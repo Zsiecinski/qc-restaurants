@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Restaurants in Quezon City - Complete Guide 2025</title>
+    <meta name="description" content="🍽️ Find the best restaurants in Quezon City, from local Filipino to international dining. Browse reviews, prices, and essential details of top dining spots.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="restaurants quezon city, best restaurants quezon city, quezon city dining, quezon city food, filipino restaurants, international restaurants, restaurant reviews quezon city, affordable restaurants quezon city, family restaurants quezon city">
+    <link rel="canonical" href="https://restaurantsquezoncity.com/" />
+    <!-- Leaflet CSS must come before Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --yelp-red: #d32323;
+            --yelp-blue: #0073bb;
+            --yelp-green: #41a700;
+            --yelp-orange: #ff9800;
+            --yelp-purple: #9c27b0;
+            --yelp-teal: #00bcd4;
+            --yelp-pink: #e91e63;
+        }
+        body {
+            background-color: #f5f5f5;
+            font-size: 16px; /* Base font size for better readability */
+            padding-top: 56px; /* Height of the navbar */
+        }
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            body {
+                font-size: 15px;
+            }
+            .restaurant-name {
+                font-size: 18px;
+            }
+            .badge {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+        /* Mobile Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            color: var(--yelp-red) !important;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 18px;
+            }
+            .nav-link {
+                padding: 0.5rem 1rem;
+                font-size: 15px;
+            }
+        }
+        /* Responsive Layout */
+        .container {
+            padding: 0 15px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+        }
+        /* Restaurant Card Responsive Design */
+        .restaurant-card {
+            margin-bottom: 12px;
+            border-radius: 6px;
+        }
+        @media (max-width: 768px) {
+            .restaurant-card {
+                margin-bottom: 10px;
+            }
+            .restaurant-image {
+                height: 150px;
+            }
+            .restaurant-info {
+                padding: 12px;
+            }
+            .rating-line {
+                gap: 4px;
+            }
+            .meta-line {
+                gap: 8px;
+                font-size: 13px;
+            }
+        }
+        /* Filter Sidebar Responsive Design */
+        .filters-sidebar {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background-color: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .filters-sidebar {
+                position: fixed;
+                top: 56px; /* Below navbar */
+                left: 0;
+                width: 85%;
+                height: calc(100vh - 56px);
+                margin: 0;
+                padding: 20px;
+                transition: transform 0.3s ease;
+                z-index: 1020;
+                background-color: white;
+                box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+                overflow-y: auto;
+                border-radius: 0;
+                transform: translateX(-100%);
+            }
+            .filters-sidebar.active {
+                transform: translateX(0);
+                left: 0;
+            }
+            .mobile-overlay {
+                z-index: 1010;
+            }
+            .filter-section {
+                margin-bottom: 24px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid #eee;
+            }
+            .filter-section:last-child {
+                border-bottom: none;
+            }
+            .filter-heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+            .filter-heading span {
+                font-size: 16px;
+                font-weight: 600;
+            }
+            .filter-heading button {
+                padding: 4px 8px;
+                font-size: 13px;
+                color: #666;
+                background: none;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .filter-checkbox {
+                padding: 12px 0;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .filter-checkbox input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+            }
+            .filter-checkbox span {
+                font-size: 15px;
+            }
+            .price-filters {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .price-button {
+                padding: 12px;
+                font-size: 15px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                background: white;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .price-button.active {
+                background-color: var(--yelp-red);
+                color: white;
+                border-color: var(--yelp-red);
+            }
+        }
+        /* Map Container Styles */
+        #map-container {
+            position: sticky;
+            top: 20px;
+            height: calc(100vh - 40px);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            z-index: 1;
+        }
+        .restaurant-marker {
+            width: 32px !important;
+            height: 32px !important;
+            background-color: #d32323;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .restaurant-marker.active {
+            background-color: #0073bb;
+            transform: scale(1.2);
+            z-index: 1000;
+        }
+        /* Ensure the map column is properly sized */
+        @media (min-width: 768px) {
+            .col-md-3 {
+                position: relative;
+                height: 100%;
+            }
+        }
+        /* Touch-friendly Interactions */
+        @media (max-width: 768px) {
+            .restaurant-card {
+                cursor: default;
+            }
+            .badge, .service-badge, .highlight-badge {
+                margin: 2px;
+                padding: 6px 10px;
+            }
+            .contact-info > div {
+                padding: 8px 0;
+            }
+            .today-hours button {
+                padding: 8px;
+            }
+        }
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--yelp-red);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+            }
+        }
+        /* Mobile Overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        @media (max-width: 768px) {
+            .mobile-overlay.active {
+                display: block;
+            }
+            
+            .filters-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .filters-sidebar.active {
+                transform: translateX(0);
+            }
+            
+            /* Filter Toggle Button */
+            .filter-toggle {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: var(--yelp-red);
+                color: white;
+                border: none;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                z-index: 998;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+            }
+            
+            /* Close Button */
+            .close-filters {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+                background: none;
+                border: none;
+                font-size: 24px;
+                color: #666;
+            }
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--yelp-red) !important;
+        }
+        .restaurant-card {
+            background: white;
+            border: 1px solid #e6e6e6;
+            margin-bottom: 16px;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .restaurant-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .restaurant-image-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+        .restaurant-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .restaurant-info {
+            padding: 16px;
+        }
+        .restaurant-name {
+            font-size: 20px;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            color: #2d2e2f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .restaurant-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        .restaurant-name a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 16px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+        .restaurant-name a:hover {
+            opacity: 1;
+            color: var(--yelp-blue);
+        }
+        .rating-reviews {
+            margin-bottom: 12px;
+        }
+        .rating-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .meta-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6f7071;
+            font-size: 14px;
+        }
+        .rating {
+            font-weight: 600;
+            color: #2d2e2f;
+        }
+        .stars {
+            color: var(--yelp-red);
+            display: flex;
+            gap: 2px;
+        }
+        .reviews {
+            color: #6f7071;
+        }
+        .price-level {
+            color: #2d2e2f;
+            font-weight: 500;
+        }
+        .restaurant-meta {
+            margin: 12px 0;
+        }
+        .category {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f1f2;
+            color: #2d2e2f;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            gap: 4px;
+        }
+        .category i {
+            font-size: 14px;
+            color: #6f7071;
+        }
+        .service-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            color: #2d2e2f;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            gap: 4px;
+        }
+        .service-badge i {
+            font-size: 14px;
+            color: #6f7071;
+        }
+        .highlights-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fff3e3;
+            color: #c25e00;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            gap: 4px;
+            border: 1px solid #ffddb3;
+        }
+        .highlight-badge i {
+            font-size: 12px;
+            color: #c25e00;
+        }
+        .quick-info {
+            color: #6f7071;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+        .quick-info > div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .today-hours {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .today-hours button {
+            color: #6f7071;
+            padding: 0;
+        }
+        .today-hours button:hover {
+            color: var(--yelp-blue);
+        }
+        .highlights {
+            color: #6f7071;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .section-header {
+            margin: 30px 0;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 15px;
+        }
+        .restaurant-list {
+            height: auto;
+            padding-right: 15px;
+        }
+        .restaurant-marker {
+            background-color: var(--yelp-red);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+        .restaurant-marker.active {
+            background-color: var(--yelp-blue);
+            transform: scale(1.1);
+            z-index: 1000 !important;
+        }
+        
+        /* Filter Sidebar Styles */
+        .filter-section {
+            margin-bottom: 24px;
+        }
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+        .filter-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d2e2f;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .filter-heading button {
+            background: none;
+            border: none;
+            font-size: 12px;
+            color: #666;
+            padding: 0;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .filter-heading button:hover {
+            color: var(--yelp-red);
+            text-decoration: underline;
+        }
+        .filter-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .filter-item {
+            margin-bottom: 8px;
+        }
+        .filter-item:last-child {
+            margin-bottom: 0;
+        }
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2d2e2f;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+        .filter-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .filter-checkbox:hover {
+            color: var(--yelp-blue);
+        }
+        .filter-checkbox span {
+            font-weight: 500;
+        }
+        .features-list .filter-checkbox i {
+            width: 16px;
+            color: #6f7071;
+        }
+        .price-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .price-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #666;
+            width: 100%;
+            text-align: left;
+        }
+        .price-button:hover {
+            background-color: #f5f5f5;
+            border-color: #999;
+        }
+        .price-button.active {
+            background-color: var(--yelp-red);
+            color: white;
+            border-color: var(--yelp-red);
+            font-weight: 500;
+        }
+        .price-button span:first-child {
+            font-weight: bold;
+            min-width: 50px;
+        }
+        .price-label {
+            color: inherit;
+            font-size: 13px;
+        }
+        .accessibility-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .accessibility-badges .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .accessibility-badges .badge i {
+            font-size: 14px;
+        }
+        
+        /* Custom Badge Colors */
+        .bg-purple {
+            background-color: var(--yelp-purple) !important;
+        }
+        .bg-orange {
+            background-color: var(--yelp-orange) !important;
+        }
+        .bg-teal {
+            background-color: var(--yelp-teal) !important;
+        }
+        .bg-pink {
+            background-color: var(--yelp-pink) !important;
+        }
+        
+        /* Badge Styles */
+        .badge {
+            padding: 6px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge i {
+            font-size: 14px;
+        }
+        .badge.bg-warning {
+            color: #000 !important;
+        }
+        .badge.bg-orange,
+        .badge.bg-teal,
+        .badge.bg-pink {
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">QC Restaurants</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">All Restaurants</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Main Content -->
+    <div class="container-fluid">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Mobile filter toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.getElementById('filterToggle');
+            const filtersSidebar = document.querySelector('.filters-sidebar');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            const closeFilters = document.getElementById('closeFilters');
+            
+            if (filterToggle) {
+                filterToggle.addEventListener('click', function() {
+                    filtersSidebar.classList.add('active');
+                    mobileOverlay.classList.add('active');
+                });
+            }
+            
+            if (closeFilters) {
+                closeFilters.addEventListener('click', function() {
+                    filtersSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                });
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', function() {
+                    filtersSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                });
+            }
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html> 

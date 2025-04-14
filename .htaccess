@@ -1,0 +1,29 @@
+# Handle Python WSGI
+Options +ExecCGI
+AddHandler wsgi-script .py
+
+# Enable mod_rewrite
+RewriteEngine On
+RewriteBase /
+
+# Allow access to static files
+RewriteCond %{REQUEST_URI} ^/static/
+RewriteRule ^static/(.*)$ static/$1 [L]
+
+# If the requested file or directory does not exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect all other requests to passenger_wsgi.py
+RewriteRule ^(.*)$ passenger_wsgi.py/$1 [QSA,L]
+
+# Directory settings
+<Directory "/home/*/public_html">
+    Options +ExecCGI
+    Allow from all
+    Require all granted
+</Directory>
+
+# Python settings
+SetEnv PYTHONPATH /home/*/public_html:/home/*/public_html/venv/lib/python3.9/site-packages
+SetEnv PYTHON_EGG_CACHE /home/*/public_html/temp 

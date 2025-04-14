@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}All Restaurants in Quezon City{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="section-header">All Restaurants in Quezon City</h1>
+        <p class="lead">Complete list of restaurants ranked by rating and popularity</p>
+    </div>
+</div>
+
+<div class="row">
+    {% for index, restaurant in restaurants.iterrows() %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="restaurant-card">
+            <div class="restaurant-image-container">
+                {% if restaurant.photo %}
+                <img src="{{ restaurant.photo }}" alt="{{ restaurant['name'] }}" class="restaurant-image">
+                {% else %}
+                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No image available" class="restaurant-image">
+                {% endif %}
+            </div>
+            <div class="restaurant-info">
+                <h3 class="restaurant-name">
+                    {% if restaurant.site %}
+                    <a href="{{ restaurant.site }}" target="_blank">{{ restaurant['name'] }}</a>
+                    {% else %}
+                    {{ restaurant['name'] }}
+                    {% endif %}
+                </h3>
+                <div class="category">{{ restaurant.category }}</div>
+                <div class="rating">
+                    <div class="stars">
+                        {% set rating = restaurant.rating|float %}
+                        {% for i in range(5) %}
+                            {% if rating >= i + 1 %}
+                                <i class="fas fa-star"></i>
+                            {% elif rating > i %}
+                                <i class="fas fa-star-half-alt"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <span class="reviews">{{ restaurant.reviews|int }} reviews</span>
+                </div>
+                <div class="address">
+                    <i class="fas fa-map-marker-alt text-muted me-1"></i> 
+                    {{ restaurant.full_address }}
+                </div>
+                {% if restaurant.phone %}
+                <div class="phone">
+                    <i class="fas fa-phone text-muted me-1"></i> 
+                    {{ restaurant.phone }}
+                </div>
+                {% endif %}
+                {% if restaurant.formatted_hours %}
+                <div class="working-hours">
+                    <i class="far fa-clock text-muted me-1"></i>
+                    {{ restaurant.formatted_hours|replace('\n', '<br>')|safe }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

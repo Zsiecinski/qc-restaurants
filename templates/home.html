@@ -1,0 +1,426 @@
+{% extends "base.html" %}
+
+{% block title %}Best Restaurants in Quezon City{% endblock %}
+
+{% block content %}
+<div class="row g-0">
+    <!-- Filters Sidebar -->
+    <div class="col-md-3">
+        <div class="filters-sidebar">
+            <button id="closeFilters" class="close-filters d-md-none">
+                <i class="fas fa-times"></i>
+            </button>
+            <!-- Price Range Filter -->
+            <div class="filter-section">
+                <div class="filter-heading">
+                    <span>Price Range</span>
+                    <button onclick="clearPrice()">Clear</button>
+                </div>
+                <div class="price-filters">
+                    <button class="price-button" data-price="1">
+                        <span>₱</span>
+                        <span class="price-label">Inexpensive</span>
+                    </button>
+                    <button class="price-button" data-price="2">
+                        <span>₱₱</span>
+                        <span class="price-label">Moderate</span>
+                    </button>
+                    <button class="price-button" data-price="3">
+                        <span>₱₱₱</span>
+                        <span class="price-label">Expensive</span>
+                    </button>
+                    <button class="price-button" data-price="4">
+                        <span>₱₱₱₱</span>
+                        <span class="price-label">Very Expensive</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Additional Features Filter -->
+            <div class="filter-section">
+                <div class="filter-heading">
+                    <span>Additional Features</span>
+                    <button onclick="clearFeatures()">Clear</button>
+                </div>
+                <ul class="filter-list features-list">
+                    <li class="filter-item">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="features" value="wheelchair">
+                            <i class="fas fa-wheelchair"></i>
+                            <span>Wheelchair Accessible</span>
+                        </label>
+                    </li>
+                    <li class="filter-item">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="features" value="kids">
+                            <i class="fas fa-child"></i>
+                            <span>Kid Friendly</span>
+                        </label>
+                    </li>
+                    <li class="filter-item">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="features" value="wifi">
+                            <i class="fas fa-wifi"></i>
+                            <span>Wi-Fi Available</span>
+                        </label>
+                    </li>
+                    <li class="filter-item">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="features" value="high_chairs">
+                            <i class="fas fa-chair"></i>
+                            <span>High Chairs</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Cuisine Filter -->
+            <div class="filter-section">
+                <div class="filter-heading">
+                    <span>Cuisine</span>
+                    <button onclick="clearCuisine()">Clear</button>
+                </div>
+                <ul class="filter-list">
+                    {% for cuisine, count in cuisine_counts.items() %}
+                    <li class="filter-item">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="cuisine" value="{{ cuisine.lower() }}">
+                            <span>{{ cuisine }} ({{ count }})</span>
+                        </label>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restaurant List -->
+    <div class="col-md-6 restaurant-list">
+        <h1 class="section-header mb-4">Best Restaurants in Quezon City</h1>
+        
+        {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if not df %}
+        <div class="alert alert-info" role="alert">
+            No restaurants found. Please try refreshing the page or contact support if the issue persists.
+        </div>
+        {% endif %}
+
+        {% for restaurant in df %}
+        <div class="restaurant-card" 
+             data-restaurant-id="{{ loop.index0 }}" 
+             data-lat="{{ restaurant.latitude if restaurant.latitude is not none else '' }}" 
+             data-lng="{{ restaurant.longitude if restaurant.longitude is not none else '' }}" 
+             data-price="{{ restaurant.price }}"
+             data-cuisine="{{ restaurant.cuisine }}"
+             data-features='{{ restaurant.features|tojson if restaurant.features is not none else '[]' }}' 
+             data-highlights='{{ restaurant.highlights|tojson if restaurant.highlights is not none else '[]' }}' 
+             data-wheelchair="{{ 'true' if restaurant.wheelchair_accessible else 'false' }}"
+             data-kids="{{ 'true' if restaurant.good_for_kids else 'false' }}"
+             data-wifi="{{ 'true' if restaurant.has_wifi else 'false' }}"
+             data-high-chairs="{{ 'true' if restaurant.has_high_chairs else 'false' }}" 
+             onmouseover="highlightMarker({{ loop.index0 }})" 
+             onmouseout="clearMarkerHighlight()">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if restaurant.photo is not none %}
+                    <div class="restaurant-image-container">
+                        <img src="{{ restaurant.photo }}" alt="{{ restaurant.name }}" class="restaurant-image">
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">
+                            <span class="restaurant-title">{{ restaurant.name }}</span>
+                            <a href="{{ restaurant.site }}" target="_blank" class="ms-2">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="rating-reviews">
+                            <div class="rating-line">
+                                <span class="rating">{{ restaurant.rating }}</span>
+                                <div class="stars">
+                                    {% for i in range(5) %}
+                                    <i class="fas fa-star {% if i < restaurant.rating|int %}text-warning{% else %}text-muted{% endif %}"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="reviews">({{ restaurant.reviews }} reviews)</span>
+                            </div>
+                            <div class="meta-line">
+                                <span class="price-level">
+                                    {% if restaurant.price %}
+                                        {{ '₱' * restaurant.price|int }}
+                                    {% endif %}
+                                </span>
+                                <span class="category">
+                                    <i class="fas fa-utensils"></i>
+                                    {{ restaurant.cuisine }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Accessibility Badges -->
+                        <div class="accessibility-badges mt-2">
+                            {% if restaurant.wheelchair_accessible %}
+                                <span class="badge bg-primary text-white me-1">
+                                    <i class="fas fa-wheelchair"></i> Wheelchair Accessible
+                                </span>
+                            {% endif %}
+                            {% if restaurant.good_for_kids %}
+                                <span class="badge bg-orange text-white me-1">
+                                    <i class="fas fa-child"></i> Kid Friendly
+                                </span>
+                            {% endif %}
+                            {% if restaurant.has_wifi %}
+                                <span class="badge bg-teal text-white me-1">
+                                    <i class="fas fa-wifi"></i> Wi-Fi Available
+                                </span>
+                            {% endif %}
+                            {% if restaurant.has_high_chairs %}
+                                <span class="badge bg-pink text-white me-1">
+                                    <i class="fas fa-chair"></i> High Chairs
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="contact-info mt-3">
+                            {% if restaurant.full_address %}
+                            <div>
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ restaurant.full_address }}
+                            </div>
+                            {% endif %}
+                            {% if restaurant.phone %}
+                            <div>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a>
+                            </div>
+                            {% endif %}
+                            {% if restaurant.formatted_hours %}
+                            <div class="today-hours">
+                                <i class="fas fa-clock"></i>
+                                <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#hoursModal{{ loop.index0 }}">
+                                    {{ restaurant.formatted_hours }}
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hours Modal -->
+        {% if restaurant.formatted_hours %}
+        <div class="modal fade" id="hoursModal{{ loop.index0 }}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ restaurant.name }} Hours</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{ restaurant.formatted_hours|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Map -->
+    <div class="col-md-3">
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Filter Toggle -->
+    <button id="filterToggle" class="filter-toggle d-md-none">
+        <i class="fas fa-filter"></i>
+    </button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize map with restaurant data
+    function initMap(restaurants) {
+        // Create map centered on Quezon City
+        const map = L.map('map').setView([14.6760, 121.0437], 14);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Store markers for later reference
+        const markers = [];
+
+        // Add markers for each restaurant
+        document.querySelectorAll('.restaurant-card').forEach((card, index) => {
+            const lat = parseFloat(card.dataset.lat);
+            const lng = parseFloat(card.dataset.lng);
+            
+            if (lat && lng && !isNaN(lat) && !isNaN(lng)) {
+                // Create marker
+                const marker = L.marker([lat, lng], {
+                    icon: L.divIcon({
+                        className: 'restaurant-marker',
+                        html: `${index + 1}`,
+                        iconSize: [32, 32]
+                    })
+                }).addTo(map);
+
+                // Store marker reference
+                markers[index] = marker;
+
+                // Add click event to marker
+                marker.on('click', () => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    highlightMarker(index);
+                });
+
+                // Add popup with restaurant name
+                const name = card.querySelector('.restaurant-title').textContent;
+                marker.bindPopup(name);
+            }
+        });
+
+        // Fit map bounds to show all markers
+        if (markers.length > 0) {
+            const group = L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+
+        // Function to highlight marker when hovering over restaurant card
+        window.highlightMarker = function(index) {
+            markers.forEach((m, i) => {
+                if (m) {
+                    m.getElement().classList.toggle('active', i === index);
+                }
+            });
+        };
+
+        // Function to clear marker highlight
+        window.clearMarkerHighlight = function() {
+            markers.forEach(m => {
+                if (m) {
+                    m.getElement().classList.remove('active');
+                }
+            });
+        };
+
+        // Handle mobile map toggle
+        const mapContainer = document.getElementById('map-container');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mapContainer.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                if (mapContainer.classList.contains('active')) {
+                    map.invalidateSize();
+                }
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', () => {
+                mapContainer.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+            });
+        }
+
+        // Force map to recalculate size
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 100);
+    }
+
+    // Initialize map with restaurant data
+    const restaurants = {{ df|tojson|safe }};
+    initMap(restaurants);
+
+    // Initialize filters
+    // Price range filters
+    const priceButtons = document.querySelectorAll('.price-button');
+    priceButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('active');
+            filterRestaurants();
+        });
+    });
+
+    // Feature checkboxes
+    const featureCheckboxes = document.querySelectorAll('input[name="features"]');
+    featureCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterRestaurants);
+    });
+
+    // Cuisine checkboxes
+    const cuisineCheckboxes = document.querySelectorAll('input[name="cuisine"]');
+    cuisineCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterRestaurants);
+    });
+
+    // Clear filter buttons
+    window.clearPrice = function() {
+        priceButtons.forEach(button => button.classList.remove('active'));
+        filterRestaurants();
+    };
+
+    window.clearFeatures = function() {
+        featureCheckboxes.forEach(checkbox => checkbox.checked = false);
+        filterRestaurants();
+    };
+
+    window.clearCuisine = function() {
+        cuisineCheckboxes.forEach(checkbox => checkbox.checked = false);
+        filterRestaurants();
+    };
+
+    function filterRestaurants() {
+        const selectedPrices = Array.from(document.querySelectorAll('.price-button.active'))
+            .map(button => parseInt(button.dataset.price));
+        
+        const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked'))
+            .map(checkbox => checkbox.value);
+        
+        const selectedCuisines = Array.from(document.querySelectorAll('input[name="cuisine"]:checked'))
+            .map(checkbox => checkbox.value);
+
+        document.querySelectorAll('.restaurant-card').forEach(card => {
+            const price = parseInt(card.dataset.price);
+            const features = JSON.parse(card.dataset.features);
+            const cuisine = card.dataset.cuisine.toLowerCase();
+            
+            const priceMatch = selectedPrices.length === 0 || selectedPrices.includes(price);
+            const featureMatch = selectedFeatures.length === 0 || 
+                selectedFeatures.every(feature => {
+                    switch(feature) {
+                        case 'wheelchair': return card.dataset.wheelchair === 'true';
+                        case 'kids': return card.dataset.kids === 'true';
+                        case 'wifi': return card.dataset.wifi === 'true';
+                        case 'high_chairs': return card.dataset.highChairs === 'true';
+                        default: return features.includes(feature);
+                    }
+                });
+            const cuisineMatch = selectedCuisines.length === 0 || selectedCuisines.includes(cuisine);
+
+            card.style.display = priceMatch && featureMatch && cuisineMatch ? '' : 'none';
+        });
+    }
+});
+</script>
+{% endblock %} 
