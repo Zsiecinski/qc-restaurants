@@ -6,9 +6,13 @@ venv/
 .env
 
 # Data files
-*.xlsx
 *.csv
 *.exe
+
+# Allow specific Excel files
+!Outscraper-20250306082041s8b.xlsx
+!restaurants.xlsx
+*.xlsx
 
 # PHP files (since we're using Flask)
 *.php
