@@ -415,14 +415,14 @@ def home():
         # Process the dataframe
         df, all_cuisines = process_dataframe(df)
         
-        # Filter for top pick restaurants
-        df = df[df['top_pick'] == True]
-        
-        # Get cuisine counts for the filters
+        # Get cuisine counts for all restaurants before filtering
         cuisine_counts = {}
         for cuisine in df['cuisine'].dropna().unique():
             count = len(df[df['cuisine'] == cuisine])
             cuisine_counts[cuisine] = count
+        
+        # Filter for top pick restaurants for display
+        df = df[df['top_pick'] == True]
         
         return render_template('home.html', df=df.to_dict('records'), cuisine_counts=cuisine_counts, all_cuisines=all_cuisines)
     except Exception as e:
