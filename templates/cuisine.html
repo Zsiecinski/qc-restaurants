@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}All Restaurants in Quezon City{% endblock %}
+{% block title %}Best {{ cuisine_name }} Restaurants in Quezon City{% endblock %}
 
-{% block description %}Browse all restaurants in Quezon City. Filter by cuisine, price range, and features to find your perfect dining spot.{% endblock %}
+{% block description %}Find the best {{ cuisine_name }} restaurants in Quezon City. Browse menus, see photos, read reviews and discover top-rated {{ cuisine_name }} dining spots.{% endblock %}
 
-{% block keywords %}restaurants quezon city, food, dining, best restaurants{% endblock %}
+{% block keywords %}{{ cuisine_name }} restaurants quezon city, {{ cuisine_name }} food, {{ cuisine_name }} cuisine, {{ cuisine_name }} dining{% endblock %}
 
-{% block canonical %}/all-restaurants{% endblock %}
+{% block canonical %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}{% endblock %}
 
-{% block og_title %}All Restaurants in Quezon City{% endblock %}
+{% block og_title %}{{ cuisine_name }} Restaurants in Quezon City{% endblock %}
 
-{% block og_description %}Find the best restaurants in Quezon City. Browse menus, see photos, read reviews and discover top-rated dining spots.{% endblock %}
+{% block og_description %}Find the best {{ cuisine_name }} restaurants in Quezon City. Browse menus, see photos, read reviews and discover top-rated {{ cuisine_name }} dining spots.{% endblock %}
 
-{% block og_url %}/all-restaurants{% endblock %}
+{% block og_url %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}{% endblock %}
 
-{% block hero_title %}All Restaurants in Quezon City{% endblock %}
+{% block hero_title %}Best {{ cuisine_name }} Restaurants in Quezon City{% endblock %}
 
-{% block hero_subtitle %}Discover amazing restaurants near you{% endblock %}
+{% block hero_subtitle %}Discover {{ restaurant_count }} amazing {{ cuisine_name }} restaurants near you{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
@@ -26,14 +26,16 @@
             <header class="cuisine-header mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h1 class="section-title">All Restaurants in Quezon City</h1>
-                        <p class="lead text-muted">Discover <span id="restaurantCount">{{ restaurants|length }}</span> amazing restaurants in Quezon City</p>
+                        <h1 class="section-title">{{ cuisine_name }} Restaurants in Quezon City</h1>
+                        <p class="lead text-muted">Discover <span id="restaurantCount">{{ restaurant_count }}</span> {{ cuisine_name }} restaurants in Quezon City</p>
                     </div>
-                    <button class="btn btn-outline-danger mobile-filter-btn d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">
-                        <i class="fas fa-filter me-1"></i> Filters
-                    </button>
                 </div>
             </header>
+
+            <!-- Mobile Filter Button -->
+            <button class="btn btn-outline-danger mobile-filter-btn d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="fas fa-filter me-1"></i> Filters
+            </button>
 
             <!-- Mobile Filter Modal -->
             <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
@@ -184,67 +186,53 @@
                                         </div>
                                     </div>
                                     {% endif %}
-                                    
-                                    <div class="badges-container">
-                                        <div class="features-badges">
-                                            {% if restaurant.features %}
-                                            {% if 'Delivery' in restaurant.features %}
+                                    <div class="features mb-2">
+                                        {% for feature in restaurant.features %}
+                                            {% if feature == 'Delivery' %}
                                             <span class="badge feature-badge delivery">
-                                                <i class="fas fa-motorcycle"></i>
-                                                <span class="badge-text">Delivery</span>
+                                                <i class="fas fa-motorcycle me-1"></i>Delivery
                                             </span>
-                                            {% endif %}
-                                            {% if 'Takeout' in restaurant.features %}
+                                            {% elif feature == 'Takeout' %}
                                             <span class="badge feature-badge takeout">
-                                                <i class="fas fa-shopping-bag"></i>
-                                                <span class="badge-text">Takeout</span>
+                                                <i class="fas fa-shopping-bag me-1"></i>Takeout
                                             </span>
-                                            {% endif %}
-                                            {% if 'Dine-in' in restaurant.features %}
+                                            {% elif feature == 'Dine-in' %}
                                             <span class="badge feature-badge dine-in">
-                                                <i class="fas fa-utensils"></i>
-                                                <span class="badge-text">Dine-in</span>
+                                                <i class="fas fa-utensils me-1"></i>Dine-in
                                             </span>
                                             {% endif %}
-                                            {% endif %}
-                                        </div>
-
-                                        <div class="amenities-badges">
-                                            {% if restaurant.wheelchair_accessible %}
-                                            <span class="badge feature-badge wheelchair">
-                                                <i class="fas fa-wheelchair"></i>
-                                                <span class="badge-text">Wheelchair</span>
-                                            </span>
-                                            {% endif %}
-                                            {% if restaurant.good_for_kids %}
-                                            <span class="badge feature-badge kids">
-                                                <i class="fas fa-child"></i>
-                                                <span class="badge-text">Kids</span>
-                                            </span>
-                                            {% endif %}
-                                            {% if restaurant.has_wifi %}
-                                            <span class="badge feature-badge wifi">
-                                                <i class="fas fa-wifi"></i>
-                                                <span class="badge-text">Wi-Fi</span>
-                                            </span>
-                                            {% endif %}
-                                            {% if restaurant.has_high_chairs %}
-                                            <span class="badge feature-badge high-chairs">
-                                                <i class="fas fa-baby"></i>
-                                                <span class="badge-text">High Chairs</span>
-                                            </span>
-                                            {% endif %}
-                                        </div>
+                                        {% endfor %}
+                                    
+                                        {% if restaurant.wheelchair_accessible %}
+                                        <span class="badge feature-badge wheelchair">
+                                            <i class="fas fa-wheelchair me-1"></i>Wheelchair Accessible
+                                        </span>
+                                        {% endif %}
+                                        {% if restaurant.good_for_kids %}
+                                        <span class="badge feature-badge kids">
+                                            <i class="fas fa-child me-1"></i>Good for Kids
+                                        </span>
+                                        {% endif %}
+                                        {% if restaurant.has_wifi %}
+                                        <span class="badge feature-badge wifi">
+                                            <i class="fas fa-wifi me-1"></i>Free Wi-Fi
+                                        </span>
+                                        {% endif %}
+                                        {% if restaurant.has_high_chairs %}
+                                        <span class="badge feature-badge high-chairs">
+                                            <i class="fas fa-baby me-1"></i>High Chairs Available
+                                        </span>
+                                        {% endif %}
                                     </div>
                                     
-                                    <div class="text-center mt-2">
-                                        {% if restaurant.site %}
+                                    {% if restaurant.site %}
+                                    <div class="text-center mt-3">
                                         <a href="{{ restaurant.site }}" target="_blank" rel="nofollow" class="btn btn-outline-danger visit-website-btn">
                                             <i class="fas fa-external-link-alt me-1"></i>
                                             Visit Website
                                         </a>
-                                        {% endif %}
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -322,6 +310,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Explore Other Cuisines Section -->
+    <section class="explore-cuisines mt-5">
+        <h2 class="section-title mb-4">Explore Other Cuisines</h2>
+        <div class="cuisine-tags">
+            {% for other_cuisine in all_cuisines|random_sample(14) if other_cuisine != cuisine_name %}
+                <a href="/cuisine/{{ other_cuisine|lower|replace(' ', '-') }}" class="cuisine-tag">
+                    {{ other_cuisine }}
+                    {% if other_cuisine == 'Fast Food' %}🍔
+                    {% elif other_cuisine == 'Pizza' %}🍕
+                    {% elif other_cuisine == 'Japanese' %}🎌
+                    {% elif other_cuisine == 'Chinese' %}🥢
+                    {% elif other_cuisine == 'Indian' %}🍛
+                    {% elif other_cuisine == 'Italian' %}🍝
+                    {% elif other_cuisine == 'Seafood' %}🐟
+                    {% elif other_cuisine == 'Korean' %}🍜
+                    {% elif other_cuisine == 'Thai' %}🥘
+                    {% elif other_cuisine == 'Vietnamese' %}🍜
+                    {% elif other_cuisine == 'American' %}🗽
+                    {% elif other_cuisine == 'Mexican' %}🌮
+                    {% elif other_cuisine == 'Mediterranean' %}🥙
+                    {% elif other_cuisine == 'Breakfast' %}🍳
+                    {% elif other_cuisine == 'Burger' %}🍔
+                    {% elif other_cuisine == 'Chicken' %}🍗
+                    {% elif other_cuisine == 'Dessert' %}🍰
+                    {% elif other_cuisine == 'Bar' %}🍺
+                    {% elif other_cuisine == 'Coffee' %}☕
+                    {% elif other_cuisine == 'Milk Tea' %}🧋
+                    {% elif other_cuisine == 'Buffet' %}🍱
+                    {% elif other_cuisine == 'Vegetarian' %}🥗
+                    {% elif other_cuisine == 'Vegan' %}🥬
+                    {% elif other_cuisine == 'Steak' %}🥩
+                    {% elif other_cuisine == 'BBQ' %}🍖
+                    {% elif other_cuisine == 'Sushi' %}🍣
+                    {% elif other_cuisine == 'Ramen' %}🍜
+                    {% elif other_cuisine == 'Filipino' %}🍚
+                    {% elif other_cuisine == 'French' %}🗼
+                    {% elif other_cuisine == 'Greek' %}🏺
+                    {% elif other_cuisine == 'Spanish' %}💃
+                    {% elif other_cuisine == 'Turkish' %}🥙
+                    {% elif other_cuisine == 'Lebanese' %}🥙
+                    {% elif other_cuisine == 'Malaysian' %}🍜
+                    {% elif other_cuisine == 'Indonesian' %}🍜
+                    {% elif other_cuisine == 'Wine Bar' %}🍷
+                    {% elif other_cuisine == 'Sandwich' %}🥪
+                    {% elif other_cuisine == 'Bakery' %}🥖
+                    {% elif other_cuisine == 'Ice Cream' %}🍦
+                    {% elif other_cuisine == 'Juice Bar' %}🧃
+                    {% elif other_cuisine == 'Food Court' %}🏪
+                    {% else %}🍽️{% endif %}
+                    ({{ cuisine_counts[other_cuisine] }})
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-cuisine mt-5">
+        <h2 class="section-title mb-4">About {{ cuisine_name }} Restaurants in Quezon City</h2>
+        <div class="about-content">
+            <p class="lead">Looking for the best {{ cuisine_name|lower }} restaurants in Quezon City? You've come to the right place! Our directory features the top {{ restaurant_count }} {{ cuisine_name|lower }} dining options across Quezon City, with authentic flavors and exceptional service.</p>
+            
+            <p>Whether you're craving traditional {{ cuisine_name|lower }} dishes or modern interpretations, these restaurants offer a delightful culinary experience. Browse our selection of {{ restaurant_count }} {{ cuisine_name|lower }} restaurants in Quezon City, read reviews from other diners, and find the perfect spot for your next meal. From casual eateries to upscale dining establishments, Quezon City has a variety of {{ cuisine_name|lower }} restaurants to satisfy your cravings.</p>
+        </div>
+    </section>
 </div>
 
 <style>
@@ -331,8 +384,23 @@
         margin-bottom: 2rem;
     }
 
+    .restaurant-card {
+        background: white;
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+    .restaurant-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
     .restaurant-card .card-body {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .restaurant-card .col-md-8 {
@@ -360,11 +428,6 @@
         padding: 4px 8px;
         border-radius: 4px;
         font-weight: 500;
-        width: fit-content;
-        min-width: min-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .restaurant-name {
@@ -388,7 +451,7 @@
         font-size: 0.9rem;
         display: flex;
         flex-direction: column;
-        gap: 0.15rem;
+        gap: 0.5rem;
     }
 
     .address, .phone {
@@ -396,7 +459,12 @@
     }
 
     .features {
-        margin-bottom: 1px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1px;
+        margin-bottom: 2px;
+        max-width: 100%;
+        line-height: 1.1;
     }
 
     .amenities {
@@ -407,7 +475,7 @@
     }
 
     .btn-outline-danger {
-        color: white;
+        color: #fff;
         background-color: #d32323;
         border-color: #d32323;
         padding: 4px 16px;
@@ -415,12 +483,48 @@
         font-weight: 500;
         transition: all 0.3s ease;
         display: inline-block;
+        margin-top: 8px;
     }
 
     .btn-outline-danger:hover {
         background-color: #b61d1d;
         border-color: #b61d1d;
-        color: white;
+        color: #fff;
+    }
+
+    /* Mobile filter button specific styles */
+    .mobile-filter-btn.btn-outline-danger {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        color: #fff;
+        background-color: #d32323;
+        border-color: #d32323;
+        padding: 10px 20px;
+        border-radius: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        font-weight: 500;
+    }
+
+    .mobile-filter-btn.btn-outline-danger:hover,
+    .mobile-filter-btn.btn-outline-danger:focus {
+        background-color: #b61d1d;
+        border-color: #b61d1d;
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 991.98px) {
+        .mobile-filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        /* Add padding to prevent content from being hidden behind the fixed button */
+        .restaurant-list {
+            padding-bottom: 80px;
+        }
     }
 
     .filters-sidebar {
@@ -441,6 +545,31 @@
         color: #333;
     }
 
+    .price-button {
+        width: 100%;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        border: 1px solid #e8e8e8;
+        border-radius: 4px;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .price-button:hover {
+        border-color: #d32323;
+        color: #d32323;
+    }
+
+    .price-button.active {
+        background-color: #d32323;
+        color: white;
+        border-color: #d32323;
+    }
+
     .form-check {
         margin-bottom: 10px;
     }
@@ -450,55 +579,134 @@
         border-color: #d32323;
     }
 
+    @media (max-width: 768px) {
+        .restaurant-image-wrapper {
+            min-height: 150px;
+        }
+
+        .restaurant-name {
+            font-size: 1.2rem;
+        }
+
+        .restaurant-details {
+            font-size: 0.9rem;
+        }
+    }
+
+    .explore-cuisines {
+        background-color: #f8f9fa;
+        padding: 40px 0;
+        border-radius: 8px;
+    }
+
+    .cuisine-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .cuisine-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        background-color: white;
+        border: 1px solid #dee2e6;
+        border-radius: 20px;
+        color: #333;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .cuisine-tag:hover {
+        background-color: #d32323;
+        color: white;
+        border-color: #d32323;
+        transform: translateY(-2px);
+    }
+
+    .about-cuisine {
+        background-color: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .about-content {
+        color: #666;
+        line-height: 1.8;
+    }
+
+    .about-content .lead {
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .cuisine-tag {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+        
+        .about-cuisine {
+            padding: 20px;
+        }
+        
+        .about-content .lead {
+            font-size: 1.1rem;
+        }
+    }
+
     .feature-badge {
-        font-size: 0.85rem;
-        padding: 4px 8px;
-        margin-right: 2px;
-        margin-bottom: 2px;
-        border-radius: 16px;
+        font-size: 0.7rem;
+        padding: 1px 5px;
+        margin: 1px;
+        border-radius: 10px;
         font-weight: 500;
         display: inline-flex;
         align-items: center;
-        height: 24px;
+        height: 18px;
+        white-space: nowrap;
+        color: #2D3436;
     }
 
     .feature-badge i {
-        margin-right: 4px;
+        margin-right: 2px;
+        font-size: 0.7rem;
     }
 
     .feature-badge.delivery {
-        background-color: #FF6B6B;
-        color: white;
+        background-color: #FFD8D8;
     }
 
     .feature-badge.takeout {
-        background-color: #4ECDC4;
-        color: white;
+        background-color: #D8F3F1;
     }
 
     .feature-badge.dine-in {
-        background-color: #45B7D1;
-        color: white;
+        background-color: #D8F0F7;
     }
 
     .feature-badge.wheelchair {
-        background-color: #6C5CE7;
-        color: white;
+        background-color: #E4E0FF;
     }
 
     .feature-badge.kids {
-        background-color: #FFA62B;
-        color: white;
+        background-color: #FFE8CC;
     }
 
     .feature-badge.wifi {
         background-color: #A8E6CF;
-        color: #2D3436;
     }
 
     .feature-badge.high-chairs {
-        background-color: #FFB5E8;
-        color: #2D3436;
+        background-color: #FFE8F7;
+    }
+
+    .feature-badge:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
     .hours {
@@ -540,54 +748,52 @@
         color: #2d2e2f;
     }
 
-    @media (max-width: 768px) {
-        .restaurant-image-wrapper {
-            min-height: 150px;
-        }
-
-        .restaurant-name {
-            font-size: 1.2rem;
-        }
-
-        .restaurant-details {
-            font-size: 0.9rem;
-        }
+    .modal-content {
+        border-radius: 12px;
     }
 
-    /* Mobile filter button specific styles */
-    .mobile-filter-btn.btn-outline-danger {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        color: #fff;
+    .modal-header {
+        border-bottom: 2px solid #d32323;
+        padding: 1rem 1.5rem;
+    }
+
+    .modal-title {
+        font-weight: 600;
+        color: #2D3436;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #dee2e6;
+        padding: 1rem 1.5rem;
+    }
+
+    .btn-outline-danger {
+        border-color: #d32323;
+        color: #d32323;
+    }
+
+    .btn-outline-danger:hover,
+    .btn-outline-danger:focus {
+        background-color: #d32323;
+        color: white;
+    }
+
+    .btn-danger {
         background-color: #d32323;
         border-color: #d32323;
-        padding: 10px 20px;
-        border-radius: 25px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        font-weight: 500;
     }
 
-    .mobile-filter-btn.btn-outline-danger:hover,
-    .mobile-filter-btn.btn-outline-danger:focus {
+    .btn-danger:hover,
+    .btn-danger:focus {
         background-color: #b61d1d;
         border-color: #b61d1d;
-        color: #fff;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-        transform: translateY(-2px);
     }
 
     @media (max-width: 991.98px) {
-        .mobile-filter-btn {
-            transition: all 0.3s ease;
-        }
-        
-        /* Add padding to prevent content from being hidden behind the fixed button */
-        .restaurant-list {
-            padding-bottom: 80px;
-        }
-        
         .filters-sidebar {
             display: none;
         }
@@ -614,148 +820,6 @@
         border-color: #b61d1d;
         color: #fff;
         transform: translateY(-1px);
-    }
-
-    .badges-container {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        margin-bottom: 8px;
-    }
-
-    .features-badges,
-    .amenities-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-
-    .feature-badge {
-        font-size: 0.8rem;
-        padding: 4px 8px;
-        border-radius: 16px;
-        font-weight: 500;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        height: 24px;
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .feature-badge i {
-        font-size: 0.9rem;
-    }
-
-    .feature-badge .badge-text {
-        margin-top: 1px;
-    }
-
-    .feature-badge.delivery {
-        background-color: #FF6B6B;
-        color: white;
-    }
-
-    .feature-badge.takeout {
-        background-color: #4ECDC4;
-        color: white;
-    }
-
-    .feature-badge.dine-in {
-        background-color: #45B7D1;
-        color: white;
-    }
-
-    .feature-badge.wheelchair {
-        background-color: #6C5CE7;
-        color: white;
-    }
-
-    .feature-badge.kids {
-        background-color: #FFA62B;
-        color: white;
-    }
-
-    .feature-badge.wifi {
-        background-color: #A8E6CF;
-        color: #2D3436;
-    }
-
-    .feature-badge.high-chairs {
-        background-color: #FFB5E8;
-        color: #2D3436;
-    }
-
-    @media (max-width: 768px) {
-        .badges-container {
-            gap: 2px;
-        }
-
-        .features-badges,
-        .amenities-badges {
-            gap: 2px;
-        }
-
-        .feature-badge {
-            font-size: 0.75rem;
-            padding: 3px 6px;
-            height: 22px;
-        }
-
-        .feature-badge i {
-            font-size: 0.8rem;
-        }
-    }
-
-    /* Restaurant card specific styles */
-    .restaurant-card .img-wrapper {
-        position: relative;
-        padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        overflow: hidden;
-    }
-
-    .restaurant-card .img-wrapper img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .restaurant-card .card-body {
-        padding: 1rem;
-    }
-
-    .restaurant-card .card-title {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .restaurant-card .card-text {
-        font-size: 0.9rem;
-        color: #666;
-        margin-bottom: 0.5rem;
-    }
-
-    .restaurant-card .badge {
-        font-size: 0.8rem;
-        padding: 0.35rem 0.65rem;
-        margin-right: 0.25rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .restaurant-card .price-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 0.35rem 0.65rem;
-        border-radius: 4px;
-        font-size: 0.9rem;
     }
 </style>
 
