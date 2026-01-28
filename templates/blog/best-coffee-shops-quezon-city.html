@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}Best Coffee Shops in Quezon City (2025 Guide) | RestaurantsQuezonCity.com{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <header class="cuisine-header mb-4">
+                <h1 class="section-title">Best Coffee Shops in Quezon City</h1>
+                <p class="lead text-muted">Where to find exceptional coffee and cozy vibes in QC</p>
+            </header>
+
+            <!-- Introduction -->
+            <div class="blog-intro mb-4">
+                <p class="lead">
+                    Quezon City has blossomed into a thriving coffee culture hub, with specialty cafes, 
+                    specialty coffee shops, and cozy coffee houses scattered across neighborhoods like 
+                    Tomas Morato, Maginhawa, Diliman, and more. Whether you're hunting for third-wave 
+                    specialty coffee, a quiet spot for chikahan, or a cafe with great ambiance for work 
+                    and relaxation, QC has something for every coffee lover.
+                </p>
+            </div>
+
+            <!-- Coffee Shop List -->
+            <div class="row g-4">
+                <!-- Caerus Specialty Coffee - Featured -->
+                <div class="col-12 mb-4">
+                    <div class="restaurant-card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="{{ url_for('static', filename='images/coffee-shops/caerus.jpg') }}" 
+                                     class="img-fluid rounded-start h-100" 
+                                     alt="Caerus Specialty Coffee + Bistro"
+                                     style="object-fit: cover; min-height: 300px;"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body p-4">
+                                    <span class="badge bg-warning text-dark mb-2">FEATURED</span>
+                                    <h3 class="card-title mb-3">Caerus Specialty Coffee + Bistro</h3>
+                                    <p class="card-text">Third-wave specialty coffee in a cozy, trendy setting perfect for coffee enthusiasts and remote workers alike. Excellent WiFi and power outlets make it ideal for work sessions.</p>
+                                    
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-2"></i>26A Sct. Torillo St, Diliman</p>
+                                            <p class="mb-1"><i class="fas fa-clock text-muted me-2"></i>Daily: 8AM-12AM</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mb-1"><i class="fas fa-star text-warning me-2"></i>4.4 rating (497 reviews)</p>
+                                            <p class="mb-1"><i class="fas fa-peso-sign text-muted me-2"></i>₱₱ (Mid-range)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Café Inggo 1587 -->
+                <div class="col-md-6">
+                    <div class="restaurant-card h-100">
+                        <div class="restaurant-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/coffee-shops/cafe-inggo.jpg') }}" 
+                                 class="restaurant-image" 
+                                 alt="Café Inggo 1587"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                            <div class="top-pick-badge">TOP PICK</div>
+                        </div>
+                        <div class="card-body p-3">
+                            <h3 class="restaurant-name mb-2">Café Inggo 1587</h3>
+                            <p class="text-muted mb-2">A cozy cafe with great tea selection and comfortable working space</p>
+                            
+                            <div class="rating-reviews mb-2">
+                                <div class="stars d-inline-block">
+                                    {% for _ in range(5) %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="text-muted">(319 reviews)</span>
+                            </div>
+                            
+                            <div class="restaurant-details">
+                                <p class="address mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    Biak na Bato, Quezon City
+                                </p>
+                                <p class="hours mb-1">
+                                    <i class="fas fa-clock text-muted me-1"></i>
+                                    Daily: 7AM-10PM
+                                </p>
+                                <p class="price mb-1">
+                                    <i class="fas fa-peso-sign text-muted me-1"></i>
+                                    ₱₱ (Mid-range)
+                                </p>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <span class="badge bg-success me-1">Coffee</span>
+                                <span class="badge bg-info me-1">Breakfast</span>
+                                <span class="badge bg-secondary">WiFi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Talisay The Garden Cafe -->
+                <div class="col-md-6">
+                    <div class="restaurant-card h-100">
+                        <div class="restaurant-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/coffee-shops/talisay.jpg') }}" 
+                                 class="restaurant-image" 
+                                 alt="Talisay The Garden Cafe"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                            <div class="jacky-pick-badge">GARDEN VIBES</div>
+                        </div>
+                        <div class="card-body p-3">
+                            <h3 class="restaurant-name mb-2">Talisay The Garden Cafe</h3>
+                            <p class="text-muted mb-2">Garden setting with great cocktails and peaceful ambiance</p>
+                            
+                            <div class="rating-reviews mb-2">
+                                <div class="stars d-inline-block">
+                                    {% for _ in range(5) %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="text-muted">(243 reviews)</span>
+                            </div>
+                            
+                            <div class="restaurant-details">
+                                <p class="address mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    44 Maginhawa, Diliman
+                                </p>
+                                <p class="hours mb-1">
+                                    <i class="fas fa-clock text-muted me-1"></i>
+                                    Tue-Sun: 11AM-9PM (Closed Mon)
+                                </p>
+                                <p class="price mb-1">
+                                    <i class="fas fa-peso-sign text-muted me-1"></i>
+                                    ₱₱ (Mid-range)
+                                </p>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <span class="badge bg-success me-1">Garden</span>
+                                <span class="badge bg-warning text-dark me-1">Cocktails</span>
+                                <span class="badge bg-secondary">Outdoor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Greens Plant Based Vegan Restaurant -->
+                <div class="col-md-6">
+                    <div class="restaurant-card h-100">
+                        <div class="restaurant-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/coffee-shops/greens.jpg') }}" 
+                                 class="restaurant-image" 
+                                 alt="Greens Plant Based Vegan Restaurant QC"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                        </div>
+                        <div class="card-body p-3">
+                            <h3 class="restaurant-name mb-2">Greens Plant Based Vegan Cafe</h3>
+                            <p class="text-muted mb-2">Plant-based cafe with great coffee in a quiet, trendy atmosphere</p>
+                            
+                            <div class="rating-reviews mb-2">
+                                <div class="stars d-inline-block">
+                                    {% for _ in range(5) %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="text-muted">(359 reviews)</span>
+                            </div>
+                            
+                            <div class="restaurant-details">
+                                <p class="address mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    104 Sct. Lozano St, Diliman
+                                </p>
+                                <p class="hours mb-1">
+                                    <i class="fas fa-clock text-muted me-1"></i>
+                                    Daily: 11:30AM-8:30PM
+                                </p>
+                                <p class="price mb-1">
+                                    <i class="fas fa-peso-sign text-muted me-1"></i>
+                                    ₱₱ (Mid-range)
+                                </p>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <span class="badge bg-success me-1">Vegan</span>
+                                <span class="badge bg-info me-1">Coffee</span>
+                                <span class="badge bg-secondary">Quiet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wildflour Restaurant -->
+                <div class="col-md-6">
+                    <div class="restaurant-card h-100">
+                        <div class="restaurant-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/coffee-shops/wildflour.jpg') }}" 
+                                 class="restaurant-image" 
+                                 alt="Wildflour Restaurant Quezon City"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                            <div class="top-pick-badge">POPULAR</div>
+                        </div>
+                        <div class="card-body p-3">
+                            <h3 class="restaurant-name mb-2">Wildflour Cafe + Bakery</h3>
+                            <p class="text-muted mb-2">Upscale cafe with excellent coffee, cocktails, and bakery items</p>
+                            
+                            <div class="rating-reviews mb-2">
+                                <div class="stars d-inline-block">
+                                    {% for _ in range(5) %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="text-muted">(622 reviews)</span>
+                            </div>
+                            
+                            <div class="restaurant-details">
+                                <p class="address mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    24 Sct. Madriñan St, Diliman
+                                </p>
+                                <p class="hours mb-1">
+                                    <i class="fas fa-clock text-muted me-1"></i>
+                                    Daily: 7AM-11PM (Fri-Sat until late)
+                                </p>
+                                <p class="price mb-1">
+                                    <i class="fas fa-peso-sign text-muted me-1"></i>
+                                    ₱₱₱ (Premium)
+                                </p>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <span class="badge bg-success me-1">Bakery</span>
+                                <span class="badge bg-warning text-dark me-1">Premium</span>
+                                <span class="badge bg-secondary">All Day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="tips-section mt-5 p-4 bg-light rounded">
+                <h3 class="mb-3">💡 Tips for Finding Great Coffee in QC</h3>
+                <ul>
+                    <li><strong>Specialty Coffee:</strong> Look for cafes that source single-origin beans and offer pour-over options</li>
+                    <li><strong>Working Remote:</strong> Choose cafes with good WiFi and power outlets (Caerus, Café Inggo 1587)</li>
+                    <li><strong>Quiet Vibes:</strong> Greens Plant Based and Talisay Garden offer more peaceful settings</li>
+                    <li><strong>Weekend Mornings:</strong> Popular spots fill up early — arrive before 10AM for best seating</li>
+                    <li><strong>Parking:</strong> Most Tomas Morato and Diliman cafes have limited street parking</li>
+                </ul>
+            </div>
+
+            <!-- Neighborhood Guide -->
+            <div class="neighborhood-guide mt-5">
+                <h3 class="mb-3">📍 Best Neighborhoods for Coffee in QC</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Tomas Morato</h5>
+                                <p class="card-text">The咖啡hub of QC with numerous specialty cafes, bars, and restaurants. Great for barista-hopping and exploring different coffee styles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Maginhawa / Teachers Village</h5>
+                                <p class="card-text">Laid-back area with garden cafes and cozy spots perfect for casual meetups and relaxed coffee dates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Diliman (Scout Areas)</h5>
+                                <p class="card-text">Home to specialty third-wave coffee shops with modern, trendy atmospheres ideal for work and socializing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section mt-5">
+                <h3 class="mb-3">❓ Frequently Asked Questions</h3>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h4 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                What are the best specialty coffee shops in Quezon City?
+                            </button>
+                        </h4>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Caerus Specialty Coffee + Bistro, Café Inggo 1587, and Wildflour are among the top-rated 
+                                specialty coffee shops in QC. These places offer third-wave coffee, skilled baristas, 
+                                and quality beans sourced from reputable roasters.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h4 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Which QC cafes have the best ambiance for working?
+                            </button>
+                        </h4>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For remote work, Caerus Specialty Coffee, Café Inggo 1587, and Greens Plant Based offer 
+                                reliable WiFi, ample power outlets, and comfortable seating. These cafes are popular 
+                                with digital nomads and remote workers.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h4 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Are there quiet cafes in Quezon City?
+                            </button>
+                        </h4>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! Greens Plant Based Vegan Cafe offers a quiet, peaceful atmosphere. Talisay The 
+                                Garden Cafe also provides a serene garden setting away from the busy streets. Both 
+                                are perfect for reading, intimate conversations, or quiet work sessions.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h4 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What time should I visit QC cafes to avoid crowds?
+                            </button>
+                        </h4>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For the best chance of finding seating, visit before 10AM on weekends or during 
+                                weekday afternoon hours (2PM-5PM). Popular spots like Wildflour and Caerus 
+                                tend to get busy during lunch hours and weekend mornings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section mt-5 p-4 text-center rounded" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 class="mb-3">Looking for More QC Dining Options?</h3>
+                <p class="mb-3">Explore our complete guide to restaurants, cafes, and food spots across Quezon City.</p>
+                <a href="/" class="btn btn-light btn-lg">Browse All Restaurants</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

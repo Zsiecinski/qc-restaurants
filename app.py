@@ -621,5 +621,9 @@ def about():
     df, all_cuisines = process_dataframe(df)
     return render_template('about.html', all_cuisines=all_cuisines)
 
+@app.route('/blog/best-coffee-shops-quezon-city')
+def coffee_shops_blog():
+    return render_template('blog/best-coffee-shops-quezon-city.html')
+
 if __name__ == '__main__':
     app.run(debug=True) 
