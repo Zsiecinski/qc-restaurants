@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Restaurants in Quezon City{% endblock %}
+{% block description %}Read the latest articles and guides about restaurants in Quezon City, Filipino food, and more.{% endblock %}
+{% block canonical %}/blog{% endblock %}
+{% block og_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}
+{% block hero_title %}QC Restaurant Blog & Articles{% endblock %}
+{% block extra_css %}
+<style>
+  /* Ensure consistent blog card image sizing */
+  .blog-index .card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<main class="container my-5 blog-index">
+  <h1 class="mb-4">QC Restaurant Blog & Articles</h1>
+  <section class="row g-4">
+    {% for post in posts %}
+    <article class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <a href="/blog/{{ post.slug }}">
+          <img src="{{ post.featured_image }}" class="card-img-top" alt="{{ post.title }}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5 card-title"><a href="/blog/{{ post.slug }}">{{ post.title }}</a></h2>
+          <p class="text-muted small mb-2">{{ post.date }}</p>
+          <p class="card-text">{{ post.excerpt }}</p>
+          <a href="/blog/{{ post.slug }}" class="btn btn-outline-danger mt-2">Read More</a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+</main>
+{% endblock %} 

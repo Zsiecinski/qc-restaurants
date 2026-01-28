@@ -1,0 +1,990 @@
+{% extends 'base.html' %}
+{% block title %}Belcap's Big Tree Diner Xavierville - All-Day Comfort Food in Quezon City{% endblock %}
+{% block description %}Discover Belcap's Big Tree Diner on 70 Xavierville Avenue, Quezon City. Hearty comfort food, all-day breakfast, Filipino-American dishes, burgers, pasta, coffee & desserts. Open daily 11am-11pm.{% endblock %}
+{% block canonical %}/blog/belcaps-big-tree-diner{% endblock %}
+{% block og_title %}Belcap's Big Tree Diner Xavierville - All-Day Comfort Food in Quezon City{% endblock %}
+{% block og_description %}Belcap's Big Tree Diner on 70 Xavierville Avenue offers hearty comfort food, all-day breakfast, Filipino-American dishes, burgers, pasta, coffee & desserts. Community favorite in Quezon City.{% endblock %}
+{% block og_image %}{{ url_for('static', filename='images/Belcap/belcaps-social-share.jpg', _external=True) }}{% endblock %}
+{% block twitter_image %}{{ url_for('static', filename='images/Belcap/belcaps-social-share.jpg', _external=True) }}{% endblock %}
+{% block og_url %}/blog/belcaps-big-tree-diner{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- Belcap's Big Tree Diner template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.bigtree-hero {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.bigtree-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bigtree-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 3rem 0 2rem;
+    color: white;
+}
+
+.bigtree-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.bigtree-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #721c24, #8b2332);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.highlight-box h3 {
+    color: white !important;
+    margin-top: 0;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #721c24;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.feature-card h4 {
+    color: #721c24;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-visit {
+    background: white;
+    color: #d32323;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.menu-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+}
+
+.menu-list li:before {
+    content: "🍽️";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.sidebar-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-box h3 {
+    font-size: 1.2rem;
+    color: #721c24;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Gallery image hover effects */
+.gallery-image-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.gallery-image-link img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-image-link:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Lightbox Modal Styles */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+.lightbox-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    animation: zoomIn 0.3s;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10000;
+    line-height: 1;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+.lightbox-close:hover {
+    color: #d32323;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .bigtree-title {
+        font-size: 1.8rem;
+    }
+    
+    .bigtree-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+      <!-- Hero Section -->
+      <div class="bigtree-hero position-relative mb-4">
+        <picture>
+          <source type="image/jpeg" srcset="/static/images/Belcap/Belcaps-1.jpg">
+          <img src="/static/images/Belcap/Belcaps-1.jpg" 
+               class="bigtree-hero-img" 
+               alt="Belcap's Big Tree Diner Xavierville Quezon City Interior" 
+               itemprop="image">
+        </picture>
+        <div class="bigtree-hero-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <h1 class="bigtree-title" itemprop="headline">
+                  Welcome to Belcap's Big Tree Diner – Where Comfort Food Meets Community
+                </h1>
+                <p class="bigtree-subtitle">Hearty all-day dining in the heart of Quezon City</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Bar -->
+      <div class="quick-info-bar bg-white rounded shadow-sm p-3 mb-4">
+        <div class="row text-center g-0">
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-map-marker-alt text-danger mb-2"></i>
+            <div class="info-label">Location</div>
+            <div class="info-value">70 Xavierville Avenue, QC</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-clock text-danger mb-2"></i>
+            <div class="info-label">Hours</div>
+            <div class="info-value">
+              <div class="small">Daily: 11:00 AM - 11:00 PM</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-utensils text-danger mb-2"></i>
+            <div class="info-label">Cuisine</div>
+            <div class="info-value">Comfort Food & All-Day Dining</div>
+          </div>
+          <div class="col-md-3 col-6">
+            <i class="fas fa-users text-danger mb-2"></i>
+            <div class="info-label">Vibe</div>
+            <div class="info-value">Family-Friendly & Casual</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="content-section mb-4" aria-label="Table of contents">
+        <h2 id="toc" class="h4 mb-3"><i class="fas fa-list-ul me-2"></i>Jump to</h2>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3"><a href="#about" class="text-decoration-none">About</a></li>
+          <li class="list-inline-item me-3"><a href="#gallery" class="text-decoration-none">Gallery</a></li>
+          <li class="list-inline-item me-3"><a href="#menu" class="text-decoration-none">Menu Highlights</a></li>
+          <li class="list-inline-item me-3"><a href="#atmosphere" class="text-decoration-none">Atmosphere</a></li>
+          <li class="list-inline-item me-3"><a href="#why-visit" class="text-decoration-none">Why Visit</a></li>
+          <li class="list-inline-item"><a href="#faq" class="text-decoration-none">FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-lg-8 order-2 order-lg-1">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div id="about" class="content-section mb-5">
+            <p class="lead">
+              For those seeking hearty comfort food, relaxed all-day dining, and a welcoming community atmosphere 
+              in Quezon City, <strong>Belcap's Big Tree Diner</strong> stands as a beloved neighborhood favorite 
+              that serves up familiar favorites from breakfast to dinner.
+            </p>
+            
+            <p>
+              Located at <strong>70 Xavierville Avenue in Quezon City</strong>, Belcap's Big Tree Diner invites 
+              you to enjoy generous portions of comfort food in a cozy, unpretentious setting. Whether you're 
+              craving classic Filipino breakfast silogs, hearty burgers, pasta dishes, Filipino-American mains, 
+              or simply a good cup of coffee with dessert, Belcap's offers an experience that feels like coming 
+              home.
+            </p>
+
+            <p>
+              Open daily from <strong>11:00 AM to 11:00 PM</strong>, Belcap's Big Tree Diner serves an all-day 
+              menu that fits everything from lunch to dinner or casual coffee catch-ups. It's the kind of place 
+              where families gather, friends catch up, and everyone feels welcomed—no reservations needed, no 
+              dress code required, just good food and good vibes.
+            </p>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div id="gallery" class="content-section mb-5">
+            <h2><i class="fas fa-images me-2"></i>Experience Belcap's Big Tree Diner</h2>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <a href="/static/images/Belcap/613089167_2349005795561774_6040240379663330275_n.jpg" class="gallery-image-link" data-lightbox="belcaps-gallery">
+                  <img src="/static/images/Belcap/613089167_2349005795561774_6040240379663330275_n.jpg" 
+                       alt="Belcap's Big Tree Diner interior and ambiance" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 250px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Cozy dining atmosphere</div>
+              </div>
+              <div class="col-md-6">
+                <a href="/static/images/Belcap/616235694_819701484453843_3897900950790462934_n.jpg" class="gallery-image-link" data-lightbox="belcaps-gallery">
+                  <img src="/static/images/Belcap/616235694_819701484453843_3897900950790462934_n.jpg" 
+                       alt="Belcap's Big Tree Diner food presentation" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 250px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Hearty comfort food</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Belcap/617617326_4487385931586367_8641284208315455162_n.jpg" class="gallery-image-link" data-lightbox="belcaps-gallery">
+                  <img src="/static/images/Belcap/617617326_4487385931586367_8641284208315455162_n.jpg" 
+                       alt="Belcap's Big Tree Diner dishes" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Delicious menu offerings</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Belcap/Belcaps - 4.jpg" class="gallery-image-link" data-lightbox="belcaps-gallery">
+                  <img src="/static/images/Belcap/Belcaps - 4.jpg" 
+                       alt="Belcap's Big Tree Diner menu items" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Menu selections</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Belcap/Belcaps Menu.jpg" class="gallery-image-link" data-lightbox="belcaps-gallery">
+                  <img src="/static/images/Belcap/Belcaps Menu.jpg" 
+                       alt="Belcap's Big Tree Diner menu" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Extensive menu selection</div>
+              </div>
+            </div>
+            <p class="text-center text-muted fst-italic">
+              From cozy interiors to hearty comfort food, Belcap's Big Tree Diner offers a complete dining experience
+            </p>
+          </div>
+
+          <!-- Menu Highlights Section -->
+          <div id="menu" class="content-section mb-5">
+            <h2><i class="fas fa-utensils me-2"></i>Menu Highlights</h2>
+            
+            <p>
+              Belcap's Big Tree Diner features a diverse menu that spans classic breakfast fare to Filipino-American 
+              main dishes, burgers, pasta, coffee, and desserts. Their all-day dining approach means you can enjoy 
+              breakfast favorites at any time, or dive into hearty mains perfect for lunch or dinner.
+            </p>
+
+            <div class="feature-card">
+              <h4>All-Day Breakfast</h4>
+              <ul class="menu-list">
+                <li><strong>Classic Silogs:</strong> Tapa, Tocino, Bacon & Eggs, Chorizo Cebu</li>
+                <li><strong>Big Tree Special Omelette:</strong> Hearty breakfast option</li>
+                <li><strong>All-Day Availability:</strong> Breakfast favorites served anytime</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Hearty Main Dishes</h4>
+              <ul class="menu-list">
+                <li><strong>Filipino Favorites:</strong> Kare-kare, traditional comfort dishes</li>
+                <li><strong>Filipino-American Classics:</strong> Pot Roast Beef, Salisbury Steak</li>
+                <li><strong>Smoked BBQ Ribs:</strong> Tender, flavorful ribs</li>
+                <li><strong>Chicken Dishes:</strong> Golden Buffalo Wings with blue cheese dip</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Burgers, Pasta & Pizza</h4>
+              <ul class="menu-list">
+                <li><strong>Burgers:</strong> Classic comfort burgers</li>
+                <li><strong>Pasta:</strong> Various pasta dishes</li>
+                <li><strong>Family-Size Pizza:</strong> Creamy Spinach 4-Cheese Pizza perfect for sharing</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Desserts & Beverages</h4>
+              <ul class="menu-list">
+                <li><strong>Desserts:</strong> Sansrival (layered meringue cake), Classic Dark Chocolate Slice</li>
+                <li><strong>Coffee:</strong> Iced Sea Salt Latte, Ube Latte, Strawberry Matcha</li>
+                <li><strong>Perfect Endings:</strong> Sweet treats to complete your meal</li>
+              </ul>
+            </div>
+
+            <p>
+              The menu at Belcap's Big Tree Diner balances familiar comfort food with generous portions, making 
+              it perfect for groups, families, or solo diners looking for a satisfying meal without the fuss.
+            </p>
+          </div>
+
+          <!-- Atmosphere Section -->
+          <div id="atmosphere" class="content-section mb-5">
+            <h2><i class="fas fa-heart me-2"></i>The Belcap's Experience</h2>
+            
+            <p>
+              What sets Belcap's Big Tree Diner apart isn't just the food—it's the atmosphere. This is a 
+              community restaurant where locals gather, families dine together, and friends catch up over coffee. 
+              The vibe is relaxed, welcoming, and unpretentious.
+            </p>
+
+            <div class="row my-4">
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-home text-danger me-2"></i>Cozy & Familiar</h4>
+                  <p>Warm lighting, friendly service, and a laid-back energy that makes every visit feel comfortable</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-users text-danger me-2"></i>Family-Friendly</h4>
+                  <p>Perfect for family meals, casual hangouts, and everyday dinner plans without the fuss</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-clock text-danger me-2"></i>All-Day Flexibility</h4>
+                  <p>Open from 11 AM to 11 PM, fitting breakfast cravings, lunch meetings, or late dinners</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-calendar-alt text-danger me-2"></i>Special Events</h4>
+                  <p>They host fun gatherings like retro-themed Friday nights and share updates on social media</p>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Whether you're planning a casual lunch, a family dinner, or just stopping by for coffee and dessert, 
+              Belcap's Big Tree Diner provides a space where you can relax, enjoy good food, and feel at home.
+            </p>
+          </div>
+
+          <!-- Why Visit Section -->
+          <div id="why-visit" class="content-section mb-5">
+            <h2><i class="fas fa-star me-2"></i>Why Belcap's Big Tree Diner Stands Out</h2>
+            
+            <p>
+              In a city filled with dining options, Belcap's Big Tree Diner distinguishes itself through:
+            </p>
+
+            <div class="row my-3">
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">All-Day Dining</h4>
+                  <p class="mb-0 small">Breakfast, lunch, dinner, or coffee—served whenever you need it</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Generous Portions</h4>
+                  <p class="mb-0 small">Hearty servings that satisfy without breaking the bank</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Community Vibe</h4>
+                  <p class="mb-0 small">A welcoming atmosphere where locals feel at home</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Diverse Menu</h4>
+                  <p class="mb-0 small">From Filipino classics to American comfort food—something for everyone</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-parking text-danger me-2"></i>Ample Parking</h4>
+                  <p class="mb-0 small">Plenty of parking space available—a rare and convenient feature in Quezon City restaurants</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-calendar-check text-danger me-2"></i>Event Reservations</h4>
+                  <p class="mb-0 small">Accepts reservations for events, meetings, parties, and gatherings to be held onsite</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-palette text-danger me-2"></i>Artist Showcase</h4>
+                  <p class="mb-0 small">Interior walls may be used to accommodate artworks of artists to be showcased, supporting local art</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <h2>Visit Belcap's Big Tree Diner Today</h2>
+            <p class="lead mb-4">
+              Whether you're craving a hearty breakfast, a satisfying lunch, or a comforting dinner, 
+              Belcap's Big Tree Diner welcomes you. Stop by their cozy location on Xavierville Avenue 
+              and experience why locals keep coming back.
+            </p>
+            <div>
+              <a href="https://www.facebook.com/p/Belcaps-Big-Tree-Diner-61571652839130/" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fab fa-facebook me-2"></i>Visit Facebook
+              </a>
+              <a href="https://www.instagram.com/bigtreediner/?hl=en" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fab fa-instagram me-2"></i>Follow on Instagram
+              </a>
+              <a href="https://www.google.com/maps/search/Belcap%27s+Big+Tree+Diner+70+Xavierville+Avenue+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+              </a>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="content-section mb-5">
+            <p>
+              <strong>Belcap's Big Tree Diner</strong> represents more than just a restaurant—it's a community 
+              gathering place where comfort food, familiar flavors, and warm hospitality come together. With their 
+              combination of all-day dining, generous portions, diverse menu, and welcoming atmosphere, they've 
+              created a dining destination that feels like home.
+            </p>
+            
+            <p>
+              Whether you're planning a family meal, meeting friends for coffee, or simply looking for a place 
+              to enjoy hearty comfort food without the fuss, Belcap's Big Tree Diner is ready to welcome you 
+              with open arms and delicious food.
+            </p>
+
+            <p class="text-muted fst-italic">
+              Visit them at <strong>70 Xavierville Avenue, Quezon City</strong>, daily from 11:00 AM to 11:00 PM. 
+              Follow them on <a href="https://www.facebook.com/p/Belcaps-Big-Tree-Diner-61571652839130/" target="_blank" rel="noopener noreferrer" class="text-danger">Facebook</a> 
+              and <a href="https://www.instagram.com/bigtreediner/?hl=en" target="_blank" rel="noopener noreferrer" class="text-danger">Instagram</a> 
+              for updates, specials, and new menu items.
+            </p>
+          </div>
+
+        </section>
+
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-01-15">
+        <meta itemprop="keywords" content="Belcap's Big Tree Diner, Xavierville restaurants, Quezon City diner, all-day breakfast Quezon City, comfort food QC, Filipino-American restaurant Quezon City, family restaurant QC, casual dining Quezon City">
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section mb-5">
+          <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  What are Belcap's Big Tree Diner's operating hours?
+                </button>
+              </h3>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Belcap's Big Tree Diner is open daily from 11:00 AM to 11:00 PM, offering all-day dining options.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  Do they serve breakfast all day?
+                </button>
+              </h3>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Belcap's Big Tree Diner offers all-day breakfast options, including classic silogs like tapa, tocino, bacon & eggs, and their Big Tree Special Omelette.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Is parking available?
+                </button>
+              </h3>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Belcap's Big Tree Diner has ample parking space available, which is a rare and convenient feature in most Quezon City restaurants. You won't have to worry about finding parking when you visit.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4">
+                  Do they accept reservations for events?
+                </button>
+              </h3>
+              <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Belcap's Big Tree Diner accepts reservations for events, meetings, parties, and gatherings to be held onsite. Contact them directly through their Facebook page or visit the restaurant to make arrangements.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5">
+                  Do they host special events?
+                </button>
+              </h3>
+              <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Belcap's Big Tree Diner sometimes hosts fun gatherings like retro-themed Friday nights. Follow their Facebook and Instagram pages for updates on special events and new menu items.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5">
+                  What type of cuisine do they serve?
+                </button>
+              </h3>
+              <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Belcap's Big Tree Diner serves hearty comfort food including Filipino classics (like kare-kare), Filipino-American dishes (pot roast, salisbury steak), burgers, pasta, pizza, all-day breakfast, coffee, and desserts.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4 order-1 order-lg-2 mb-4">
+        <div class="sidebar-box sticky-top" style="top: 20px;">
+          <h3><i class="fas fa-info-circle me-2"></i>Quick Info</h3>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i>Location</strong>
+            <p class="mb-1">70 Xavierville Avenue</p>
+            <p class="mb-0">Quezon City</p>
+            <a href="https://www.google.com/maps/search/Belcap%27s+Big+Tree+Diner+70+Xavierville+Avenue+Quezon+City" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-sm btn-outline-danger mt-2">
+              <i class="fas fa-directions me-1"></i> Get Directions
+            </a>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-clock text-danger me-2"></i>Hours</strong>
+            <p class="mb-0 small">Daily: 11:00 AM - 11:00 PM</p>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fab fa-facebook text-danger me-2"></i>Facebook</strong>
+            <p class="mb-0">
+              <a href="https://www.facebook.com/p/Belcaps-Big-Tree-Diner-61571652839130/" target="_blank" rel="noopener noreferrer" class="text-danger text-decoration-none small">
+                Belcap's Big Tree Diner
+              </a>
+            </p>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fab fa-instagram text-danger me-2"></i>Instagram</strong>
+            <p class="mb-0">
+              <a href="https://www.instagram.com/bigtreediner/?hl=en" target="_blank" rel="noopener noreferrer" class="text-danger text-decoration-none small">
+                @bigtreediner
+              </a>
+            </p>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-utensils text-danger me-2"></i>Specialties</strong>
+            <ul class="mb-0 ps-3 small">
+              <li>All-Day Breakfast</li>
+              <li>Comfort Food</li>
+              <li>Filipino-American Dishes</li>
+              <li>Burgers & Pasta</li>
+              <li>Coffee & Desserts</li>
+            </ul>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-tags text-danger me-2"></i>Keywords</strong>
+            <div>
+              <span class="badge bg-danger me-1 mb-1">Xavierville</span>
+              <span class="badge bg-danger me-1 mb-1">Comfort Food</span>
+              <span class="badge bg-danger me-1 mb-1">All-Day Dining</span>
+              <span class="badge bg-danger me-1 mb-1">Family Restaurant</span>
+              <span class="badge bg-danger me-1 mb-1">Quezon City</span>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-map-marked-alt text-danger me-2"></i>Map</strong>
+            <iframe src="https://www.google.com/maps?q=70+Xavierville+Avenue+Quezon+City&output=embed" width="100%" height="180" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="mb-2 small text-muted">Last updated: {{ current_date if current_date else 'January 2025' }}</div>
+          <h3><i class="fas fa-book me-2"></i>Related Articles</h3>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <a href="/blog/maginhawa-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Maginhawa Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/blog/tomas-morato-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Tomas Morato Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/all-restaurants" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>All QC Restaurants
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Belcap's Big Tree Diner - All-Day Comfort Food in Quezon City",
+  "datePublished": "2025-01-15",
+  "image": "/static/images/Belcap/belcaps-social-share.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "description": "Discover Belcap's Big Tree Diner on 70 Xavierville Avenue, Quezon City. Hearty comfort food, all-day breakfast, Filipino-American dishes, burgers, pasta, coffee & desserts.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/belcaps-big-tree-diner"
+  },
+  "keywords": "Belcap's Big Tree Diner, Xavierville restaurants, Quezon City diner, all-day breakfast Quezon City, comfort food QC, Filipino-American restaurant Quezon City, family restaurant QC, casual dining Quezon City"
+}
+</script>
+
+<!-- Breadcrumbs JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Belcap's Big Tree Diner",
+      "item": "https://www.restaurantsquezoncity.com/blog/belcaps-big-tree-diner"
+    }
+  ]
+}
+</script>
+
+<!-- Restaurant JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Belcap's Big Tree Diner",
+  "description": "Community-favorite restaurant serving hearty comfort food, all-day breakfast, Filipino-American dishes, burgers, pasta, coffee, and desserts",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "70 Xavierville Avenue",
+    "addressLocality": "Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "url": "https://www.facebook.com/p/Belcaps-Big-Tree-Diner-61571652839130/",
+  "servesCuisine": ["Filipino", "American", "Comfort Food", "Breakfast", "Diner"],
+  "priceRange": "₱₱",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:00",
+      "closes": "23:00"
+    }
+  ],
+  "image": [
+    "/static/images/Belcap/613089167_2349005795561774_6040240379663330275_n.jpg",
+    "/static/images/Belcap/616235694_819701484453843_3897900950790462934_n.jpg",
+    "/static/images/Belcap/617617326_4487385931586367_8641284208315455162_n.jpg"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/p/Belcaps-Big-Tree-Diner-61571652839130/",
+    "https://www.instagram.com/bigtreediner/"
+  ]
+}
+</script>
+
+<!-- FAQ JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are Belcap's Big Tree Diner's operating hours?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Belcap's Big Tree Diner is open daily from 11:00 AM to 11:00 PM, offering all-day dining options."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do they serve breakfast all day?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Belcap's Big Tree Diner offers all-day breakfast options, including classic silogs like tapa, tocino, bacon & eggs, and their Big Tree Special Omelette."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is parking available?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Belcap's Big Tree Diner has ample parking space available, which is a rare and convenient feature in most Quezon City restaurants. You won't have to worry about finding parking when you visit."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do they accept reservations for events?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Belcap's Big Tree Diner accepts reservations for events, meetings, parties, and gatherings to be held onsite. Contact them directly through their Facebook page or visit the restaurant to make arrangements."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do they host special events?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Belcap's Big Tree Diner sometimes hosts fun gatherings like retro-themed Friday nights. Follow their Facebook and Instagram pages for updates on special events and new menu items."}
+    },
+    {
+      "@type": "Question",
+      "name": "What type of cuisine do they serve?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Belcap's Big Tree Diner serves hearty comfort food including Filipino classics (like kare-kare), Filipino-American dishes (pot roast, salisbury steak), burgers, pasta, pizza, all-day breakfast, coffee, and desserts."}
+    }
+  ]
+}
+</script>
+
+<!-- Lightbox Modal -->
+<div id="lightboxModal" class="lightbox-modal">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryLinks = document.querySelectorAll('.gallery-image-link[data-lightbox]');
+    const modal = document.getElementById('lightboxModal');
+    const modalImg = document.getElementById('lightboxImage');
+    
+    galleryLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imgSrc = this.getAttribute('href');
+            const imgAlt = this.querySelector('img').getAttribute('alt');
+            modalImg.src = imgSrc;
+            modalImg.alt = imgAlt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+    
+    // Close on background click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeLightbox();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+});
+
+function closeLightbox() {
+    const modal = document.getElementById('lightboxModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+</script>
+{% endblock %}

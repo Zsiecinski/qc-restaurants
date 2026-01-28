@@ -1,0 +1,1797 @@
+{% extends 'base.html' %}
+{% block title %}SM North EDSA Restaurants 2025: Best 40 Dining Spots in Quezon City | Complete Guide{% endblock %}
+{% block description %}Discover the best SM North EDSA restaurants! From Tong Yang buffet to TGI Friday's, Vikings to O GA NE Italian - explore 40 top-rated dining options with reviews, prices, hours & insider tips.{% endblock %}
+{% block canonical %}/blog/sm-north-edsa-restaurants-2025{% endblock %}
+{% block og_title %}Best SM North EDSA Restaurants 2025: Complete Dining Guide Quezon City{% endblock %}
+{% block og_description %}Top 40 SM North EDSA restaurants featuring Tong Yang, TGI Friday's, Vikings, O GA NE Italian & more. Reviews, prices, hours & must-try dishes for every budget.{% endblock %}
+{% block og_url %}/blog/sm-north-edsa-restaurants-2025{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- SM North EDSA Restaurants template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.sm-north-edsa-hero {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(211, 35, 35, 0.9), rgba(255, 107, 107, 0.9)),
+                url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.sm-north-edsa-hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.sm-north-edsa-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.sm-north-edsa-subtitle {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.quick-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+    font-size: 1.8rem;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.content-section p {
+    margin-bottom: 1.2rem;
+}
+
+.content-section .lead {
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.content-section ul, .content-section ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.content-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+.intro-box {
+    background: #f8f9fa;
+    border-left: 4px solid #d32323;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.intro-box p {
+    margin-bottom: 1rem;
+}
+
+.intro-box p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #721c24, #8b2332);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.highlight-box h3 {
+    color: white !important;
+    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .highlight-box {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .highlight-box h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .highlight-box p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #721c24;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.feature-card h4 {
+    color: #721c24;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.feature-card h4 a {
+    transition: color 0.2s ease;
+}
+
+.feature-card h4 a:hover {
+    color: #d32323 !important;
+}
+
+.feature-card p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .feature-card {
+        padding: 1rem;
+        margin: 0.75rem 0;
+    }
+    
+    .feature-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+}
+
+.restaurant-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.25rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.restaurant-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Optimized image positioning for each restaurant */
+.restaurant-card img[alt*="Vikings"] {
+    object-position: center bottom; /* Show the buffet food spread */
+}
+
+.restaurant-card img[alt*="Gerry's Grill"] {
+    object-position: center top; /* Show the prominent signage */
+}
+
+.restaurant-card img[alt*="Tong Yang"] {
+    object-position: center bottom; /* Show the buffet spread */
+}
+
+.restaurant-card img[alt*="Panda Express"] {
+    object-position: center center; /* Show the restaurant */
+}
+
+.restaurant-card img[alt*="Ramen Nagi"] {
+    object-position: 65% center; /* Focus on the ramen bowls */
+}
+
+.restaurant-card img[alt*="Lydia's Lechon"] {
+    object-position: center 40%; /* Center on the lechon */
+}
+
+@media (max-width: 768px) {
+    .restaurant-card {
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .restaurant-card img {
+        height: 180px;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-2px);
+    }
+}
+
+.restaurant-name {
+    color: #721c24;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+    .restaurant-name {
+        font-size: 1.1rem;
+        line-height: 1.25;
+    margin-bottom: 0.5rem;
+    }
+}
+
+.restaurant-rating {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.restaurant-rating .fas, .restaurant-rating .fa-star {
+    color: #ffc107;
+}
+
+.restaurant-cuisine {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.restaurant-hours {
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.restaurant-address {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.restaurant-phone {
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .restaurant-rating {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+    .restaurant-cuisine,
+    .restaurant-hours,
+    .restaurant-address,
+.restaurant-phone {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+}
+
+.price-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.top-pick-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #d32323;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stars {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.rating-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+    font-weight: 500;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+        margin-right: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-visit {
+    background: white;
+    color: #d32323;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.tip-box {
+    background: #d1ecf1;
+    border-left: 4px solid #0c5460;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.tip-box h4 {
+    color: #0c5460;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Show More functionality for mobile */
+@media (max-width: 768px) {
+    .restaurant-card.mobile-hidden {
+        display: none;
+    }
+    
+    .show-more-btn {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #d32323, #ff6b6b);
+        color: white;
+        border: none;
+    border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin: 1.5rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .show-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(211, 35, 35, 0.3);
+    }
+    
+    .show-more-btn i {
+        transition: transform 0.3s ease;
+        margin-left: 0.5rem;
+    }
+    
+    .show-more-btn.expanded i {
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 769px) {
+    .show-more-btn {
+        display: none;
+    }
+}
+
+/* Hours display styles */
+.hours-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.hours-header:hover {
+    background-color: #e9ecef;
+}
+
+.hours-status {
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-right: auto;
+}
+
+.hours-toggle {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+    color: #6c757d;
+}
+
+.hours-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.hours-list.expanded {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+}
+
+.hours-item.current-day {
+    background: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.hours-item .day {
+    color: #495057;
+    margin-right: 0.5rem;
+    min-width: 90px;
+}
+
+.hours-item .time {
+    color: #6c757d;
+}
+
+.tip-box p, .tip-box ul {
+    margin-bottom: 0.75rem;
+}
+
+.tip-box ul {
+    padding-left: 1.5rem;
+}
+
+.tip-box ul:last-child {
+    margin-bottom: 0;
+}
+
+.internal-links {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.internal-links h3 {
+    font-size: 1.3rem;
+    color: #721c24;
+    margin-bottom: 1.5rem;
+}
+
+.internal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.internal-links li {
+    margin-bottom: 1rem;
+}
+
+.internal-links a {
+    color: #d32323;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.internal-links a:hover {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .tip-box {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .tip-box h4 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .tip-box p, .tip-box ul {
+        font-size: 0.9rem;
+    }
+    
+    .internal-links {
+        padding: 1.5rem;
+    }
+    
+    .internal-links h3 {
+        font-size: 1.1rem;
+    }
+    
+    .internal-links a {
+        font-size: 0.95rem;
+    }
+}
+
+.cuisine-badge {
+    display: inline-block;
+    background: #721c24;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 0.2rem;
+    text-decoration: none;
+}
+
+.cuisine-badge:hover {
+    background: #8b2332;
+    color: white;
+    text-decoration: none;
+}
+
+.toc {
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.toc h2 {
+    font-size: 1.3rem;
+    color: #721c24;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    border: none !important;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 2rem;
+}
+
+.toc li {
+    margin-bottom: 0.75rem;
+    break-inside: avoid;
+}
+
+.toc a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.toc a:hover {
+    color: #d32323;
+}
+
+.toc a i {
+    margin-right: 0.5rem;
+    color: #d32323;
+}
+
+/* Breadcrumbs */
+.breadcrumb-nav {
+    background: #f8f9fa;
+    padding: 0.75rem 0;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.breadcrumb-nav .container {
+    padding: 0 1rem;
+}
+
+.breadcrumb-nav ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.breadcrumb-nav li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-nav a {
+    color: #d32323;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-nav .separator {
+    color: #6c757d;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-nav .current {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+    }
+    
+    .breadcrumb-nav a,
+    .breadcrumb-nav .current {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb-nav .separator {
+        margin: 0 0.25rem;
+    }
+    
+    .toc ul {
+        columns: 1;
+    }
+    
+    .toc {
+        padding: 1rem;
+    }
+    
+    .toc h2 {
+        font-size: 1.1rem;
+    }
+    
+    .toc li {
+        margin-bottom: 0.6rem;
+    }
+    
+    .toc a {
+        font-size: 0.9rem;
+    }
+    
+    .sm-north-edsa-hero {
+        height: 350px;
+    }
+    
+    .sm-north-edsa-title {
+        font-size: 1.8rem;
+    }
+    
+    .sm-north-edsa-subtitle {
+        font-size: 1rem;
+    }
+    
+    .quick-stats {
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    .quick-hours-dropdown .row {
+        flex-direction: column;
+    }
+    
+    .quick-hours-dropdown .col-md-4 {
+        margin-bottom: 1rem;
+    }
+    
+    .quick-hours-dropdown h6 {
+        font-size: 0.9rem;
+    }
+    
+    .quick-hours-dropdown .small {
+        font-size: 0.8rem;
+    }
+    
+    .content-section {
+        font-size: 1rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .intro-box {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .intro-box p {
+        font-size: 0.95rem;
+    }
+    
+    .quick-info-bar {
+        padding: 1rem !important;
+    }
+    
+    .quick-info-bar .col-6 {
+        padding: 0.5rem;
+    }
+    
+    .info-label {
+        font-size: 0.75rem;
+    }
+    
+    .info-value {
+        font-size: 0.85rem;
+    }
+    
+    .cta-section {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        <li><a href="/"><i class="fas fa-home me-1"></i>Home</a></li>
+        <li><span class="separator">/</span></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><span class="separator">/</span></li>
+        <li><span class="current">SM North EDSA Restaurants</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+      <!-- Hero Section -->
+      <div class="sm-north-edsa-hero">
+        <div class="sm-north-edsa-hero-content">
+                <h1 class="sm-north-edsa-title" itemprop="headline">
+            Best SM North EDSA Restaurants: Your Complete 2025 Dining Guide
+                </h1>
+          <p class="sm-north-edsa-subtitle">
+            From Tong Yang's legendary buffet to TGI Friday's American favorites, Vikings to O GA NE's 
+            authentic Italian cuisine - discover the top 40 dining destinations in SM City North EDSA, 
+            Quezon City's premier food hub.
+          </p>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">40+</span>
+              <span class="stat-label">Restaurants</span>
+              </div>
+            <div class="stat-item">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Cuisines</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">⭐ 4.5+</span>
+              <span class="stat-label">Avg Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Bar -->
+      <div class="quick-info-bar bg-white rounded shadow-sm p-3 mb-4">
+        <div class="row text-center g-0">
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-map-marker-alt text-danger mb-2"></i>
+            <div class="info-label">Location</div>
+            <div class="info-value">SM City North EDSA, Quezon City</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-utensils text-danger mb-2"></i>
+            <div class="info-label">Restaurants</div>
+            <div class="info-value">40+ Options</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-star text-danger mb-2"></i>
+            <div class="info-label">Top Rated</div>
+            <div class="info-value">4.5+ Stars</div>
+          </div>
+          <div class="col-md-3 col-6">
+            <i class="fas fa-clock text-danger mb-2"></i>
+            <div class="info-label">Hours</div>
+            <div class="info-value hours-toggle-btn" onclick="toggleQuickHours()" style="cursor: pointer;">
+              <span class="hours-status-text">Most: 10AM-10PM</span>
+              <i class="fas fa-chevron-down ms-1" id="quickHoursChevron" style="font-size: 0.8rem;"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Expandable Hours Section -->
+        <div id="quickHoursDropdown" class="quick-hours-dropdown" style="display: none;">
+          <hr class="my-3">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-utensils me-2"></i>Restaurants</h6>
+              <p class="mb-1 small"><strong>Most restaurants:</strong> 10AM-10PM</p>
+              <p class="mb-1 small"><strong>Vikings:</strong> 11AM-2:30PM, 5:30PM-10PM</p>
+              <p class="mb-0 small"><strong>Gerry's Grill:</strong> Mon-Thu 10AM-9PM, Fri-Sat 10AM-10PM</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-coffee me-2"></i>Cafes</h6>
+              <p class="mb-1 small"><strong>Panda Express:</strong> Daily 10AM-10PM</p>
+              <p class="mb-1 small"><strong>PaperMoon Cafe:</strong> Daily 10AM-10PM</p>
+              <p class="mb-0 small"><strong>Most Cafes:</strong> 10AM-10PM</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-shopping-bag me-2"></i>Mall Hours</h6>
+              <p class="mb-1 small"><strong>SM North EDSA:</strong> Daily 10AM-10PM</p>
+              <p class="mb-1 small"><strong>Food Court:</strong> 10AM-9PM</p>
+              <p class="mb-0 small"><i class="fas fa-info-circle me-1"></i>Hours may vary by restaurant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2><i class="fas fa-list me-2"></i>Quick Navigation</h2>
+        <ul>
+          <li><a href="#top-restaurants"><i class="fas fa-chevron-right"></i>Top Rated Restaurants</a></li>
+          <li><a href="#cuisines"><i class="fas fa-chevron-right"></i>Browse by Cuisine</a></li>
+          <li><a href="#quick-bites"><i class="fas fa-chevron-right"></i>Quick Bites & Specialties</a></li>
+          <li><a href="#budget-guide"><i class="fas fa-chevron-right"></i>Budget Guide</a></li>
+          <li><a href="#dining-tips"><i class="fas fa-chevron-right"></i>Insider Tips</a></li>
+          <li><a href="#map"><i class="fas fa-chevron-right"></i>Location & Directions</a></li>
+          <li><a href="#faq"><i class="fas fa-chevron-right"></i>FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-lg-8 mx-auto">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div class="content-section mb-5">
+            <p class="lead">
+              Looking for the best <strong>SM North EDSA restaurants</strong> in Quezon City? You've come to the right place! 
+              SM City North EDSA has transformed into one of the premier dining destinations in northern Metro Manila, 
+              featuring over 40 restaurants ranging from international buffets to authentic Italian and Japanese cuisine.
+            </p>
+            
+            <p>
+              Whether you're craving the legendary <strong>Tong Yang buffet</strong> (4.9★), authentic Italian at 
+              <strong>O GA NE Restaurant</strong> (4.9★), American favorites at <strong>TGI Friday's</strong> (4.9★), 
+              or the premium <strong>Vikings buffet</strong> (4.8★), SM North EDSA's diverse dining scene offers 
+              something for everyone—from budget-friendly meals to upscale experiences.
+            </p>
+
+            <p>
+              This comprehensive guide showcases the must-try <strong>restaurants in SM North EDSA</strong>, featuring 
+              detailed reviews, price ranges, operating hours, and insider tips. Whether you're a SM North EDSA resident, 
+              mall-goer, or foodie explorer, discover why SM North EDSA restaurants have become a culinary destination 
+              in Quezon City.
+            </p>
+          </div>
+
+          <!-- Top Restaurants Section -->
+          <div class="content-section mb-5">
+            <h2 id="top-restaurants"><i class="fas fa-star me-2"></i>Top Rated Restaurants in SM North EDSA</h2>
+            
+            <p>
+              These are the highest-rated restaurants in SM North EDSA based on customer reviews, food quality, 
+              and overall dining experience. For more detailed information about each restaurant, visit our 
+              <a href="/sm-north-edsa/" class="text-danger">complete SM North EDSA restaurant directory</a>.
+            </p>
+
+            {% if sm_north_restaurants %}
+              {% for restaurant in sm_north_restaurants[:10] %}
+              <div class="restaurant-card {% if loop.index > 5 %}mobile-hidden{% endif %}">
+                {% if restaurant.photo_url %}
+                  {% set address_for_image = restaurant.address|string if restaurant.address and restaurant.address|string != 'nan' else '' %}
+                  {% set image_url, alt_tag = get_restaurant_image_url(restaurant.name, restaurant.photo_url, street=address_for_image) %}
+                  <img src="{{ image_url }}" 
+                       alt="{{ alt_tag or (restaurant.name + ' SM North EDSA restaurant') }}" 
+                       class="img-fluid rounded mb-3" 
+                       loading="lazy"
+                       onerror="this.style.display='none';">
+                {% else %}
+                  <div style="width: 100%; height: 220px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #6c757d; border-radius: 8px; margin-bottom: 1rem;">
+                    <i class="fas fa-utensils" style="font-size: 3rem;"></i>
+                  </div>
+                {% endif %}
+                <h3 class="restaurant-name">{{ restaurant.name }}</h3>
+                {% if restaurant.rating and restaurant.rating != 'nan' %}
+              <div class="restaurant-rating mb-2">
+                  {% set rating_val = restaurant.rating|float %}
+                  {% set full_stars = rating_val|round|int %}
+                  {% for i in range(full_stars) %}<i class="fas fa-star"></i>{% endfor %}
+                  {% if rating_val %  1 >= 0.5 and full_stars < 5 %}<i class="fas fa-star-half-alt"></i>{% endif %}
+                  <strong>{{ "%.1f"|format(rating_val) }}/5</strong>
+                  {% if restaurant.reviews and restaurant.reviews != 'nan' %}
+                    {% set reviews_int = restaurant.reviews|int if restaurant.reviews|string != 'nan' else 0 %}
+                    ({{ "{:,}".format(reviews_int) }} review{% if reviews_int != 1 %}s{% endif %})
+                  {% endif %}
+              </div>
+                {% endif %}
+                <div class="restaurant-cuisine"><strong>Cuisine:</strong> {{ restaurant.cuisine or 'Restaurant' }}</div>
+                {% if restaurant.hours and restaurant.hours is mapping %}
+                <div class="hours mb-2">
+                    <div class="hours-header" onclick="toggleHours(this)">
+                        <b>🕒</b>
+                        <span class="hours-status">
+                            {% set current_hours = restaurant.hours.get(current_day, '') %}
+                            {% if current_hours %}
+                                {{ current_hours }}
+                            {% else %}
+                                View Hours
+                            {% endif %}
+                        </span>
+                        <span class="hours-toggle">
+                            <span class="text-muted">▼</span>
+                        </span>
+                    </div>
+                    <div class="hours-list collapsed">
+                        {% for day, hours in restaurant.hours.items() %}
+                        <div class="hours-item {% if day == current_day %}current-day{% endif %}">
+                            <span class="day">{{ day }}</span>
+                            <span class="time">{{ hours }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% if restaurant.address and restaurant.address|length > 0 %}
+                  <div class="restaurant-address"><strong>Location:</strong> {{ restaurant.address[:80] }}{% if restaurant.address|length > 80 %}...{% endif %}</div>
+                {% endif %}
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Dine-in</span>
+                  {% if restaurant.phone %}<span class="badge bg-primary me-1">Takeout</span>{% endif %}
+                  {% if restaurant.site %}<span class="badge bg-info me-1">Delivery</span>{% endif %}
+              </div>
+            </div>
+              {% endfor %}
+
+            <!-- Show More Button for Mobile -->
+            <button id="showMoreBtn" class="show-more-btn" onclick="toggleRestaurants()">
+                <span id="btnText">Show {{ sm_north_restaurants|length - 5 }} More Restaurants</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            {% else %}
+              <p class="text-muted">Restaurant data is being loaded...</p>
+            {% endif %}
+            
+            <div class="text-center mt-4">
+              <a href="/sm-north-edsa/" class="btn btn-danger btn-lg">
+                <i class="fas fa-utensils me-2"></i>View All SM North EDSA Restaurants
+              </a>
+            </div>
+          </div>
+
+          <!-- Cuisine Categories -->
+          <div class="content-section mb-5">
+            <h2 id="cuisines"><i class="fas fa-utensils me-2"></i>Browse by Cuisine in SM North EDSA</h2>
+            
+            <p>
+              SM North EDSA offers a diverse range of cuisines to satisfy every palate. Here's what you can find. 
+              Explore our <a href="/cuisine/" class="text-danger">complete cuisine directory</a> for more options.
+            </p>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=fast-food" class="text-dark" style="text-decoration: none;">🍔 Fast Food (6 restaurants)</a></h4>
+                  <p>Quick bites and comfort food favorites including McDonald's, Jollibee, and local chains.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=japanese" class="text-dark" style="text-decoration: none;">🍜 Japanese (6 restaurants)</a></h4>
+                  <p>Authentic Japanese cuisine including Karayama, Dohtonbori, and Genki Sushi.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=cafe" class="text-dark" style="text-decoration: none;">☕ Cafe (4 restaurants)</a></h4>
+                  <p>Perfect spots for coffee, pastries, and light meals including Kalye Cafe and local cafes.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=buffet" class="text-dark" style="text-decoration: none;">🍱 Buffet (3 restaurants)</a></h4>
+                  <p>All-you-can-eat options including Tong Yang, Vikings, and other buffet restaurants.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=buffet" class="text-dark" style="text-decoration: none;">🍱 Buffet (3 restaurants)</a></h4>
+                  <p>All-you-can-eat options including Vikings and other buffet restaurants.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=korean" class="text-dark" style="text-decoration: none;">🍜 Korean (2 restaurants)</a></h4>
+                  <p>Korean cuisine including 24 Chicken and other Korean-inspired dishes.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <h3>Browse by Cuisine in SM North EDSA</h3>
+              <div class="text-center">
+                <a href="/sm-north-edsa/?cuisine=fast-food" class="cuisine-badge">Fast food</a>
+                <a href="/sm-north-edsa/?cuisine=cafe" class="cuisine-badge">Cafe</a>
+                <a href="/sm-north-edsa/?cuisine=filipino" class="cuisine-badge">Filipino</a>
+                <a href="/sm-north-edsa/?cuisine=pizza" class="cuisine-badge">Pizza</a>
+                <a href="/sm-north-edsa/?cuisine=buffet" class="cuisine-badge">Buffet</a>
+                <a href="/sm-north-edsa/?cuisine=korean" class="cuisine-badge">Korean</a>
+                <a href="/sm-north-edsa/?cuisine=chicken" class="cuisine-badge">Chicken</a>
+                <a href="/sm-north-edsa/?cuisine=american" class="cuisine-badge">American</a>
+                <a href="/sm-north-edsa/?cuisine=lechon" class="cuisine-badge">Lechon</a>
+                <a href="/sm-north-edsa/?cuisine=ramen" class="cuisine-badge">Ramen</a>
+                <a href="/sm-north-edsa/?cuisine=japanese" class="cuisine-badge">Japanese</a>
+                <a href="/sm-north-edsa/?cuisine=asian" class="cuisine-badge">Asian</a>
+                <a href="/sm-north-edsa/?cuisine=donut-shop" class="cuisine-badge">Donut shop</a>
+                <a href="/sm-north-edsa/?cuisine=pancake" class="cuisine-badge">Pancake</a>
+                <a href="/sm-north-edsa/?cuisine=chinese" class="cuisine-badge">Chinese</a>
+                <a href="/sm-north-edsa/?cuisine=dessert" class="cuisine-badge">Dessert</a>
+                <a href="/sm-north-edsa/?cuisine=cake-shop" class="cuisine-badge">Cake shop</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Bites & Specialties -->
+          <div class="content-section mb-5">
+            <h2 id="quick-bites"><i class="fas fa-hamburger me-2"></i>Quick Bites & Specialty Dining</h2>
+            
+            <p>
+              Beyond full-service restaurants, SM North EDSA offers plenty of options for quick meals, coffee breaks, and special dining experiences.
+            </p>
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=fast-food" class="text-dark" style="text-decoration: none;">🍔 Fast Food (6 restaurants)</a></h4>
+                  <p class="mb-1">Quick meals from McDonald's, Jollibee, KFC, Burger King, Chowking, and more.</p>
+                  <a href="/sm-north-edsa/?cuisine=fast-food" class="text-danger small">View all →</a>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=japanese" class="text-dark" style="text-decoration: none;">🍜 Japanese (6 restaurants)</a></h4>
+                  <p class="mb-1">Authentic Japanese cuisine at Karayama, Dohtonbori, Genki Sushi, and more.</p>
+                  <a href="/sm-north-edsa/?cuisine=japanese" class="text-danger small">View all →</a>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/sm-north-edsa/?cuisine=buffet" class="text-dark" style="text-decoration: none;">🍱 Buffets (3 restaurants)</a></h4>
+                  <p class="mb-1">All-you-can-eat at Tong Yang (4.9★), Vikings (4.8★), and other buffet options for celebrations.</p>
+                  <a href="/sm-north-edsa/?cuisine=buffet" class="text-danger small">View all →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <h2>Explore SM North EDSA Restaurants Today</h2>
+            <p class="lead mb-4">
+              Whether you're looking for a quick bite, family dinner, or special celebration, 
+              SM North EDSA's diverse restaurant scene has something for everyone. 
+              Discover your new favorite dining spot today!
+            </p>
+            <div>
+              <a href="/sm-north-edsa/" class="btn-visit">
+                <i class="fas fa-utensils me-2"></i>View All Restaurants
+              </a>
+              <a href="https://www.google.com/maps/search/SM+City+SM North EDSA+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+              </a>
+            </div>
+          </div>
+
+          <!-- Budget Guide -->
+          <div id="budget-guide" class="content-section mb-5">
+            <h2><i class="fas fa-wallet me-2"></i>Budget Guide: Dining in SM North EDSA for Every Wallet</h2>
+            
+            <p>
+              Whether you're looking for budget eats or splurge-worthy meals, SM North EDSA has options for every price point. 
+              Here's our breakdown to help you plan your dining budget:
+            </p>
+
+            <h3>💵 Budget-Friendly (Under ₱300/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Quick meals, students, everyday dining</p>
+              <ul>
+                <li><strong>SM North EDSA Food Court</strong> - Various Filipino and Asian options (₱150-250)</li>
+                <li><strong>Fast Food Chains</strong> - Jollibee, McDonald's, KFC, Chowking (₱150-250)</li>
+                <li><strong>Tim Ho Wan</strong> - Affordable dim sum options (₱200-300)</li>
+                <li><strong>Fast Food Options</strong> - Various quick-service restaurants (₱150-250)</li>
+              </ul>
+            </div>
+
+            <h3>💰 Mid-Range (₱300-₱600/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Casual dining, dates, small celebrations</p>
+              <ul>
+                <li><strong>Panda Express</strong> - American Chinese fast-casual (₱300-500)</li>
+                <li><strong>Karayama</strong> - Authentic Japanese cuisine (₱400-600)</li>
+                <li><strong>Dohtonbori</strong> - Japanese restaurant (₱400-600)</li>
+                <li><strong>Genki Sushi</strong> - Conveyor belt sushi (₱300-500)</li>
+                <li><strong>Reyes Barbecue</strong> - Chicken and barbecue (₱300-500)</li>
+              </ul>
+            </div>
+
+            <h3>💎 Upscale (₱600-₱1,200/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Business meals, special occasions, quality dining</p>
+              <ul>
+                <li><strong>Reyes Barbecue</strong> - Premium chicken and barbecue (₱500-800)</li>
+                <li><strong>Dohtonbori</strong> - Japanese restaurant (₱600-900)</li>
+                <li><strong>Panda Express</strong> - Chinese fast-casual (₱500-800)</li>
+              </ul>
+            </div>
+
+            <h3>👑 Fine Dining (₱1,200+/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Celebrations, birthdays, anniversaries</p>
+              <ul>
+                <li><strong>Tong Yang</strong> - Premium all-you-can-eat buffet (₱1,200-1,600)</li>
+                <li><strong>Vikings Luxury Buffet</strong> - Premium all-you-can-eat buffet (₱1,500-1,800)</li>
+                <li><strong>Note:</strong> Both buffets offer birthday discounts and weekday lunch specials for better value</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Dining Tips -->
+          <div id="dining-tips" class="content-section mb-5">
+            <h2><i class="fas fa-lightbulb me-2"></i>Insider Tips for Dining in SM North EDSA</h2>
+            
+            <p>Make the most of your SM North EDSA dining experience with these local tips:</p>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-car me-2"></i>Parking Tips</h4>
+              <p><strong>Challenge:</strong> SM North EDSA can get crowded on weekends.</p>
+              <p><strong>Solution:</strong> Arrive before 11AM or after 9PM for easier parking. The multi-level parking building has the most available spaces. Some restaurants offer parking validation with minimum spend—ask before paying!</p>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-clock me-2"></i>Best Times to Visit</h4>
+              <p><strong>Avoid the Rush:</strong></p>
+              <ul>
+                <li><strong>Weekday Lunch (11AM-1PM):</strong> Popular with office workers but quieter than weekends</li>
+                <li><strong>Early Dinner (5PM-6PM):</strong> Beat the dinner crowd and get better tables</li>
+                <li><strong>Weekend Mornings:</strong> Perfect for brunch at PaperMoon Cafe or other cafes in The Block</li>
+                <li><strong>Late Night (9PM+):</strong> Many restaurants stay open, and crowds thin out</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-credit-card me-2"></i>Payment & Deals</h4>
+              <p><strong>What to Know:</strong></p>
+              <ul>
+                <li>Most sit-down restaurants accept credit cards and e-wallets</li>
+                <li>Food court stalls are mostly cash-only—bring small bills</li>
+                <li>ATMs available on every floor</li>
+                <li>Check restaurant social media pages for promos and discounts</li>
+                <li>Some restaurants offer birthday freebies—bring valid ID!</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-calendar-check me-2"></i>Reservations</h4>
+              <p><strong>When to Book Ahead:</strong></p>
+              <ul>
+                <li><strong>Vikings:</strong> Book 1-2 days ahead for weekend dinners (walk-ins often have 1-2 hour waits)</li>
+                <li><strong>Gerry's Grill:</strong> Reservations recommended for groups of 6+</li>
+                <li><strong>Most Other Restaurants:</strong> Walk-ins usually fine, but call ahead for large groups</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-utensils me-2"></i>Food Court Strategy</h4>
+              <p><strong>Maximize Your Experience:</strong></p>
+              <ul>
+                <li>Visit during off-peak hours (2-4PM) for shorter lines</li>
+                <li>Tables fill up fast during lunch—send someone to grab seats first</li>
+                <li>Great for groups who can't agree on one cuisine</li>
+                <li>Most stalls offer combo meals for better value</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Internal Linking -->
+          <div class="intro-box">
+            <p><strong>Explore More Dining Areas:</strong> 
+              <a href="/eastwood" class="text-danger">Eastwood City</a> • 
+              <a href="/trinoma" class="text-danger">Trinoma Mall</a> • 
+              <a href="/all-restaurants" class="text-danger">All 400+ QC Restaurants</a>
+            </p>
+          </div>
+
+          <!-- Map Section -->
+          <div id="map" class="content-section mb-5">
+            <h2><i class="fas fa-map-marker-alt me-2"></i>Location: How to Get to SM North EDSA</h2>
+            
+            <p>
+              SM City North EDSA is located along North Avenue, Quezon City, right next to the MRT North Avenue Station. 
+              It's one of the largest malls in the Philippines and easily accessible from various parts of Metro Manila.
+            </p>
+
+            <div class="mb-4">
+              <iframe 
+                src="https://www.google.com/maps?q=SM+City+North+EDSA,+Quezon+City&output=embed" 
+                width="100%" 
+                height="400" 
+                style="border:0; border-radius: 8px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Map showing location of SM North EDSA restaurants in Quezon City">
+              </iframe>
+            </div>
+
+            <h3>Getting There</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="intro-box">
+                  <h4><i class="fas fa-car me-2"></i>By Private Car</h4>
+                  <ul>
+                    <li><strong>From EDSA:</strong> Take EDSA and exit at North Avenue, SM North EDSA is on the corner</li>
+                    <li><strong>MRT:</strong> Get off at MRT North Avenue Station - walking distance to SM North EDSA</li>
+                    <li><strong>Parking:</strong> Multi-level parking building with ample spaces</li>
+                    <li><strong>Parking Fee:</strong> ₱50 for first 3 hours</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="intro-box">
+                  <h4><i class="fas fa-bus me-2"></i>By Public Transport</h4>
+                  <ul>
+                    <li><strong>MRT:</strong> MRT North Avenue Station - exit directly to SM North EDSA</li>
+                    <li><strong>Bus:</strong> Buses along EDSA stop at SM North EDSA</li>
+                    <li><strong>Grab/Taxi:</strong> Simply tell driver "SM City North EDSA"</li>
+                    <li><strong>Jeepney:</strong> Ride jeeps bound for "SM North EDSA" or "North Avenue" from various QC points</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="content-section mb-5">
+            <h2>Final Thoughts: Why SM North EDSA Restaurants Are Worth the Visit</h2>
+            
+            <p>
+              <strong>SM North EDSA restaurants</strong> have earned their reputation as one of Quezon City's premier 
+              dining destinations for good reason. With over 40 establishments spanning multiple cuisines, price points, 
+              and dining styles, SM City North EDSA offers something for every palate and occasion.
+            </p>
+            
+            <p>
+              What sets the <strong>restaurants in SM North EDSA</strong> apart is the combination of variety and quality. 
+              Whether you're seeking the luxury buffet experience at Tong Yang (4.9★) or Vikings (4.8★), craving authentic 
+              Japanese cuisine at Karayama or Dohtonbori, or looking for premium Chinese at Panda Express, you'll find 
+              exceptional dining options without having to travel across Metro Manila.
+            </p>
+
+            <p>
+              From the highly-rated Tong Yang (4.9/5 stars with over 9,000 reviews) and Vikings (4.8/5 stars with over 
+              6,500 reviews) to popular spots like Reyes Barbecue and Karayama, <strong>SM North EDSA dining</strong> caters 
+              to both casual diners and food enthusiasts. The mall's accessible location in northern Quezon City, ample parking, 
+              and extended operating hours make it an ideal choice for families, BPO workers, and weekend explorers alike.
+            </p>
+
+            <p>
+              Whether you're planning a special celebration at Tong Yang or Vikings, a casual date at Karayama or Dohtonbori, 
+              or a quick lunch at one of the many fast-food options, the <strong>best SM North EDSA restaurants</strong> deliver 
+              consistent quality and memorable experiences. The diversity of cuisines—from Buffet and Japanese to Chinese, 
+              Italian, American, and beyond—means you can visit repeatedly without exhausting your options.
+            </p>
+
+            <p class="text-muted fst-italic">
+              Ready to explore? Visit <a href="/sm-north-edsa/" class="text-danger">our complete SM North EDSA restaurant directory</a> 
+              for detailed information, photos, menus, and contact details for all 40+ dining establishments. 
+              Bookmark this page and make SM North EDSA your go-to destination for exceptional dining in Quezon City!
+            </p>
+          </div>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section mb-5">
+          <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  What are the most popular restaurants in SM North EDSA?
+                </button>
+              </h3>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">The most popular restaurants include Tong Yang (4.9/5 stars with 9,322 reviews), Vikings Luxury Buffet (4.8/5 stars with 6,520 reviews), Reyes Barbecue (4.8/5 stars), and Karayama (4.7/5 stars).</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  What cuisines are available in SM North EDSA?
+                </button>
+              </h3>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">SM North EDSA offers a wide variety of cuisines including Filipino, Korean, American, Chinese, Japanese, Italian, and many more international options.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Is there parking available at SM North EDSA?
+                </button>
+              </h3>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes, SM North EDSA has ample parking space for visitors. Parking is available in the mall's parking areas.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4">
+                  What are the operating hours of SM North EDSA restaurants?
+                </button>
+              </h3>
+              <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Most restaurants in SM North EDSA operate from 10AM to 10PM, though some may have extended hours. It's best to check individual restaurant hours.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5">
+                  Where can I find Tong Yang buffet in SM North EDSA?
+                </button>
+              </h3>
+              <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Tong Yang is located on the 3rd Floor of The Block, SM City North EDSA. With a 4.9/5 star rating and over 9,300 reviews, it's one of the most popular buffet restaurants in the area. Expect to spend ₱1,200-1,600 per person for their all-you-can-eat buffet.</div>
+          </div>
+      </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q6">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a6" aria-expanded="false" aria-controls="a6">
+                  Is there authentic Japanese food in SM North EDSA?
+                </button>
+              </h3>
+              <div id="a6" class="accordion-collapse collapse" aria-labelledby="q6" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! SM North EDSA has several excellent Japanese restaurants including Karayama (4.7/5 stars), Dohtonbori (4.6/5 stars), and Genki Sushi (4.4/5 stars). Karayama is located on B1 level and offers authentic Japanese cuisine, while Genki Sushi features a fun conveyor belt dining experience.</div>
+          </div>
+          </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q7">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a7" aria-expanded="false" aria-controls="a7">
+                  What's unique about Tim Ho Wan at SM North EDSA?
+                </button>
+              </h3>
+              <div id="a7" class="accordion-collapse collapse" aria-labelledby="q7" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Tim Ho Wan is a Michelin-starred dim sum restaurant from Hong Kong, located on the Upper Floor of SM North EDSA. They're famous for their Baked BBQ Pork Buns, Steamed Shrimp Dumplings, and other authentic Cantonese dim sum. Expect to spend around ₱200-400 per person.</div>
+          </div>
+          </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q8">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a8" aria-expanded="false" aria-controls="a8">
+                  Are there budget-friendly restaurant options in SM North EDSA?
+                </button>
+              </h3>
+              <div id="a8" class="accordion-collapse collapse" aria-labelledby="q8" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Absolutely! Many options under ₱300/person including Tim Ho Wan, various fast-food chains, and the food court. Mid-range options (₱300-600) include Panda Express, Karayama, and Genki Sushi. Tong Yang and Vikings buffets are the premium options at ₱1,200-1,800.</div>
+            </div>
+          </div>
+          </div>
+        </section>
+
+        <!-- Article metadata -->
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-01-15">
+        <meta itemprop="dateModified" content="2025-11-11">
+        <meta itemprop="keywords" content="SM North EDSA restaurants, best SM North EDSA restaurants, restaurants in SM North EDSA, Tong Yang buffet, Vikings SM North EDSA, Karayama Japanese, Dohtonbori, Panda Express, Reyes Barbecue, Genki Sushi, Tim Ho Wan, SM North EDSA Quezon City dining, SM City North EDSA food, where to eat SM North EDSA">
+      </div>
+    </div>
+  </article>
+</main>
+
+<script>
+// Toggle Quick Hours
+function toggleQuickHours() {
+    const dropdown = document.getElementById('quickHoursDropdown');
+    const chevron = document.getElementById('quickHoursChevron');
+    
+    if (dropdown.style.display === 'none') {
+        dropdown.style.display = 'block';
+        chevron.classList.add('rotated');
+    } else {
+        dropdown.style.display = 'none';
+        chevron.classList.remove('rotated');
+    }
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+});
+</script>
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Top 64 Best Restaurants in SM North EDSA, Quezon City",
+  "datePublished": "2025-01-15",
+  "image": "{{ url_for('static', filename='hero-bg.jpg', _external=True) }}",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "description": "Complete 2025 guide to the best SM North EDSA restaurants. Featuring Tong Yang buffet, Vikings Luxury Buffet, Karayama Japanese, Dohtonbori, Panda Express, Reyes Barbecue & 40+ more dining options with reviews, prices, and hours.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/sm-north-edsa-restaurants-2025"
+  },
+  "keywords": "SM North EDSA restaurants, best SM North EDSA restaurants, restaurants in SM North EDSA, Tong Yang buffet, Vikings SM North EDSA, Karayama Japanese, Dohtonbori, Panda Express, Reyes Barbecue, Genki Sushi, Tim Ho Wan, SM North EDSA Quezon City dining, SM City North EDSA food, where to eat SM North EDSA, SM North EDSA food guide"
+}
+</script>
+
+<!-- Breadcrumbs JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "SM North EDSA Restaurants",
+      "item": "https://www.restaurantsquezoncity.com/blog/sm-north-edsa-restaurants-2025"
+    }
+  ]
+}
+</script>
+
+<!-- FAQ JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the most popular restaurants in SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The most popular restaurants include Tong Yang (4.9/5 stars with 9,322 reviews), Vikings Luxury Buffet (4.8/5 stars with 6,520 reviews), Reyes Barbecue (4.8/5 stars), and Karayama (4.7/5 stars)."}
+    },
+    {
+      "@type": "Question",
+      "name": "What cuisines are available in SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "SM North EDSA offers a wide variety of cuisines including Buffet, Japanese, Chinese, Italian, American, cafe dining, and many more international options. Notable mentions include authentic Japanese at Karayama and Dohtonbori, premium buffets at Tong Yang and Vikings, and Chinese cuisine at Panda Express."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there parking available at SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, SM North EDSA has ample parking space for visitors. Parking is available in the mall's parking areas."}
+    },
+    {
+      "@type": "Question",
+      "name": "What are the operating hours of SM North EDSA restaurants?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Most restaurants in SM North EDSA operate from 10AM to 10PM, though some may have extended hours. It's best to check individual restaurant hours."}
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I find Tong Yang buffet in SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Tong Yang is located on the 3rd Floor of The Block, SM City North EDSA. With a 4.9/5 star rating and over 9,300 reviews, it's one of the most popular buffet restaurants in the area. Expect to spend ₱1,200-1,600 per person for their all-you-can-eat buffet."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there authentic Japanese food in SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! SM North EDSA has several excellent Japanese restaurants including Karayama (4.7/5 stars), Dohtonbori (4.6/5 stars), and Genki Sushi (4.4/5 stars). Karayama is located on B1 level and offers authentic Japanese cuisine, while Genki Sushi features a fun conveyor belt dining experience."}
+    },
+    {
+      "@type": "Question",
+      "name": "What's unique about Tim Ho Wan at SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Tim Ho Wan is a Michelin-starred dim sum restaurant from Hong Kong, located on the Upper Floor of SM North EDSA. They're famous for their Baked BBQ Pork Buns, Steamed Shrimp Dumplings, and other authentic Cantonese dim sum. Expect to spend around ₱200-400 per person."}
+    },
+    {
+      "@type": "Question",
+      "name": "Are there budget-friendly restaurant options in SM North EDSA?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Absolutely! Many options under ₱300/person including Tim Ho Wan, various fast-food chains, and the food court. Mid-range options (₱300-600) include Panda Express, Karayama, and Genki Sushi. Tong Yang and Vikings buffets are the premium options at ₱1,200-1,800."}
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": "SM City North EDSA",
+  "description": "Shopping mall in Quezon City with 40+ restaurants offering diverse dining options",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Quirino Highway",
+    "addressLocality": "Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "url": "https://www.restaurantsquezoncity.com/sm-north-edsa/",
+  "servesCuisine": ["Filipino", "Korean", "American", "Chinese", "Japanese", "Thai", "Italian", "Fast Food", "Buffet", "Cafe", "Ramen", "Pancakes", "Street Food"],
+  "priceRange": "₱₱₱",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "10:00",
+      "closes": "22:00"
+    }
+  ]
+}
+</script>
+
+<script>
+// Toggle expandable hours dropdown
+function toggleQuickHours() {
+  const dropdown = document.getElementById('quickHoursDropdown');
+  const chevron = document.getElementById('quickHoursChevron');
+  
+  if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+    dropdown.style.display = 'block';
+    chevron.style.transform = 'rotate(180deg)';
+  } else {
+    dropdown.style.display = 'none';
+    chevron.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Toggle hours display
+function toggleHours(header) {
+    const hoursList = header.nextElementSibling;
+    const toggle = header.querySelector('.hours-toggle');
+    
+    if (hoursList.classList.contains('collapsed')) {
+        // Expand
+        hoursList.classList.remove('collapsed');
+        hoursList.classList.add('expanded');
+        toggle.classList.add('expanded');
+    } else {
+        // Collapse
+        hoursList.classList.remove('expanded');
+        hoursList.classList.add('collapsed');
+        toggle.classList.remove('expanded');
+    }
+}
+
+// Toggle restaurant cards visibility on mobile
+function toggleRestaurants() {
+  const hiddenCards = document.querySelectorAll('.restaurant-card.mobile-hidden');
+  const btn = document.getElementById('showMoreBtn');
+  const btnText = document.getElementById('btnText');
+  
+  hiddenCards.forEach(card => {
+    if (card.style.display === 'none' || card.style.display === '') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  if (btn.classList.contains('expanded')) {
+    btn.classList.remove('expanded');
+    btnText.textContent = 'Show 5 More Restaurants';
+    // Scroll back to the button smoothly
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    btn.classList.add('expanded');
+    btnText.textContent = 'Show Less';
+  }
+}
+</script>
+{% endblock %}

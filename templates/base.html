@@ -1,733 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- DNS Prefetch & Preconnect for faster external resource loading -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//analytics.ahrefs.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://analytics.ahrefs.com">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YH004G0WP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YH004G0WP7');
+    </script>
+    
+    <!-- Ahrefs Analytics -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="Iny/bUyuEEJ8O0BQ1I473w" async></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Restaurants in Quezon City - Complete Guide 2025</title>
-    <meta name="description" content="🍽️ Find the best restaurants in Quezon City, from local Filipino to international dining. Browse reviews, prices, and essential details of top dining spots.">
+    <meta name="theme-color" content="#d32323">
+    <title>{% block title %}Restaurants Quezon City - Find the Best Places to Eat{% endblock %}</title>
+    <meta name="description" content="{% block description %}Discover the best restaurants in Quezon City with authentic Filipino flavors, dining experience, and diverse cuisines. Find comfort food, breakfast spots, and upscale dining venues for 2025.{% endblock %}">
+
     <meta name="robots" content="index, follow">
-    <meta name="keywords" content="restaurants quezon city, best restaurants quezon city, quezon city dining, quezon city food, filipino restaurants, international restaurants, restaurant reviews quezon city, affordable restaurants quezon city, family restaurants quezon city">
-    <link rel="canonical" href="https://restaurantsquezoncity.com/" />
-    <!-- Leaflet CSS must come before Bootstrap CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --yelp-red: #d32323;
-            --yelp-blue: #0073bb;
-            --yelp-green: #41a700;
-            --yelp-orange: #ff9800;
-            --yelp-purple: #9c27b0;
-            --yelp-teal: #00bcd4;
-            --yelp-pink: #e91e63;
-        }
-        body {
-            background-color: #f5f5f5;
-            font-size: 16px; /* Base font size for better readability */
-            padding-top: 56px; /* Height of the navbar */
-        }
-        /* Responsive Typography */
-        @media (max-width: 768px) {
-            body {
-                font-size: 15px;
-            }
-            .restaurant-name {
-                font-size: 18px;
-            }
-            .badge {
-                font-size: 12px;
-                padding: 4px 8px;
-            }
-        }
-        /* Mobile Navigation */
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1030;
-        }
-        .navbar-brand {
-            color: var(--yelp-red) !important;
-            font-weight: 600;
-        }
-        @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 18px;
-            }
-            .nav-link {
-                padding: 0.5rem 1rem;
-                font-size: 15px;
-            }
-        }
-        /* Responsive Layout */
-        .container {
-            padding: 0 15px;
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 10px;
-            }
-        }
-        /* Restaurant Card Responsive Design */
-        .restaurant-card {
-            margin-bottom: 12px;
-            border-radius: 6px;
-        }
-        @media (max-width: 768px) {
-            .restaurant-card {
-                margin-bottom: 10px;
-            }
-            .restaurant-image {
-                height: 150px;
-            }
-            .restaurant-info {
-                padding: 12px;
-            }
-            .rating-line {
-                gap: 4px;
-            }
-            .meta-line {
-                gap: 8px;
-                font-size: 13px;
-            }
-        }
-        /* Filter Sidebar Responsive Design */
-        .filters-sidebar {
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            background-color: white;
-            padding: 16px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 768px) {
-            .filters-sidebar {
-                position: fixed;
-                top: 56px; /* Below navbar */
-                left: 0;
-                width: 85%;
-                height: calc(100vh - 56px);
-                margin: 0;
-                padding: 20px;
-                transition: transform 0.3s ease;
-                z-index: 1020;
-                background-color: white;
-                box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-                overflow-y: auto;
-                border-radius: 0;
-                transform: translateX(-100%);
-            }
-            .filters-sidebar.active {
-                transform: translateX(0);
-                left: 0;
-            }
-            .mobile-overlay {
-                z-index: 1010;
-            }
-            .filter-section {
-                margin-bottom: 24px;
-                padding-bottom: 16px;
-                border-bottom: 1px solid #eee;
-            }
-            .filter-section:last-child {
-                border-bottom: none;
-            }
-            .filter-heading {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 16px;
-            }
-            .filter-heading span {
-                font-size: 16px;
-                font-weight: 600;
-            }
-            .filter-heading button {
-                padding: 4px 8px;
-                font-size: 13px;
-                color: #666;
-                background: none;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-            }
-            .filter-checkbox {
-                padding: 12px 0;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .filter-checkbox input[type="checkbox"] {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #ddd;
-                border-radius: 4px;
-            }
-            .filter-checkbox span {
-                font-size: 15px;
-            }
-            .price-filters {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-            .price-button {
-                padding: 12px;
-                font-size: 15px;
-                border: 1px solid #ddd;
-                border-radius: 6px;
-                background: white;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .price-button.active {
-                background-color: var(--yelp-red);
-                color: white;
-                border-color: var(--yelp-red);
-            }
-        }
-        /* Map Container Styles */
-        #map-container {
-            position: sticky;
-            top: 20px;
-            height: calc(100vh - 40px);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        #map {
-            width: 100%;
-            height: 100%;
-            min-height: 600px;
-            z-index: 1;
-        }
-        .restaurant-marker {
-            width: 32px !important;
-            height: 32px !important;
-            background-color: #d32323;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .restaurant-marker.active {
-            background-color: #0073bb;
-            transform: scale(1.2);
-            z-index: 1000;
-        }
-        /* Ensure the map column is properly sized */
-        @media (min-width: 768px) {
-            .col-md-3 {
-                position: relative;
-                height: 100%;
-            }
-        }
-        /* Touch-friendly Interactions */
-        @media (max-width: 768px) {
-            .restaurant-card {
-                cursor: default;
-            }
-            .badge, .service-badge, .highlight-badge {
-                margin: 2px;
-                padding: 6px 10px;
-            }
-            .contact-info > div {
-                padding: 8px 0;
-            }
-            .today-hours button {
-                padding: 8px;
-            }
-        }
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background-color: var(--yelp-red);
-            color: white;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            z-index: 1001;
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-            }
-        }
-        /* Mobile Overlay */
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-        @media (max-width: 768px) {
-            .mobile-overlay.active {
-                display: block;
-            }
-            
-            .filters-sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-            
-            .filters-sidebar.active {
-                transform: translateX(0);
-            }
-            
-            /* Filter Toggle Button */
-            .filter-toggle {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                background: var(--yelp-red);
-                color: white;
-                border: none;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-                z-index: 998;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-            }
-            
-            /* Close Button */
-            .close-filters {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                padding: 8px;
-                background: none;
-                border: none;
-                font-size: 24px;
-                color: #666;
-            }
-        }
-        .navbar-brand {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--yelp-red) !important;
-        }
-        .restaurant-card {
-            background: white;
-            border: 1px solid #e6e6e6;
-            margin-bottom: 16px;
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            transition: all 0.2s ease;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .restaurant-card:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-        }
-        .restaurant-image-container {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-        }
-        .restaurant-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .restaurant-info {
-            padding: 16px;
-        }
-        .restaurant-name {
-            font-size: 20px;
-            margin-bottom: 6px;
-            line-height: 1.3;
-            color: #2d2e2f;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .restaurant-title {
-            font-weight: 600;
-            flex: 1;
-        }
-        .restaurant-name a {
-            color: inherit;
-            text-decoration: none;
-            font-size: 16px;
-            opacity: 0.7;
-            transition: opacity 0.2s ease;
-        }
-        .restaurant-name a:hover {
-            opacity: 1;
-            color: var(--yelp-blue);
-        }
-        .rating-reviews {
-            margin-bottom: 12px;
-        }
-        .rating-line {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-        .meta-line {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #6f7071;
-            font-size: 14px;
-        }
-        .rating {
-            font-weight: 600;
-            color: #2d2e2f;
-        }
-        .stars {
-            color: var(--yelp-red);
-            display: flex;
-            gap: 2px;
-        }
-        .reviews {
-            color: #6f7071;
-        }
-        .price-level {
-            color: #2d2e2f;
-            font-weight: 500;
-        }
-        .restaurant-meta {
-            margin: 12px 0;
-        }
-        .category {
-            display: inline-flex;
-            align-items: center;
-            background-color: #f0f1f2;
-            color: #2d2e2f;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: 4px;
-            gap: 4px;
-        }
-        .category i {
-            font-size: 14px;
-            color: #6f7071;
-        }
-        .service-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 8px;
-        }
-        .service-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: #f8f9fa;
-            color: #2d2e2f;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: 4px;
-            gap: 4px;
-        }
-        .service-badge i {
-            font-size: 14px;
-            color: #6f7071;
-        }
-        .highlights-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 8px;
-        }
-        .highlight-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: #fff3e3;
-            color: #c25e00;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: 4px;
-            gap: 4px;
-            border: 1px solid #ffddb3;
-        }
-        .highlight-badge i {
-            font-size: 12px;
-            color: #c25e00;
-        }
-        .quick-info {
-            color: #6f7071;
-            font-size: 13px;
-            margin-top: 12px;
-        }
-        .quick-info > div {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 4px;
-        }
-        .today-hours {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .today-hours button {
-            color: #6f7071;
-            padding: 0;
-        }
-        .today-hours button:hover {
-            color: var(--yelp-blue);
-        }
-        .highlights {
-            color: #6f7071;
-            font-size: 13px;
-            line-height: 1.4;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e6e6e6;
-        }
-        .section-header {
-            margin: 30px 0;
-            border-bottom: 1px solid #e6e6e6;
-            padding-bottom: 15px;
-        }
-        .restaurant-list {
-            height: auto;
-            padding-right: 15px;
-        }
-        .restaurant-marker {
-            background-color: var(--yelp-red);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 50%;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-        }
-        .restaurant-marker.active {
-            background-color: var(--yelp-blue);
-            transform: scale(1.1);
-            z-index: 1000 !important;
-        }
-        
-        /* Filter Sidebar Styles */
-        .filter-section {
-            margin-bottom: 24px;
-        }
-        .filter-section:last-child {
-            margin-bottom: 0;
-        }
-        .filter-heading {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2d2e2f;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .filter-heading button {
-            background: none;
-            border: none;
-            font-size: 12px;
-            color: #666;
-            padding: 0;
-            margin-left: 8px;
-            cursor: pointer;
-        }
-        .filter-heading button:hover {
-            color: var(--yelp-red);
-            text-decoration: underline;
-        }
-        .filter-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .filter-item {
-            margin-bottom: 8px;
-        }
-        .filter-item:last-child {
-            margin-bottom: 0;
-        }
-        .filter-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #2d2e2f;
-            font-size: 14px;
-            cursor: pointer;
-            padding: 4px 0;
-        }
-        .filter-checkbox input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            border: 2px solid #cbd5e1;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .filter-checkbox:hover {
-            color: var(--yelp-blue);
-        }
-        .filter-checkbox span {
-            font-weight: 500;
-        }
-        .features-list .filter-checkbox i {
-            width: 16px;
-            color: #6f7071;
-        }
-        .price-filters {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 8px;
-        }
-        .price-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 14px;
-            color: #666;
-            width: 100%;
-            text-align: left;
-        }
-        .price-button:hover {
-            background-color: #f5f5f5;
-            border-color: #999;
-        }
-        .price-button.active {
-            background-color: var(--yelp-red);
-            color: white;
-            border-color: var(--yelp-red);
-            font-weight: 500;
-        }
-        .price-button span:first-child {
-            font-weight: bold;
-            min-width: 50px;
-        }
-        .price-label {
-            color: inherit;
-            font-size: 13px;
-        }
-        .accessibility-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 8px;
-        }
-        .accessibility-badges .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 10px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-        .accessibility-badges .badge i {
-            font-size: 14px;
-        }
-        
-        /* Custom Badge Colors */
-        .bg-purple {
-            background-color: var(--yelp-purple) !important;
-        }
-        .bg-orange {
-            background-color: var(--yelp-orange) !important;
-        }
-        .bg-teal {
-            background-color: var(--yelp-teal) !important;
-        }
-        .bg-pink {
-            background-color: var(--yelp-pink) !important;
-        }
-        
-        /* Badge Styles */
-        .badge {
-            padding: 6px 10px;
-            font-size: 13px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .badge i {
-            font-size: 14px;
-        }
-        .badge.bg-warning {
-            color: #000 !important;
-        }
-        .badge.bg-orange,
-        .badge.bg-teal,
-        .badge.bg-pink {
-            color: #fff !important;
-        }
-    </style>
+    <link rel="canonical" href="https://www.restaurantsquezoncity.com{% block canonical %}{% endblock %}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Restaurants in Quezon City - Find the Best Places to Eat{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Discover the best restaurants in Quezon City. Browse by cuisine, price range, and features.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}">
+    <meta property="og:url" content="https://www.restaurantsquezoncity.com{% block og_url %}{% endblock %}">
+    
+    <!-- Twitter Card / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BestEatsQC">
+    <meta name="twitter:creator" content="@BestEatsQC">
+    <meta name="twitter:title" content="{% block twitter_title %}Restaurants in Quezon City - Find the Best Places to Eat{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Discover the best restaurants in Quezon City. Browse by cuisine, price range, and features.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}">
+    
+    {% block extra_head %}{% endblock %}
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Restaurants Quezon City",
+        "description": "Discover the best restaurants in Quezon City with authentic Filipino flavors, dining experience, and diverse cuisines",
+        "url": "https://www.restaurantsquezoncity.com",
+        "about": [
+            "restaurants",
+            "dining experience",
+            "Filipino cuisine",
+            "comfort food",
+            "flavors",
+            "Quezon City",
+            "Philippines",
+            "dining venues",
+            "cuisines",
+            "service"
+        ],
+        "mentions": [
+            "Maginhawa",
+            "Tomas Morato",
+            "Filipino food",
+            "Spanish cuisine",
+            "fusion dishes",
+            "breakfast",
+            "dinner",
+            "heritage",
+            "vibes",
+            "2025"
+        ],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.restaurantsquezoncity.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', filename='css/custom.min.css') }}" as="style">
+    
+    <!-- Bootstrap CSS (Local) -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Leaflet CSS (Local) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <!-- Font Awesome (Local with font-display optimization) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <!-- Custom CSS (External, Minified) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    <style>/* Hero section background needs Jinja2 template */.hero-section{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("{{ url_for('static', filename='hero-bg.jpg') }}")}</style>
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">QC Restaurants</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container position-relative">
+            <button class="navbar-toggler d-block d-lg-none" type="button" id="mobileMenuBtn" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <a class="navbar-brand mx-auto" href="/">
+                <img src="{{ url_for('static', filename='logo.svg') }}" alt="Restaurants QC">
+            </a>
+            <div class="d-none d-lg-flex ms-auto align-items-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">All Restaurants</a>
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="cuisinesDropdown" role="button" data-bs-toggle="dropdown">
+                            Cuisines
+                        </a>
+                        <ul class="dropdown-menu cuisine-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="cuisineSearch" placeholder="Search cuisines...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="cuisine-list">
+                                {% if all_cuisines %}
+                                    {% for cuisine in all_cuisines %}
+                                    <li><a class="dropdown-item" href="/cuisine/{{ cuisine|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}">{{ cuisine }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areasDropdown" role="button" data-bs-toggle="dropdown">
+                            Areas
+                        </a>
+                        <ul class="dropdown-menu areas-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="areaSearch" placeholder="Search areas...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="area-list">
+                                {% if area_counts %}
+                                    {% for area, count in area_counts.items() %}
+                                    <li><a class="dropdown-item" href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/">{{ area }} ({{ count }})</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/all-restaurants">All Restaurants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Mobile menu overlay -->
+            <div id="mobileNavOverlay" class="mobile-nav-overlay d-lg-none">
+                <button class="close-mobile-nav" id="closeMobileNav" aria-label="Close menu">&times;</button>
+                <ul class="navbar-nav flex-column text-center mt-5">
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown mb-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="mobileCuisinesDropdown" role="button" data-bs-toggle="dropdown">
+                            Cuisines
+                        </a>
+                        <ul class="dropdown-menu cuisine-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="mobileCuisineSearch" placeholder="Search cuisines...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="cuisine-list">
+                                {% if all_cuisines %}
+                                    {% for cuisine in all_cuisines %}
+                                    <li><a class="dropdown-item" href="/cuisine/{{ cuisine|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}">{{ cuisine }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mb-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="mobileAreasDropdown" role="button" data-bs-toggle="dropdown">
+                            Areas
+                        </a>
+                        <ul class="dropdown-menu areas-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="mobileAreaSearch" placeholder="Search areas...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="area-list">
+                                {% if area_counts %}
+                                    {% for area, count in area_counts.items() %}
+                                    <li><a class="dropdown-item" href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/">{{ area }} ({{ count }})</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/all-restaurants">All Restaurants</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/blog">Blog</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    {% block hero_section %}
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">{% block hero_title %}Top 12 Restaurants in Quezon City{% endblock %}</h1>
+            <p class="hero-subtitle">{% block hero_subtitle %}Discover the best places to eat near you{% endblock %}</p>
+        </div>
+    </section>
+    {% endblock %}
+
     <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
     
     <!-- Main Content -->
-    <div class="container-fluid">
+    <main class="container">
         {% block content %}{% endblock %}
-    </div>
+    </main>
     
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Scripts (Deferred for faster page load) -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/leaflet.js') }}" defer></script>
     
     <script>
         // Mobile filter toggle
@@ -758,7 +280,177 @@
                 });
             }
         });
+
+        // Cuisine search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('cuisineSearch');
+            const cuisineItems = document.querySelectorAll('.cuisine-list .dropdown-item');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                cuisineItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Areas search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const areaSearchInput = document.getElementById('areaSearch');
+            const areaItems = document.querySelectorAll('.area-list .dropdown-item');
+
+            if (areaSearchInput && areaItems.length > 0) {
+                areaSearchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    areaItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        // Mobile areas search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileAreaSearchInput = document.getElementById('mobileAreaSearch');
+            const mobileAreaItems = document.querySelectorAll('.areas-dropdown .area-list .dropdown-item');
+
+            if (mobileAreaSearchInput && mobileAreaItems.length > 0) {
+                mobileAreaSearchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    mobileAreaItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        // Mobile nav toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            var mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            var closeMobileNav = document.getElementById('closeMobileNav');
+            if (mobileMenuBtn && mobileNavOverlay && closeMobileNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileNavOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    // Hide the hamburger button when menu is open
+                    mobileMenuBtn.style.opacity = '0';
+                    mobileMenuBtn.style.pointerEvents = 'none';
+                });
+                closeMobileNav.addEventListener('click', function() {
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    // Show the hamburger button when menu is closed
+                    mobileMenuBtn.style.opacity = '1';
+                    mobileMenuBtn.style.pointerEvents = 'auto';
+                });
+                
+                // Close menu when clicking on the overlay background
+                mobileNavOverlay.addEventListener('click', function(e) {
+                    if (e.target === mobileNavOverlay) {
+                        mobileNavOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                        // Show the hamburger button when menu is closed
+                        mobileMenuBtn.style.opacity = '1';
+                        mobileMenuBtn.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+        });
     </script>
     {% block scripts %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-5" style="background-color: #000;">
+        <div class="container">
+            <div class="row">
+                <!-- About Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">About Restaurants QC</h3>
+                    <p class="text-white-50">Your guide to the best restaurants in Quezon City. Find top-rated places to eat near you.</p>
+                    <p class="text-white-50">
+                        <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📊 Browse 400+ Restaurants</a>
+                    </p>
+                    <p class="text-white-50">Follow us on social media:</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/BestEatsQC" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Popular Areas Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">Popular Areas</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📋 All Restaurants</a>
+                        </li>
+                        {% if area_counts %}
+                            {% for area, count in area_counts.items()|sort(attribute='1', reverse=true) %}
+                                {% if loop.index <= 6 %}
+                                <li class="mb-2">
+                                    <a href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/" class="text-white-50 text-decoration-none">
+                                        {{ area }} ({{ count }})
+                                    </a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Popular Cuisines Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">Popular Cuisines</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">🍽️ Complete Directory</a>
+                        </li>
+                        <li class="mb-2"><a href="/cuisine/fast-food" class="text-white-50 text-decoration-none">Fast food 🍔</a></li>
+                        <li class="mb-2"><a href="/cuisine/pizza" class="text-white-50 text-decoration-none">Pizza 🍕</a></li>
+                        <li class="mb-2"><a href="/cuisine/japanese" class="text-white-50 text-decoration-none">Japanese 🎌</a></li>
+                        <li class="mb-2"><a href="/cuisine/chinese" class="text-white-50 text-decoration-none">Chinese 🥢</a></li>
+                        <li class="mb-2"><a href="/cuisine/filipino" class="text-white-50 text-decoration-none">Filipino 🍚</a></li>
+                        <li class="mb-2"><a href="/cuisine/korean" class="text-white-50 text-decoration-none">Korean 🍜</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <hr class="border-secondary">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <p class="text-white-50 mb-0">Â© 2024 Restaurants QC. All rights reserved.</p>
+                        <div class="footer-links">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none me-3">All Restaurants</a>
+                            <a href="/about" class="text-white-50 text-decoration-none">About</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 
+

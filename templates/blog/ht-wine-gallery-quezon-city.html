@@ -1,0 +1,933 @@
+{% extends 'base.html' %}
+{% block title %}H&T Wine Gallery Kamuning - Premier Wine Bar & Deli in Quezon City{% endblock %}
+{% block description %}Discover H&T Wine Gallery in Kamuning, Quezon City at 24 KD corner K-1st Street. Fine wines, artisan cheeses, and gourmet deli. Shop online or visit their elegant wine bar.{% endblock %}
+{% block canonical %}/blog/ht-wine-gallery-quezon-city{% endblock %}
+{% block og_title %}H&T Wine Gallery Kamuning - Premier Wine Bar & Deli in Quezon City{% endblock %}
+{% block og_description %}Discover H&T Wine Gallery in Kamuning, Quezon City at 24 KD corner K-1st Street. Fine wines, artisan cheeses, and gourmet deli. Shop online at htwinegallery.com or visit their elegant wine bar.{% endblock %}
+{% block og_url %}/blog/ht-wine-gallery-quezon-city{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- H&T Wine Gallery template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.wine-gallery-hero {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.wine-gallery-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wine-gallery-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 3rem 0 2rem;
+    color: white;
+}
+
+.wine-gallery-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.wine-gallery-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #721c24, #8b2332);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.highlight-box h3 {
+    color: white !important;
+    margin-top: 0;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #721c24;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.feature-card h4 {
+    color: #721c24;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-visit {
+    background: white;
+    color: #d32323;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.wine-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.wine-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+}
+
+.wine-list li:before {
+    content: "🍷";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.sidebar-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-box h3 {
+    font-size: 1.2rem;
+    color: #721c24;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .wine-gallery-title {
+        font-size: 1.8rem;
+    }
+    
+    .wine-gallery-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+      <!-- Hero Section -->
+      <div class="wine-gallery-hero position-relative mb-4">
+        <picture>
+          <source type="image/avif" srcset="/static/images/89ed7d_637f6bd5e13a497594b93a29d643170c~mv2.avif">
+          <img src="/static/hero-bg.jpg" 
+               class="wine-gallery-hero-img" 
+               alt="H&T Wine Gallery Kamuning Quezon City Interior" 
+               itemprop="image">
+        </picture>
+        <div class="wine-gallery-hero-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <h1 class="wine-gallery-title" itemprop="headline">
+                  Welcome to H&T Wine Gallery – The Best Wine Bar in Quezon City
+                </h1>
+                <p class="wine-gallery-subtitle">Prime destination for wine, cheese & deli in QC</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Bar -->
+      <div class="quick-info-bar bg-white rounded shadow-sm p-3 mb-4">
+        <div class="row text-center g-0">
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-map-marker-alt text-danger mb-2"></i>
+            <div class="info-label">Location</div>
+            <div class="info-value">24 KD cor K-1st St, Kamuning, QC</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-clock text-danger mb-2"></i>
+            <div class="info-label">Hours</div>
+            <div class="info-value">
+              <div class="small">Mon-Thu: 12pm-9pm</div>
+              <div class="small">Fri-Sat: 12pm-10pm</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-store text-danger mb-2"></i>
+            <div class="info-label">Shopping</div>
+            <div class="info-value">In-Store & Online</div>
+          </div>
+          <div class="col-md-3 col-6">
+            <i class="fas fa-globe text-danger mb-2"></i>
+            <div class="info-label">Website</div>
+            <div class="info-value">
+              <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-danger">
+                htwinegallery.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="content-section mb-4" aria-label="Table of contents">
+        <h2 id="toc" class="h4 mb-3"><i class="fas fa-list-ul me-2"></i>Jump to</h2>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3"><a href="#gallery" class="text-decoration-none">Gallery</a></li>
+          <li class="list-inline-item me-3"><a href="#wines" class="text-decoration-none">Wines</a></li>
+          <li class="list-inline-item me-3"><a href="#cheeses" class="text-decoration-none">Cheeses & Deli</a></li>
+          <li class="list-inline-item me-3"><a href="#bar" class="text-decoration-none">Wine Bar</a></li>
+          <li class="list-inline-item me-3"><a href="#classes" class="text-decoration-none">Classes</a></li>
+          <li class="list-inline-item me-3"><a href="#shop" class="text-decoration-none">Shop Online</a></li>
+          <li class="list-inline-item"><a href="#faq" class="text-decoration-none">FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-lg-8 order-2 order-lg-1">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div class="content-section mb-5">
+            <p class="lead">
+              For wine enthusiasts, cheese connoisseurs, and gourmet food lovers in Quezon City, 
+              <strong>H&T Wine Gallery</strong> stands as a premier destination that combines the elegance 
+              of a wine bar with the convenience of a specialized deli and wine shop.
+            </p>
+            
+            <p>
+              Located in the heart of <strong>Kamuning at 24 KD corner K-1st Street</strong>, H&T Wine Gallery 
+              invites you to enjoy nice wines with some bites in a fun, welcoming atmosphere. Whether you're 
+              searching for the perfect bottle for a special occasion, exploring artisan cheeses from around 
+              the world, or simply looking to enjoy a glass of wine in a sophisticated setting, H&T Wine Gallery 
+              offers an experience that goes beyond ordinary shopping.
+            </p>
+
+            <p>
+              With both <strong>online and in-store</strong> options, enjoying fine wines and gourmet products 
+              has never been more accessible. Visit them Monday through Thursday from 12pm to 9pm, or Friday 
+              and Saturday from 12pm to 10pm (closed Sundays).
+            </p>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div class="content-section mb-5">
+            <h2 id="gallery"><i class="fas fa-images me-2"></i>Experience H&T Wine Gallery</h2>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <img src="/static/images/89ed7d_d9308e7da6aa4a4daea14f3c3b3405d4~mv2.avif" 
+                     alt="H&T Wine Gallery wine selection" 
+                     class="img-fluid rounded shadow-sm w-100"
+                     style="height: 250px; object-fit: cover;" loading="lazy">
+                <div class="small text-muted mt-1 text-center">Curated global wine selection</div>
+              </div>
+              <div class="col-md-6">
+                <img src="/static/images/89ed7d_5e91faa472344fe4ac1f1764b36916f1~mv2.avif" 
+                     alt="H&T Wine Gallery wine bar ambiance" 
+                     class="img-fluid rounded shadow-sm w-100"
+                     style="height: 250px; object-fit: cover;" loading="lazy">
+                <div class="small text-muted mt-1 text-center">Elegant wine bar setting</div>
+              </div>
+              <div class="col-md-4">
+                <img src="/static/images/89ed7d_fe3f201aa9104687afeda48ca47fa12d~mv2.avif" 
+                     alt="H&T Wine Gallery cheese and wine" 
+                     class="img-fluid rounded shadow-sm w-100"
+                     style="height: 200px; object-fit: cover;" loading="lazy">
+                <div class="small text-muted mt-1 text-center">Wine and cheese pairings</div>
+              </div>
+              <div class="col-md-4">
+                <img src="/static/images/89ed7d_72b704ef49614f79b47aa8c65e63582c~mv2.avif" 
+                     alt="H&T Wine Gallery gourmet products" 
+                     class="img-fluid rounded shadow-sm w-100"
+                     style="height: 200px; object-fit: cover;" loading="lazy">
+                <div class="small text-muted mt-1 text-center">Gourmet deli selections</div>
+              </div>
+              <div class="col-md-4">
+                <img src="/static/images/89ed7d_0c80a44f5cab4c489c1d643a034dcc3a~mv2.avif" 
+                     alt="H&T Wine Gallery wine collection" 
+                     class="img-fluid rounded shadow-sm w-100"
+                     style="height: 200px; object-fit: cover;" loading="lazy">
+                <div class="small text-muted mt-1 text-center">Discover new favorites</div>
+              </div>
+            </div>
+            <p class="text-center text-muted fst-italic">
+              From our curated wine selection to our cozy wine bar atmosphere, H&T Wine Gallery offers a complete gourmet experience
+            </p>
+          </div>
+
+          <!-- Wines Section -->
+          <div class="content-section mb-5">
+            <h2 id="wines"><i class="fas fa-wine-bottle me-2"></i>A Curated Wine Selection</h2>
+            
+            <p>
+              At H&T Wine Gallery, the wine selection is carefully curated to offer something for every palate 
+              and occasion. From everyday table wines to prestigious vintages, their collection spans the globe's 
+              most celebrated wine regions.
+            </p>
+
+            <div class="feature-card">
+              <h4>What You'll Find:</h4>
+              <ul class="wine-list">
+                <li><strong>Old World Classics:</strong> French Bordeaux, Burgundy, Italian Chianti, Spanish Rioja</li>
+                <li><strong>New World Favorites:</strong> California Cabernet, Australian Shiraz, Chilean Carmenere</li>
+                <li><strong>Sparkling & Champagne:</strong> Perfect for celebrations and special moments</li>
+                <li><strong>Rosé & White Wines:</strong> Ideal for the tropical Philippine climate</li>
+                <li><strong>Dessert Wines:</strong> They regularly carry a selection of Moscato wines.</li>
+              </ul>
+            </div>
+
+            <p>
+              The knowledgeable staff at H&T Wine Gallery can guide you through their selection, offering 
+              recommendations based on your preferences, food pairings, or budget. Whether you're a seasoned 
+              oenophile or just beginning your wine journey, you'll find expert assistance and welcoming service.
+            </p>
+          </div>
+
+          <!-- Cheese Section -->
+          <div class="content-section mb-5">
+            <h2 id="cheeses"><i class="fas fa-cheese me-2"></i>Artisan Cheeses & Gourmet Deli</h2>
+            
+            <p>
+              The perfect complement to any wine is, of course, exceptional cheese. H&T Wine Gallery's deli 
+              section features an impressive array of artisan cheeses from renowned producers worldwide.
+            </p>
+
+            <div class="feature-card">
+              <h4>Cheese & Deli Offerings:</h4>
+              <ul>
+                <li><strong>European Classics:</strong> French Brie, Italian Parmigiano-Reggiano, Spanish Manchego</li>
+                <li><strong>Artisan Selections:</strong> Award-winning farmhouse cheeses from small producers</li>
+                <li><strong>Charcuterie:</strong> Premium cured meats, salamis, and pâtés</li>
+                <li><strong>Accompaniments:</strong> Crackers, preserves, olives, and gourmet condiments</li>
+                <li><strong>Cheese Boards:</strong> Pre-curated selections perfect for entertaining</li>
+              </ul>
+            </div>
+
+            <p>
+              Whether you're assembling a cheese board for guests or looking for the perfect pairing for 
+              your chosen wine, H&T Wine Gallery provides both the products and the expertise to create 
+              memorable culinary experiences.
+            </p>
+          </div>
+
+          <!-- Our Menu -->
+          <div class="content-section mb-5">
+            <h2 id="menu"><i class="fas fa-utensils me-2"></i>Our Menu</h2>
+            
+            <p>
+              In addition to their exquisite wine selection, H&T Wine Gallery offers an extensive Tapas menu. Inspired by Spanish, French, and Italian cuisines, it offers a delightful array of flavors for every palate.
+            </p>
+
+            <div class="feature-card">
+              <p class="mb-0">
+                <a href="https://www.htwinegallery.com/wine-bar" target="_blank" rel="noopener noreferrer" class="btn btn-danger">
+                  <i class="fas fa-external-link-alt me-2"></i>View Full Menu
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Wine Bar Experience -->
+          <div class="content-section mb-5">
+            <h2 id="bar"><i class="fas fa-wine-glass me-2"></i>The Wine Bar Experience</h2>
+            
+            <p>
+              Beyond retail, H&T Wine Gallery offers a beautiful wine bar where you can relax and enjoy 
+              wines by the glass in an elegant, intimate setting. It's the perfect spot for:
+            </p>
+
+            <div class="row my-4">
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-heart text-danger me-2"></i>Romantic Evenings</h4>
+                  <p>Share a bottle with someone special in a sophisticated ambiance</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-users text-danger me-2"></i>Social Gatherings</h4>
+                  <p>Meet friends for wine flights and cheese pairings</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-briefcase text-danger me-2"></i>After-Work Unwinding</h4>
+                  <p>Decompress with a glass of wine and light bites</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-graduation-cap text-danger me-2"></i>Wine Education</h4>
+                  <p>Taste and learn about different varietals and regions</p>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              The wine bar allows you to sample before you buy, making it easier to discover new favorites 
+              and expand your wine knowledge in a relaxed, welcoming environment.
+            </p>
+          </div>
+
+          <!-- Wine Tasting Events -->
+          <div id="book-class"></div>
+          <div class="content-section mb-5">
+            <h2 id="classes"><i class="fas fa-glass-cheers me-2"></i>Wine Tasting Events & Classes</h2>
+            
+            <div class="row align-items-center mb-4">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <img src="/static/images/89ed7d_f85cbd74d4c94e3980ce78b7a806b8ee~mv2.jpg" 
+                     alt="Wine tasting class at H&T Wine Gallery with Tanguy Gras" 
+                     class="img-fluid rounded shadow-sm w-100" loading="lazy">
+              </div>
+              <div class="col-md-6">
+                <h3>The Art of Wine - Introductory Wine Class</h3>
+                <p class="mb-2">
+                  <strong>Experience a unique wine tasting journey</strong> with French wine connoisseur 
+                  <strong>Tanguy Gras</strong> at H&T Wine Gallery. Discover the world of wine like you 
+                  never did before in a fun and interactive 2-hour session.
+                </p>
+                <p class="mb-2">
+                  <i class="fas fa-calendar text-danger me-2"></i><strong>Next Class:</strong> Saturday, November 15th, 3pm<br>
+                  <i class="fas fa-tag text-danger me-2"></i><strong>Price:</strong> ₱1,500 per person
+                </p>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <h3>What You'll Learn & Experience:</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li><strong>Taste 5 curated wines</strong> from different regions</li>
+                    <li><strong>Wine pairing mastery</strong> with 5 complementary bites</li>
+                    <li><strong>Proper bottle opening techniques</strong></li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li><strong>Understand wine labels</strong> and make informed choices</li>
+                    <li><strong>Certificate of completion</strong> at the end of class</li>
+                    <li><strong>Interactive learning</strong> with a French wine expert</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              This introductory wine class is perfect for wine enthusiasts looking to deepen their knowledge 
+              or beginners wanting to explore the wonderful world of wine. Tanguy Gras takes you on a journey 
+              of flavors, knowledge, and discoveries in the heart of Quezon City, Manila.
+            </p>
+
+            <p class="mb-0">
+              <em>Note: Wine and bites selection may change depending on availability, but the selection will 
+              always be 5 wines perfectly paired with 5 bites for an optimal tasting experience.</em>
+            </p>
+          </div>
+
+          <!-- Online Shopping -->
+          <div class="content-section mb-5">
+            <h2 id="shop"><i class="fas fa-laptop me-2"></i>Shop Online with Convenience</h2>
+            
+            <p>
+              Can't make it to the physical store? H&T Wine Gallery brings their exceptional selection 
+              directly to you through their comprehensive online shop at 
+              <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="text-danger">
+                <strong>htwinegallery.com</strong>
+              </a>.
+            </p>
+
+            <div class="highlight-box">
+              <h3>Online Shopping Benefits:</h3>
+              <ul class="mb-0">
+                <li><strong>Full Product Catalog:</strong> Browse their complete wine and cheese selection from home</li>
+                <li><strong>Detailed Descriptions:</strong> Tasting notes, pairing suggestions, and product information</li>
+                <li><strong>Convenient Delivery:</strong> Have your selections delivered to your door</li>
+                <li><strong>Special Offers:</strong> Exclusive online deals and promotions</li>
+                <li><strong>Gift Options:</strong> Send wine gifts to friends and loved ones</li>
+              </ul>
+            </div>
+
+            <p>
+              Whether you're stocking up for a party, finding the perfect gift, or simply replenishing 
+              your personal wine cellar, the online shop makes it easy and convenient.
+            </p>
+          </div>
+
+          <!-- Why Choose H&T -->
+          <div class="content-section mb-5">
+            <h2 id="reasons"><i class="fas fa-star me-2"></i>Why H&T Wine Gallery Stands Out</h2>
+            
+            <p>
+              In a city with growing appreciation for wine and gourmet food, H&T Wine Gallery distinguishes 
+              itself through:
+            </p>
+
+            <div class="row my-3">
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Expert Knowledge</h4>
+                  <p class="mb-0 small">Staff members are passionate about wine and eager to share their expertise</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Quality Selection</h4>
+                  <p class="mb-0 small">Carefully curated products that represent excellent value and quality</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Dual Experience</h4>
+                  <p class="mb-0 small">Enjoy both retail shopping and wine bar ambiance in one location</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Accessibility</h4>
+                  <p class="mb-0 small">Shop in-store or online, whichever suits your lifestyle</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <h2>Experience H&T Wine Gallery Today</h2>
+            <p class="lead mb-4">
+              Whether you're a wine enthusiast, cheese lover, or simply curious about exploring gourmet experiences, 
+              H&T Wine Gallery welcomes you. Visit their beautiful wine bar and deli in Quezon City, or explore 
+              their full selection online.
+            </p>
+            <div>
+              <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-shopping-cart me-2"></i>Shop Online
+              </a>
+              <a href="https://www.google.com/maps/search/H%26T+Wine+Gallery+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-map-marker-alt me-2"></i>Find in Store
+              </a>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="content-section mb-5">
+            <p>
+              <strong>H&T Wine Gallery</strong> represents more than just a place to buy wine—it's a destination 
+              for those who appreciate the finer things in life. With their combination of expert knowledge, 
+              quality products, elegant wine bar, and convenient online shopping, they've created a 
+              complete wine and gourmet experience right here in Quezon City.
+            </p>
+            
+            <p>
+              Whether you're planning a special dinner, looking for the perfect gift, or simply want to 
+              enjoy a glass of wine in good company, H&T Wine Gallery is ready to help you discover, 
+              explore, and savor the world of fine wines and gourmet delights.
+            </p>
+
+            <p class="text-muted fst-italic">
+              Visit <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="text-danger">htwinegallery.com</a> 
+              to explore their current selection and special offers.
+            </p>
+          </div>
+
+        </section>
+
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-10-14">
+        <meta itemprop="keywords" content="wine Quezon City, best wine bar in Quezon City, H&T Wine Gallery, wine shop Quezon City, cheese Quezon City, wine and cheese QC, wine bar QC, wine tasting Quezon City, wine class Manila">
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section mb-5">
+          <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  How long is the introductory wine class?
+                </button>
+              </h3>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Approximately 2 hours, including tasting and pairing.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  What is included in the class?
+                </button>
+              </h3>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">5 curated wines, 5 food bites, pairing guidance, proper bottle opening, reading labels, and a certificate of completion.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Can I reschedule my booking?
+                </button>
+              </h3>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Please contact H&T Wine Gallery at least 48 hours before the class to request a reschedule, subject to availability.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4">
+                  Is there parking available?
+                </button>
+              </h3>
+              <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Street parking is available around Kamuning; we recommend arriving a few minutes early.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4 order-1 order-lg-2 mb-4">
+        <div class="sidebar-box sticky-top" style="top: 20px;">
+          <h3><i class="fas fa-info-circle me-2"></i>Quick Info</h3>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i>Location</strong>
+            <p class="mb-1">24 KD corner K-1st Street</p>
+            <p class="mb-0">Kamuning, Quezon City</p>
+            <a href="https://www.google.com/maps/search/24+KD+corner+K-1st+Street+Kamuning+Quezon+City" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-sm btn-outline-danger mt-2">
+              <i class="fas fa-directions me-1"></i> Get Directions
+            </a>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-clock text-danger me-2"></i>Hours</strong>
+            <p class="mb-1 small">Mon-Thu: 12:00 PM - 9:00 PM</p>
+            <p class="mb-1 small">Fri-Sat: 12:00 PM - 10:00 PM</p>
+            <p class="mb-0 small text-muted">Sunday: Closed</p>
+          </div>
+          <div class="mb-3">
+            <a href="#book-class" class="btn btn-danger w-100 mb-2"><i class="fas fa-ticket-alt me-2"></i>Book Intro Class</a>
+            <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger w-100"><i class="fas fa-shopping-cart me-2"></i>Shop Online</a>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-globe text-danger me-2"></i>Website</strong>
+            <p class="mb-0">
+              <a href="https://www.htwinegallery.com/" target="_blank" rel="noopener noreferrer" class="text-danger text-decoration-none">
+                htwinegallery.com
+              </a>
+            </p>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-wine-glass-alt text-danger me-2"></i>Specialties</strong>
+            <ul class="mb-0 ps-3 small">
+              <li>Fine Wines</li>
+              <li>Artisan Cheeses</li>
+              <li>Gourmet Deli</li>
+              <li>Wine Bar</li>
+            </ul>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-tags text-danger me-2"></i>Keywords</strong>
+            <div>
+              <span class="badge bg-danger me-1 mb-1">Wine Quezon City</span>
+              <span class="badge bg-danger me-1 mb-1">Wine Bar QC</span>
+              <span class="badge bg-danger me-1 mb-1">Kamuning</span>
+              <span class="badge bg-danger me-1 mb-1">Cheese Shop</span>
+              <span class="badge bg-danger me-1 mb-1">Gourmet Deli</span>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-map-marked-alt text-danger me-2"></i>Map</strong>
+            <iframe src="https://www.google.com/maps?q=24%20KD%20corner%20K-1st%20Street%20Kamuning%20Quezon%20City&output=embed" width="100%" height="180" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="mb-2 small text-muted">Last updated: {{ current_date if current_date else 'October 2025' }}</div>
+          <h3><i class="fas fa-book me-2"></i>Related Articles</h3>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <a href="/blog/tomas-morato-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Tomas Morato Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/blog/eastwood-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Eastwood Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/all-restaurants" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>All QC Restaurants
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Welcome to H&T Wine Gallery - Premier Wine, Cheese & Deli in Kamuning",
+  "datePublished": "2025-10-14",
+  "image": "/static/images/89ed7d_637f6bd5e13a497594b93a29d643170c~mv2.avif",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "description": "Discover H&T Wine Gallery in Kamuning, Quezon City at 24 KD corner K-1st Street. Fine wines, artisan cheeses, and gourmet deli. Shop online at htwinegallery.com or visit their elegant wine bar.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/ht-wine-gallery-quezon-city"
+  },
+  "keywords": "wine Quezon City, best wine bar in Quezon City, H&T Wine Gallery, wine shop Quezon City, cheese Quezon City, wine and cheese QC, wine bar QC, Kamuning wine bar, wine tasting Quezon City, wine class Manila, wine tasting events QC"
+}
+</script>
+
+<!-- Breadcrumbs JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "H&T Wine Gallery",
+      "item": "https://www.restaurantsquezoncity.com/blog/ht-wine-gallery-quezon-city"
+    }
+  ]
+}
+</script>
+
+<!-- EducationEvent JSON-LD for Introductory Wine Class -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  "name": "The Art of Wine - Introductory Wine Class",
+  "startDate": "2025-11-15T15:00:00+08:00",
+  "endDate": "2025-11-15T17:00:00+08:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@type": "Place",
+    "name": "H&T Wine Gallery",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "24 KD corner K-1st Street, Kamuning",
+      "addressLocality": "Quezon City",
+      "addressRegion": "Metro Manila",
+      "addressCountry": "PH"
+    }
+  },
+  "description": "Introductory wine class with French wine connoisseur Tanguy Gras. Taste 5 curated wines with 5 bites, learn pairing, bottle opening, and reading labels. Certificate included.",
+  "image": [
+    "https://www.restaurantsquezoncity.com/static/images/89ed7d_f85cbd74d4c94e3980ce78b7a806b8ee~mv2.jpg"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "1500",
+    "priceCurrency": "PHP",
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.htwinegallery.com/"
+  },
+  "performer": {
+    "@type": "Person",
+    "name": "Tanguy Gras"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "H&T Wine Gallery",
+    "url": "https://www.htwinegallery.com/"
+  }
+}
+</script>
+
+<!-- FAQ JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long is the introductory wine class?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Approximately 2 hours, including tasting and pairing."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is included in the class?",
+      "acceptedAnswer": {"@type": "Answer", "text": "5 curated wines, 5 food bites, pairing guidance, proper bottle opening, reading wine labels, and a certificate of completion."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I reschedule my booking?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Please contact H&T Wine Gallery at least 48 hours before the class to request a reschedule, subject to availability."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there parking available?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Street parking is available around Kamuning; we recommend arriving a few minutes early."}
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "H&T Wine Gallery",
+  "description": "Premier wine, cheese, and deli destination in Kamuning, Quezon City offering both in-store and online shopping",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "24 KD corner K-1st Street, Kamuning",
+    "addressLocality": "Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "url": "https://www.htwinegallery.com/",
+  "servesCuisine": ["Wine", "Cheese", "Gourmet Deli"],
+  "priceRange": "₱₱₱",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      "opens": "12:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday", "Saturday"],
+      "opens": "12:00",
+      "closes": "22:00"
+    }
+  ]
+}
+</script>
+{% endblock %}
+
