@@ -2146,5 +2146,9 @@ def food_tour():
                          all_cuisines=all_cuisines,
                          area_counts=area_counts)
 
+@app.route('/blog/best-coffee-shops-quezon-city')
+def coffee_shops_blog():
+    return render_template('blog/best-coffee-shops-quezon-city.html')
+
 if __name__ == '__main__':
     app.run(debug=True) 
