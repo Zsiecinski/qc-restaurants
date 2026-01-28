@@ -2,296 +2,192 @@
 
 {% block title %}Best Coffee Shops in Quezon City (2025) — Where Locals Actually Get Their Caffeine Fix{% endblock %}
 
-{% block meta %}
-<meta name="description" content="Discover QC's best coffee shops for remote work, dates, and casual hangouts. Caerus, Cafe Inggo, Talisay & more. Expert reviews with prices, hours, and insider tips.">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "What are the best coffee shops in Quezon City for remote work?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Caerus Specialty Coffee and Cafe Inggo 1587 are top picks for remote work due to their fast WiFi, abundant power outlets, and comfortable seating."
-    }
-  }, {
-    "@type": "Question", 
-    "name": "Which QC cafe has the best atmosphere?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Talisay The Garden Cafe offers the most unique garden atmosphere in QC, perfect for dates and peaceful work sessions."
-    }
-  }]
-}
-</script>
-{% endblock %}
+{% block meta_description %}Discover QC's best coffee shops for remote work, dates, and casual hangouts. Caerus, Cafe Inggo, Talisay & more. Expert reviews with prices, hours, and insider tips.{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container py-4">
     <div class="row">
         <div class="col-12">
-            <!-- Hero Section with Strong Hook -->
-            <header class="cuisine-header mb-4 text-center">
-                <span class="badge bg-warning text-dark mb-3 px-3 py-2">☕ Local's Choice — 2025</span>
-                <h1 class="section-title display-5">Best Coffee Shops in Quezon City</h1>
-                <p class="lead text-muted mx-auto" style="max-width: 700px;">
-                    After testing 50+ cafes across QC, these 5 stand out for quality, vibe, and value. 
-                    <strong>Your perfect coffee spot is on this page.</strong>
+            <!-- Hero Section -->
+            <header class="mb-4 text-center">
+                <span class="badge bg-warning text-dark mb-2 px-3 py-2">☕ Local's Choice — 2025</span>
+                <h1 class="section-title h2 mb-3">Best Coffee Shops in Quezon City</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                    After testing 50+ cafes, these 5 stand out. Your perfect coffee spot is below.
                 </p>
             </header>
 
-            <!-- Quick Pick Quiz CTA -->
-            <div class="alert border-warning bg-light-warning mb-4 p-4 rounded">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <h5 class="mb-1">🎯 Not sure which cafe fits your needs?</h5>
-                        <p class="mb-0 text-muted">Take our 15-second quiz and get a personalized recommendation</p>
-                    </div>
-                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        <a href="#quiz" class="btn btn-warning">Find My Perfect Cafe →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured: Caerus (Highest Rated Overall) -->
-            <div class="restaurant-card mb-5 shadow-sm">
+            <!-- Featured: Caerus (Compact) -->
+            <div class="restaurant-card mb-4 shadow-sm">
                 <div class="row g-0">
-                    <div class="col-lg-5 position-relative">
+                    <div class="col-md-5">
                         <img src="{{ url_for('static', filename='images/coffee-shops/caerus.jpg') }}" 
                              class="img-fluid rounded-start h-100" 
                              alt="Caerus Specialty Coffee interior"
-                             style="object-fit: cover; min-height: 350px;"
+                             style="object-fit: cover; min-height: 250px;"
                              onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
-                        <div class="position-absolute top-0 start-0 m-3">
-                            <span class="badge bg-warning text-dark px-3 py-2 shadow">🏆 #1 Pick for Remote Work</span>
-                        </div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="col-md-7">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
                                 <div>
-                                    <h2 class="card-title mb-1">Caerus Specialty Coffee + Bistro</h2>
-                                    <p class="text-muted mb-0">Where third-wave coffee meets productivity</p>
+                                    <span class="badge bg-warning text-dark mb-1">🏆 #1 for Remote Work</span>
+                                    <h2 class="card-title h5 mb-0">Caerus Specialty Coffee + Bistro</h2>
                                 </div>
                                 <div class="text-end">
-                                    <div class="h3 mb-0 text-warning">★ 4.4</div>
+                                    <div class="h6 mb-0 text-warning">★ 4.4</div>
                                     <small class="text-muted">497 reviews</small>
                                 </div>
                             </div>
                             
-                            <div class="alert alert-light border-start border-warning border-4 mb-3">
-                                <strong>Why locals love it:</strong> "The best WiFi in QC, power outlets at every seat, and their Ethiopian pour-over is legitimately world-class. I work here 3x a week." — Verified Google Review
-                            </div>
+                            <p class="small text-muted mb-2">Third-wave coffee with 100Mbps+ WiFi and power outlets everywhere.</p>
                             
-                            <div class="row mb-3">
-                                <div class="col-sm-6">
-                                    <p class="mb-2"><i class="fas fa-map-marker-alt text-warning me-2"></i>26A Sct. Torillo St, Diliman</p>
-                                    <p class="mb-2"><i class="fas fa-clock text-warning me-2"></i>Daily: 8AM-12AM</p>
+                            <div class="row small mb-2">
+                                <div class="col-6">
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-1"></i>26A Sct. Torillo, Diliman</p>
+                                    <p class="mb-0"><i class="fas fa-clock text-muted me-1"></i>8AM-12AM daily</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p class="mb-2"><i class="fas fa-peso-sign text-warning me-2"></i>₱300-600 per person</p>
-                                    <p class="mb-0"><i class="fas fa-wifi text-warning me-2"></i>100Mbps+ WiFi • Power everywhere</p>
+                                <div class="col-6">
+                                    <p class="mb-1"><i class="fas fa-peso-sign text-muted me-1"></i>₱300-600</p>
+                                    <p class="mb-0"><i class="fas fa-wifi text-success me-1"></i>Fast WiFi</p>
                                 </div>
                             </div>
                             
-                            <div class="mb-3">
-                                <strong class="d-block mb-2">Perfect For:</strong>
-                                <span class="badge bg-light text-dark border me-1 mb-1">Remote Workers</span>
-                                <span class="badge bg-light text-dark border me-1 mb-1">Digital Nomads</span>
-                                <span class="badge bg-light text-dark border me-1 mb-1">Long Work Sessions</span>
-                                <span class="badge bg-light text-dark border me-1 mb-1">Coffee Snobs</span>
-                            </div>
-                            
-                            <div class="d-flex gap-2 flex-wrap">
-                                <a href="https://www.facebook.com/caerusspecialtycoffee" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
-                                    <i class="fab fa-facebook me-1"></i>Facebook
-                                </a>
-                                <a href="https://www.google.com/maps/place/Caerus+Specialty+Coffee" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-directions me-1"></i>Get Directions
-                                </a>
+                            <div class="d-flex gap-2">
+                                <a href="https://www.google.com/maps/place/Caerus+Specialty+Coffee" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">Directions</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Two Column: Cafe Inggo & Talisay -->
-            <div class="row g-4 mb-5">
-                <!-- Café Inggo 1587 -->
-                <div class="col-lg-6">
+            <!-- Quick Pick CTA -->
+            <div class="alert border-warning bg-light-warning mb-4 p-3 rounded">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <p class="mb-0 small"><strong>Not sure which cafe fits your needs?</strong> Take our 15-sec quiz</p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                        <a href="#quiz" class="btn btn-warning btn-sm">Find My Cafe →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2x2 Grid: Cafe Inggo & Talisay -->
+            <div class="row g-3 mb-4">
+                <!-- Café Inggo -->
+                <div class="col-md-6">
                     <div class="restaurant-card h-100 shadow-sm">
-                        <div class="position-relative">
-                            <img src="{{ url_for('static', filename='images/coffee-shops/cafe-inggo.jpg') }}" 
-                                 class="card-img-top" 
-                                 alt="Café Inggo 1587 cafe interior"
-                                 style="object-fit: cover; height: 250px;"
-                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-success px-2 py-1">🌅 Best for Early Risers</span>
+                        <div class="row g-0">
+                            <div class="col-5">
+                                <img src="{{ url_for('static', filename='images/coffee-shops/cafe-inggo.jpg') }}" 
+                                     class="img-fluid rounded-start h-100" 
+                                     alt="Café Inggo 1587"
+                                     style="object-fit: cover; min-height: 150px;"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
                             </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h3 class="card-title h5 mb-0">Café Inggo 1587</h3>
-                                <span class="text-warning">★ 4.5 • 319 reviews</span>
-                            </div>
-                            
-                            <p class="text-muted small mb-3">Cozy corner cafe with the best early morning hours in QC</p>
-                            
-                            <div class="row small mb-3">
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-clock text-muted me-1"></i>7AM-10PM daily</p>
-                                    <p class="mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱250-500</p>
+                            <div class="col-7">
+                                <div class="card-body p-2">
+                                    <span class="badge bg-success mb-1">🌅 Early Bird</span>
+                                    <h3 class="card-title h6 mb-1">Café Inggo 1587</h3>
+                                    <p class="small text-muted mb-1">★ 4.5 • 319 reviews</p>
+                                    <p class="small mb-1"><i class="fas fa-clock text-muted me-1"></i>7AM-10PM</p>
+                                    <p class="small mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱250-500</p>
                                 </div>
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-1"></i>Biak na Bato</p>
-                                    <p class="mb-0"><i class="fas fa-wifi text-muted me-1"></i>Good WiFi</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex gap-2">
-                                <a href="https://www.google.com/maps/place/Caf%C3%A9+Inggo+1587" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm flex-grow-1">View on Maps</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Talisay The Garden Cafe -->
-                <div class="col-lg-6">
+                <!-- Talisay -->
+                <div class="col-md-6">
                     <div class="restaurant-card h-100 shadow-sm">
-                        <div class="position-relative">
-                            <img src="{{ url_for('static', filename='images/coffee-shops/talisay.jpg') }}" 
-                                 class="card-img-top" 
-                                 alt="Talisay The Garden Cafe outdoor seating"
-                                 style="object-fit: cover; height: 250px;"
-                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-info text-dark px-2 py-1">🌳 Best Garden Vibes</span>
+                        <div class="row g-0">
+                            <div class="col-5">
+                                <img src="{{ url_for('static', filename='images/coffee-shops/talisay.jpg') }}" 
+                                     class="img-fluid rounded-start h-100" 
+                                     alt="Talisay The Garden Cafe"
+                                     style="object-fit: cover; min-height: 150px;"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
                             </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h3 class="card-title h5 mb-0">Talisay The Garden Cafe</h3>
-                                <span class="text-warning">★ 4.6 • 243 reviews</span>
-                            </div>
-                            
-                            <p class="text-muted small mb-3">Hidden garden oasis perfect for dates and quiet conversations</p>
-                            
-                            <div class="row small mb-3">
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-clock text-muted me-1"></i>11AM-9PM (Tue-Sun)</p>
-                                    <p class="mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱300-600</p>
+                            <div class="col-7">
+                                <div class="card-body p-2">
+                                    <span class="badge bg-info text-dark mb-1">🌳 Garden Vibe</span>
+                                    <h3 class="card-title h6 mb-1">Talisay Garden Cafe</h3>
+                                    <p class="small text-muted mb-1">★ 4.6 • 243 reviews</p>
+                                    <p class="small mb-1"><i class="fas fa-clock text-muted me-1"></i>11AM-9PM</p>
+                                    <p class="small mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱300-600</p>
                                 </div>
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-1"></i>44 Maginhawa</p>
-                                    <p class="mb-0"><i class="fas fa-tree text-muted me-1"></i>Garden seating</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex gap-2">
-                                <a href="https://www.google.com/maps/place/Talisay+The+Garden+Cafe" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm flex-grow-1">View on Maps</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Two Column: Wildflour & Greens -->
-            <div class="row g-4 mb-5">
+            <!-- 2x2 Grid: Wildflour & Greens -->
+            <div class="row g-3 mb-4">
                 <!-- Wildflour -->
-                <div class="col-lg-6">
+                <div class="col-md-6">
                     <div class="restaurant-card h-100 shadow-sm">
-                        <div class="position-relative">
-                            <img src="{{ url_for('static', filename='images/coffee-shops/wildflour.jpg') }}" 
-                                 class="card-img-top" 
-                                 alt="Wildflour Cafe bakery display"
-                                 style="object-fit: cover; height: 250px;"
-                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-warning text-dark px-2 py-1">🥐 Best Bakery Coffee</span>
+                        <div class="row g-0">
+                            <div class="col-5">
+                                <img src="{{ url_for('static', filename='images/coffee-shops/wildflour.jpg') }}" 
+                                     class="img-fluid rounded-start h-100" 
+                                     alt="Wildflour Cafe + Bakery"
+                                     style="object-fit: cover; min-height: 150px;"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
                             </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h3 class="card-title h5 mb-0">Wildflour Cafe + Bakery</h3>
-                                <span class="text-warning">★ 4.6 • 622 reviews</span>
-                            </div>
-                            
-                            <p class="text-muted small mb-3">Premium bakery-cafe hybrid with consistent quality and upscale ambiance</p>
-                            
-                            <div class="row small mb-3">
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-clock text-muted me-1"></i>7AM-11PM daily</p>
-                                    <p class="mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱500-1000</p>
+                            <div class="col-7">
+                                <div class="card-body p-2">
+                                    <span class="badge bg-warning text-dark mb-1">🥐 Best Bakery</span>
+                                    <h3 class="card-title h6 mb-1">Wildflour Cafe</h3>
+                                    <p class="small text-muted mb-1">★ 4.6 • 622 reviews</p>
+                                    <p class="small mb-1"><i class="fas fa-clock text-muted me-1"></i>7AM-11PM</p>
+                                    <p class="small mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱500-1000</p>
                                 </div>
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-1"></i>24 Sct. Madriñan</p>
-                                    <p class="mb-0"><i class="fas fa-birthday-cake text-muted me-1"></i>Famous pastries</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex gap-2">
-                                <a href="https://www.google.com/maps/place/Wildflour+Restaurant+-+Quezon+City" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm flex-grow-1">View on Maps</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Greens -->
-                <div class="col-lg-6">
+                <div class="col-md-6">
                     <div class="restaurant-card h-100 shadow-sm">
-                        <div class="position-relative">
-                            <img src="{{ url_for('static', filename='images/coffee-shops/greens.jpg') }}" 
-                                 class="card-img-top" 
-                                 alt="Greens Plant Based Vegan Cafe interior"
-                                 style="object-fit: cover; height: 250px;"
-                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-success px-2 py-1">🌱 Best Vegan Option</span>
+                        <div class="row g-0">
+                            <div class="col-5">
+                                <img src="{{ url_for('static', filename='images/coffee-shops/greens.jpg') }}" 
+                                     class="img-fluid rounded-start h-100" 
+                                     alt="Greens Plant Based Cafe"
+                                     style="object-fit: cover; min-height: 150px;"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
                             </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h3 class="card-title h5 mb-0">Greens Plant Based Cafe</h3>
-                                <span class="text-warning">★ 4.5 • 359 reviews</span>
-                            </div>
-                            
-                            <p class="text-muted small mb-3">100% plant-based cafe with excellent coffee in a serene setting</p>
-                            
-                            <div class="row small mb-3">
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-clock text-muted me-1"></i>11:30AM-8:30PM</p>
-                                    <p class="mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱300-600</p>
+                            <div class="col-7">
+                                <div class="card-body p-2">
+                                    <span class="badge bg-success mb-1">🌱 Vegan</span>
+                                    <h3 class="card-title h6 mb-1">Greens Plant Based</h3>
+                                    <p class="small text-muted mb-1">★ 4.5 • 359 reviews</p>
+                                    <p class="small mb-1"><i class="fas fa-clock text-muted me-1"></i>11:30AM-8:30PM</p>
+                                    <p class="small mb-0"><i class="fas fa-peso-sign text-muted me-1"></i>₱300-600</p>
                                 </div>
-                                <div class="col-6">
-                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-muted me-1"></i>104 Sct. Lozano</p>
-                                    <p class="mb-0"><i class="fas fa-leaf text-muted me-1"></i>100% Vegan</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex gap-2">
-                                <a href="https://www.google.com/maps/place/Greens+Plant+Based+Vegan+Restaurant+QC" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm flex-grow-1">View on Maps</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Decision Matrix -->
-            <div class="card mb-5 shadow-sm">
-                <div class="card-header bg-primary text-white py-3">
-                    <h4 class="mb-0"><i class="fas fa-th-list me-2"></i>Quick Decision Matrix</h4>
+            <!-- Quick Decision Matrix (Compact) -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white py-2">
+                    <h5 class="mb-0 h6"><i class="fas fa-th-list me-2"></i>Quick Comparison</h5>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
+                        <table class="table table-hover table-sm mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th>Cafe</th>
                                     <th>Price</th>
                                     <th>Best For</th>
-                                    <th>Vibe</th>
                                     <th>WiFi</th>
                                     <th>Hours</th>
                                 </tr>
@@ -301,7 +197,6 @@
                                     <td><strong>🏆 Caerus</strong></td>
                                     <td>₱₱</td>
                                     <td>Remote Work</td>
-                                    <td>Trendy</td>
                                     <td>★★★★★</td>
                                     <td>8AM-12AM</td>
                                 </tr>
@@ -309,7 +204,6 @@
                                     <td>Café Inggo</td>
                                     <td>₱₱</td>
                                     <td>Early Breakfast</td>
-                                    <td>Cozy</td>
                                     <td>★★★☆☆</td>
                                     <td>7AM-10PM</td>
                                 </tr>
@@ -317,7 +211,6 @@
                                     <td>Talisay</td>
                                     <td>₱₱</td>
                                     <td>Garden Dates</td>
-                                    <td>Peaceful</td>
                                     <td>★★☆☆☆</td>
                                     <td>11AM-9PM</td>
                                 </tr>
@@ -325,7 +218,6 @@
                                     <td>Wildflour</td>
                                     <td>₱₱₱</td>
                                     <td>Premium Bakery</td>
-                                    <td>Upscale</td>
                                     <td>★★★☆☆</td>
                                     <td>7AM-11PM</td>
                                 </tr>
@@ -333,7 +225,6 @@
                                     <td>Greens</td>
                                     <td>₱₱</td>
                                     <td>Vegan Coffee</td>
-                                    <td>Quiet</td>
                                     <td>★★★☆☆</td>
                                     <td>11:30AM-8:30PM</td>
                                 </tr>
@@ -343,116 +234,64 @@
                 </div>
             </div>
 
-            <!-- Pro Tips Section -->
-            <div class="tips-section mb-5 p-4 bg-light rounded border">
-                <h4 class="mb-3">💡 Pro Tips from Local Coffee Lovers</h4>
-                <div class="row">
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                                <span class="display-6">☕</span>
-                            </div>
-                            <div>
-                                <strong>Best pour-over:</strong>
-                                <p class="small text-muted mb-0">Caerus does exceptional Ethiopian single-origin. Ask for their current rotation.</p>
-                            </div>
-                        </div>
+            <!-- Pro Tips (Compact) -->
+            <div class="tips-section mb-4 p-3 bg-light rounded border">
+                <h5 class="mb-3">💡 Pro Tips</h5>
+                <div class="row small">
+                    <div class="col-md-4 mb-2 mb-md-0">
+                        <strong>☕ Best pour-over:</strong> Caerus — Ethiopian single-origin
                     </div>
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                                <span class="display-6">🅿️</span>
-                            </div>
-                            <div>
-                                <strong>Parking hack:</strong>
-                                <p class="small text-muted mb-0">Most Diliman cafes have limited street parking. Arrive before 10AM on weekends.</p>
-                            </div>
-                        </div>
+                    <div class="col-md-4 mb-2 mb-md-0">
+                        <strong>🅿️ Parking:</strong> Arrive before 10AM on weekends
                     </div>
                     <div class="col-md-4">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                                <span class="display-6">⏰</span>
-                            </div>
-                            <div>
-                                <strong>Beat the crowd:</strong>
-                                <p class="small text-muted mb-0">Weekday mornings (9-11AM) are quietest. Saturday mornings are busiest.</p>
-                            </div>
-                        </div>
+                        <strong>⏰ Least crowded:</strong> Weekday 9-11AM
                     </div>
                 </div>
             </div>
 
-            <!-- FAQ Section -->
-            <div class="faq-section mb-5">
-                <h4 class="mb-3">❓ Frequently Asked Questions</h4>
+            <!-- FAQ (Compact) -->
+            <div class="mb-4">
+                <h5 class="mb-3">❓ FAQ</h5>
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item">
-                        <h5 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                What are the best coffee shops in Quezon City for remote work?
+                        <h6 class="accordion-header">
+                            <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Best for remote work?
                             </button>
-                        </h5>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <strong>Caerus Specialty Coffee</strong> is our top pick for remote work thanks to their fast 100Mbps+ WiFi, power outlets at every seat, and comfortable seating for long sessions. 
-                                <strong>Café Inggo 1587</strong> is a close second with good WiFi and quieter atmosphere.
-                            </div>
+                        </h6>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body small">Caerus Specialty Coffee — fast WiFi, power outlets everywhere.</div>
                         </div>
                     </div>
-                    
                     <div class="accordion-item">
-                        <h5 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Which QC cafe has the best atmosphere?
+                        <h6 class="accordion-header">
+                            <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Best garden cafe?
                             </button>
-                        </h5>
+                        </h6>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <strong>Talisay The Garden Cafe</strong> offers the most unique atmosphere with its lush garden setting in Maginhawa. 
-                                It's perfect for dates, quiet conversations, or escaping the city noise while enjoying quality coffee.
-                            </div>
+                            <div class="accordion-body small">Talisay The Garden Cafe — peaceful garden setting in Maginhawa.</div>
                         </div>
                     </div>
-                    
                     <div class="accordion-item">
-                        <h5 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Where can I find specialty third-wave coffee in QC?
+                        <h6 class="accordion-header">
+                            <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Best vegan option?
                             </button>
-                        </h5>
+                        </h6>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <strong>Caerus Specialty Coffee</strong> and <strong>Wildflour</strong> are your best bets for third-wave specialty coffee. 
-                                Both source quality beans and offer pour-over options prepared by trained baristas.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h5 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Are there vegan-friendly coffee shops in Quezon City?
-                            </button>
-                        </h5>
-                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <strong>Greens Plant Based Vegan Cafe</strong> is 100% vegan and serves excellent coffee alongside plant-based pastries. 
-                                Most other cafes (Caerus, Wildflour) also offer oat milk alternatives.
-                            </div>
+                            <div class="accordion-body small">Greens Plant Based Cafe — 100% vegan with excellent coffee.</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CTA Section -->
-            <div class="cta-section mt-5 p-5 text-center rounded" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                <h3 class="mb-3">Have a Favorite QC Cafe We Missed?</h3>
-                <p class="mb-4">We're always discovering new spots. Send us your recommendations!</p>
-                <a href="mailto:hello@restaurantsquezoncity.com" class="btn btn-light btn-lg px-4">
-                    <i class="fas fa-envelope me-2"></i>Suggest a Cafe
-                </a>
-                <p class="mt-3 mb-0 small opacity-75">Explore more QC dining guides at RestaurantsQuezonCity.com</p>
+            <!-- CTA -->
+            <div class="p-4 text-center rounded" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h5 class="mb-2">Have a Favorite Cafe We Missed?</h5>
+                <p class="small mb-3">Send us your recommendations!</p>
+                <a href="mailto:hello@restaurantsquezoncity.com" class="btn btn-light btn-sm">Suggest a Cafe</a>
             </div>
 
         </div>
