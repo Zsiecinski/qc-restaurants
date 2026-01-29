@@ -1,423 +1,350 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <meta name="keywords" content="{{ restaurant.name }}, {{ restaurant.cuisine }}, restaurant Quezon City, dining QC">
-    <link rel="canonical" href="https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="restaurant.restaurant">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:image" content="{{ restaurant.photo_url or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600' }}">
-    <meta property="og:url" content="https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}">
-    <meta property="og:site_name" content="Restaurants Quezon City">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ title }}">
-    <meta name="twitter:description" content="{{ description }}">
-    <meta name="twitter:image" content="{{ restaurant.photo_url or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600' }}">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "{{ restaurant.name }}",
-        "description": "{{ description }}",
-        "url": "https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}",
-        "image": "{{ restaurant.photo_url or '' }}",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Quezon City",
-            "addressRegion": "Metro Manila",
-            "addressCountry": "PH"
-        },
-        "telephone": "{{ restaurant.phone or '' }}",
-        "servesCuisine": "{{ restaurant.cuisine }}",
-        "priceRange": "{{ restaurant.price_range }}",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "{{ restaurant.rating or '' }}",
-            "reviewCount": "{{ restaurant.reviews|default(0) }}"
-        }
-    }
-    </script>
-    
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
-    
-    <style>
-        .restaurant-hero {
-            position: relative;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
-        }
-        .restaurant-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
-        }
-        .restaurant-name-overlay {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .info-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .info-box i {
-            color: #d32323;
-            width: 24px;
-        }
-        .feature-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin: 4px;
-        }
-        .feature-badge.available {
-            background: #d4edda;
-            color: #155724;
-        }
-        .save-btn-lg {
-            padding: 12px 24px;
-            font-size: 1.1rem;
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/">
-                <div class="logo-circle me-2">
-                    <i class="fas fa-utensils text-danger"></i>
-                </div>
-                <div class="brand-text">
-                    <div class="brand-main">RESTAURANTS</div>
-                    <div class="brand-sub">QUEZON CITY</div>
-                </div>
-            </a>
-            <a href="/all-restaurants" class="btn btn-outline-dark btn-sm">Back to All</a>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
-    <!-- Hero Section -->
-    <section class="restaurant-hero" style="background-image: url('{{ restaurant.photo_url }}');">
-        <div class="restaurant-name-overlay">
-            <h1 class="display-4 fw-bold mb-2">{{ restaurant.name }}</h1>
-            <div class="d-flex align-items-center gap-3">
+{% block title %}{{ restaurant.name }} - {{ restaurant.cuisine }} in {{ restaurant.area }}{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="bg-light py-2">
+    <div class="container">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/all-restaurants">Restaurants</a></li>
+            <li class="breadcrumb-item"><a href="/cuisine/{{ restaurant.cuisine|lower }}">{{ restaurant.cuisine }}</a></li>
+            <li class="breadcrumb-item active">{{ restaurant.name }}</li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="restaurant-hero" style="position: relative; height: 350px; background-size: cover; background-position: center; background-image: url('{{ restaurant.photo_url }}');">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);"></div>
+    <div class="container" style="position: relative; height: 100%; display: flex; align-items: flex-end; padding-bottom: 30px;">
+        <div>
+            <h1 class="display-5 fw-bold text-white mb-2">{{ restaurant.name }}</h1>
+            <div class="d-flex flex-wrap align-items-center gap-3 text-white">
                 {% if restaurant.rating %}
                 <span class="badge bg-warning text-dark fs-6">
-                    <i class="fas fa-star me-1"></i>{{ restaurant.rating }}
+                    <i class="fas fa-star me-1"></i>{{ restaurant.rating }} ({{ restaurant.reviews|int }} reviews)
                 </span>
                 {% endif %}
-                <span class="text-white-50">{{ restaurant.cuisine }}</span>
-                <span class="text-white-50">{{ '₱' * (restaurant.price_range|int) }}</span>
+                <span><i class="fas fa-utensils me-1"></i>{{ restaurant.cuisine }}</span>
+                <span><i class="fas fa-peso-sign me-1"></i>{{ restaurant.price_range }}</span>
+                <span><i class="fas fa-map-marker-alt me-1"></i>{{ restaurant.area }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="container py-4">
+    <div class="row g-4">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+            <!-- Quick Actions -->
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <a href="/saved" class="btn btn-outline-danger save-btn" data-id="{{ restaurant.id }}" data-name="{{ restaurant.name }}">
+                    <i class="far fa-heart me-1"></i> Save
+                </a>
+                {% if maps_url %}
+                <a href="{{ maps_url }}" target="_blank" class="btn btn-danger">
+                    <i class="fas fa-directions me-1"></i> Get Directions
+                </a>
+                {% endif %}
+                {% if restaurant.phone %}
+                <a href="tel:{{ restaurant.phone }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-phone me-1"></i> Call
+                </a>
+                {% endif %}
+                <button class="btn btn-outline-secondary" onclick="shareRestaurant()">
+                    <i class="fas fa-share me-1"></i> Share
+                </button>
+            </div>
+
+            <!-- Essential Info Cards -->
+            <div class="row g-3 mb-4">
+                {% if restaurant.address %}
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h5 class="mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i>Location</h5>
+                        <p class="mb-2">{{ restaurant.address }}</p>
+                        {% if maps_url %}
+                        <a href="{{ maps_url }}" target="_blank" class="text-danger small">Open in Google Maps →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if restaurant.phone %}
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h5 class="mb-2"><i class="fas fa-phone text-danger me-2"></i>Contact</h5>
+                        <p class="mb-1">{{ restaurant.phone }}</p>
+                        {% if restaurant.site %}
+                        <a href="{{ restaurant.site }}" target="_blank" class="text-danger small">Visit Website →</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if restaurant.hours %}
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h5 class="mb-2"><i class="fas fa-clock text-danger me-2"></i>Hours</h5>
+                        <p class="mb-1">
+                            {% if restaurant.is_open %}
+                            <span class="text-success fw-bold">Open Now</span>
+                            {% else %}
+                            <span class="text-danger fw-bold">Closed</span>
+                            {% endif %}
+                        </p>
+                        <p class="text-muted small mb-0">{{ restaurant.hours }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="col-md-6">
+                    <div class="info-box h-100">
+                        <h5 class="mb-2"><i class="fas fa-wallet text-danger me-2"></i>Price Range</h5>
+                        <p class="mb-1">{{ restaurant.price_range }}</p>
+                        <p class="text-muted small mb-0">
+                            {% if '₱₱₱₱' in restaurant.price_range %}Premium dining
+                            {% elif '₱₱₱' in restaurant.price_range %}Moderate to pricey
+                            {% elif '₱₱' in restaurant.price_range %}Moderate
+                            {% else %}Budget-friendly{% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            {% if restaurant.about %}
+            <div class="info-box mb-4">
+                <h5 class="mb-3"><i class="fas fa-info-circle text-danger me-2"></i>About</h5>
+                <p class="mb-0">{{ restaurant.about }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Features & Amenities -->
+            {% if restaurant.features %}
+            <div class="info-box mb-4">
+                <h5 class="mb-3"><i class="fas fa-check-circle text-danger me-2"></i>Features & Amenities</h5>
+                <div class="row g-2">
+                    {% for feature in restaurant.features[:12] %}
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center p-2 bg-light rounded">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <span class="small">{{ feature }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Menu Section -->
+            <div class="info-box mb-4" id="menu-section">
+                <h5 class="mb-3"><i class="fas fa-utensils text-danger me-2"></i>Menu Highlights</h5>
+                <div id="menu-items">
+                    <div class="text-center py-3 text-muted">
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                        Loading menu...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Gallery -->
+            {% if restaurant.photo_url %}
+            <div class="info-box mb-4">
+                <h5 class="mb-3"><i class="fas fa-camera text-danger me-2"></i>Photos</h5>
+                <div style="position: relative;">
+                    <img src="{{ restaurant.photo_url }}" alt="{{ restaurant.name }}" class="img-fluid rounded" style="width: 100%;">
+                    <a href="{{ maps_url }}" target="_blank" class="btn btn-dark position-absolute bottom-0 end-0 m-3">
+                        View All Photos
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-lg-4">
+            <!-- Map -->
+            {% if maps_url %}
+            <div class="info-box mb-4">
+                <h6 class="mb-2"><i class="fas fa-map text-danger me-2"></i>Map</h6>
+                <a href="{{ maps_url }}" target="_blank">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.latitude }},{{ restaurant.longitude }}&zoom=15&size=400x200&markers=color:red%7C{{ restaurant.latitude }},{{ restaurant.longitude }}&key=YOUR_API_KEY" 
+                         alt="Map" class="img-fluid rounded" style="width: 100%;"
+                         onerror="this.style.display='none'">
+                </a>
+                <a href="{{ maps_url }}" target="_blank" class="btn btn-outline-danger btn-sm w-100 mt-2">
+                    <i class="fas fa-external-link-alt me-1"></i> Open in Google Maps
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Similar Restaurants -->
+            <div class="info-box mb-4">
+                <h6 class="mb-3"><i class="fas fa-search text-danger me-2"></i>Similar Restaurants</h6>
+                {% if similar_restaurants %}
+                <div class="d-flex flex-column gap-2">
+                    {% for sim in similar_restaurants[:5] %}
+                    <a href="/restaurant/{{ sim.slug }}" class="d-flex align-items-center p-2 bg-light rounded text-decoration-none">
+                        {% if sim.photo %}
+                        <img src="{{ sim.photo }}" alt="{{ sim.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+                        {% else %}
+                        <div style="width: 50px; height: 50px; background: #eee; border-radius: 6px; display: flex; align-items: center; justify-content: center;">🍽️</div>
+                        {% endif %}
+                        <div class="ms-2">
+                            <div class="fw-bold text-dark" style="font-size: 0.9rem;">{{ sim.name }}</div>
+                            <div class="text-muted small">{{ sim.cuisine }} • {% if sim.rating %}<i class="fas fa-star text-warning"></i> {{ sim.rating }}{% endif %}</div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <a href="/all-restaurants" class="text-danger small mt-2 d-block">View all restaurants →</a>
+                {% else %}
+                <p class="text-muted small mb-0">No similar restaurants found nearby.</p>
+                <a href="/all-restaurants" class="btn btn-outline-danger btn-sm mt-2">Browse All</a>
+                {% endif %}
+            </div>
+
+            <!-- Best Time to Visit -->
+            <div class="info-box mb-4">
+                <h6 class="mb-3"><i class="fas fa-clock text-danger me-2"></i>Best Time to Visit</h6>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="small">Weekdays</span>
+                    <span class="badge bg-success">Less Crowded</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="small">Weekends</span>
+                    <span class="badge bg-warning text-dark">Busy</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="small">Best Hours</span>
+                    <span class="small text-muted">11AM-2PM, 6PM-8PM</span>
+                </div>
+            </div>
+
+            <!-- Quick Info Summary -->
+            <div class="info-box">
+                <h6 class="mb-3"><i class="fas fa-list text-danger me-2"></i>Quick Summary</h6>
+                <ul class="list-unstyled mb-0 small">
+                    <li class="mb-2"><i class="fas fa-star text-warning me-2"></i>Rating: {{ restaurant.rating }}/5 ({{ restaurant.reviews|int }} reviews)</li>
+                    <li class="mb-2"><i class="fas fa-utensils text-secondary me-2"></i>{{ restaurant.cuisine }}</li>
+                    <li class="mb-2"><i class="fas fa-peso-sign text-secondary me-2"></i>{{ restaurant.price_range }} - {{ 'Budget to moderate' if '₱₱' in restaurant.price_range and '₱₱₱' not in restaurant.price_range else 'Moderate to pricey' }}</li>
+                    {% if restaurant.area %}
+                    <li><i class="fas fa-map-marker-alt text-secondary me-2"></i>{{ restaurant.area }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Areas -->
+    <section class="mt-4">
+        <h4 class="mb-3">Explore More in {{ restaurant.area }}</h4>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <a href="/search?area={{ restaurant.area|urlencode }}" class="btn btn-outline-dark w-100">
+                    <i class="fas fa-search me-1"></i> All in {{ restaurant.area }}
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/best-of/top-rated" class="btn btn-outline-dark w-100">
+                    <i class="fas fa-star me-1"></i> Top Rated
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/best-of/budget" class="btn btn-outline-dark w-100">
+                    <i class="fas fa-peso-sign me-1"></i> Budget Friendly
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/food-tour" class="btn btn-outline-dark w-100">
+                    <i class="fas fa-route me-1"></i> Food Tour
+                </a>
             </div>
         </div>
     </section>
+</main>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Save Button -->
-                <div class="mb-4">
-                    <button class="btn btn-outline-danger save-btn-lg save-btn" 
-                            data-id="{{ restaurant.id }}"
-                            data-name="{{ restaurant.name }}"
-                            data-area="{{ restaurant.area }}"
-                            data-cuisine="{{ restaurant.cuisine }}">
-                        <i class="far fa-heart me-2"></i>
-                        <span class="save-text">Save Restaurant</span>
-                    </button>
-                </div>
+<script>
+// Share function
+function shareRestaurant() {
+    if (navigator.share) {
+        navigator.share({
+            title: '{{ restaurant.name }}',
+            text: 'Check out {{ restaurant.name }} in Quezon City!',
+            url: window.location.href
+        });
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    }
+}
 
-                <!-- Quick Info -->
-                <div class="info-box">
-                    <h3 class="h5 mb-3">Quick Information</h3>
-                    
-                    {% if restaurant.address %}
-                    <p class="mb-2">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <strong>Address:</strong> {{ restaurant.address }}
-                    </p>
-                    {% endif %}
-                    
-                    {% if restaurant.phone %}
-                    <p class="mb-2">
-                        <i class="fas fa-phone"></i>
-                        <strong>Phone:</strong> 
-                        <a href="tel:{{ restaurant.phone }}" class="text-decoration-none">{{ restaurant.phone }}</a>
-                    </p>
-                    {% endif %}
-                    
-                    {% if restaurant.site %}
-                    <p class="mb-2">
-                        <i class="fas fa-globe"></i>
-                        <strong>Website:</strong> 
-                        <a href="{{ restaurant.site }}" target="_blank" rel="nofollow">Visit Website</a>
-                    </p>
-                    {% endif %}
-                    
-                    {% if restaurant.hours %}
-                    <p class="mb-0">
-                        <i class="fas fa-clock"></i>
-                        <strong>Hours:</strong> 
-                        {% if restaurant.is_open %}
-                        <span class="text-success">Open Now</span>
-                        {% else %}
-                        <span class="text-danger">Closed</span>
-                        {% endif %}
-                    </p>
-                    {% endif %}
-                </div>
-
-                <!-- Features -->
-                {% if restaurant.features %}
-                <div class="info-box">
-                    <h3 class="h5 mb-3">Features & Amenities</h3>
-                    <div class="d-flex flex-wrap">
-                        {% for feature in restaurant.features %}
-                        <span class="feature-badge available">
-                            <i class="fas fa-check"></i> {{ feature }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- About -->
-                {% if restaurant.about %}
-                <div class="info-box">
-                    <h3 class="h5 mb-3">About</h3>
-                    <p class="mb-0">{{ restaurant.about }}</p>
-                </div>
-                {% endif %}
-
-                <!-- Menu Section (loaded via API) -->
-                <div class="info-box" id="menu-section" style="display: none;">
-                    <h3 class="h5 mb-3">📋 Menu Highlights</h3>
-                    <div id="menu-items">
-                        <div class="text-center py-3">
-                            <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
-                            <span class="ms-2">Loading menu...</span>
+// Load menu data
+async function loadMenu() {
+    const menuItems = document.getElementById('menu-items');
+    if (!menuItems) return;
+    
+    try {
+        const response = await fetch('/api/menus/{{ restaurant.name|urlencode }}');
+        const data = await response.json();
+        
+        if (response.ok && data.data && data.data.items && data.data.items.length > 0) {
+            let html = '<div class="row g-2">';
+            data.data.items.slice(0, 6).forEach(item => {
+                html += `
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between p-2 bg-light rounded">
+                            <span>${item.name}</span>
+                            <span class="text-danger fw-bold">${item.price}</span>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <a href="#" id="view-full-menu" class="btn btn-outline-danger btn-sm" target="_blank">
-                            <i class="fas fa-external-link-alt me-1"></i> View Full Menu
-                        </a>
-                    </div>
-                </div>
+                `;
+            });
+            html += '</div>';
+            if (data.data.items.length > 6) {
+                html += `<p class="text-center text-muted small mt-2 mb-0">And ${data.data.items.length - 6} more items...</p>`;
+            }
+            menuItems.innerHTML = html;
+        } else {
+            document.getElementById('menu-section').style.display = 'none';
+        }
+    } catch (error) {
+        document.getElementById('menu-section').style.display = 'none';
+    }
+}
 
-                <!-- Menu CTA if no data -->
-                <div class="info-box" id="menu-cta">
-                    <h3 class="h5 mb-3">📋 Menu</h3>
-                    <p class="text-muted mb-3">Know the menu? Help us add it!</p>
-                    <button class="btn btn-outline-danger btn-sm" onclick="suggestMenu('{{ restaurant.name }}')">
-                        <i class="fas fa-plus me-1"></i> Suggest Menu Items
-                    </button>
-                </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- Actions -->
-                <div class="info-box">
-                    <h4 class="h6 mb-3">Get Directions</h4>
-                    {% if maps_url %}
-                    <a href="{{ maps_url }}" target="_blank" rel="nofollow" class="btn btn-danger w-100 mb-2">
-                        <i class="fas fa-directions me-2"></i> Open in Google Maps
-                    </a>
-                    {% endif %}
-                    {% if restaurant.phone %}
-                    <a href="tel:{{ restaurant.phone }}" class="btn btn-outline-danger w-100">
-                        <i class="fas fa-phone me-2"></i> Call Now
-                    </a>
-                    {% endif %}
-                </div>
-
-                <!-- Similar Restaurants -->
-                <div class="info-box">
-                    <h4 class="h6 mb-3">Similar Restaurants</h4>
-                    <p class="text-muted mb-0">
-                        <a href="/all-restaurants" class="text-danger">Browse all restaurants</a> 
-                        in {{ restaurant.area }} or {{ restaurant.cuisine }} cuisine.
-                    </p>
-                </div>
-
-                <!-- Share -->
-                <div class="info-box">
-                    <h4 class="h6 mb-3">Share</h4>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer py-4" style="background-color: #000;">
-        <div class="container text-center">
-            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
-            <p class="text-white-50 mb-0">
-                <a href="/about" class="text-white-50">About</a> • 
-                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
-                <a href="/saved" class="text-white-50">My Saved</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize save button
-        document.addEventListener('DOMContentLoaded', function() {
-            const saveBtn = document.querySelector('.save-btn');
-            if (saveBtn) {
-                const id = saveBtn.getAttribute('data-id');
-                
-                // Check if already saved
-                if (typeof isSaved === 'function' && isSaved(id)) {
-                    saveBtn.innerHTML = '<i class="fas fa-heart text-danger me-2"></i><span class="save-text">Saved</span>';
-                    saveBtn.classList.add('saved', 'btn-danger');
-                    saveBtn.classList.remove('btn-outline-danger');
-                }
-                
-                // Add click handler
-                saveBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const id = this.getAttribute('data-id');
-                    const name = this.getAttribute('data-name');
-                    const area = this.getAttribute('data-area');
-                    const cuisine = this.getAttribute('data-cuisine');
-                    
-                    if (this.classList.contains('saved')) {
-                        if (typeof removeRestaurant === 'function') {
-                            removeRestaurant(id);
-                            this.innerHTML = '<i class="far fa-heart me-2"></i><span class="save-text">Save Restaurant</span>';
-                            this.classList.remove('saved', 'btn-danger');
-                            this.classList.add('btn-outline-danger');
-                        }
-                    } else {
-                        if (typeof saveRestaurant === 'function') {
-                            saveRestaurant(id, name, area, cuisine);
-                            this.innerHTML = '<i class="fas fa-heart text-danger me-2"></i><span class="save-text">Saved</span>';
-                            this.classList.add('saved', 'btn-danger');
-                            this.classList.remove('btn-outline-danger');
-                        }
-                    }
-                });
+// Initialize save button
+document.addEventListener('DOMContentLoaded', function() {
+    const saveBtn = document.querySelector('.save-btn');
+    if (saveBtn) {
+        const id = saveBtn.getAttribute('data-id');
+        if (localStorage.getItem('saved_' + id)) {
+            saveBtn.innerHTML = '<i class="fas fa-heart text-danger me-1"></i> Saved';
+            saveBtn.classList.add('btn-danger');
+            saveBtn.classList.remove('btn-outline-danger');
+        }
+        saveBtn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            if (localStorage.getItem('saved_' + id)) {
+                localStorage.removeItem('saved_' + id);
+                this.innerHTML = '<i class="far fa-heart me-1"></i> Save';
+                this.classList.remove('btn-danger');
+                this.classList.add('btn-outline-danger');
+            } else {
+                localStorage.setItem('saved_' + id, name);
+                this.innerHTML = '<i class="fas fa-heart text-danger me-1"></i> Saved';
+                this.classList.add('btn-danger');
+                this.classList.remove('btn-outline-danger');
             }
         });
-
-        // Load menu data
-        async function loadMenu() {
-            const menuSection = document.getElementById('menu-section');
-            const menuItems = document.getElementById('menu-items');
-            const menuCta = document.getElementById('menu-cta');
-            
-            if (!menuSection || !menuItems) return;
-            
-            const restaurantName = document.querySelector('.restaurant-name-overlay h1')?.textContent;
-            if (!restaurantName) return;
-            
-            try {
-                const response = await fetch(`/api/menus/${encodeURIComponent(restaurantName)}`);
-                const data = await response.json();
-                
-                if (response.ok && data.data && data.data.items) {
-                    menuSection.style.display = 'block';
-                    menuCta.style.display = 'none';
-                    
-                    // Display menu items
-                    let html = '<div class="menu-grid">';
-                    data.data.items.slice(0, 8).forEach(item => {
-                        html += `
-                            <div class="menu-item">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <span class="menu-item-name">${item.name}</span>
-                                    <span class="menu-item-price text-danger">${item.price}</span>
-                                </div>
-                                ${item.description ? `<p class="menu-item-desc text-muted small mb-0">${item.description}</p>` : ''}
-                            </div>
-                        `;
-                    });
-                    html += '</div>';
-                    
-                    if (data.data.items.length > 8) {
-                        html += `<p class="text-center text-muted mt-2"><em>And ${data.data.items.length - 8} more items...</em></p>`;
-                    }
-                    
-                    menuItems.innerHTML = html;
-                    
-                    // Update "View Full Menu" link
-                    const viewMenuBtn = document.getElementById('view-full-menu');
-                    if (viewMenuBtn && data.menu_url) {
-                        viewMenuBtn.href = data.menu_url;
-                    }
-                } else {
-                    // No menu data - show CTA
-                    console.log('No menu data found for', restaurantName);
-                }
-            } catch (error) {
-                console.log('Error loading menu:', error);
-            }
-        }
-
-        // Suggest menu button handler
-        function suggestMenu(restaurantName) {
-            const email = 'menus@restaurantsquezoncity.com';
-            const subject = `Menu Suggestion: ${restaurantName}`;
-            const body = `Hi! I want to add menu data for ${restaurantName}.\n\nPlease find attached or describe the menu items below:\n\n`;
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        }
-
-        // Load menu on page load
-        document.addEventListener('DOMContentLoaded', loadMenu);
-    </script>
-
-    <!-- Menu styles -->
-    <style>
-        .menu-grid {
-            display: grid;
-            gap: 12px;
-        }
-        .menu-item {
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        .menu-item-name {
-            font-weight: 600;
-            color: #333;
-        }
-        .menu-item-price {
-            font-weight: 600;
-        }
-        .menu-item-desc {
-            font-size: 0.85em;
-            margin-top: 4px;
-        }
-    </style>
-</body>
-</html>
+    }
+    loadMenu();
+});
+</script>
+{% endblock %}

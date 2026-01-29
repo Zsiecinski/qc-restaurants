@@ -2221,18 +2221,42 @@ def restaurant_details(slug):
         abort(404)
     
     # Generate SEO-friendly title and description
-    title = f"{restaurant['name']} – {restaurant['city']} Restaurant"
-    description = f"Visit {restaurant['name']} in {restaurant['city']}. "
-    if restaurant['rating']:
-        description += f"Rated {restaurant['rating']}/5 stars with {int(restaurant['reviews'])} reviews. "
-    description += f"Located at {restaurant['address']}."
+    title = f"{restaurant['name']} – {restaurant.get('area', 'Quezon City')} Restaurant"
+    description = f"Visit {restaurant['name']} in {restaurant.get('area', 'Quezon City')}. "
+    if restaurant.get('rating'):
+        description += f"Rated {restaurant['rating']}/5 stars with {int(restaurant.get('reviews', 0))} reviews. "
+    description += f"{restaurant.get('cuisine', 'Restaurant')} cuisine."
     
     # Generate Google Maps URL
     maps_url = ""
-    if restaurant['latitude'] and restaurant['longitude']:
+    if restaurant.get('latitude') and restaurant.get('longitude'):
         maps_url = f"https://www.google.com/maps?q={restaurant['latitude']},{restaurant['longitude']}"
-    elif restaurant['address']:
+    elif restaurant.get('address'):
         maps_url = f"https://www.google.com/maps/search/{restaurant['address'].replace(' ', '+')}"
+    
+    # Find similar restaurants (same cuisine or area, excluding current)
+    similar_restaurants = []
+    if restaurant.get('cuisine') or restaurant.get('area'):
+        for slug_key, other_rest in restaurants_data.items():
+            if slug_key == slug:
+                continue
+            score = 0
+            if other_rest.get('cuisine') == restaurant.get('cuisine'):
+                score += 2
+            if other_rest.get('area') == restaurant.get('area'):
+                score += 1
+            if other_rest.get('rating', 0) >= 4.0:
+                score += 0.5
+            if score >= 2:
+                similar_restaurants.append({
+                    'name': other_rest.get('name', 'Unknown'),
+                    'slug': slug_key,
+                    'cuisine': other_rest.get('cuisine', ''),
+                    'rating': other_rest.get('rating', 0),
+                    'photo': other_rest.get('photo_url', '')
+                })
+        # Sort by rating and limit to 5
+        similar_restaurants = sorted(similar_restaurants, key=lambda x: x['rating'], reverse=True)[:5]
     
     return render_template('restaurant.html', 
                          restaurant=restaurant,
@@ -2240,7 +2264,8 @@ def restaurant_details(slug):
                          area_counts=area_counts,
                          title=title,
                          description=description,
-                         maps_url=maps_url)
+                         maps_url=maps_url,
+                         similar_restaurants=similar_restaurants)
 
 @app.route('/food-tour', methods=['GET', 'POST'])
 def food_tour():
