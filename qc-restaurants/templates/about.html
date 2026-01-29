@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Restaurants Quezon City</title>
+    <meta name="description" content="Learn about RestaurantsQuezonCity.com — your trusted guide to the best dining in Quezon City. Founded by Zachary Siecinski, we help seniors and families find perfect restaurant spots since 2024.">
+    <link rel="canonical" href="/about">
+    
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+        .about-hero {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .about-section {
+            padding: 60px 0;
+        }
+        .mission-box {
+            background: #f8f9fa;
+            border-left: 4px solid #d32323;
+            padding: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+        .team-member {
+            text-align: center;
+            padding: 30px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/all-restaurants">All Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold" href="/about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">About Restaurants Quezon City</h1>
+            <p class="lead mb-0">Your trusted guide to finding the best dining experiences in Quezon City</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Our Story -->
+        <section class="about-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-4">Our Story</h2>
+                    <p class="lead">
+                        RestaurantsQuezonCity.com was created to help people discover the best places to eat in Quezon City — one of the Philippines' most vibrant food destinations.
+                    </p>
+                    <p>
+                        Founded in 2024, we started with a simple mission: <strong>make it easy for everyone to find great restaurants</strong>, especially seniors and families who want quality dining without the hassle.
+                    </p>
+                    <p>
+                        Whether you're looking for a quiet spot for lunch, a family-friendly restaurant, or an upscale venue for special occasions, we've done the research so you don't have to.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Values -->
+        <section class="about-section bg-light">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="h2 mb-5 text-center">Our Mission & Values</h2>
+                    
+                    <div class="mission-box mb-4">
+                        <h3 class="h4 mb-3">🎯 Our Mission</h3>
+                        <p class="mb-0">
+                            To be the most trusted and comprehensive resource for restaurant information in Quezon City, helping diners make informed decisions about where to eat.
+                        </p>
+                    </div>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <div class="value-icon">💯</div>
+                                <h4 class="h5">Honest Reviews</h4>
+                                <p class="text-muted">We provide unbiased, accurate information to help you choose with confidence.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <div class="value-icon">👵</div>
+                                <h4 class="h5">Senior-Friendly Focus</h4>
+                                <p class="text-muted">We understand the needs of older diners — accessibility, quiet spaces, and easy parking.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <div class="value-icon">📚</div>
+                                <h4 class="h5">Comprehensive Data</h4>
+                                <p class="text-muted">From hours to prices to accessibility — we cover the details that matter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Editor -->
+        <section class="about-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-5 text-center">Meet the Editor</h2>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 text-center">
+                            <div style="width: 150px; height: 150px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 48px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="h4 mb-2">Zachary Siecinski</h3>
+                            <p class="text-muted mb-3">Founder & Editor</p>
+                            <p>
+                                Zachary is a Quezon City resident passionate about local food and helping others discover great dining spots. 
+                                He created RestaurantsQuezonCity.com to share his knowledge of the city's diverse restaurant scene.
+                            </p>
+                            <p>
+                                With a focus on senior-friendly dining and family restaurants, Zachary ensures every recommendation 
+                                considers accessibility, ambiance, and overall dining experience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Cover -->
+        <section class="about-section bg-light">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-4">What We Cover</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h4 class="h5">📍 Areas</h4>
+                            <ul class="list-unstyled">
+                                <li>• UP Town Center & Katipunan</li>
+                                <li>• Tomas Morato & Timog</li>
+                                <li>• Eastwood City & Trinoma</li>
+                                <li>• SM North EDSA & Maginhawa</li>
+                                <li>• And many more neighborhoods</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h4 class="h5">🍽️ Cuisines</h4>
+                            <ul class="list-unstyled">
+                                <li>• Filipino Comfort Food</li>
+                                <li>• Japanese & Korean</li>
+                                <li>• Italian & Mediterranean</li>
+                                <li>• Spanish & American</li>
+                                <li>• And many more</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="about-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="h2 mb-4">Have Questions or Suggestions?</h2>
+                    <p class="text-muted mb-4">
+                        We're always looking to improve our directory. If you know a great restaurant we should feature, 
+                        or if you notice outdated information, let us know!
+                    </p>
+                    <a href="mailto:zachary@restaurantsquezoncity.com" class="btn btn-danger btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Email Us
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/all-restaurants" class="text-white-50">All Restaurants</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

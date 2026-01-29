@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How We Rate Restaurants - Restaurants Quezon City</title>
+    <meta name="description" content="Learn how we rate and review restaurants in Quezon City. Our methodology covers ratings, reviews, and how we ensure accurate, helpful information for diners.">
+    <link rel="canonical" href="/how-we-rate">
+    
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .methodology-section {
+            padding: 60px 0;
+        }
+        .step-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 4px solid #d32323;
+        }
+        .rating-scale {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 32px;
+            margin: 30px 0;
+        }
+        .rating-star {
+            color: #ffc107;
+        }
+        .rating-star.empty {
+            color: #ddd;
+        }
+        .checklist li {
+            margin-bottom: 10px;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        .trust-badge {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+        .trust-badge i {
+            font-size: 36px;
+            color: #d32323;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/all-restaurants">All Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">How We Rate Restaurants</h1>
+            <p class="lead mb-0">Our methodology for evaluating and recommending restaurants in Quezon City</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <i class="fas fa-check-circle"></i>
+                <div>Verified Info</div>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-star"></i>
+                <div>5-Star Scale</div>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-sync-alt"></i>
+                <div>Regular Updates</div>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-user-check"></i>
+                <div>Senior-Focused</div>
+            </div>
+        </div>
+
+        <!-- Our Rating System -->
+        <section class="methodology-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-4 text-center">Our Rating System</h2>
+                    <p class="text-center text-muted mb-5">
+                        We use a 5-star rating system to help you quickly understand the quality of each restaurant.
+                    </p>
+                    
+                    <div class="step-box">
+                        <h3 class="h4 mb-3">⭐⭐⭐⭐⭐ (5 Stars)</h3>
+                        <p class="mb-0"><strong>Exceptional</strong> — Outstanding in all aspects. A destination worth seeking out. Excellent food, service, and ambiance.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3 class="h4 mb-3">⭐⭐⭐⭐ (4 Stars)</h3>
+                        <p class="mb-0"><strong>Excellent</strong> — Strong across the board. Highly recommended. Great choice for most occasions.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3 class="h4 mb-3">⭐⭐⭐ (3 Stars)</h3>
+                        <p class="mb-0"><strong>Good</strong> — Solid option. Meets expectations. Suitable for casual dining.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3 class="h4 mb-3">⭐⭐ (2 Stars)</h3>
+                        <p class="mb-0"><strong>Fair</strong> — Some issues noted. May have potential but needs improvement.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3 class="h4 mb-3">⭐ (1 Star)</h3>
+                        <p class="mb-0"><strong>Below Average</strong> — Significant issues. We generally don't recommend these unless noted.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Evaluate -->
+        <section class="methodology-section bg-light">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="h2 mb-5 text-center">What We Evaluate</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="step-box h-100">
+                                <h4 class="h5 mb-3">🍽️ Food Quality</h4>
+                                <ul class="checklist mb-0">
+                                    <li>Taste and flavor execution</li>
+                                    <li>Ingredient freshness</li>
+                                    <li>Portion size and value</li>
+                                    <li>Menu variety and options</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="step-box h-100">
+                                <h4 class="h5 mb-3">👋 Service</h4>
+                                <ul class="checklist mb-0">
+                                    <li>Staff friendliness and knowledge</li>
+                                    <li>Response time</li>
+                                    <li>Handling of special requests</li>
+                                    <li>Consistency across visits</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="step-box h-100">
+                                <h4 class="h5 mb-3">🏪 Atmosphere & Accessibility</h4>
+                                <ul class="checklist mb-0">
+                                    <li>Noise level (important for seniors!)</li>
+                                    <li>Seating comfort</li>
+                                    <li>Wheelchair accessibility</li>
+                                    <li>Parking availability</li>
+                                    <li>Overall ambiance</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="step-box h-100">
+                                <h4 class="h5 mb-3">💰 Value</h4>
+                                <ul class="checklist mb-0">
+                                    <li>Price vs. experience</li>
+                                    <li>Value for money</li>
+                                    <li>Price range indicators (₱-₱₱₱₱)</li>
+                                    <li>Special offers or promotions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Senior-Focused Criteria -->
+        <section class="methodology-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-4 text-center">Our Senior-Focused Approach</h2>
+                    <p class="text-center text-muted mb-5">
+                        We pay special attention to factors that matter most to our senior diners and those with mobility considerations.
+                    </p>
+                    
+                    <div class="step-box" style="border-left-color: #28a745;">
+                        <h4 class="h5 mb-3">👴 Key Considerations for Seniors</h4>
+                        <ul class="checklist mb-0">
+                            <li><strong>Walking distance from parking</strong> — Short walks are better</li>
+                            <li><strong>Seating comfort</strong> — Chairs with backs, comfortable booths</li>
+                            <li><strong>Noise levels</strong> — Quiet restaurants for conversation</li>
+                            <li><strong>Menu readability</strong> — Clear fonts, good lighting</li>
+                            <li><strong>Restroom accessibility</strong> — Easy to access, grab bars</li>
+                            <li><strong>Staff patience</strong> — Attentive, unhurried service</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="methodology-section bg-light">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h2 mb-4 text-center">How We Gather Information</h2>
+                    
+                    <div class="step-box">
+                        <h4 class="h5 mb-3">📊 Our Data Sources</h4>
+                        <p>We collect restaurant information from multiple sources to ensure accuracy:</p>
+                        <ul>
+                            <li><strong>Direct research</strong> — We visit restaurants and gather firsthand information</li>
+                            <li><strong>Public databases</strong> — We cross-reference with Google Maps, social media, and official websites</li>
+                            <li><strong>User feedback</strong> — We welcome corrections and updates from our readers</li>
+                            <li><strong>Regular updates</strong> — We refresh our database quarterly to catch changes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h4 class="h5 mb-3">🔄 Keeping Information Current</h4>
+                        <p class="mb-0">
+                            Restaurant hours, prices, and even ownership can change. We update our database 
+                            <strong>every quarter</strong> and encourage readers to verify hours before visiting. 
+                            If you notice outdated information, please <a href="mailto:zachary@restaurantsquezoncity.com">email us</a>!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Editorial Independence -->
+        <section class="methodology-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="h2 mb-4">Our Editorial Independence</h2>
+                    <p>
+                        RestaurantsQuezonCity.com is independent and editorially unbiased. 
+                        We do not accept payment for positive reviews or favorable placement.
+                    </p>
+                    <p>
+                        Our recommendations are based solely on our research and the criteria outlined above. 
+                        If a restaurant pays for advertising, it will be clearly marked and won't affect our ratings.
+                    </p>
+                    <p class="text-muted">
+                        Last updated: January 28, 2026
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/all-restaurants" class="text-white-50">All Restaurants</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

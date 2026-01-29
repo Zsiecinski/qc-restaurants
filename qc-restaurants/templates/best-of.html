@@ -1,247 +1,168 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Best Of Quezon City Restaurants</title>
-    <meta name="description" content="Discover the best restaurants in Quezon City by category - top rated, budget-friendly, romantic, family-friendly, and more.">
-    <link rel="canonical" href="/best-of">
-    
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        .best-hero {
-            background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .category-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            color: inherit;
-        }
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        .category-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        .category-count {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-        .top-pick-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        .top-pick-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        .top-pick-badge {
-            background: linear-gradient(135deg, #ffc107, #ff9800);
-            color: #000;
-            padding: 8px 20px;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-        .featured-section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin-top: -30px;
-            position: relative;
-        }
-        .stat-box {
-            text-align: center;
-            padding: 20px;
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #d32323;
-        }
-        .stat-label {
-            color: #6c757d;
-        }
-    </style>
-</head>
-<body>
-    <!-- Hero -->
-    <section class="best-hero">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-3">🏆 Best Of Quezon City</h1>
-            <p class="lead">Discover top-rated restaurants by category</p>
+{% extends "base.html" %}
+
+{% block title %}🏆 Best Of Quezon City Restaurants{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="best-hero" style="background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%); color: white; padding: 80px 0; text-align: center;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">🏆 Best Of Quezon City</h1>
+        <p class="lead">Discover top-rated restaurants by category</p>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Browse by Category</h2>
+        
+        <div class="row g-4">
+            <!-- Top Rated -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/top-rated" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">⭐</div>
+                    <div class="category-title">Top Rated</div>
+                    <div class="category-count">4+ star restaurants</div>
+                </a>
+            </div>
+            
+            <!-- Budget -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/budget" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">💰</div>
+                    <div class="category-title">Budget</div>
+                    <div class="category-count">Under ₱300</div>
+                </a>
+            </div>
+            
+            <!-- Romantic -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/romantic" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">💕</div>
+                    <div class="category-title">Romantic</div>
+                    <div class="category-count">Date night spots</div>
+                </a>
+            </div>
+            
+            <!-- Family -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/family" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">👨‍👩‍👧‍👦</div>
+                    <div class="category-title">Family</div>
+                    <div class="category-count">Kid-friendly</div>
+                </a>
+            </div>
+            
+            <!-- Senior -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/senior" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">♿</div>
+                    <div class="category-title">Senior</div>
+                    <div class="category-count">Wheelchair friendly</div>
+                </a>
+            </div>
+            
+            <!-- Coffee -->
+            <div class="col-md-4 col-lg-2">
+                <a href="/best-of/coffee" class="category-card" style="background: white; border-radius: 16px; padding: 30px; text-align: center; display: block; text-decoration: none; color: inherit;">
+                    <div class="category-icon">☕</div>
+                    <div class="category-title">Coffee</div>
+                    <div class="category-count">Cafes & coffee shops</div>
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Main Content -->
-    <main class="container pb-5">
-        <div class="featured-section">
-            <!-- Stats -->
-            <div class="row mb-5">
-                <div class="col-md-3">
-                    <div class="stat-box">
-                        <div class="stat-number">{{ stats.total }}</div>
-                        <div class="stat-label">Total Restaurants</div>
+<!-- Featured Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">⭐ Editor's Top Picks</h2>
+        <div class="row g-4">
+            {% for restaurant in featured|default([], true)[:3] %}
+            <div class="col-md-4">
+                <div class="top-pick-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    {% if restaurant.photo %}
+                    <img src="{{ restaurant.photo }}" alt="{{ restaurant.name }}" style="width: 100%; height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div style="width: 100%; height: 200px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 3rem;">🍽️</span>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-box">
-                        <div class="stat-number">{{ stats.high_rated }}</div>
-                        <div class="stat-label">4+ Star Ratings</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-box">
-                        <div class="stat-number">{{ stats.cuisines }}</div>
-                        <div class="stat-label">Cuisine Types</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-box">
-                        <div class="stat-number">{{ stats.areas }}</div>
-                        <div class="stat-label">Areas Covered</div>
+                    {% endif %}
+                    <div class="p-3">
+                        <h5 class="mb-1">{{ restaurant.name }}</h5>
+                        <p class="text-muted mb-2">{{ restaurant.cuisine }} • {{ restaurant.area }}</p>
+                        {% if restaurant.rating %}
+                        <span class="badge bg-warning text-dark">⭐ {{ restaurant.rating }}</span>
+                        {% endif %}
+                        <a href="/restaurant/{{ restaurant.slug }}" class="btn btn-outline-primary btn-sm mt-2">View Details</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-            <!-- Browse Categories -->
-            <h2 class="text-center mb-4">Browse by Category</h2>
-            <div class="row g-4">
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/top-rated" class="category-card">
-                        <div class="category-icon">⭐</div>
-                        <div class="category-title">Top Rated</div>
-                        <div class="category-count">{{ stats.high_rated }} restaurants</div>
-                    </a>
+<!-- Stats -->
+<section class="py-5">
+    <div class="container">
+        <div class="featured-section" style="background: white; border-radius: 16px; padding: 40px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #d32323;">{{ stats.restaurants|default(0) }}</div>
+                        <div class="stat-label">Restaurants</div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/budget" class="category-card">
-                        <div class="category-icon">💰</div>
-                        <div class="category-title">Budget Friendly</div>
-                        <div class="category-count">Under ₱300</div>
-                    </a>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #d32323;">{{ stats.cuisines|default(0) }}</div>
+                        <div class="stat-label">Cuisines</div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/romantic" class="category-card">
-                        <div class="category-icon">💕</div>
-                        <div class="category-title">Romantic</div>
-                        <div class="category-count">Date night spots</div>
-                    </a>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #d32323;">{{ stats.areas|default(0) }}</div>
+                        <div class="stat-label">Areas</div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/family" class="category-card">
-                        <div class="category-icon">👨‍👩‍👧‍👦</div>
-                        <div class="category-title">Family Friendly</div>
-                        <div class="category-count">Great for kids</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/senior" class="category-card">
-                        <div class="category-icon">♿</div>
-                        <div class="category-title">Senior Friendly</div>
-                        <div class="category-count">Accessible</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/best-of/coffee" class="category-card">
-                        <div class="category-icon">☕</div>
-                        <div class="category-title">Coffee & Cafe</div>
-                        <div class="category-count">{{ stats.cafes }} spots</div>
-                    </a>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #d32323;">{{ stats.rating|default('N/A') }}</div>
+                        <div class="stat-label">Avg Rating</div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Quick Picks Section -->
-            {% if featured %}
-            <h2 class="text-center mb-4 mt-5">🔥 Quick Picks</h2>
-            <div class="row g-4">
-                {% for r in featured[:4] %}
-                <div class="col-md-6 col-lg-3">
-                    <div class="top-pick-card">
-                        <div class="top-pick-badge">TOP PICK</div>
-                        <div class="p-3">
-                            <img src="{{ r.photo or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400' }}" 
-                                 alt="{{ r.name }}" class="w-100 rounded mb-3" style="height: 150px; object-fit: cover;">
-                            <h5 class="mb-1">{{ r.name }}</h5>
-                            <p class="text-muted small mb-2">
-                                <i class="fas fa-map-marker-alt"></i> {{ r.area }}
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-warning text-dark">
-                                    ⭐ {{ r.rating }}
-                                </span>
-                                <span class="text-muted small">{{ r.cuisine }}</span>
-                            </div>
-                            <a href="/restaurant/{{ r.slug }}" class="btn btn-danger btn-sm w-100 mt-3">
-                                View Details
-                            </a>
+<!-- Quick Picks -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="mb-4">🔥 Quick Picks</h2>
+        <div class="row g-4">
+            {% for restaurant in stats.quick_picks|default([], true)[:6] %}
+            <div class="col-md-4">
+                <a href="/restaurant/{{ restaurant.slug }}" class="text-decoration-none">
+                    <div class="d-flex align-items-center p-3 bg-white rounded" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        {% if restaurant.photo %}
+                        <img src="{{ restaurant.photo }}" alt="{{ restaurant.name }}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;">
+                        {% else %}
+                        <div style="width: 60px; height: 60px; border-radius: 8px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                            <span>🍽️</span>
+                        </div>
+                        {% endif %}
+                        <div class="ms-3">
+                            <h6 class="mb-1">{{ restaurant.name }}</h6>
+                            <small class="text-muted">{{ restaurant.cuisine }}</small>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                </a>
             </div>
-            {% endif %}
-
-            <!-- By Cuisine -->
-            <h2 class="text-center mb-4 mt-5">🍽️ By Cuisine</h2>
-            <div class="row g-3">
-                {% for cuisine in cuisines %}
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="/all-restaurants?cuisine={{ cuisine.name|urlencode }}" class="category-card">
-                        <div class="category-icon">{{ cuisine.icon }}</div>
-                        <div class="category-title">{{ cuisine.name }}</div>
-                        <div class="category-count">{{ cuisine.count }} places</div>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-
-            <!-- By Area -->
-            <h2 class="text-center mb-4 mt-5">📍 By Area</h2>
-            <div class="row g-3">
-                {% for area in areas %}
-                <div class="col-6 col-md-4 col-lg-3">
-                    <a href="/all-restaurants?area={{ area.name|urlencode }}" class="category-card">
-                        <div class="category-icon">📍</div>
-                        <div class="category-title">{{ area.name }}</div>
-                        <div class="category-count">{{ area.count }} restaurants</div>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer py-4" style="background-color: #000;">
-        <div class="container text-center">
-            <p class="text-white-50 mb-0">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
+    </div>
+</section>
+{% endblock %}

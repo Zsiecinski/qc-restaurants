@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - Restaurants Quezon City</title>
+    <meta name="description" content="Get weekly restaurant recommendations for Quezon City. Senior-friendly dining guides, new openings, and expert tips delivered to your inbox.">
+    <link rel="canonical" href="/subscribe">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .subscribe-hero {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .subscribe-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            max-width: 500px;
+            margin: -40px auto 0;
+            position: relative;
+        }
+        .benefit-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .testimonial {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            color: #d32323;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <a href="/" class="btn btn-outline-dark btn-sm">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="subscribe-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">🍽️ Get Weekly Restaurant Picks</h1>
+            <p class="lead mb-0">Senior-friendly dining guides delivered to your inbox every Tuesday</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="subscribe-card">
+                    <h2 class="h4 mb-4 text-center">What You'll Get</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="benefit-icon me-3">📍</div>
+                                <div>
+                                    <h5 class="mb-1">Neighborhood Guides</h5>
+                                    <p class="text-muted mb-0">Discover the best restaurants in different areas of QC</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="benefit-icon me-3">👴</div>
+                                <div>
+                                    <h5 class="mb-1">Senior-Focused Picks</h5>
+                                    <p class="text-muted mb-0">Curated for accessibility, quiet, and comfort</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="benefit-icon me-3">🆕</div>
+                                <div>
+                                    <h5 class="mb-1">New Openings</h5>
+                                    <p class="text-muted mb-0">Be the first to know about new restaurants</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-start">
+                                <div class="benefit-icon me-3">💡</div>
+                                <div>
+                                    <h5 class="mb-1">Expert Tips</h5>
+                                    <p class="text-muted mb-0">Insider knowledge on best dishes, parking & more</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Form -->
+                    <form action="https://beehiv.com/subscribe" method="POST" target="_blank" class="mb-4">
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">Your Email Address</label>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-lg w-100">
+                            <i class="fas fa-envelope me-2"></i> Subscribe Now
+                        </button>
+                        <p class="text-muted text-center mt-3 mb-0">
+                            <small>No spam, unsubscribe anytime. We respect your privacy.</small>
+                        </p>
+                    </form>
+
+                    <!-- Stats -->
+                    <div class="text-center mb-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="h3 mb-0 fw-bold text-danger">32%</div>
+                                <small class="text-muted">Open Rate</small>
+                            </div>
+                            <div class="col-6">
+                                <div class="h3 mb-0 fw-bold text-danger">18%</div>
+                                <small class="text-muted">Click Rate</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial -->
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I love getting these emails every week. They help me find great places to take my grandchildren for lunch!"</p>
+                        <p class="testimonial-author">- Maria S., Subscriber since 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/privacy" class="text-white-50">Privacy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

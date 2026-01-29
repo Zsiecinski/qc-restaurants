@@ -1,277 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍜 Food Tour Builder - Create Your Perfect Food Trip</title>
-    <meta name="description" content="Build your perfect food tour in Quezon City! Choose cuisine, budget, and area for a curated dining experience.">
-    <link rel="canonical" href="/food-tour">
-    
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        .tour-hero {
-            background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .tour-form-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            margin-top: -40px;
-            position: relative;
-        }
-        .tour-stop {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .tour-stop::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 5px;
-            background: linear-gradient(180deg, #d32323, #ff6b6b);
-        }
-        .stop-number {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #d32323;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .dish-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #fff3cd;
-            color: #856404;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 2px;
-        }
-        .tour-map {
-            background: #e9ecef;
-            border-radius: 16px;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px 0;
-        }
-        .form-select {
-            border-radius: 12px;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-        }
-        .form-select:focus {
-            border-color: #d32323;
-            box-shadow: 0 0 0 0.2rem rgba(211, 35, 35, 0.25);
-        }
-        .premium-badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Hero Section -->
-    <section class="tour-hero">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-3">🍜 Build Your Food Tour</h1>
-            <p class="lead mb-0">Create a perfect dining journey through Quezon City in 3 stops!</p>
+{% extends "base.html" %}
+
+{% block title %}🍜 Food Tour Builder - Quezon City{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="tour-hero" style="background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%); color: white; padding: 80px 0; text-align: center;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">🍜 Build Your Food Tour</h1>
+        <p class="lead">Create the perfect dining itinerary in Quezon City</p>
+    </div>
+</section>
+
+<!-- Tour Builder Form -->
+<section style="position: relative; z-index: 10;">
+    <div class="container">
+        <div class="tour-form-card" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); margin-top: -40px;">
+            <form id="tourForm">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <label class="form-label">Cuisine Type</label>
+                        <select name="cuisine" class="form-select form-select-lg">
+                            <option value="">Any Cuisine</option>
+                            {%_cuisines %}
+ for c in all                            <option value="{{ c }}">{{ c }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Area</label>
+                        <select name="area" class="form-select form-select-lg">
+                            <option value="">Any Area</option>
+                            {% for a in areas %}
+                            <option value="{{ a }}">{{ a }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Stops</label>
+                        <select name="stops" class="form-select form-select-lg">
+                            <option value="3">3 Stops</option>
+                            <option value="4">4 Stops</option>
+                            <option value="5" selected>5 Stops</option>
+                            <option value="6">6 Stops</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" onclick="generateTour()" class="btn btn-primary btn-lg w-100 mt-4" style="background: #d32323; border: none;">
+                    <i class="fas fa-magic"></i> Generate My Food Tour
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Main Content -->
-    <main class="container my-5 pb-5">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                
-                <!-- Tour Form -->
-                <div class="tour-form-card">
-                    <form method="POST" action="/food-tour">
-                        <div class="row g-4">
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">Cuisine Type</label>
-                                <select class="form-select" name="cuisine">
-                                    <option value="">Select cuisine...</option>
-                                    <option value="filipino" {% if form_data.cuisine == 'filipino' %}selected{% endif %}>🇵🇭 Filipino</option>
-                                    <option value="asian" {% if form_data.cuisine == 'asian' %}selected{% endif %}>🍜 Asian Fusion</option>
-                                    <option value="western" {% if form_data.cuisine == 'western' %}selected{% endif %}>🍔 Western</option>
-                                    <option value="any" {% if form_data.cuisine == 'any' %}selected{% endif %}>🌍 Anything Goes</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">Budget per Stop</label>
-                                <select class="form-select" name="budget">
-                                    <option value="">Select budget...</option>
-                                    <option value="1" {% if form_data.budget == '1' %}selected{% endif %}>💵 Budget (₱200-400)</option>
-                                    <option value="2" {% if form_data.budget == '2' %}selected{% endif %}>💰 Mid-Range (₱400-700)</option>
-                                    <option value="3" {% if form_data.budget == '3' %}selected{% endif %}>💎 Splurge (₱700+)</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">Area</label>
-                                <select class="form-select" name="area">
-                                    <option value="">Any area...</option>
-                                    <option value="timog" {% if form_data.area == 'timog' %}selected{% endif %}>📍 Timog Area</option>
-                                    <option value="tomas morato" {% if form_data.area == 'tomas morato' %}selected{% endif %}>📍 Tomas Morato</option>
-                                    <option value="north" {% if form_data.area == 'north' %}selected{% endif %}>📍 North QC (SM North, Trinoma)</option>
-                                    <option value="east" {% if form_data.area == 'east' %}selected{% endif %}>📍 Eastwood/Ortigas</option>
-                                    <option value="maginhawa" {% if form_data.area == 'maginhawa' %}selected{% endif %}>📍 Maginhawa</option>
-                                    <option value="any" {% if form_data.area == 'any' %}selected{% endif %}>🌍 Anywhere in QC</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-danger btn-lg px-5">
-                                <i class="fas fa-route me-2"></i> Build My Tour
-                            </button>
-                        </div>
-                    </form>
-                </div>
+<!-- Tour Results -->
+<section class="py-5" id="tourResults" style="display: none;">
+    <div class="container">
+        <h2 class="text-center mb-5">🍽️ Your Custom Food Tour</h2>
+        <div id="tourStops"></div>
+        
+        <div class="text-center mt-4">
+            <button onclick="window.print()" class="btn btn-outline-secondary">
+                <i class="fas fa-print"></i> Print Tour
+            </button>
+            <button onclick="regenerateTour()" class="btn btn-primary" style="background: #d32323;">
+                <i class="fas fa-redo"></i> Generate Different Tour
+            </button>
+        </div>
+    </div>
+</section>
 
-                <!-- Tour Results -->
-                {% if tour %}
-                <div class="mt-5">
-                    <!-- Premium Tour Header -->
-                    {% if premium_tour_data %}
-                    <div class="text-center mb-4">
-                        <span class="premium-badge">✨ Premium Tour</span>
-                        <h2 class="h3 mb-2">{{ premium_tour_data.theme }}</h2>
-                        <p class="text-muted">{{ premium_tour_data.description }}</p>
+<!-- Sample Tours -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h3 class="mb-4">🎯 Popular Tour Themes</h3>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <a href="/food-tour?cuisine=Filipino&stops=5" class="text-decoration-none">
+                    <div class="p-4 bg-white rounded" style="box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span style="font-size: 2rem;">🇵🇭</span>
+                        <h5 class="mt-2">Filipino Food Trail</h5>
+                        <p class="text-muted">Experience the best of Filipino cuisine</p>
                     </div>
-                    {% endif %}
-
-                    <!-- Tour Stops -->
-                    {% for stop in tour %}
-                    <article class="tour-stop">
-                        <div class="stop-number">{{ stop.order }}</div>
-                        
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3 class="h4 mb-2">{{ stop.name }}</h3>
-                                <p class="text-muted mb-2">
-                                    <i class="fas fa-map-marker-alt me-1"></i> {{ stop.area }}
-                                    {% if stop.address %}
-                                    • {{ stop.address }}
-                                    {% endif %}
-                                </p>
-                                
-                                <!-- Dishes from Premium Tour -->
-                                {% if stop.dishes %}
-                                <div class="mt-3">
-                                    <h5 class="h6 mb-2">🍽️ Recommended Dishes:</h5>
-                                    {% for dish in stop.dishes %}
-                                    <span class="dish-badge">{{ dish.name }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                                
-                                <!-- Why Visit -->
-                                {% if stop.why_visit %}
-                                <p class="mt-3 mb-0">
-                                    <i class="fas fa-star text-warning me-1"></i>
-                                    <strong>Why Visit:</strong> {{ stop.why_visit }}
-                                </p>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-4 text-md-end">
-                                <div class="mb-2">
-                                    <span class="badge bg-danger fs-6">{{ stop.price_range }}</span>
-                                </div>
-                                <a href="/restaurant/{{ stop.slug }}" class="btn btn-outline-danger btn-sm">
-                                    View Details
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    {% endfor %}
-
-                    <!-- Tour Summary -->
-                    <div class="text-center mt-4">
-                        <div class="alert alert-light d-inline-block">
-                            <i class="fas fa-clock me-2"></i>
-                            <strong>Estimated Duration:</strong> 2-3 hours
-                            <span class="mx-3">|</span>
-                            <i class="fas fa-users me-2"></i>
-                            <strong>Best for:</strong> 2-4 people
-                        </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/food-tour?cuisine=Cafe&stops=4" class="text-decoration-none">
+                    <div class="p-4 bg-white rounded" style="box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span style="font-size: 2rem;">☕</span>
+                        <h5 class="mt-2">Coffee & Dessert Tour</h5>
+                        <p class="text-muted">Sweet spots across Quezon City</p>
                     </div>
-
-                    <!-- Actions -->
-                    <div class="text-center mt-4">
-                        <a href="/food-tour" class="btn btn-outline-secondary me-2">
-                            <i class="fas fa-redo me-1"></i> Build New Tour
-                        </a>
-                        <a href="/subscribe" class="btn btn-danger">
-                            <i class="fas fa-envelope me-1"></i> Save This Tour
-                        </a>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/food-tour?area=Timog&stops=5" class="text-decoration-none">
+                    <div class="p-4 bg-white rounded" style="box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span style="font-size: 2rem;">🗺️</span>
+                        <h5 class="mt-2">Timog Food Walk</h5>
+                        <p class="text-muted">Explore Timog's culinary gems</p>
                     </div>
-                </div>
-                {% endif %}
-
-                <!-- How It Works -->
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <h3 class="h5 mb-3">How It Works</h3>
-                        <div class="row">
-                            <div class="col-md-4 text-center">
-                                <div class="display-4 mb-2">1️⃣</div>
-                                <h5 class="h6">Choose Your Preferences</h5>
-                                <p class="text-muted small">Select cuisine, budget, and area</p>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="display-4 mb-2">2️⃣</div>
-                                <h5 class="h6">Get Your Personalized Tour</h5>
-                                <p class="text-muted small">We curate 3 perfect stops for you</p>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="display-4 mb-2">3️⃣</div>
-                                <h5 class="h6">Enjoy Your Food Journey</h5>
-                                <p class="text-muted small">Discover amazing restaurants!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                </a>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer py-4" style="background-color: #000;">
-        <div class="container text-center">
-            <p class="text-white-50 mb-0">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+<script>
+let tourData = {{ tour_data|tojson if tour_data else 'null' }};
+
+function generateTour() {
+    const form = document.getElementById('tourForm');
+    const params = new URLSearchParams(new FormData(form)).toString();
+    window.location.href = '/food-tour?' + params;
+}
+
+function regenerateTour() {
+    generateTour();
+}
+
+{% if tour_data %}
+document.getElementById('tourResults').style.display = 'block';
+let stopsHtml = '';
+tourData.forEach((stop, index) => {
+    stopsHtml += `
+        <div class="tour-stop" style="background: white; border-radius: 16px; padding: 30px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: relative; overflow: hidden;">
+            <div class="stop-number" style="position: absolute; top: 20px; right: 20px; background: #d32323; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">${index + 1}</div>
+            <div class="row">
+                <div class="col-md-3">
+                    ${stop.photo ? `<img src="${stop.photo}" alt="${stop.name}" style="width: 100%; border-radius: 12px;">` : '<div style="width: 100%; height: 150px; background: #f8f9fa; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 3rem;">🍽️</span></div>'}
+                </div>
+                <div class="col-md-9">
+                    <h4>${stop.name}</h4>
+                    <p class="text-muted">
+                        <i class="fas fa-tag"></i> ${stop.cuisine} • 
+                        <i class="fas fa-map-marker-alt"></i> ${stop.area}
+                    </p>
+                    ${stop.rating ? `<span class="badge bg-warning text-dark">⭐ ${stop.rating}</span>` : ''}
+                    ${stop.price_range ? `<span class="badge bg-secondary">${stop.price_range}</span>` : ''}
+                    <p class="mt-2">${stop.about || ''}</p>
+                    <a href="/restaurant/${stop.slug}" class="btn btn-outline-primary btn-sm">View Details</a>
+                </div>
+            </div>
         </div>
-    </footer>
-</body>
-</html>
+    `;
+});
+document.getElementById('tourStops').innerHTML = stopsHtml;
+{% endif %}
+</script>
+{% endblock %}

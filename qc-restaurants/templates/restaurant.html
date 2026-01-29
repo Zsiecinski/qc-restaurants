@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="keywords" content="{{ restaurant.name }}, {{ restaurant.cuisine }}, restaurant Quezon City, dining QC">
+    <link rel="canonical" href="https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant.restaurant">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:image" content="{{ restaurant.photo_url or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600' }}">
+    <meta property="og:url" content="https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}">
+    <meta property="og:site_name" content="Restaurants Quezon City">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="{{ restaurant.photo_url or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600' }}">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "{{ restaurant.name }}",
+        "description": "{{ description }}",
+        "url": "https://www.restaurantsquezoncity.com/restaurant/{{ restaurant.slug }}",
+        "image": "{{ restaurant.photo_url or '' }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Quezon City",
+            "addressRegion": "Metro Manila",
+            "addressCountry": "PH"
+        },
+        "telephone": "{{ restaurant.phone or '' }}",
+        "servesCuisine": "{{ restaurant.cuisine }}",
+        "priceRange": "{{ restaurant.price_range }}",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ restaurant.rating or '' }}",
+            "reviewCount": "{{ restaurant.reviews|default(0) }}"
+        }
+    }
+    </script>
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        .restaurant-hero {
+            position: relative;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        .restaurant-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
+        }
+        .restaurant-name-overlay {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .info-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .info-box i {
+            color: #d32323;
+            width: 24px;
+        }
+        .feature-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 4px;
+        }
+        .feature-badge.available {
+            background: #d4edda;
+            color: #155724;
+        }
+        .save-btn-lg {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <a href="/all-restaurants" class="btn btn-outline-dark btn-sm">Back to All</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="restaurant-hero" style="background-image: url('{{ restaurant.photo_url }}');">
+        <div class="restaurant-name-overlay">
+            <h1 class="display-4 fw-bold mb-2">{{ restaurant.name }}</h1>
+            <div class="d-flex align-items-center gap-3">
+                {% if restaurant.rating %}
+                <span class="badge bg-warning text-dark fs-6">
+                    <i class="fas fa-star me-1"></i>{{ restaurant.rating }}
+                </span>
+                {% endif %}
+                <span class="text-white-50">{{ restaurant.cuisine }}</span>
+                <span class="text-white-50">{{ '₱' * (restaurant.price_range|int) }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Save Button -->
+                <div class="mb-4">
+                    <button class="btn btn-outline-danger save-btn-lg save-btn" 
+                            data-id="{{ restaurant.id }}"
+                            data-name="{{ restaurant.name }}"
+                            data-area="{{ restaurant.area }}"
+                            data-cuisine="{{ restaurant.cuisine }}">
+                        <i class="far fa-heart me-2"></i>
+                        <span class="save-text">Save Restaurant</span>
+                    </button>
+                </div>
+
+                <!-- Quick Info -->
+                <div class="info-box">
+                    <h3 class="h5 mb-3">Quick Information</h3>
+                    
+                    {% if restaurant.address %}
+                    <p class="mb-2">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <strong>Address:</strong> {{ restaurant.address }}
+                    </p>
+                    {% endif %}
+                    
+                    {% if restaurant.phone %}
+                    <p class="mb-2">
+                        <i class="fas fa-phone"></i>
+                        <strong>Phone:</strong> 
+                        <a href="tel:{{ restaurant.phone }}" class="text-decoration-none">{{ restaurant.phone }}</a>
+                    </p>
+                    {% endif %}
+                    
+                    {% if restaurant.site %}
+                    <p class="mb-2">
+                        <i class="fas fa-globe"></i>
+                        <strong>Website:</strong> 
+                        <a href="{{ restaurant.site }}" target="_blank" rel="nofollow">Visit Website</a>
+                    </p>
+                    {% endif %}
+                    
+                    {% if restaurant.hours %}
+                    <p class="mb-0">
+                        <i class="fas fa-clock"></i>
+                        <strong>Hours:</strong> 
+                        {% if restaurant.is_open %}
+                        <span class="text-success">Open Now</span>
+                        {% else %}
+                        <span class="text-danger">Closed</span>
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Features -->
+                {% if restaurant.features %}
+                <div class="info-box">
+                    <h3 class="h5 mb-3">Features & Amenities</h3>
+                    <div class="d-flex flex-wrap">
+                        {% for feature in restaurant.features %}
+                        <span class="feature-badge available">
+                            <i class="fas fa-check"></i> {{ feature }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- About -->
+                {% if restaurant.about %}
+                <div class="info-box">
+                    <h3 class="h5 mb-3">About</h3>
+                    <p class="mb-0">{{ restaurant.about }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Menu Section (loaded via API) -->
+                <div class="info-box" id="menu-section" style="display: none;">
+                    <h3 class="h5 mb-3">📋 Menu Highlights</h3>
+                    <div id="menu-items">
+                        <div class="text-center py-3">
+                            <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
+                            <span class="ms-2">Loading menu...</span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="#" id="view-full-menu" class="btn btn-outline-danger btn-sm" target="_blank">
+                            <i class="fas fa-external-link-alt me-1"></i> View Full Menu
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Menu CTA if no data -->
+                <div class="info-box" id="menu-cta">
+                    <h3 class="h5 mb-3">📋 Menu</h3>
+                    <p class="text-muted mb-3">Know the menu? Help us add it!</p>
+                    <button class="btn btn-outline-danger btn-sm" onclick="suggestMenu('{{ restaurant.name }}')">
+                        <i class="fas fa-plus me-1"></i> Suggest Menu Items
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Actions -->
+                <div class="info-box">
+                    <h4 class="h6 mb-3">Get Directions</h4>
+                    {% if maps_url %}
+                    <a href="{{ maps_url }}" target="_blank" rel="nofollow" class="btn btn-danger w-100 mb-2">
+                        <i class="fas fa-directions me-2"></i> Open in Google Maps
+                    </a>
+                    {% endif %}
+                    {% if restaurant.phone %}
+                    <a href="tel:{{ restaurant.phone }}" class="btn btn-outline-danger w-100">
+                        <i class="fas fa-phone me-2"></i> Call Now
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Similar Restaurants -->
+                <div class="info-box">
+                    <h4 class="h6 mb-3">Similar Restaurants</h4>
+                    <p class="text-muted mb-0">
+                        <a href="/all-restaurants" class="text-danger">Browse all restaurants</a> 
+                        in {{ restaurant.area }} or {{ restaurant.cuisine }} cuisine.
+                    </p>
+                </div>
+
+                <!-- Share -->
+                <div class="info-box">
+                    <h4 class="h6 mb-3">Share</h4>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fab fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/saved" class="text-white-50">My Saved</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize save button
+        document.addEventListener('DOMContentLoaded', function() {
+            const saveBtn = document.querySelector('.save-btn');
+            if (saveBtn) {
+                const id = saveBtn.getAttribute('data-id');
+                
+                // Check if already saved
+                if (typeof isSaved === 'function' && isSaved(id)) {
+                    saveBtn.innerHTML = '<i class="fas fa-heart text-danger me-2"></i><span class="save-text">Saved</span>';
+                    saveBtn.classList.add('saved', 'btn-danger');
+                    saveBtn.classList.remove('btn-outline-danger');
+                }
+                
+                // Add click handler
+                saveBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const area = this.getAttribute('data-area');
+                    const cuisine = this.getAttribute('data-cuisine');
+                    
+                    if (this.classList.contains('saved')) {
+                        if (typeof removeRestaurant === 'function') {
+                            removeRestaurant(id);
+                            this.innerHTML = '<i class="far fa-heart me-2"></i><span class="save-text">Save Restaurant</span>';
+                            this.classList.remove('saved', 'btn-danger');
+                            this.classList.add('btn-outline-danger');
+                        }
+                    } else {
+                        if (typeof saveRestaurant === 'function') {
+                            saveRestaurant(id, name, area, cuisine);
+                            this.innerHTML = '<i class="fas fa-heart text-danger me-2"></i><span class="save-text">Saved</span>';
+                            this.classList.add('saved', 'btn-danger');
+                            this.classList.remove('btn-outline-danger');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Load menu data
+        async function loadMenu() {
+            const menuSection = document.getElementById('menu-section');
+            const menuItems = document.getElementById('menu-items');
+            const menuCta = document.getElementById('menu-cta');
+            
+            if (!menuSection || !menuItems) return;
+            
+            const restaurantName = document.querySelector('.restaurant-name-overlay h1')?.textContent;
+            if (!restaurantName) return;
+            
+            try {
+                const response = await fetch(`/api/menus/${encodeURIComponent(restaurantName)}`);
+                const data = await response.json();
+                
+                if (response.ok && data.data && data.data.items) {
+                    menuSection.style.display = 'block';
+                    menuCta.style.display = 'none';
+                    
+                    // Display menu items
+                    let html = '<div class="menu-grid">';
+                    data.data.items.slice(0, 8).forEach(item => {
+                        html += `
+                            <div class="menu-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="menu-item-name">${item.name}</span>
+                                    <span class="menu-item-price text-danger">${item.price}</span>
+                                </div>
+                                ${item.description ? `<p class="menu-item-desc text-muted small mb-0">${item.description}</p>` : ''}
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    
+                    if (data.data.items.length > 8) {
+                        html += `<p class="text-center text-muted mt-2"><em>And ${data.data.items.length - 8} more items...</em></p>`;
+                    }
+                    
+                    menuItems.innerHTML = html;
+                    
+                    // Update "View Full Menu" link
+                    const viewMenuBtn = document.getElementById('view-full-menu');
+                    if (viewMenuBtn && data.menu_url) {
+                        viewMenuBtn.href = data.menu_url;
+                    }
+                } else {
+                    // No menu data - show CTA
+                    console.log('No menu data found for', restaurantName);
+                }
+            } catch (error) {
+                console.log('Error loading menu:', error);
+            }
+        }
+
+        // Suggest menu button handler
+        function suggestMenu(restaurantName) {
+            const email = 'menus@restaurantsquezoncity.com';
+            const subject = `Menu Suggestion: ${restaurantName}`;
+            const body = `Hi! I want to add menu data for ${restaurantName}.\n\nPlease find attached or describe the menu items below:\n\n`;
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // Load menu on page load
+        document.addEventListener('DOMContentLoaded', loadMenu);
+    </script>
+
+    <!-- Menu styles -->
+    <style>
+        .menu-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .menu-item {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .menu-item-name {
+            font-weight: 600;
+            color: #333;
+        }
+        .menu-item-price {
+            font-weight: 600;
+        }
+        .menu-item-desc {
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+    </style>
+</body>
+</html>

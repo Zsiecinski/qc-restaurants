@@ -1,479 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍽️ Find Your Perfect Restaurant - Take the Quiz</title>
-    <meta name="description" content="Take our quick quiz to find your perfect restaurant in Quezon City based on your preferences, budget, and mood!">
-    <link rel="canonical" href="/quiz/perfect-spot">
-    
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            min-height: 100vh;
-        }
-        .quiz-hero {
-            background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .quiz-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            margin-top: -40px;
-            position: relative;
-        }
-        .progress-bar {
-            height: 8px;
-            border-radius: 4px;
-            background: #e9ecef;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #d32323, #ff6b6b);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-        .question {
-            display: none;
-        }
-        .question.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .option-card {
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .option-card:hover {
-            border-color: #d32323;
-            background: #fff5f5;
-            transform: translateX(5px);
-        }
-        .option-card.selected {
-            border-color: #d32323;
-            background: #d32323;
-            color: white;
-        }
-        .option-icon {
-            font-size: 32px;
-            margin-right: 15px;
-        }
-        .quiz-nav {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .result-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-        .result-card:hover {
-            transform: translateY(-5px);
-        }
-        .result-card img {
-            height: 180px;
-            object-fit: cover;
-        }
-        .match-score {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #28a745;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        .personality-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #d32323, #ff6b6b);
-            color: white;
-            border-radius: 30px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .email-capture {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Hero Section -->
-    <section class="quiz-hero">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-3">🔍 Find Your Perfect Restaurant</h1>
-            <p class="lead mb-0">Answer 5 quick questions and get personalized recommendations!</p>
-        </div>
-    </section>
+{% extends "base.html" %}
 
-    <!-- Quiz Container -->
-    <main class="container my-5 pb-5">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="quiz-card">
-                    <!-- Progress Bar -->
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill" style="width: 20%"></div>
-                    </div>
+{% block title %}🍽️ Find Your Perfect Restaurant - Quiz{% endblock %}
 
-                    <!-- Question 1: Vibe -->
-                    <div class="question active" id="q1">
-                        <h3 class="h4 mb-4">1. What's your vibe today?</h3>
-                        <div class="option-card" onclick="selectOption(1, 'casual', this)">
-                            <span class="option-icon">🍺</span>
-                            <div>
-                                <strong>Casual & Chill</strong>
-                                <p class="text-muted mb-0 small">Just hanging out with friends</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(1, 'romantic', this)">
-                            <span class="option-icon">💕</span>
-                            <div>
-                                <strong>Romantic Date</strong>
-                                <p class="text-muted mb-0 small">Special evening for two</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(1, 'family', this)">
-                            <span class="option-icon">👨‍👩‍👧‍👦</span>
-                            <div>
-                                <strong>Family Outing</strong>
-                                <p class="text-muted mb-0 small">Bringing the kids along</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(1, 'celebration', this)">
-                            <span class="option-icon">🎉</span>
-                            <div>
-                                <strong>Celebration</strong>
-                                <p class="text-muted mb-0 small">Birthday, promotion, or treat yourself!</p>
-                            </div>
-                        </div>
-                    </div>
+{% block content %}
+<!-- Hero -->
+<section class="quiz-hero" style="background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%); color: white; padding: 80px 0; text-align: center;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">🍽️ Find Your Perfect Restaurant</h1>
+        <p class="lead">Answer a few questions to get personalized recommendations</p>
+    </div>
+</section>
 
-                    <!-- Question 2: Cuisine -->
-                    <div class="question" id="q2">
-                        <h3 class="h4 mb-4">2. What are you craving?</h3>
-                        <div class="option-card" onclick="selectOption(2, 'filipino', this)">
-                            <span class="option-icon">🍚</span>
-                            <div>
-                                <strong>Filipino Comfort</strong>
-                                <p class="text-muted mb-0 small">Adobo, sinigang, lumpia...</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(2, 'asian', this)">
-                            <span class="option-icon">🍜</span>
-                            <div>
-                                <strong>Asian Fusion</strong>
-                                <p class="text-muted mb-0 small">Japanese, Thai, Korean, Vietnamese</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(2, 'western', this)">
-                            <span class="option-icon">🍔</span>
-                            <div>
-                                <strong>Western</strong>
-                                <p class="text-muted mb-0 small">American, Italian, Spanish</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(2, 'anything', this)">
-                            <span class="option-icon">🤔</span>
-                            <div>
-                                <strong>Surprise Me!</strong>
-                                <p class="text-muted mb-0 small">Open to anything delicious</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Question 3: Budget -->
-                    <div class="question" id="q3">
-                        <h3 class="h4 mb-4">3. What's your budget?</h3>
-                        <div class="option-card" onclick="selectOption(3, 'budget', this)">
-                            <span class="option-icon">💵</span>
-                            <div>
-                                <strong>Budget-Friendly</strong>
-                                <p class="text-muted mb-0 small">Under ₱300 per person</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(3, 'mid', this)">
-                            <span class="option-icon">💰</span>
-                            <div>
-                                <strong>Mid-Range</strong>
-                                <p class="text-muted mb-0 small">₱300 - ₱700 per person</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(3, 'splurge', this)">
-                            <span class="option-icon">💎</span>
-                            <div>
-                                <strong>Worth the Splurge</strong>
-                                <p class="text-muted mb-0 small">₱700+ (it's special!)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Question 4: Area -->
-                    <div class="question" id="q4">
-                        <h3 class="h4 mb-4">4. Where in Quezon City?</h3>
-                        <div class="option-card" onclick="selectOption(4, 'north', this)">
-                            <span class="option-icon">📍</span>
-                            <div>
-                                <strong>North QC</strong>
-                                <p class="text-muted mb-0 small">SM North, Trinoma, Fairview</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(4, 'east', this)">
-                            <span class="option-icon">📍</span>
-                            <div>
-                                <strong>East QC</strong>
-                                <p class="text-muted mb-0 small">Ortigas, Eastwood, Taguig nearby</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(4, 'center', this)">
-                            <span class="option-icon">📍</span>
-                            <div>
-                                <strong>Center/Scout Area</strong>
-                                <p class="text-muted mb-0 small">Timog, Tomas Morato, Maginhawa</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(4, 'any', this)">
-                            <span class="option-icon">🌍</span>
-                            <div>
-                                <strong>Anywhere in QC</strong>
-                                <p class="text-muted mb-0 small">Surprise me with a great spot!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Question 5: Seniors -->
-                    <div class="question" id="q5">
-                        <h3 class="h4 mb-4">5. Any special needs? (Optional)</h3>
-                        <div class="option-card" onclick="selectOption(5, 'wheelchair', this)">
-                            <span class="option-icon">♿</span>
-                            <div>
-                                <strong>Wheelchair Accessible</strong>
-                                <p class="text-muted mb-0 small">Easy access needed</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(5, 'quiet', this)">
-                            <span class="option-icon">🔇</span>
-                            <div>
-                                <strong>Quiet Atmosphere</strong>
-                                <p class="text-muted mb-0 small">Can actually have a conversation</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(5, 'parking', this)">
-                            <span class="option-icon">🅿️</span>
-                            <div>
-                                <strong>Easy Parking</strong>
-                                <p class="text-muted mb-0 small">No circling the block!</p>
-                            </div>
-                        </div>
-                        <div class="option-card" onclick="selectOption(5, 'none', this)">
-                            <span class="option-icon">✨</span>
-                            <div>
-                                <strong>No special needs</strong>
-                                <p class="text-muted mb-0 small">Just want good food!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navigation -->
-                    <div class="quiz-nav">
-                        <button class="btn btn-outline-secondary" id="prevBtn" onclick="prevQuestion()" style="visibility: hidden;">
-                            ← Back
-                        </button>
-                        <button class="btn btn-danger" id="nextBtn" onclick="nextQuestion()" style="visibility: hidden;">
-                            Next →
-                        </button>
-                    </div>
-
-                    <!-- Results Section (Hidden Initially) -->
-                    <div id="results" style="display: none;">
-                        <div class="text-center mb-4">
-                            <div class="personality-badge">Your Perfect Match</div>
-                            <h2 class="h3 mb-3">We found 3 restaurants for you!</h2>
-                            <p class="text-muted">Based on your preferences: <span id="resultPrefs"></span></p>
-                        </div>
-
-                        <!-- Results Container -->
-                        <div id="resultsContainer"></div>
-
-                        <!-- Email Capture -->
-                        <div class="email-capture text-center">
-                            <h4 class="h5 mb-3">🔔 Get Personalized Picks Weekly</h4>
-                            <p class="mb-3">Subscribe to our newsletter for more great recommendations!</p>
-                            <form action="https://beehiv.com/subscribe" method="POST" target="_blank" class="d-flex gap-2 justify-content-center">
-                                <input type="email" class="form-control" placeholder="Your email" style="max-width: 300px;" required>
-                                <button type="submit" class="btn btn-danger">Subscribe</button>
-                            </form>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <a href="/all-restaurants" class="btn btn-outline-dark">Browse All Restaurants</a>
-                            <a href="/quiz/personality" class="btn btn-outline-danger ms-2">🎭 Take Personality Quiz</a>
-                        </div>
-                    </div>
+<!-- Quiz Form -->
+<section style="position: relative; z-index: 10;">
+    <div class="container">
+        <div class="quiz-card" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); margin-top: -40px;">
+            <form id="quizForm">
+                <!-- Progress -->
+                <div class="progress-bar" style="height: 8px; border-radius: 4px; background: #e9ecef; margin-bottom: 30px;">
+                    <div class="progress-fill" id="progressFill" style="height: 100%; background: linear-gradient(90deg, #d32323, #ff6b6b); border-radius: 4px; width: 16.66%;"></div>
                 </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer py-4" style="background-color: #000;">
-        <div class="container text-center">
-            <p class="text-white-50 mb-0">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Quiz state
-        let currentQuestion = 1;
-        const answers = {};
-        
-        function selectOption(questionNum, value, element) {
-            // Store answer
-            answers[questionNum] = value;
-            
-            // Visual feedback
-            element.parentElement.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            
-            // Auto-advance
-            setTimeout(() => {
-                nextQuestion();
-            }, 400);
-        }
-        
-        function nextQuestion() {
-            if (currentQuestion < 5) {
-                // Hide current
-                document.getElementById('q' + currentQuestion).classList.remove('active');
-                currentQuestion++;
-                // Show next
-                document.getElementById('q' + currentQuestion).classList.add('active');
-                updateProgress();
-            } else {
-                showResults();
-            }
-        }
-        
-        function prevQuestion() {
-            if (currentQuestion > 1) {
-                document.getElementById('q' + currentQuestion).classList.remove('active');
-                currentQuestion--;
-                document.getElementById('q' + currentQuestion).classList.add('active');
-                updateProgress();
-            }
-        }
-        
-        function updateProgress() {
-            const progress = (currentQuestion / 5) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            
-            // Update buttons
-            document.getElementById('prevBtn').style.visibility = currentQuestion > 1 ? 'visible' : 'hidden';
-        }
-        
-        function showResults() {
-            // Hide questions
-            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            document.querySelector('.quiz-nav').style.display = 'none';
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('progressFill').style.width = '100%';
-            
-            // Build preference summary
-            const prefs = [];
-            if (answers[1]) prefs.push(answers[1]);
-            if (answers[2]) prefs.push(answers[2]);
-            if (answers[3]) prefs.push(answers[3] + ' budget');
-            document.getElementById('resultPrefs').textContent = prefs.join(', ');
-            
-            // Fetch real results from server
-            fetchQuizResults(answers);
-        }
-        
-        function fetchQuizResults(answers) {
-            const resultsContainer = document.getElementById('resultsContainer');
-            resultsContainer.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-danger" role="status"></div><p class="mt-3">Finding perfect restaurants for you...</p></div>';
-            
-            // Send answers to server and get real matches
-            fetch('/api/quiz/perfect-spot', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(answers)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.restaurants && data.restaurants.length > 0) {
-                    resultsContainer.innerHTML = generateRealResults(data);
-                } else {
-                    resultsContainer.innerHTML = '<p class="text-center text-muted">No matching restaurants found. <a href="/all-restaurants">Browse all restaurants</a></p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching quiz results:', error);
-                resultsContainer.innerHTML = '<p class="text-center text-muted">Error loading results. <a href="/all-restaurants">Browse all restaurants</a></p>';
-            });
-        }
-        
-        function generateRealResults(data) {
-            let html = '';
-            data.restaurants.forEach((r, i) => {
-                html += `
-                    <article class="result-card card">
-                        <div style="position: relative;">
-                            <img src="${r.photo || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400'}" alt="${r.name}" class="w-100">
-                            <span class="match-score">${r.match_score}% Match</span>
+                
+                <!-- Question 1: Mood -->
+                <div class="question active" data-step="1">
+                    <h4 class="mb-4">1. What's your mood today?</h4>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('mood', 'adventurous')">
+                                <span style="font-size: 2rem;">🌶️</span>
+                                <div class="mt-2">Adventurous</div>
+                            </button>
                         </div>
-                        <div class="card-body p-4">
-                            <h3 class="h5 mb-2">${r.name}</h3>
-                            <p class="text-muted mb-2">
-                                <i class="fas fa-map-marker-alt me-1"></i> ${r.area || 'Quezon City'}
-                            </p>
-                            <div class="mb-3">
-                                <span class="cuisine-badge">${r.cuisine}</span>
-                                <span class="cuisine-badge" style="background: #28a745; color: white;">${'₱'.repeat(r.price_range || 2)}</span>
-                                ${r.rating ? `<span class="cuisine-badge bg-warning text-dark">⭐ ${r.rating}</span>` : ''}
-                            </div>
-                            <div class="d-flex gap-2">
-                                <a href="/restaurant/${r.slug || '#'}" class="btn btn-danger btn-sm flex-fill">View Details</a>
-                                <button class="btn btn-outline-danger btn-sm save-btn" data-id="${r.id}" data-name="${r.name}" data-area="${r.area || 'Quezon City'}" data-cuisine="${r.cuisine}">
-                                    <i class="far fa-heart"></i> Save
-                                </button>
-                            </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('mood', 'comfort')">
+                                <span style="font-size: 2rem;">🍜</span>
+                                <div class="mt-2">Comfort Food</div>
+                            </button>
                         </div>
-                    </article>
-                `;
-            });
-            return html;
-        }
-    </script>
-</body>
-</html>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('mood', 'romantic')">
+                                <span style="font-size: 2rem;">💕</span>
+                                <div class="mt-2">Romantic</div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('mood', 'quick')">
+                                <span style="font-size: 2rem;">⚡</span>
+                                <div class="mt-2">Quick Bite</div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="mood" id="mood">
+                </div>
+                
+                <!-- Question 2: Budget -->
+                <div class="question" data-step="2">
+                    <h4 class="mb-4">2. What's your budget?</h4>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('budget', 'budget')">
+                                <span style="font-size: 2rem;">💰</span>
+                                <div class="mt-2">Budget<br><small>Under ₱300</small></div>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('budget', 'moderate')">
+                                <span style="font-size: 2rem;">💵</span>
+                                <div class="mt-2">Moderate<br><small>₱300-₱800</small></div>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('budget', 'splurge')">
+                                <span style="font-size: 2rem;">💎</span>
+                                <div class="mt-2">Splurge<br><small>₱800+</small></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="budget" id="budget">
+                </div>
+                
+                <!-- Question 3: Cuisine -->
+                <div class="question" data-step="3">
+                    <h4 class="mb-4">3. What cuisine sounds good?</h4>
+                    <div class="row g-3">
+                        {% for c in all_cuisines[:6] %}
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-3" onclick="selectOption('cuisine', '{{ c }}')">
+                                <div>{{ c }}</div>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" name="cuisine" id="cuisine">
+                </div>
+                
+                <!-- Question 4: Company -->
+                <div class="question" data-step="4">
+                    <h4 class="mb-4">4. Who are you dining with?</h4>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('company', 'date')">
+                                <span style="font-size: 2rem;">💑</span>
+                                <div class="mt-2">Date Night</div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('company', 'family')">
+                                <span style="font-size: 2rem;">👨‍👩‍👧‍👦</span>
+                                <div class="mt-2">Family</div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('company', 'friends')">
+                                <span style="font-size: 2rem;">👯</span>
+                                <div class="mt-2">Friends</div>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('company', 'solo')">
+                                <span style="font-size: 2rem;">🧑</span>
+                                <div class="mt-2">Solo</div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="company" id="company">
+                </div>
+                
+                <!-- Question 5: Vibe -->
+                <div class="question" data-step="5">
+                    <h4 class="mb-4">5. What vibe do you want?</h4>
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('vibe', 'casual')">
+                                <span style="font-size: 2rem;">🪑</span>
+                                <div class="mt-2">Casual</div>
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('vibe', 'trendy')">
+                                <span style="font-size: 2rem;">✨</span>
+                                <div class="mt-2">Trendy</div>
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-4" onclick="selectOption('vibe', 'cozy')">
+                                <span style="font-size: 2rem;">🏠</span>
+                                <div class="mt-2">Cozy</div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="vibe" id="vibe">
+                </div>
+                
+                <!-- Question 6: Area -->
+                <div class="question" data-step="6">
+                    <h4 class="mb-4">6. Where in Quezon City?</h4>
+                    <div class="row g-3">
+                        {% for a in areas[:6] %}
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 p-3" onclick="selectOption('area', '{{ a }}')">
+                                <div>{{ a }}</div>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" name="area" id="area">
+                </div>
+                
+                <!-- Navigation -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" id="prevBtn" class="btn btn-outline-secondary" onclick="prevQuestion()" style="display: none;">← Back</button>
+                    <button type="button" id="nextBtn" class="btn btn-primary ms-auto" onclick="nextQuestion()" style="background: #d32323; display: none;">Next →</button>
+                    <button type="button" id="submitBtn" class="btn btn-primary ms-auto" onclick="showResults()" style="background: #d32323; display: none;">See My Results →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Results -->
+<section class="py-5" id="results" style="display: none;">
+    <div class="container">
+        <h2 class="text-center mb-5">🍽️ Your Perfect Restaurant Match</h2>
+        <div id="resultsContent"></div>
+    </div>
+</section>
+
+<script>
+let currentStep = 1;
+const totalSteps = 6;
+const answers = {};
+
+function selectOption(field, value) {
+    document.getElementById(field).value = value;
+    answers[field] = value;
+    
+    // Visual feedback
+    const btns = event.target.closest('.row').querySelectorAll('button');
+    btns.forEach(btn => {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline-secondary');
+    });
+    event.target.closest('button').classList.remove('btn-outline-secondary');
+    event.target.closest('button').classList.add('btn-primary');
+    event.target.closest('button').style.background = '#d32323';
+    event.target.closest('button').style.color = 'white';
+    event.target.closest('button').style.borderColor = '#d32323';
+    
+    setTimeout(() => {
+        nextQuestion();
+    }, 300);
+}
+
+function showQuestion(step) {
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.querySelector(`[data-step="${step}"]`).classList.add('active');
+    
+    // Update progress
+    document.getElementById('progressFill').style.width = (step / totalSteps * 100) + '%';
+    
+    // Navigation buttons
+    document.getElementById('prevBtn').style.display = step > 1 ? 'block' : 'none';
+    
+    if (step < totalSteps) {
+        document.getElementById('nextBtn').style.display = 'block';
+        document.getElementById('submitBtn').style.display = 'none';
+    } else {
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'block';
+    }
+}
+
+function nextQuestion() {
+    if (currentStep < totalSteps) {
+        currentStep++;
+        showQuestion(currentStep);
+    }
+}
+
+function prevQuestion() {
+    if (currentStep > 1) {
+        currentStep--;
+        showQuestion(currentStep);
+    }
+}
+
+function showResults() {
+    const form = document.getElementById('quizForm');
+    const params = new URLSearchParams(new FormData(form)).toString();
+    window.location.href = '/quiz/results?' + params;
+}
+</script>
+{% endblock %}

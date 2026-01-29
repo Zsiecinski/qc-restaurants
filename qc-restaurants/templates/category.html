@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Best {{ category }} in Quezon City{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="section-header">Best {{ category }} in Quezon City</h1>
+            <p class="lead">Ranked by rating and number of reviews</p>
+        </div>
+    </div>
+
+    <!-- Sort Controls -->
+    <div class="d-flex justify-content-center mb-3">
+        <div class="sort-controls">
+            <label for="sortSelect" class="form-label me-2 mb-0">Sort by:</label>
+            <select class="form-select form-select-sm" id="sortSelect" style="width: auto;">
+                <option value="rating">Rating (High to Low)</option>
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row" id="restaurantGrid">
+        {% for restaurant in restaurants %}
+        <div class="col-md-4 mb-4">
+            <div class="restaurant-card">
+                <div class="restaurant-image-container">
+                    <img src="{{ restaurant.photo_url }}" alt="{{ restaurant.name }}" class="restaurant-image">
+                    {% if restaurant.price %}
+                    <div class="price-badge">{{ '₱' * restaurant.price|int }}</div>
+                    {% endif %}
+                    {% if restaurant.top_pick %}
+                    <div class="top-pick-badge">TOP PICK</div>
+                    {% endif %}
+                </div>
+                <div class="restaurant-info">
+                    <h3 class="restaurant-name">
+                        {% if restaurant.site %}
+                                                        <a href="{{ restaurant.site }}" target="_blank" rel="nofollow">{{ restaurant.name }}</a>
+                        {% else %}
+                        {{ restaurant.name }}
+                        {% endif %}
+                    </h3>
+                    <div class="rating">
+                        <div class="stars">
+                            {% set rating = restaurant.rating|float %}
+                            {% for i in range(5) %}
+                                {% if rating >= i + 1 %}
+                                    <i class="fas fa-star"></i>
+                                {% elif rating > i %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="reviews">{{ restaurant.reviews|int }} reviews</span>
+                    </div>
+                    <div class="address">
+                        <i class="fas fa-map-marker-alt text-muted me-1"></i> 
+                        {% if restaurant.latitude and restaurant.longitude %}
+                        <a href="https://maps.google.com/?q={{ restaurant.name }}+{{ restaurant.street|replace(',', ' ')|replace('  ', ' ')|trim }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="text-decoration-none text-dark"
+                           title="Open in Google Maps">
+                            {{ restaurant.street }}
+                            <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size: 0.8em;"></i>
+                        </a>
+                        {% else %}
+                        {{ restaurant.street }}
+                        {% endif %}
+                    </div>
+                    {% if restaurant.phone %}
+                    <div class="phone">
+                        <i class="fas fa-phone text-muted me-1"></i> 
+                        <a href="tel:{{ restaurant.phone }}" 
+                           class="text-decoration-none text-dark"
+                           title="Call {{ restaurant.name }}">
+                            {{ restaurant.phone }}
+                            <i class="fas fa-phone-volume ms-1 text-muted" style="font-size: 0.8em;"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if restaurant.formatted_hours %}
+                    <div class="working-hours">
+                        <i class="far fa-clock text-muted me-1"></i>
+                        {{ restaurant.formatted_hours|replace('\n', '<br>')|safe }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+// Restaurant sorting functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+    const restaurantGrid = document.getElementById('restaurantGrid');
+    
+    if (sortSelect && restaurantGrid) {
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const restaurantCards = Array.from(restaurantGrid.querySelectorAll('.col-md-4'));
+            
+            restaurantCards.sort(function(a, b) {
+                const cardA = a.querySelector('.restaurant-card');
+                const cardB = b.querySelector('.restaurant-card');
+                
+                if (sortValue === 'rating') {
+                    // Sort by rating (high to low)
+                    const ratingA = parseFloat(cardA.querySelector('.stars').textContent.trim()) || 0;
+                    const ratingB = parseFloat(cardB.querySelector('.stars').textContent.trim()) || 0;
+                    return ratingB - ratingA;
+                } else if (sortValue === 'name-asc') {
+                    // Sort by name A-Z
+                    const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    return nameA.localeCompare(nameB);
+                } else if (sortValue === 'name-desc') {
+                    // Sort by name Z-A
+                    const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    return nameB.localeCompare(nameA);
+                }
+                return 0;
+            });
+            
+            // Clear and re-append sorted cards
+            restaurantGrid.innerHTML = '';
+            restaurantCards.forEach(card => {
+                restaurantGrid.appendChild(card);
+            });
+        });
+    }
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Restaurants Quezon City</title>
+    <meta name="description" content="Get in touch with RestaurantsQuezonCity.com. Send us restaurant updates, feedback, or partnership inquiries.">
+    <link rel="canonical" href="/contact">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #d32323;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin: 0 auto 15px;
+        }
+        .form-control:focus {
+            border-color: #d32323;
+            box-shadow: 0 0 0 0.2rem rgba(211, 35, 35, 0.25);
+        }
+        .btn-danger {
+            background-color: #d32323;
+            border-color: #d32323;
+        }
+        .btn-danger:hover {
+            background-color: #b31f1f;
+            border-color: #b31f1f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <a href="/" class="btn btn-outline-dark btn-sm">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Contact Us</h1>
+            <p class="lead mb-0">We'd love to hear from you</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                
+                <!-- Contact Form -->
+                <div class="contact-card">
+                    <h2 class="h4 mb-4">Send us a Message</h2>
+                    <p class="text-muted mb-4">
+                        Have a restaurant update? Feedback on our guides? Partnership opportunity? 
+                        Fill out the form below and we'll get back to you within 24-48 hours.
+                    </p>
+                    
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label fw-bold">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label fw-bold">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label fw-bold">Subject</label>
+                            <select class="form-select" id="subject" name="subject" required>
+                                <option value="">Select a subject...</option>
+                                <option value="restaurant-update">Restaurant Information Update</option>
+                                <option value="feedback">Website Feedback</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="advertising">Advertising Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label fw-bold">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-danger btn-lg w-100">
+                            <i class="fas fa-paper-plane me-2"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info Cards -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="contact-card text-center h-100">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h5 class="h6 mb-2">Email</h5>
+                            <p class="text-muted mb-0">
+                                <a href="mailto:zachary@restaurantsquezoncity.com" class="text-decoration-none">
+                                    zachary@restaurantsquezoncity.com
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-card text-center h-100">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h5 class="h6 mb-2">Location</h5>
+                            <p class="text-muted mb-0">Quezon City, Philippines</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-card text-center h-100">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h5 class="h6 mb-2">Response Time</h5>
+                            <p class="text-muted mb-0">24-48 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What We Can Help With -->
+                <div class="contact-card mt-4">
+                    <h3 class="h5 mb-3">How We Can Help</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    Report outdated restaurant information
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    Suggest a restaurant to feature
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    Report broken links or errors
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    Advertising & sponsorship inquiries
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    General feedback & suggestions
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-danger me-2"></i>
+                                    Partnership opportunities
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/contact" class="text-white-50">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // In a real implementation, this would send to a backend
+            // For now, we'll show a success message
+            const name = formData.get('name');
+            const subject = formData.get('subject');
+            
+            // Show success message
+            const card = form.closest('.contact-card');
+            card.innerHTML = `
+                <div class="text-center py-5">
+                    <div style="font-size: 64px; color: #28a745; margin-bottom: 20px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Message Sent!</h3>
+                    <p class="text-muted mb-4">
+                        Thank you, ${name}! We've received your message about "${subject}". 
+                        We'll get back to you within 24-48 hours.
+                    </p>
+                    <a href="/" class="btn btn-danger btn-lg">
+                        <i class="fas fa-home me-2"></i> Back to Home
+                    </a>
+                </div>
+            `;
+            
+            // In production, you would send this data to your backend:
+            // fetch('/api/contact', { method: 'POST', body: formData })
+        }
+    </script>
+</body>
+</html>

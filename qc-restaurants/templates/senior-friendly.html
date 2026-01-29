@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior-Friendly Restaurants in Quezon City - Complete Guide</title>
+    <meta name="description" content="Discover senior-friendly restaurants in Quezon City with easy parking, wheelchair access, quiet seating & comfortable dining. Expert picks for seniors & families.">
+    <link rel="canonical" href="/senior-friendly">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .filter-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        .restaurant-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+        }
+        .senior-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #d32323;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 10px;
+        }
+        .guide-section {
+            padding: 60px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-2">
+                    <i class="fas fa-utensils text-danger"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/all-restaurants">All Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold" href="/senior-friendly">Senior-Friendly</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">👴 Senior-Friendly Restaurants</h1>
+            <p class="lead mb-4">Quezon City's best restaurants for seniors and those with mobility considerations</p>
+            <p class="mb-0">
+                <span class="badge bg-light text-dark me-2">Easy Parking</span>
+                <span class="badge bg-light text-dark me-2">Wheelchair Accessible</span>
+                <span class="badge bg-light text-dark">Quiet Seating</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        
+        <!-- What Makes a Restaurant Senior-Friendly -->
+        <section class="guide-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h3 mb-4">What We Look For</h2>
+                    <p class="text-muted mb-4">
+                        Our senior-friendly recommendations are based on factors that matter most to older diners:
+                    </p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-parking"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Easy Parking</h5>
+                                    <p class="text-muted mb-0">Close to parking, minimal walking distance, accessible parking spaces available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-wheelchair"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Wheelchair Access</h5>
+                                    <p class="text-muted mb-0">Ramps available, accessible restrooms, no steps to seating</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-volume-mute"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quiet Atmosphere</h5>
+                                    <p class="text-muted mb-0">Low noise levels for comfortable conversation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chair"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Comfortable Seating</h5>
+                                    <p class="text-muted mb-0">Chairs with backs, spacious tables, comfortable booths</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Readable Menus</h5>
+                                    <p class="text-muted mb-0">Large print menus, good lighting at tables</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-user-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Patient Service</h5>
+                                    <p class="text-muted mb-0">Attentive, unhurried staff who understand senior needs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Senior-Friendly Restaurants -->
+        <section class="guide-section bg-light">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="h3 mb-4">Top Senior-Friendly Picks</h2>
+                    
+                    <!-- Filter buttons -->
+                    <div class="mb-4">
+                        <span class="me-2"><strong>Filter by:</strong></span>
+                        <a href="/cuisine/filipino" class="btn btn-sm btn-outline-dark me-2">Filipino</a>
+                        <a href="/cuisine/italian" class="btn btn-sm btn-outline-dark me-2">Italian</a>
+                        <a href="/cuisine/american" class="btn btn-sm btn-outline-dark">American</a>
+                    </div>
+
+                    <div class="row">
+                        <!-- Restaurant 1 -->
+                        <div class="col-md-6">
+                            <article class="restaurant-card card">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Frazzled Cook" class="restaurant-image" loading="lazy">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h3 class="h5 mb-0">The Frazzled Cook</h3>
+                                        <span class="senior-badge">Senior Pick</span>
+                                    </div>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-2"></i>78 Sct. Gandia St, Quezon City
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="cuisine-badge">Filipino</span>
+                                        <span class="cuisine-badge">International</span>
+                                    </div>
+                                    <p class="text-muted">
+                                        Cozy atmosphere with comfortable seating. Easy parking nearby. 
+                                        Staff is patient and accommodating. Great for family gatherings.
+                                    </p>
+                                    <a href="https://www.restaurantsquezoncity.com/the-frazzled-cook" class="btn btn-outline-danger btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Restaurant 2 -->
+                        <div class="col-md-6">
+                            <article class="restaurant-card card">
+                                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Banapple" class="restaurant-image" loading="lazy">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h3 class="h5 mb-0">Banapple Matalino</h3>
+                                        <span class="senior-badge">Senior Pick</span>
+                                    </div>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-2"></i>34 Matalino St, Quezon City
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="cuisine-badge">Filipino</span>
+                                        <span class="cuisine-badge">Asian Fusion</span>
+                                    </div>
+                                    <p class="text-muted">
+                                        Spacious seating, wheelchair accessible. Good lighting. 
+                                        Filipino comfort food in a relaxed environment.
+                                    </p>
+                                    <a href="https://www.restaurantsquezoncity.com/banapple-matalino" class="btn btn-outline-danger btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Restaurant 3 -->
+                        <div class="col-md-6">
+                            <article class="restaurant-card card">
+                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cafe Mary Grace" class="restaurant-image" loading="lazy">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h3 class="h5 mb-0">Cafe Mary Grace</h3>
+                                        <span class="senior-badge">Senior Pick</span>
+                                    </div>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-2"></i>UP Town Center
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="cuisine-badge">Filipino</span>
+                                        <span class="cuisine-badge">Cafe</span>
+                                    </div>
+                                    <p class="text-muted">
+                                        Air-conditioned, comfortable booths. Accessible parking at UP Town Center. 
+                                        Great for coffee and merienda with friends.
+                                    </p>
+                                    <a href="https://www.restaurantsquezoncity.com/cafe-mary-grace-up-town-center" class="btn btn-outline-danger btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Restaurant 4 -->
+                        <div class="col-md-6">
+                            <article class="restaurant-card card">
+                                <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lola Cafe" class="restaurant-image" loading="lazy">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h3 class="h5 mb-0">LOLA Cafe</h3>
+                                        <span class="senior-badge">Senior Pick</span>
+                                    </div>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-2"></i>99 Scout Lozano St, Tomas Morato
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="cuisine-badge">Filipino</span>
+                                        <span class="cuisine-badge">Ilocano</span>
+                                    </div>
+                                    <p class="text-muted">
+                                        Traditional Filipino comfort food. Quiet corner seating available. 
+                                        Staff provides patient, friendly service.
+                                    </p>
+                                    <a href="https://www.restaurantsquezoncity.com/lola-cafe" class="btn btn-outline-danger btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="/all-restaurants" class="btn btn-danger btn-lg">
+                            Browse All 400+ Restaurants →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Area Guides -->
+        <section class="guide-section">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="h3 mb-4">Senior-Friendly Area Guides</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <a href="/up-town-center/" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title">UP Town Center</h5>
+                                        <p class="card-text text-muted">Mall-based dining with excellent accessibility</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="/eastwood/" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title">Eastwood City</h5>
+                                        <p class="card-text text-muted">Modern restaurants with good facilities</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="/trinoma/" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title">Trinoma</h5>
+                                        <p class="card-text text-muted">Varied options in air-conditioned mall</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="guide-section bg-light">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="h3 mb-4">Get Weekly Senior-Friendly Recommendations</h2>
+                    <p class="text-muted mb-4">
+                        We send out senior-focused restaurant guides every Tuesday morning. 
+                        Be the first to know about new openings and senior-friendly spots!
+                    </p>
+                    <a href="/subscribe" class="btn btn-danger btn-lg">
+                        <i class="fas fa-envelope me-2"></i> Subscribe to Newsletter
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-2">© 2026 RestaurantsQuezonCity.com. All rights reserved.</p>
+            <p class="text-white-50 mb-0">
+                <a href="/about" class="text-white-50">About</a> • 
+                <a href="/how-we-rate" class="text-white-50">How We Rate</a> • 
+                <a href="/subscribe" class="text-white-50">Subscribe</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

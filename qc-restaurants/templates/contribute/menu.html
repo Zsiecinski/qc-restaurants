@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ Add Menu Data - Help Build Our Database</title>
+    <meta name="description" content="Know a restaurant's menu? Help us by adding menu items!">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #d32323 0%, #ff6b6b 100%);
+            color: white;
+            padding: 60px 0;
+        }
+        .contribute-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-top: -30px;
+        }
+        .menu-item-row {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .remove-item {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #dc3545;
+            cursor: pointer;
+        }
+        .contribution-stats {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold mb-3">🍽️ Add Menu Data</h1>
+            <p class="lead">Know a restaurant's menu? Help fellow foodies by adding it!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5 pb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                
+                <!-- Stats -->
+                <div class="contribution-stats">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="stat-number">{{ stats.restaurants_with_menus }}</div>
+                            <div class="small">Restaurants with Menus</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-number">{{ stats.total_items }}</div>
+                            <div class="small">Menu Items</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-number">{{ stats.contributors }}</div>
+                            <div class="small">Contributors</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contribution Card -->
+                <div class="contribute-card">
+                    {% if success %}
+                    <div class="alert alert-success text-center py-4">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <h4>Thank You!</h4>
+                        <p>Your menu contribution has been submitted and will be reviewed.</p>
+                        <a href="/all-restaurants" class="btn btn-danger">Browse Restaurants</a>
+                    </div>
+                    {% else %}
+                    <form method="POST" action="/contribute/menu">
+                        <!-- Restaurant Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Which Restaurant?</label>
+                            <input type="text" class="form-control" name="restaurant_name" 
+                                   placeholder="Start typing restaurant name..." required
+                                   list="restaurant-list">
+                            <datalist id="restaurant-list">
+                                {% for r in restaurants %}
+                                <option value="{{ r }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+
+                        <!-- Menu Items -->
+                        <div id="menu-items">
+                            <div class="menu-item-row">
+                                <span class="remove-item" onclick="this.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <input type="text" class="form-control" name="item_name[]" 
+                                               placeholder="Dish name (e.g., Adobo)" required>
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <input type="text" class="form-control" name="item_price[]" 
+                                               placeholder="Price (e.g., ₱150)" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="item_desc[]" 
+                                               placeholder="Description (optional)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-secondary mb-4" onclick="addMenuItem()">
+                            <i class="fas fa-plus me-1"></i> Add Another Item
+                        </button>
+
+                        <!-- Your Info -->
+                        <div class="border-top pt-4 mt-4">
+                            <h5 class="mb-3">Your Info (Optional)</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" name="contributor_name" 
+                                           placeholder="Your name">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="email" class="form-control" name="contributor_email" 
+                                           placeholder="Your email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Menu
+                            </button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+
+                <!-- How It Works -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">How It Works</h5>
+                        <ol class="mb-0">
+                            <li>Search for the restaurant above</li>
+                            <li>Add menu items (name, price, description)</li>
+                            <li>Submit - we'll verify and add to the database</li>
+                            <li>Help thousands of foodies find great dishes!</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4" style="background-color: #000;">
+        <div class="container text-center">
+            <p class="text-white-50 mb-0">© 2026 RestaurantsQuezonCity.com</p>
+        </div>
+    </footer>
+
+    <script>
+        function addMenuItem() {
+            const html = `
+                <div class="menu-item-row">
+                    <span class="remove-item" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <input type="text" class="form-control" name="item_name[]" 
+                                   placeholder="Dish name (e.g., Adobo)" required>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <input type="text" class="form-control" name="item_price[]" 
+                                   placeholder="Price (e.g., ₱150)" required>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="item_desc[]" 
+                                   placeholder="Description (optional)">
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('menu-items').insertAdjacentHTML('beforeend', html);
+        }
+    </script>
+</body>
+</html>

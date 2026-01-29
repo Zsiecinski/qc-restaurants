@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "last_updated": "2026-01-28",
+    "total_restaurants_with_menus": 20,
+    "description": "Menu items for QC restaurants - from services/menu_suggestions.py",
+    "sources": ["services/menu_suggestions.py", "user_contributions"]
+  },
+  "menus": {
+    "Esmeralda Kitchen": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Filipino",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Bicol Express", "price": "₱350", "description": "Spicy pork in coconut milk with chilies"},
+          {"name": "Crispy Kare-Kare", "price": "₱450", "description": "Oxtail with peanut sauce, crispy version"},
+          {"name": "Sizzling Sisig", "price": "₱280", "description": "Chopped pork ears and belly, sizzling plate"}
+        ]
+      }
+    },
+    "LOLA Cafe": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Filipino",
+      "area": "Tomas Morato",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Crispy Kare-Kare", "price": "₱420", "description": "Traditional oxtail with bagoong"},
+          {"name": "Bagnet", "price": "₱380", "description": "Deep-fried pork belly with dipping sauce"},
+          {"name": "Pinakbet", "price": "₱250", "description": "Mixed vegetables with shrimp paste"}
+        ]
+      }
+    },
+    "Some Thai": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Thai",
+      "area": "Tomas Morato",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Pad Thai", "price": "₱350", "description": "Stir-fried rice noodles with shrimp"},
+          {"name": "Green Curry", "price": "₱380", "description": "Thai green curry with jasmine rice"},
+          {"name": "Tom Yum Soup", "price": "₱280", "description": "Hot and sour soup"}
+        ]
+      }
+    },
+    "Bugis Singapore Street Food": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Singaporean",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Chili Crab", "price": "₱680", "description": "Singapore-style crab in spicy sauce"},
+          {"name": "Satay Skewers", "price": "₱250", "description": "Grilled meat skewers with peanut sauce"},
+          {"name": "Hainanese Chicken Rice", "price": "₱320", "description": "Poached chicken with ginger rice"}
+        ]
+      }
+    },
+    "Shiok Shiok Singaporean Restaurant": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Singaporean",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Laksa", "price": "₱380", "description": "Spicy noodle soup with coconut milk"},
+          {"name": "Singapore Fried Rice", "price": "₱280", "description": "Wok-fried rice with eggs and shrimp"},
+          {"name": "Chicken Curry", "price": "₱350", "description": "Rich coconut curry"}
+        ]
+      }
+    },
+    "Café Inggo 1587": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Filipino",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Filipino Breakfast", "price": "₱280", "description": "Tapa, sinangag, itlog"},
+          {"name": "Coffee", "price": "₱120", "description": "Barako or kapeng barako"},
+          {"name": "Tapsilog", "price": "₱320", "description": "Beef tapa with garlic rice"}
+        ]
+      }
+    },
+    "Hotpot Kid": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Hotpot",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Shabu-Shabu Set", "price": "₱499", "description": "All-you-can hotpot"},
+          {"name": "Beef Slices", "price": "₱350", "description": "Premium beef for hotpot"},
+          {"name": "Seafood Platter", "price": "₱450", "description": "Mixed seafood selection"}
+        ]
+      }
+    },
+    "ANGKOL buttered chicken house": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Asian Fusion",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Buttered Chicken", "price": "₱350", "description": "Butter chicken curry"},
+          {"name": "Naan Bread", "price": "₱80", "description": "Fresh baked naan"},
+          {"name": "Biryani", "price": "₱380", "description": "Aromatic rice dish"}
+        ]
+      }
+    },
+    "Patio de Conchita Restaurant": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Filipino",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Conchita's Special", "price": "₱450", "description": "House specialty dish"},
+          {"name": "Lechon Kawali", "price": "₱320", "description": "Crispy pork belly"},
+          {"name": "Sinigang na Baboy", "price": "₱350", "description": "Sour pork soup"}
+        ]
+      }
+    },
+    "Elar's Lechon the Original": {
+      "restaurant_id": "",
+      "menu_url": "",
+      "cuisine": "Filipino",
+      "area": "Quezon City",
+      "scraped_at": "2026-01-28 15:00:00",
+      "data": {
+        "source": "curated",
+        "items": [
+          {"name": "Lechon Kawali", "price": "₱280", "description": "Crispy pork belly"},
+          {"name": "Lechon", "price": "₱800", "description": "Whole roasted pig (order ahead)"},
+          {"name": "Sisig", "price": "₱250", "description": "Sizzling pork variant"}
+        ]
+      }
+    }
+  }
+}

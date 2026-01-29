@@ -1,0 +1,1169 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurants Quezon City - Best Dining Experience & Flavors 2025{% endblock %}
+
+{% block extra_head %}
+<!-- Restaurant Directory Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Top Restaurants in Quezon City",
+    "description": "Best dining experience and flavors in Quezon City for 2025",
+    "url": "https://www.restaurantsquezoncity.com",
+    "numberOfItems": {{ df[:12]|length }},
+    "itemListElement": [
+        {% for restaurant in df[:12] %}
+        {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "item": {
+                "@type": "Restaurant",
+                "name": "{{ restaurant.name_for_emails or restaurant.name }}",
+                "servesCuisine": "{{ restaurant.cuisine }}",
+                "url": "{{ restaurant.site if restaurant.site else 'https://www.restaurantsquezoncity.com' }}",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "{{ restaurant.street }}",
+                    "addressLocality": "Quezon City",
+                    "addressRegion": "Metro Manila",
+                    "addressCountry": "PH"
+                }{% if restaurant.get('rating') %},
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "{{ restaurant.rating }}",
+                    "reviewCount": "{{ restaurant.reviews|int if restaurant.reviews else 0 }}"
+                }{% endif %}
+            }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-12">
+            <header class="cuisine-header mb-4">
+                <h2 class="section-title">Top Restaurants Near You</h2>
+                <div class="meal-times-info mt-2 mb-3">
+                    <p class="text-muted small">Perfect for breakfast, lunch, and dinner - find your ideal meal any time of day. Each restaurant offers something unique for every guest. Discover Japanese options, Filipino flavors, and diverse dining places across Tomas Morato and other Philippines neighborhoods. From one amazing meal to multiple dining experiences, Quezon City has vibes for every taste.</p>
+                </div>
+            </header>
+
+            <!-- Sort Controls -->
+            <div class="d-flex justify-content-center mb-3">
+                <div class="sort-controls">
+                    <label for="sortSelect" class="form-label me-2 mb-0">Sort by:</label>
+                    <select class="form-select form-select-sm" id="sortSelect">
+                        <option value="rating">Rating (High to Low)</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Restaurant List -->
+            <div class="row g-4" id="restaurantGrid">
+                <div class="col-12 mb-3">
+                    <h4 class="text-muted">Discover Quezon City Restaurants by Dining Style</h4>
+                </div>
+                {% for restaurant in df[:12] %}
+                <div class="col-md-4">
+                    <div class="restaurant-card h-100">
+                        <div class="restaurant-image-wrapper">
+                            {% set image_url, alt_tag = get_restaurant_image_url(restaurant.name, restaurant.photo_url) %}
+                            <img src="{{ image_url }}" 
+                                 class="restaurant-image" 
+                                 alt="{{ alt_tag }}"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg', _external=True) }}';">
+                            {% if restaurant.price %}
+                            <div class="price-badge">{{ '₱' * restaurant.price|int }}</div>
+                            {% endif %}
+                            {% if restaurant.top_pick %}
+                            <div class="top-pick-badge">TOP PICK</div>
+                            {% endif %}
+                            {% if restaurant.jacky_pick %}
+                            <div class="jacky-pick-badge">JACKY'S PICK</div>
+                            {% endif %}
+                        </div>
+                        <div class="card-body p-2">
+                            <h2 class="restaurant-name mb-1">
+                                {{ restaurant.name }}
+                            </h2>
+                            <div class="rating-reviews mb-1">
+                                <div class="stars d-inline-block">
+                                    {% for _ in range(restaurant.rating|round|int) %}
+                                    <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="text-muted">({{ restaurant.reviews|int }} reviews)</span>
+                                {% if restaurant.reviews|int >= 10 %}
+                                <span class="badge bg-success ms-1">Top 10 Rated</span>
+                                {% elif restaurant.reviews|int >= 8 %}
+                                <span class="badge bg-info ms-1">Top 8+ Rated</span>
+                                {% endif %}
+                            </div>
+                            <div class="restaurant-details">
+                                <p class="address mb-1">
+                                    <b>📍</b>
+                                    {% if restaurant.latitude and restaurant.longitude %}
+                                    <a href="https://maps.google.com/?q={{ restaurant.name_for_emails or restaurant.name }}+{{ restaurant.street|replace(',', ' ')|replace('  ', ' ')|trim }}" 
+                                       target="_blank" 
+                                       rel="noopener noreferrer"
+                                       class="text-decoration-none text-dark"
+                                       title="Open in Google Maps">
+                                        {{ restaurant.street }}
+                                        <span class="text-muted" style="font-size: 0.8em;">↗</span>
+                                    </a>
+                                    {% else %}
+                                    {{ restaurant.street }}
+                                    {% endif %}
+                                </p>
+                                {% if restaurant.phone %}
+                                <p class="phone mb-1">
+                                    <b>📞</b>
+                                    <a href="tel:{{ restaurant.phone }}" 
+                                       class="text-decoration-none text-dark"
+                                       rel="nofollow"
+                                       title="Call {{ restaurant.name }}">
+                                        {{ restaurant.phone }}
+                                        <span class="text-muted" style="font-size: 0.8em;">📞</span>
+                                    </a>
+                                </p>
+                                {% endif %}
+                                {% if restaurant.hours %}
+                                <div class="hours mb-2">
+                                    <div class="hours-header" onclick="toggleHours(this)">
+                                        <b>🕒</b>
+                                        <span class="hours-status {% if restaurant.is_open %}text-success{% else %}text-danger{% endif %}">
+                                            {% if restaurant.is_open %}Open Now{% else %}Closed{% endif %}
+                                        </span>
+                                        <span class="hours-toggle">
+                                            <span class="text-muted">▼</span>
+                                        </span>
+                                    </div>
+                                    <div class="hours-list collapsed">
+                                        {% for day, hours in restaurant.hours.items() %}
+                                        <div class="hours-item {% if day == current_day %}current-day{% endif %}">
+                                            <span class="day">{{ day }}</span>
+                                            <span class="time">{{ hours }}</span>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if restaurant.features %}
+                                <div class="features mb-1">
+                                    {% if 'Delivery' in restaurant.features %}
+                                    <span class="badge feature-badge delivery">
+                                        🚚 Delivery
+                                    </span>
+                                    {% endif %}
+                                    {% if 'Takeout' in restaurant.features %}
+                                    <span class="badge feature-badge takeout">
+                                        🛍️ Takeout
+                                    </span>
+                                    {% endif %}
+                                    {% if 'Dine-in' in restaurant.features %}
+                                    <span class="badge feature-badge dine-in">
+                                        🍽️ Dine-in
+                                    </span>
+                                    {% endif %}
+                                    {% if restaurant.rating >= 4.5 %}
+                                    <span class="badge feature-badge top-rated">
+                                        ⭐ Top 10 Rated
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                
+                                <div class="amenities mb-2">
+                                    {% if restaurant.wheelchair_accessible %}
+                                    <span class="badge feature-badge wheelchair">
+                                        ♿ Wheelchair Accessible
+                                    </span>
+                                    {% endif %}
+                                    {% if restaurant.good_for_kids %}
+                                    <span class="badge feature-badge kids">
+                                        👶 Good for Kids
+                                    </span>
+                                    {% endif %}
+                                    {% if restaurant.free_wifi %}
+                                    <span class="badge feature-badge wifi">
+                                        📶 Free Wi-Fi
+                                    </span>
+                                    {% endif %}
+                                    {% if restaurant.high_chairs %}
+                                    <span class="badge feature-badge high-chairs">
+                                        🪑 High Chairs
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="mt-0">
+                                {% if restaurant.site %}
+                                <a href="{{ restaurant.site }}" target="_blank" rel="nofollow" class="btn btn-outline-danger">
+                                    <i class="fas fa-external-link-alt me-1"></i>
+                                    Visit Website
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Areas Section -->
+    <section class="neighbourhoods-section mt-5">
+        <div class="neighbourhoods-header text-center mb-4">
+            <h2 class="section-title">All Quezon City Areas</h2>
+            <p class="lead text-muted">Browse restaurants by area, sorted by number of dining options. Each neighborhood offers unique flavors and vibes - from Japanese places to Filipino comfort food spots. Discover something special in every place across Quezon City.</p>
+            <p class="mt-2">
+                <a href="/all-restaurants" class="btn btn-outline-primary">View Complete Restaurant Directory</a>
+            </p>
+        </div>
+        <div class="neighbourhoods-grid">
+            {% for area, count in area_counts.items() %}
+                <a href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/" class="neighbourhood-card">
+                    <h3 class="neighbourhood-name">{{ area }}</h3>
+                    <p class="neighbourhood-count">{{ count }} restaurants</p>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Cuisines Section -->
+    <section class="cuisines-section mt-5">
+        <div class="cuisines-header text-center mb-4">
+            <h2 class="section-title">Top Cuisines in Quezon City</h2>
+            <p class="lead text-muted">Browse the most popular cuisine types, sorted by number of restaurants. From Japanese options to Filipino flavors, discover diverse dining places across Quezon City. Each meal offers something unique, whether you're looking for one amazing dish or multiple dining experiences with authentic Philippines vibes.</p>
+            <p class="mt-2">
+                <a href="/all-restaurants" class="btn btn-outline-secondary">Browse All Restaurants</a>
+            </p>
+        </div>
+        <div class="cuisines-grid">
+            <div class="col-12 mb-3">
+                <h4 class="text-muted">Explore Quezon City Restaurant Options by Cuisine</h4>
+            </div>
+            {% for cuisine, count in cuisine_counts.items()|sort(attribute='1', reverse=true) %}
+                {% if loop.index <= 10 %}
+                <a href="/cuisine/{{ cuisine|lower|replace(' ', '-') }}" class="cuisine-card">
+                    <div class="cuisine-emoji">
+                        {% if 'fast' in cuisine|lower %}🍔
+                        {% elif 'pizza' in cuisine|lower %}🍕
+                        {% elif 'japanese' in cuisine|lower %}🍣
+                        {% elif 'chinese' in cuisine|lower %}🥢
+                        {% elif 'indian' in cuisine|lower %}🍛
+                        {% elif 'italian' in cuisine|lower %}🍝
+                        {% elif 'seafood' in cuisine|lower or 'fish' in cuisine|lower %}🦞
+                        {% elif 'korean' in cuisine|lower %}🍜
+                        {% elif 'thai' in cuisine|lower %}🥘
+                        {% elif 'vietnamese' in cuisine|lower %}🍜
+                        {% elif 'american' in cuisine|lower %}🗽
+                        {% elif 'mexican' in cuisine|lower %}🌮
+                        {% elif 'mediterranean' in cuisine|lower %}🥙
+                        {% elif 'breakfast' in cuisine|lower %}🍳
+                        {% elif 'burger' in cuisine|lower %}🍔
+                        {% elif 'chicken' in cuisine|lower %}🍗
+                        {% elif 'dessert' in cuisine|lower or 'cake' in cuisine|lower %}🍰
+                        {% elif 'bar' in cuisine|lower or 'pub' in cuisine|lower %}🍸
+                        {% elif 'coffee' in cuisine|lower %}☕
+                        {% elif 'tea' in cuisine|lower %}🧋
+                        {% elif 'buffet' in cuisine|lower %}🍱
+                        {% elif 'vegetarian' in cuisine|lower %}🥗
+                        {% elif 'vegan' in cuisine|lower %}🥬
+                        {% elif 'steak' in cuisine|lower %}🥩
+                        {% elif 'bbq' in cuisine|lower or 'barbecue' in cuisine|lower %}🍖
+                        {% elif 'sushi' in cuisine|lower %}🍣
+                        {% elif 'ramen' in cuisine|lower %}🍜
+                        {% elif 'filipino' in cuisine|lower %}🍚
+                        {% elif 'french' in cuisine|lower %}🗼
+                        {% elif 'greek' in cuisine|lower %}🏺
+                        {% elif 'spanish' in cuisine|lower %}💃
+                        {% elif 'turkish' in cuisine|lower %}🥙
+                        {% elif 'lebanese' in cuisine|lower %}🥙
+                        {% elif 'malaysian' in cuisine|lower %}🍜
+                        {% elif 'indonesian' in cuisine|lower %}🍜
+                        {% elif 'wine' in cuisine|lower %}🍷
+                        {% elif 'sandwich' in cuisine|lower %}🥪
+                        {% elif 'bakery' in cuisine|lower or 'bread' in cuisine|lower %}🥖
+                        {% elif 'ice cream' in cuisine|lower %}🍦
+                        {% elif 'juice' in cuisine|lower %}🧃
+                        {% elif 'food court' in cuisine|lower %}🏪
+                        {% elif 'noodle' in cuisine|lower %}🍜
+                        {% elif 'soup' in cuisine|lower %}🍲
+                        {% elif 'grill' in cuisine|lower %}🔥
+                        {% elif 'hotpot' in cuisine|lower %}🍲
+                        {% elif 'dimsum' in cuisine|lower %}🥟
+                        {% elif 'curry' in cuisine|lower %}🍛
+                        {% elif 'pasta' in cuisine|lower %}🍝
+                        {% elif 'salad' in cuisine|lower %}🥗
+                        {% elif 'smoothie' in cuisine|lower %}🥤
+                        {% elif 'bubble tea' in cuisine|lower %}🧋
+                        {% elif 'cafe' in cuisine|lower %}☕
+                        {% elif 'restaurant' in cuisine|lower %}🍽️
+                        {% else %}🍽️{% endif %}
+                    </div>
+                    <div class="cuisine-info">
+                        <h3 class="cuisine-name">{{ cuisine }}</h3>
+                        <p class="cuisine-count">{{ count }} restaurants</p>
+                    </div>
+                </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section mt-5">
+        <h2 class="section-title">Frequently Asked Questions About Quezon City Dining</h2>
+        <div class="faq-list mt-4">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are the best restaurants for Filipino comfort food in Quezon City?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Discover authentic Filipino flavors at popular spots like Maginhawa restaurants and traditional dining venues across Quezon City. These places serve classic dishes with a modern twist, offering the best dining experience for comfort food lovers. From Japanese options to Filipino vibes, each meal tells a unique story of Philippines culinary heritage.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Which neighborhoods offer the best dining experience and vibes?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Tomas Morato is known for upscale dining and bar scenes, while Maginhawa offers casual comfort food vibes. Each area has unique flavors and service styles that create memorable dining experiences.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What cuisines and flavors are most popular in Quezon City?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>From traditional Filipino to Spanish and fusion dishes, Quezon City offers diverse menu options. Popular choices include comfort food, breakfast spots, and late-night dining venues that showcase authentic flavors from the Philippines and around the world.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Are there good restaurants for breakfast and dinner in Quezon City?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Quezon City has excellent breakfast spots serving traditional Filipino meals and international flavors. For dinner, explore upscale dining venues and cozy restaurants with romantic vibes perfect for special occasions.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What makes Quezon City restaurants special and unique?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Quezon City combines rich heritage with modern innovation. Restaurants here offer authentic flavors, warm service, and unique dining spaces that reflect the city's vibrant culture and guest hospitality. Each place tells a story of tradition and creativity.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What's new in Quezon City dining for 2025?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>2025 brings exciting new fusion restaurants, innovative menu concepts, and enhanced dining experiences. Discover trending flavors and modern dining spaces that showcase the city's evolving food scene and commitment to culinary excellence.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I find restaurants for special occasions and home celebrations?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! Quezon City has romantic dining venues, family-friendly restaurants, and upscale places perfect for celebrations. Many offer special menus and service for memorable dining experiences. Whether it's a date night or home gathering, you'll find the perfect space.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What makes the chefs and dining scene unique in Quezon City?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Quezon City chefs blend traditional Filipino techniques with modern innovation. Each restaurant offers something special - from home-style comfort food to gourmet dishes. The dining spaces range from cozy places to elegant venues, each telling a unique story of culinary creativity.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What are the best things to know about dining in Quezon City?</h3>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The best things about dining in Quezon City include diverse cuisines, authentic flavors, and warm service. Whether you're looking for one amazing meal or planning multiple dining experiences, the city offers something for every taste and occasion. From breakfast to dinner, each meal is an adventure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+<style>
+    .cuisine-header {
+        border-bottom: 2px solid #d32323;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .restaurant-card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: white;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+
+    .restaurant-card:hover {
+        border: 2px solid #d32323;
+        box-shadow: 0 8px 24px rgba(211,35,35,0.15);
+        transform: translateY(-5px);
+    }
+
+    .restaurant-image-wrapper {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .restaurant-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .price-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(108, 117, 125, 0.95);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        z-index: 2;
+    }
+
+    .top-pick-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #d32323;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        z-index: 2;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .jacky-pick-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #d32323;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        z-index: 2;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .restaurant-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #2d2e2f;
+    }
+
+    .stars {
+        font-size: 0.9rem;
+        margin-right: 5px;
+        color: #ffd700;
+    }
+
+    .address, .phone {
+        margin-bottom: 0.15rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-outline-danger {
+        color: white;
+        background-color: #d32323;
+        border-color: #d32323;
+        padding: 4px 16px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #b61d1d;
+        border-color: #b61d1d;
+        color: white;
+    }
+
+    .restaurant-details {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    .restaurant-details i {
+        width: 16px;
+    }
+
+    .features .badge {
+        font-weight: 500;
+        font-size: 0.85rem;
+        padding: 4px 8px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .feature-badge {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        border-radius: 16px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+    }
+
+    .feature-badge i {
+        margin-right: 4px;
+        font-size: 0.85rem;
+    }
+
+    .feature-badge.delivery {
+        background-color: #FF6B6B;
+        color: white;
+    }
+
+    .feature-badge.takeout {
+        background-color: #4ECDC4;
+        color: white;
+    }
+
+    .feature-badge.dine-in {
+        background-color: #45B7D1;
+        color: white;
+    }
+
+    .feature-badge.wheelchair {
+        background-color: #6C5CE7;
+        color: white;
+    }
+
+    .feature-badge.kids {
+        background-color: #FFA62B;
+        color: white;
+    }
+
+    .feature-badge.wifi {
+        background-color: #A8E6CF;
+        color: #2D3436;
+    }
+
+    .feature-badge.high-chairs {
+        background-color: #FFB5E8;
+        color: #2D3436;
+    }
+
+    .feature-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .features {
+        margin-bottom: 1px;
+    }
+
+    .amenities {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        margin-bottom: 4px;
+    }
+
+    /* Hours Styles */
+    .hours {
+        font-size: 0.9rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    .hours-header {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+    }
+
+    .hours-header:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .hours-toggle {
+        margin-left: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .hours-toggle.expanded {
+        transform: rotate(180deg);
+    }
+
+    .hours-status {
+        font-weight: 500;
+    }
+
+    .hours-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 4px;
+        margin-top: 8px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .hours-list.expanded {
+        max-height: 200px;
+    }
+
+    .hours-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 4px;
+    }
+
+    .hours-item.current-day {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+    .day {
+        color: #666;
+        margin-right: 8px;
+    }
+
+    .time {
+        color: #2d2e2f;
+    }
+
+    .faq-section {
+        margin-top: 4rem;
+        padding: 2rem 0;
+    }
+
+    .faq-section .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        display: inline-block;
+    }
+
+    .faq-section .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #d32323;
+    }
+
+    .faq-list {
+        max-width: 900px;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .faq-question {
+        padding: 1.5rem 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-question h3 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        margin: 0;
+    }
+
+    .faq-arrow {
+        font-size: 0.8rem;
+        color: #d32323;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-arrow {
+        transform: rotate(180deg);
+    }
+
+    .faq-answer {
+        display: none;
+        padding-bottom: 1.5rem;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+
+    .mt-0 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .restaurant-image-wrapper {
+            height: 150px;
+        }
+
+        .restaurant-name {
+            font-size: 1.1rem;
+        }
+
+        .restaurant-details {
+            font-size: 0.9rem;
+        }
+
+        .faq-section {
+            padding: 1rem;
+        }
+
+        .faq-section .section-title {
+            font-size: 1.5rem;
+        }
+
+        .faq-question h3 {
+            font-size: 1rem;
+        }
+    }
+
+    .neighbourhoods-section {
+        padding: 3rem 0;
+        background-color: white;
+        border-radius: 16px;
+        margin: 2rem 0;
+        border: 1px solid #e8e8e8;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .neighbourhoods-header {
+        margin-bottom: 2rem;
+    }
+
+    .neighbourhoods-header .section-title {
+        color: #2d2e2f;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        border-bottom: 2px solid #d32323;
+        padding-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    .neighbourhoods-header .lead {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .neighbourhoods-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .neighbourhood-card {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px;
+    }
+
+    .neighbourhood-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        border-color: #d32323;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .neighbourhood-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        color: #d32323;
+        line-height: 1.2;
+    }
+
+    .neighbourhood-count {
+        font-size: 1rem;
+        color: #666;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .cuisines-section {
+        padding: 3rem 0;
+        background-color: #f8f9fa;
+        border-radius: 16px;
+        margin: 2rem 0;
+    }
+
+    .cuisines-header {
+        margin-bottom: 2rem;
+    }
+
+    .cuisines-header .section-title {
+        color: #2d2e2f;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .cuisines-header .lead {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .cuisines-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .cuisine-card {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 140px;
+    }
+
+    .cuisine-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        border-color: #d32323;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .cuisine-emoji {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+
+    .cuisine-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .cuisine-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 0.5rem 0;
+        color: #2d2e2f;
+        line-height: 1.2;
+    }
+
+    .cuisine-count {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .btn-danger {
+        background-color: #d32323;
+        border-color: #d32323;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        background-color: #b61d1d;
+        border-color: #b61d1d;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(211, 35, 35, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .neighbourhoods-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .neighbourhood-card {
+            padding: 1rem;
+            min-height: 80px;
+        }
+
+        .neighbourhood-name {
+            font-size: 1.1rem;
+        }
+
+        .neighbourhood-count {
+            font-size: 0.9rem;
+        }
+
+        .cuisines-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .cuisine-card {
+            padding: 1rem;
+            min-height: 120px;
+        }
+
+        .cuisine-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cuisine-name {
+            font-size: 1rem;
+        }
+
+        .cuisine-count {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* FAQ Section Styling */
+    .faq-section {
+        background-color: #f8f9fa;
+        padding: 3rem 0;
+        border-radius: 10px;
+    }
+
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-color: #007bff;
+    }
+
+    .faq-question {
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid transparent;
+    }
+
+    .faq-item.active .faq-question {
+        border-bottom-color: #e9ecef;
+    }
+
+    .faq-toggle {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #007bff;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0 1.5rem;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    .faq-answer p {
+        margin: 0;
+        color: #6c757d;
+        line-height: 1.6;
+    }
+
+
+</style>
+
+<script>
+function toggleFaq(element) {
+    const faqItem = element.parentElement;
+    const wasActive = faqItem.classList.contains('active');
+    
+    // Close all FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Toggle the clicked item
+    if (!wasActive) {
+        faqItem.classList.add('active');
+    }
+}
+
+// Hours toggle functionality
+function toggleHours(header) {
+    const hoursList = header.nextElementSibling;
+    const toggleIcon = header.querySelector('.hours-toggle i');
+    
+    if (hoursList.classList.contains('collapsed')) {
+        // Expand
+        hoursList.classList.remove('collapsed');
+        hoursList.classList.add('expanded');
+        header.querySelector('.hours-toggle').classList.add('expanded');
+    } else {
+        // Collapse
+        hoursList.classList.remove('expanded');
+        hoursList.classList.add('collapsed');
+        header.querySelector('.hours-toggle').classList.remove('expanded');
+    }
+}
+
+// Restaurant sorting functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+    const restaurantGrid = document.getElementById('restaurantGrid');
+    
+    if (sortSelect && restaurantGrid) {
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const restaurantCards = Array.from(restaurantGrid.querySelectorAll('.col-md-4'));
+            
+            restaurantCards.sort(function(a, b) {
+                const cardA = a.querySelector('.restaurant-card');
+                const cardB = b.querySelector('.restaurant-card');
+                
+                if (sortValue === 'rating') {
+                    // Sort by rating (high to low)
+                    const ratingA = parseFloat(cardA.querySelector('.stars').textContent.trim()) || 0;
+                    const ratingB = parseFloat(cardB.querySelector('.stars').textContent.trim()) || 0;
+                    return ratingB - ratingA;
+                } else if (sortValue === 'name-asc') {
+                    // Sort by name A-Z
+                    const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    return nameA.localeCompare(nameB);
+                } else if (sortValue === 'name-desc') {
+                    // Sort by name Z-A
+                    const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                    return nameB.localeCompare(nameA);
+                }
+                return 0;
+            });
+            
+            // Clear and re-append sorted cards
+            restaurantGrid.innerHTML = '';
+            restaurantCards.forEach(card => {
+                restaurantGrid.appendChild(card);
+            });
+        });
+    }
+});
+</script>
+{% endblock %} 

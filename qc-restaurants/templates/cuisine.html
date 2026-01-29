@@ -1,0 +1,1214 @@
+{% extends "base.html" %}
+
+{% block title %}Top {{ total_restaurants }} Best {{ cuisine_name }} Restaurants in {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}{% endblock %}
+
+{% block description %}Discover the top {{ cuisine_name|lower }} dining options across {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}. Browse {{ total_restaurants }} {{ cuisine_name|lower }} restaurants with menus, photos, reviews and ratings.{% endblock %}
+
+{% block keywords %}{{ cuisine_name }} restaurants quezon city, {{ cuisine_name }} food, {{ cuisine_name }} cuisine, {{ cuisine_name }} dining{% endblock %}
+
+{% block canonical %}{% if request.args.get('area') %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}?area={{ request.args.get('area') }}{% else %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}{% endif %}{% endblock %}
+
+{% block og_title %}Top {{ total_restaurants }} Best {{ cuisine_name }} Restaurants in {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}{% endblock %}
+
+{% block og_description %}Discover the top {{ cuisine_name|lower }} dining options across {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}. Browse {{ total_restaurants }} {{ cuisine_name|lower }} restaurants with menus, photos, reviews and ratings.{% endblock %}
+
+{% block og_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}
+
+{% block og_url %}{% if request.args.get('area') %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}?area={{ request.args.get('area') }}{% else %}/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}{% endif %}{% endblock %}
+
+{% block hero_title %}Top {{ total_restaurants }} Best {{ cuisine_name }} Restaurants in {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}{% endblock %}
+
+{% block hero_subtitle %}Discover the top {{ cuisine_name|lower }} dining options across {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-12">
+            <!-- Other Cuisines in Quezon City Section -->
+            <section class="other-cuisines-section mb-3">
+                <div class="section-header mb-3">
+                    <h2 class="section-title">Other Cuisines in {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}</h2>
+                    <p class="lead text-muted">Explore different dining options {% if request.args.get('area') %}in {{ request.args.get('area')|replace('-', ' ')|title }}{% else %}across the city{% endif %}</p>
+                    <p class="mt-2">
+                        <a href="/all-restaurants" class="btn btn-outline-primary">View Complete Restaurant Directory</a>
+                    </p>
+                </div>
+                <div class="cuisine-grid">
+                    {% for other_cuisine, count in cuisine_counts.items() %}
+                        {% if other_cuisine != cuisine_name and loop.index <= 9 %}
+                        <a href="/cuisine/{{ other_cuisine|lower|replace(' ', '-') }}" class="cuisine-card">
+                            <div class="cuisine-emoji">
+                                {% if 'fast' in other_cuisine|lower %}🍔
+                                {% elif 'pizza' in other_cuisine|lower %}🍕
+                                {% elif 'japanese' in other_cuisine|lower %}🍣
+                                {% elif 'chinese' in other_cuisine|lower %}🥢
+                                {% elif 'indian' in other_cuisine|lower %}🍛
+                                {% elif 'italian' in other_cuisine|lower %}🍝
+                                {% elif 'seafood' in other_cuisine|lower or 'fish' in other_cuisine|lower %}🦞
+                                {% elif 'korean' in other_cuisine|lower %}🍜
+                                {% elif 'thai' in other_cuisine|lower %}🥘
+                                {% elif 'vietnamese' in other_cuisine|lower %}🍜
+                                {% elif 'american' in other_cuisine|lower %}🗽
+                                {% elif 'mexican' in other_cuisine|lower %}🌮
+                                {% elif 'mediterranean' in other_cuisine|lower %}🥙
+                                {% elif 'breakfast' in other_cuisine|lower %}🍳
+                                {% elif 'burger' in other_cuisine|lower %}🍔
+                                {% elif 'chicken' in other_cuisine|lower %}🍗
+                                {% elif 'dessert' in other_cuisine|lower or 'cake' in other_cuisine|lower %}🍰
+                                {% elif 'bar' in other_cuisine|lower or 'pub' in other_cuisine|lower %}🍸
+                                {% elif 'coffee' in other_cuisine|lower %}☕
+                                {% elif 'tea' in other_cuisine|lower %}🧋
+                                {% elif 'buffet' in other_cuisine|lower %}🍱
+                                {% elif 'vegetarian' in other_cuisine|lower %}🥗
+                                {% elif 'vegan' in other_cuisine|lower %}🥬
+                                {% elif 'steak' in other_cuisine|lower %}🥩
+                                {% elif 'bbq' in other_cuisine|lower or 'barbecue' in other_cuisine|lower %}🍖
+                                {% elif 'sushi' in other_cuisine|lower %}🍣
+                                {% elif 'ramen' in other_cuisine|lower %}🍜
+                                {% elif 'filipino' in other_cuisine|lower %}🍚
+                                {% elif 'french' in other_cuisine|lower %}🗼
+                                {% elif 'greek' in other_cuisine|lower %}🏺
+                                {% elif 'spanish' in other_cuisine|lower %}💃
+                                {% elif 'turkish' in other_cuisine|lower %}🥙
+                                {% elif 'lebanese' in other_cuisine|lower %}🥙
+                                {% elif 'malaysian' in other_cuisine|lower %}🍜
+                                {% elif 'indonesian' in other_cuisine|lower %}🍜
+                                {% elif 'wine' in other_cuisine|lower %}🍷
+                                {% elif 'sandwich' in other_cuisine|lower %}🥪
+                                {% elif 'bakery' in other_cuisine|lower or 'bread' in other_cuisine|lower %}🥖
+                                {% elif 'ice cream' in other_cuisine|lower %}🍦
+                                {% elif 'juice' in other_cuisine|lower %}🧃
+                                {% elif 'food court' in other_cuisine|lower %}🏪
+                                {% elif 'noodle' in other_cuisine|lower %}🍜
+                                {% elif 'soup' in other_cuisine|lower %}🍲
+                                {% elif 'grill' in other_cuisine|lower %}🔥
+                                {% elif 'hotpot' in other_cuisine|lower %}🍲
+                                {% elif 'dimsum' in other_cuisine|lower %}🥟
+                                {% elif 'curry' in other_cuisine|lower %}🍛
+                                {% elif 'pasta' in other_cuisine|lower %}🍝
+                                {% elif 'salad' in other_cuisine|lower %}🥗
+                                {% elif 'smoothie' in other_cuisine|lower %}🥤
+                                {% elif 'bubble tea' in other_cuisine|lower %}🧋
+                                {% elif 'cafe' in other_cuisine|lower %}☕
+                                {% elif 'restaurant' in other_cuisine|lower %}🍽️
+                                {% else %}🍽️{% endif %}
+                            </div>
+                            <div class="cuisine-name">{{ other_cuisine }}</div>
+                            <div class="cuisine-count">{{ count }} restaurants</div>
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Cuisine Title Section -->
+            <header class="cuisine-header mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="section-title">All {{ cuisine_name }} Restaurants in {% if request.args.get('area') %}{{ request.args.get('area')|replace('-', ' ')|title }}{% else %}Quezon City{% endif %}</h2>
+                    </div>
+                </div>
+            </header>
+
+            
+
+             <!-- Sort Controls -->
+             <div class="sort-controls mb-3">
+                 <div class="d-flex justify-content-center">
+                     <div class="sort-group">
+                         <label class="sort-label me-2">Sort by:</label>
+                         <select class="form-select sort-select" id="sortSelect" style="width: auto; min-width: 180px;">
+                             <option value="rating">Rating (High to Low)</option>
+                             <option value="name-asc">Name (A-Z)</option>
+                             <option value="name-desc">Name (Z-A)</option>
+                         </select>
+                     </div>
+                 </div>
+             </div>
+
+            <!-- Restaurant List -->
+            <div class="restaurant-list">
+                <div class="row g-4" id="restaurantGrid">
+                    {% for restaurant in restaurants %}
+                    <div class="col-md-4">
+                         <div class="restaurant-card h-100" 
+                              data-price="{{ restaurant.price|string }}"
+                              data-features='{{ restaurant.features|tojson }}'
+                              data-about="{{ restaurant.about }}"
+                              data-name="{{ restaurant.display_name }}"
+                              data-high-chairs="{{ restaurant.has_high_chairs|string|lower }}"
+                              data-wifi="{{ restaurant.has_wifi|string|lower }}">
+                              <div class="restaurant-image-wrapper">
+                                  {% set image_url, alt_tag = get_restaurant_image_url(restaurant.display_name, restaurant.photo_url) %}
+                                  <img src="{{ image_url }}" 
+                                       class="restaurant-image" 
+                                       alt="{{ alt_tag }}"
+                                       onerror="this.onerror=null; this.src='{{ url_for('static', filename='cuisine-images/default.svg') }}';">
+                                  {% if restaurant.price %}
+                                  <div class="price-badge">{{ '₱' * restaurant.price|int }}</div>
+                                  {% endif %}
+                                  {% if restaurant.top_pick %}
+                                  <div class="top-pick-badge">TOP PICK</div>
+                                  {% endif %}
+                              </div>
+                              <div class="card-body p-2">
+                                  <div class="d-flex justify-content-between align-items-start mb-1">
+                                      <h2 class="restaurant-name mb-1">{{ restaurant.display_name }}</h2>
+                                      {% if restaurant.jacky_pick %}
+                                      <span class="badge bg-danger">JACKY'S PICK</span>
+                                      {% endif %}
+                                  </div>
+                                  <div class="rating-reviews mb-1">
+                                      <div class="stars d-inline-block">
+                                          {% for _ in range(restaurant.rating|round|int) %}
+                                          <i class="fas fa-star text-warning"></i>
+                                          {% endfor %}
+                                      </div>
+                                      <span class="text-muted">({{ restaurant.reviews|int }} reviews)</span>
+                                  </div>
+                                  <div class="restaurant-details">
+                                      <p class="address mb-1">
+                                          <i class="fas fa-map-marker-alt text-muted me-2"></i>
+                                          {% if restaurant.latitude and restaurant.longitude %}
+                                          <a href="https://maps.google.com/?q={{ restaurant.display_name }}+{{ restaurant.street|replace(',', ' ')|replace('  ', ' ')|trim }}" 
+                                             target="_blank" 
+                                             rel="noopener noreferrer"
+                                             class="text-decoration-none text-dark"
+                                             title="Open in Google Maps">
+                                              {{ restaurant.street }}
+                                              <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size: 0.8em;"></i>
+                                          </a>
+                                          {% else %}
+                                          {{ restaurant.street }}
+                                          {% endif %}
+                                      </p>
+                                      {% if restaurant.phone %}
+                                      <p class="phone mb-1">
+                                          <i class="fas fa-phone text-muted me-2"></i>
+                                          <a href="tel:{{ restaurant.phone }}" 
+                                             class="text-decoration-none text-dark"
+                                             title="Call {{ restaurant.name }}">
+                                              {{ restaurant.phone }}
+                                              <i class="fas fa-phone-volume ms-1 text-muted" style="font-size: 0.8em;"></i>
+                                          </a>
+                                      </p>
+                                      {% endif %}
+                                      {% if restaurant.hours %}
+                                      <div class="hours mb-2">
+                                          <div class="hours-header" onclick="toggleHours(this)">
+                                              <i class="far fa-clock text-muted me-2"></i>
+                                              <span class="hours-status {% if restaurant.is_open %}text-success{% else %}text-danger{% endif %}">
+                                                  {% if restaurant.is_open %}Open Now{% else %}Closed{% endif %}
+                                              </span>
+                                              <span class="hours-toggle">
+                                                  <i class="fas fa-chevron-down"></i>
+                                              </span>
+                                          </div>
+                                          <div class="hours-list collapsed">
+                                              {% for day, hours in restaurant.hours.items() %}
+                                              <div class="hours-item {% if day == current_day %}current-day{% endif %}">
+                                                  <span class="day">{{ day }}</span>
+                                                  <span class="time">{{ hours }}</span>
+                                              </div>
+                                              {% endfor %}
+                                          </div>
+                                      </div>
+                                      {% endif %}
+                                      <div class="features mb-1">
+                                          {% for feature in restaurant.features %}
+                                              {% if feature == 'Delivery' %}
+                                              <span class="badge feature-badge delivery">
+                                                  <i class="fas fa-motorcycle me-1"></i>Delivery
+                                              </span>
+                                              {% elif feature == 'Takeout' %}
+                                              <span class="badge feature-badge takeout">
+                                                  <i class="fas fa-shopping-bag me-1"></i>Takeout
+                                              </span>
+                                              {% elif feature == 'Dine-in' %}
+                                              <span class="badge feature-badge dine-in">
+                                                  <i class="fas fa-utensils me-1"></i>Dine-in
+                                              </span>
+                                              {% endif %}
+                                          {% endfor %}
+                                      
+                                          {% if restaurant.wheelchair_accessible %}
+                                          <span class="badge feature-badge wheelchair">
+                                              <i class="fas fa-wheelchair me-1"></i>Wheelchair Accessible
+                                          </span>
+                                          {% endif %}
+                                          {% if restaurant.good_for_kids %}
+                                          <span class="badge feature-badge kids">
+                                              <i class="fas fa-child me-1"></i>Good for Kids
+                                          </span>
+                                          {% endif %}
+                                          {% if restaurant.has_wifi %}
+                                          <span class="badge feature-badge wifi">
+                                              <i class="fas fa-wifi me-1"></i>Free Wi-Fi
+                                          </span>
+                                          {% endif %}
+                                          {% if restaurant.has_high_chairs %}
+                                          <span class="badge feature-badge high-chairs">
+                                              <i class="fas fa-baby me-1"></i>High Chairs Available
+                                          </span>
+                                          {% endif %}
+                                      </div>
+                                      
+                                      {% if restaurant.site %}
+                                      <div class="text-center mt-3">
+                                          <a href="{{ restaurant.site }}" target="_blank" rel="nofollow" class="btn btn-outline-danger visit-website-btn">
+                                              <i class="fas fa-external-link-alt me-1"></i>
+                                              Visit Website
+                                          </a>
+                                      </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+                  
+                  <!-- Server-Side Pagination -->
+                  {% if pagination.pages > 1 %}
+                  <nav aria-label="Restaurant pagination" class="mt-4">
+                      <ul class="pagination justify-content-center">
+                          <!-- Previous button -->
+                          {% if pagination.has_prev %}
+                          <li class="page-item">
+                              <a class="page-link" href="?{% if request.args.get('area') %}area={{ request.args.get('area') }}&{% endif %}page={{ pagination.prev_num }}" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                              </a>
+                          </li>
+                          {% else %}
+                          <li class="page-item disabled">
+                              <span class="page-link" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                              </span>
+                          </li>
+                          {% endif %}
+                          
+                          <!-- Page numbers -->
+                          {% for page_num in pagination.iter_pages() %}
+                              {% if page_num %}
+                                  {% if page_num == pagination.page %}
+                                  <li class="page-item active">
+                                      <span class="page-link">{{ page_num }}</span>
+                                  </li>
+                                  {% else %}
+                                  <li class="page-item">
+                                      <a class="page-link" href="?{% if request.args.get('area') %}area={{ request.args.get('area') }}&{% endif %}page={{ page_num }}">{{ page_num }}</a>
+                                  </li>
+                                  {% endif %}
+                              {% else %}
+                                  <li class="page-item disabled">
+                                      <span class="text-muted">...</span>
+                                  </li>
+                              {% endif %}
+                          {% endfor %}
+                          
+                          <!-- Next button -->
+                          {% if pagination.has_next %}
+                          <li class="page-item">
+                              <a class="page-link" href="?{% if request.args.get('area') %}area={{ request.args.get('area') }}&{% endif %}page={{ pagination.next_num }}" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                              </a>
+                          </li>
+                          {% else %}
+                          <li class="page-item disabled">
+                              <span class="page-link" aria-label="Previous">
+                                  <span aria-hidden="true">&raquo;</span>
+                              </span>
+                          </li>
+                          {% endif %}
+                      </ul>
+                      
+                      <!-- Page Info -->
+                      <div class="text-center mt-2">
+                          <small class="text-muted">
+                              Showing {{ pagination.first }} to {{ pagination.last }} of {{ pagination.total }} restaurants
+                          </small>
+                      </div>
+                  </nav>
+                  {% endif %}
+              </div>
+         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Popular Areas Section -->
+    {% if popular_areas %}
+    <section class="popular-areas mt-5">
+        <div class="section-header text-center mb-4">
+            <h2 class="section-title">Popular Areas for {{ cuisine_name }} in Quezon City</h2>
+            <p class="lead text-muted">Discover the top {{ cuisine_name|lower }} dining options across Quezon City</p>
+        </div>
+        <div class="areas-grid">
+            {% for area_name, count in popular_areas %}
+                         <a href="/cuisine/{{ cuisine_name|lower|replace(' ', '-') }}?area={{ area_name|lower|replace(' ', '-') }}" class="area-card">
+                <div class="area-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h4>{{ area_name }}</h4>
+                <p>{{ count }} {{ cuisine_name|lower }} restaurants</p>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Similar Cuisines Section -->
+    {% if similar_cuisines %}
+    <section class="similar-cuisines mt-5">
+        <div class="section-header text-center mb-4">
+            <h2 class="section-title">Similar Cuisines You Might Like</h2>
+            <p class="lead text-muted">Explore related dining options</p>
+        </div>
+                         <div class="cuisine-tags">
+                     {% for similar_cuisine in similar_cuisines %}
+                         <a href="/cuisine/{{ similar_cuisine|lower|replace(' ', '-') }}" class="cuisine-tag">
+                             {{ similar_cuisine }}
+                             {% if 'fast' in similar_cuisine|lower %}🍔
+                             {% elif 'pizza' in similar_cuisine|lower %}🍕
+                             {% elif 'japanese' in similar_cuisine|lower %}🍣
+                             {% elif 'chinese' in similar_cuisine|lower %}🥢
+                             {% elif 'indian' in similar_cuisine|lower %}🍛
+                             {% elif 'italian' in similar_cuisine|lower %}🍝
+                             {% elif 'seafood' in similar_cuisine|lower or 'fish' in similar_cuisine|lower %}🦞
+                             {% elif 'korean' in similar_cuisine|lower %}🍜
+                             {% elif 'thai' in similar_cuisine|lower %}🥘
+                             {% elif 'vietnamese' in similar_cuisine|lower %}🍜
+                             {% elif 'american' in similar_cuisine|lower %}🗽
+                             {% elif 'mexican' in similar_cuisine|lower %}🌮
+                             {% elif 'mediterranean' in similar_cuisine|lower %}🥙
+                             {% elif 'breakfast' in similar_cuisine|lower %}🍳
+                             {% elif 'burger' in similar_cuisine|lower %}🍔
+                             {% elif 'chicken' in similar_cuisine|lower %}🍗
+                             {% elif 'dessert' in similar_cuisine|lower or 'cake' in similar_cuisine|lower %}🍰
+                             {% elif 'bar' in similar_cuisine|lower or 'pub' in similar_cuisine|lower %}🍸
+                             {% elif 'coffee' in similar_cuisine|lower %}☕
+                             {% elif 'tea' in similar_cuisine|lower %}🧋
+                             {% elif 'buffet' in similar_cuisine|lower %}🍱
+                             {% elif 'vegetarian' in similar_cuisine|lower %}🥗
+                             {% elif 'vegan' in similar_cuisine|lower %}🥬
+                             {% elif 'steak' in similar_cuisine|lower %}🥩
+                             {% elif 'bbq' in similar_cuisine|lower or 'barbecue' in similar_cuisine|lower %}🍖
+                             {% elif 'sushi' in similar_cuisine|lower %}🍣
+                             {% elif 'ramen' in similar_cuisine|lower %}🍜
+                             {% elif 'filipino' in similar_cuisine|lower %}🍚
+                             {% elif 'french' in similar_cuisine|lower %}🗼
+                             {% elif 'greek' in similar_cuisine|lower %}🏺
+                             {% elif 'spanish' in similar_cuisine|lower %}💃
+                             {% elif 'turkish' in similar_cuisine|lower %}🥙
+                             {% elif 'lebanese' in similar_cuisine|lower %}🥙
+                             {% elif 'malaysian' in similar_cuisine|lower %}🍜
+                             {% elif 'indonesian' in similar_cuisine|lower %}🍜
+                             {% elif 'wine' in similar_cuisine|lower %}🍷
+                             {% elif 'sandwich' in similar_cuisine|lower %}🥪
+                             {% elif 'bakery' in similar_cuisine|lower or 'bread' in similar_cuisine|lower %}🥖
+                             {% elif 'ice cream' in similar_cuisine|lower %}🍦
+                             {% elif 'juice' in similar_cuisine|lower %}🧃
+                             {% elif 'food court' in similar_cuisine|lower %}🏪
+                             {% elif 'noodle' in similar_cuisine|lower %}🍜
+                             {% elif 'soup' in similar_cuisine|lower %}🍲
+                             {% elif 'grill' in similar_cuisine|lower %}🔥
+                             {% elif 'hotpot' in similar_cuisine|lower %}🍲
+                             {% elif 'dimsum' in similar_cuisine|lower %}🥟
+                             {% elif 'curry' in similar_cuisine|lower %}🍛
+                             {% elif 'pasta' in similar_cuisine|lower %}🍝
+                             {% elif 'salad' in similar_cuisine|lower %}🥗
+                             {% elif 'smoothie' in similar_cuisine|lower %}🥤
+                             {% elif 'bubble tea' in similar_cuisine|lower %}🧋
+                             {% elif 'cafe' in similar_cuisine|lower %}☕
+                             {% elif 'restaurant' in similar_cuisine|lower %}🍽️
+                             {% else %}🍽️{% endif %}
+                             ({{ cuisine_counts[similar_cuisine] }})
+                         </a>
+                     {% endfor %}
+                 </div>
+                    </section>
+                    {% endif %}
+
+                    <!-- Last Updated Section -->
+                    <section class="last-updated mt-4">
+                        <div class="text-center">
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                Last updated: {{ current_date }}
+                            </small>
+                        </div>
+                    </section>
+                </div>
+
+                <style>
+                    .cuisine-header {
+                        border-bottom: 2px solid #d32323;
+                        padding-bottom: 1rem;
+                        margin-bottom: 2rem;
+                    }
+
+                    /* Other Cuisines Section */
+                    .other-cuisines-section {
+                        background: #f8f9fa;
+                        padding: 2rem;
+                        border-radius: 12px;
+                        margin-bottom: 3rem;
+                    }
+
+                    .cuisine-grid {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.4rem;
+                        margin-bottom: 3rem;
+                    }
+
+                    .cuisine-card {
+                        background-color: white;
+                        font-size: 16px;
+                        color: #495057;
+                        padding: 8px 16px;
+                        border-radius: 25px;
+                        text-decoration: none;
+                        border: 1px solid #e9ecef;
+                        transition: all 0.2s ease;
+                        display: inline-flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+                        min-height: auto;
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                        white-space: nowrap;
+                        font-weight: 500;
+                        width: fit-content;
+                    }
+
+                    .cuisine-card:hover {
+                        background-color: #d32323;
+                        color: white;
+                        transform: translateY(-1px);
+                        box-shadow: 0 3px 8px rgba(211, 35, 35, 0.2);
+                        border-color: #d32323;
+                    }
+
+                    .cuisine-emoji {
+                        font-size: 1.2rem;
+                        line-height: 1;
+                        margin: 0;
+                        filter: grayscale(0.3);
+                    }
+
+                    .cuisine-name {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: inherit;
+                        line-height: 1.2;
+                        margin: 0;
+                        text-transform: capitalize;
+                    }
+
+                    .cuisine-count {
+                        font-size: 14px;
+                        color: inherit;
+                        line-height: 1.2;
+                        opacity: 0.7;
+                        margin: 0;
+                        font-weight: 400;
+                    }
+
+                    .restaurant-card {
+                        background: white;
+                        border: none;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+                        margin-bottom: 20px;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .restaurant-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 24px rgba(211,35,35,0.15);
+                    }
+
+                    .restaurant-card .card-body {
+                        padding: 0.75rem;
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                    }
+
+                    .restaurant-image-wrapper {
+                        position: relative;
+                        height: 200px;
+                        min-height: 200px;
+                        width: 100%;
+                    }
+
+                    .restaurant-image {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .top-pick-badge {
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                        background: #d32323;
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        z-index: 2;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                    }
+
+                    .jacky-pick-badge {
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                        background: #d32323;
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        z-index: 2;
+                    }
+
+                    .price-badge {
+                        position: absolute;
+                        top: 15px;
+                        left: 15px;
+                        background: rgba(108, 117, 125, 0.95);
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        z-index: 2;
+                    }
+
+                    .restaurant-name {
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        margin-bottom: 0.25rem;
+                        color: #2d2e2f;
+                    }
+
+                    .stars {
+                        font-size: 0.9rem;
+                        margin-right: 5px;
+                        color: #ffd700;
+                    }
+
+                    .rating-reviews {
+                        margin-bottom: 1rem;
+                    }
+
+                    .restaurant-details {
+                        color: #666;
+                        font-size: 0.9rem;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.15rem;
+                        flex-grow: 1;
+                    }
+
+                    .address, .phone {
+                        margin-bottom: 0.15rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .features {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1px;
+                        margin-bottom: 1px;
+                        max-width: 100%;
+                        line-height: 1.1;
+                    }
+
+                    .btn-outline-danger {
+                        color: white;
+                        background-color: #d32323;
+                        border-color: #d32323;
+                        padding: 4px 16px;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        transition: all 0.3s ease;
+                        display: inline-block;
+                    }
+
+                    .btn-outline-danger:hover {
+                        background-color: #b61d1d;
+                        border-color: #b61d1d;
+                        color: white;
+                    }
+
+                    
+
+                    .cuisine-tags {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                    }
+
+                    .cuisine-tag {
+                        display: inline-flex;
+                        align-items: center;
+                        padding: 8px 16px;
+                        background-color: white;
+                        border: 1px solid #dee2e6;
+                        border-radius: 20px;
+                        color: #333;
+                        text-decoration: none;
+                        font-size: 0.95rem;
+                        transition: all 0.3s ease;
+                    }
+
+                    .cuisine-tag:hover {
+                        background-color: #d32323;
+                        color: white;
+                        border-color: #d32323;
+                        transform: translateY(-2px);
+                    }
+
+                    .feature-badge {
+                        font-size: 0.85rem;
+                        padding: 4px 8px;
+                        margin-right: 2px;
+                        margin-bottom: 2px;
+                        border-radius: 16px;
+                        font-weight: 500;
+                        display: inline-flex;
+                        align-items: center;
+                        height: 24px;
+                    }
+
+                    .feature-badge i {
+                        margin-right: 4px;
+                        font-size: 0.85rem;
+                    }
+
+                    .feature-badge.delivery {
+                        background-color: #FF6B6B;
+                        color: white;
+                    }
+
+                    .feature-badge.takeout {
+                        background-color: #4ECDC4;
+                        color: white;
+                    }
+
+                    .feature-badge.dine-in {
+                        background-color: #45B7D1;
+                        color: white;
+                    }
+
+                    .feature-badge.wheelchair {
+                        background-color: #6C5CE7;
+                        color: white;
+                    }
+
+                    .feature-badge.kids {
+                        background-color: #FFA62B;
+                        color: white;
+                    }
+
+                    .feature-badge.wifi {
+                        background-color: #A8E6CF;
+                        color: #2D3436;
+                    }
+
+                    .feature-badge.high-chairs {
+                        background-color: #FFB5E8;
+                        color: #2D3436;
+                    }
+
+                    .hours {
+                        font-size: 0.9rem;
+                        background: #f8f9fa;
+                        border-radius: 8px;
+                        padding: 8px;
+                    }
+
+                    .hours-header {
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        padding: 4px;
+                        border-radius: 4px;
+                        transition: background-color 0.2s ease;
+                    }
+
+                    .hours-header:hover {
+                        background-color: rgba(0, 0, 0, 0.05);
+                    }
+
+                    .hours-toggle {
+                        margin-left: auto;
+                        transition: transform 0.3s ease;
+                    }
+
+                    .hours-toggle.expanded {
+                        transform: rotate(180deg);
+                    }
+
+                    .hours-status {
+                        font-weight: 500;
+                    }
+
+                    .hours-list {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 4px;
+                        margin-top: 8px;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.3s ease;
+                    }
+
+                    .hours-list.expanded {
+                        max-height: 200px;
+                    }
+
+                    .hours-item {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 2px 4px;
+                    }
+
+                    .hours-item.current-day {
+                        background: #fff;
+                        border-radius: 4px;
+                        font-weight: 500;
+                    }
+
+                    .day {
+                        color: #666;
+                        margin-right: 8px;
+                    }
+
+                    .time {
+                        color: #2d2e2f;
+                    }
+
+                    .btn-outline-danger {
+                        border-color: #d32323;
+                        color: #d32323;
+                    }
+
+                    .btn-outline-danger:hover,
+                    .btn-outline-danger:focus {
+                        background-color: #d32323;
+                        color: white;
+                    }
+
+                    
+
+                    .visit-website-btn.btn-outline-danger {
+                        color: #fff;
+                        background-color: #d32323;
+                        border-color: #d32323;
+                        padding: 6px 20px;
+                        font-size: 0.95rem;
+                        font-weight: 500;
+                        transition: all 0.3s ease;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 140px;
+                        max-width: 180px;
+                        text-align: center;
+                    }
+
+                    .visit-website-btn.btn-outline-danger:hover {
+                        background-color: #b61d1d;
+                        border-color: #b61d1d;
+                        color: #fff;
+                        transform: translateY(-1px);
+                    }
+
+                    .popular-areas {
+                        background: #f8f9fa;
+                        padding: 3rem 0;
+                        border-radius: 16px;
+                    }
+
+                                         .section-header {
+                         margin-bottom: 2rem;
+                         border-bottom: 2px solid #d32323;
+                         padding-bottom: 1rem;
+                     }
+
+                    .section-title {
+                        color: #2d2e2f;
+                        font-weight: 700;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .areas-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 1.5rem;
+                        max-width: 1000px;
+                        margin: 0 auto;
+                    }
+
+                    .area-card {
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 12px;
+                        text-align: center;
+                        text-decoration: none;
+                        color: inherit;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        transition: all 0.3s ease;
+                        border: 1px solid #e8e8e8;
+                    }
+
+                    .area-card:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+                        color: inherit;
+                        text-decoration: none;
+                    }
+
+                    .area-icon {
+                        width: 60px;
+                        height: 60px;
+                        background: linear-gradient(135deg, #d32323, #b61d1d);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    }
+
+                    .area-card h4 {
+                        color: #2d2e2f;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .area-card p {
+                        color: #666;
+                        margin: 0;
+                        font-size: 0.9rem;
+                    }
+
+                    .similar-cuisines {
+                        background: white;
+                        padding: 3rem;
+                        border-radius: 16px;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        border: 1px solid #e8e8e8;
+                    }
+
+                    .last-updated {
+                        background: #f8f9fa;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #e8e8e8;
+                    }
+
+                    .last-updated small {
+                        font-size: 0.9rem;
+                    }
+
+                                                                                   @media (max-width: 768px) {
+                          .areas-grid {
+                              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                              gap: 1rem;
+                          }
+  
+                          .similar-cuisines {
+                              padding: 2rem;
+                          }
+                          
+                                  /* Mobile font sizes for cuisine grid */
+         .cuisine-name {
+             font-size: 12px;
+             margin: 0;
+         }
+         
+         .cuisine-count {
+             font-size: 10px;
+             margin: 0;
+         }
+                      }
+                      
+                      /* Filter section styling - applies to all screen sizes */
+                      .filter-section {
+                          background: white;
+                          border: 1px solid #e9ecef;
+                          border-radius: 12px;
+                          padding: 1rem;
+                          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                      }
+                      
+                      .filter-header {
+                          border-bottom: 1px solid #e9ecef;
+                          padding-bottom: 0.75rem;
+                      }
+                      
+                      .filter-label {
+                          font-weight: 600;
+                          color: #495057;
+                          margin-bottom: 0.5rem;
+                          display: block;
+                          font-size: 0.9rem;
+                      }
+                      
+                      .price-buttons, .feature-buttons {
+                          display: flex;
+                          flex-wrap: wrap;
+                          gap: 0.5rem;
+                      }
+                      
+                      .price-buttons .btn, .feature-buttons .btn {
+                          padding: 0.5rem 0.75rem;
+                          font-size: 0.9rem;
+                          border-radius: 8px;
+                          min-width: 60px;
+                          text-align: center;
+                          transition: all 0.2s ease;
+                      }
+                      
+                      .price-buttons .btn-check:checked + .btn,
+                      .feature-buttons .btn-check:checked + .btn {
+                          background-color: #d32323;
+                          border-color: #d32323;
+                          color: white;
+                          transform: scale(1.05);
+                      }
+                      
+                      .price-buttons .btn:hover,
+                      .feature-buttons .btn:hover {
+                          border-color: #d32323;
+                          transform: translateY(-1px);
+                      }
+                      
+                      .filter-group select {
+                          border-radius: 8px;
+                          border: 1px solid #ced4da;
+                          padding: 0.5rem;
+                          font-size: 0.9rem;
+                      }
+                      
+                      .filter-group select:focus {
+                          border-color: #d32323;
+                          box-shadow: 0 0 0 0.2rem rgba(211, 35, 35, 0.25);
+                      }
+                      
+                                             /* Desktop filter styling */
+                       @media (min-width: 768px) {
+                           .filter-section {
+                               background: transparent;
+                               border: none;
+                               box-shadow: none;
+                               padding: 0;
+                           }
+                           
+                           .filter-content {
+                               display: flex;
+                               align-items: flex-start;
+                               gap: 1.5rem;
+                           }
+                           
+                           .filter-group {
+                               margin-bottom: 0;
+                               display: flex;
+                               flex-direction: column;
+                           }
+                           
+                           .filter-label {
+                               margin-bottom: 0.25rem;
+                               font-size: 0.85rem;
+                               line-height: 1;
+                           }
+                           
+                           .price-buttons, .feature-buttons {
+                               gap: 0.25rem;
+                               display: flex;
+                               align-items: center;
+                           }
+                           
+                           .price-buttons .btn, .feature-buttons .btn {
+                               padding: 0.375rem 0.75rem;
+                               font-size: 0.8rem;
+                               min-width: 50px;
+                               height: 32px;
+                               display: flex;
+                               align-items: center;
+                               justify-content: center;
+                           }
+                           
+                           .filter-group select {
+                               padding: 0.375rem 0.75rem;
+                               font-size: 0.8rem;
+                               width: auto;
+                               height: 32px;
+                           }
+                       }
+                     
+                     /* Pagination Styles */
+                     .pagination {
+                         margin-bottom: 0;
+                     }
+                     
+                     .page-link {
+                         color: #d32323;
+                         border-color: #dee2e6;
+                         padding: 0.5rem 0.75rem;
+                         font-weight: 500;
+                         transition: all 0.2s ease;
+                     }
+                     
+                     .page-link:hover {
+                         color: #b61d1d;
+                         background-color: #f8f9fa;
+                         border-color: #d32323;
+                     }
+                     
+                     .page-item.active .page-link {
+                         background-color: #d32323;
+                         border-color: #d32323;
+                         color: white;
+                     }
+                     
+                     .page-item.disabled .page-link {
+                         color: #6c757d;
+                         background-color: transparent;
+                         border-color: #dee2e6;
+                     }
+                     
+                     .page-item:first-child .page-link,
+                     .page-item:last-child .page-link {
+                         border-radius: 0.375rem;
+                     }
+                     
+                     .page-item:not(:first-child) .page-link {
+                         margin-left: -1px;
+                     }
+                     
+                     /* Sort Controls Styling */
+                     .sort-controls {
+                         background: #f8f9fa;
+                         border: 1px solid #e9ecef;
+                         border-radius: 8px;
+                         padding: 1rem;
+                     }
+                     
+                     .sort-label {
+                         font-weight: 600;
+                         color: #495057;
+                         font-size: 0.9rem;
+                     }
+                     
+                     .sort-select {
+                         border-radius: 6px;
+                         border: 1px solid #ced4da;
+                         padding: 0.5rem;
+                         font-size: 0.9rem;
+                         transition: all 0.2s ease;
+                     }
+                     
+                     .sort-select:focus {
+                         border-color: #d32323;
+                         box-shadow: 0 0 0 0.2rem rgba(211, 35, 35, 0.25);
+                     }
+                     
+                     .sort-select:hover {
+                         border-color: #d32323;
+                     }
+                </style>
+
+                {% block scripts %}
+                <script>
+                    // Global variables
+                    let sortSelect, restaurantGrid, priceFilters, featureFilters;
+                    
+                    function toggleHours(header) {
+                        const hoursList = header.nextElementSibling;
+                        const toggleIcon = header.querySelector('.hours-toggle i');
+                        
+                        if (hoursList.classList.contains('collapsed')) {
+                            // Expand
+                            hoursList.classList.remove('collapsed');
+                            hoursList.classList.add('expanded');
+                            header.querySelector('.hours-toggle').classList.add('expanded');
+                        } else {
+                            // Collapse
+                            hoursList.classList.remove('expanded');
+                            hoursList.classList.add('collapsed');
+                            header.querySelector('.hours-toggle').classList.remove('expanded');
+                        }
+                    }
+
+                    // Restaurant sorting functionality
+                    document.addEventListener('DOMContentLoaded', function() {
+                        sortSelect = document.getElementById('sortSelect');
+                        restaurantGrid = document.getElementById('restaurantGrid');
+                        
+                        if (sortSelect) {
+                            sortSelect.addEventListener('change', applySorting);
+                        }
+                    });
+                    
+                    function applySorting() {
+                        const sortValue = sortSelect.value;
+                        const restaurantCards = Array.from(restaurantGrid.querySelectorAll('.col-md-4'));
+                        
+                        // Sort the cards based on the selected option
+                        restaurantCards.sort(function(a, b) {
+                            const cardA = a.querySelector('.restaurant-card');
+                            const cardB = b.querySelector('.restaurant-card');
+                            
+                            if (sortValue === 'rating') {
+                                const ratingA = parseFloat(cardA.querySelector('.stars').textContent.trim()) || 0;
+                                const ratingB = parseFloat(cardB.querySelector('.stars').textContent.trim()) || 0;
+                                return ratingB - ratingA; // High to low
+                            } else if (sortValue === 'name-asc') {
+                                const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                                const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                                return nameA.localeCompare(nameB); // A-Z
+                            } else if (sortValue === 'name-desc') {
+                                const nameA = cardA.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                                const nameB = cardB.querySelector('.restaurant-name').textContent.trim().toLowerCase();
+                                return nameB.localeCompare(nameA); // Z-A
+                            }
+                            return 0;
+                        });
+                        
+                        // Re-append the sorted cards to maintain the order
+                        restaurantCards.forEach(card => {
+                            restaurantGrid.appendChild(card);
+                        });
+                        
+                        console.log('Restaurants sorted by:', sortValue);
+                    }
+
+                </script>
+                {% endblock %}
+                {% endblock %}

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- DNS Prefetch & Preconnect for faster external resource loading -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//analytics.ahrefs.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://analytics.ahrefs.com">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YH004G0WP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YH004G0WP7');
+    </script>
+    
+    <!-- Ahrefs Analytics -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="Iny/bUyuEEJ8O0BQ1I473w" async></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#d32323">
+    <title>{% block title %}Restaurants Quezon City - Find the Best Places to Eat{% endblock %}</title>
+    <meta name="description" content="{% block description %}Discover the best restaurants in Quezon City with authentic Filipino flavors, dining experience, and diverse cuisines. Find comfort food, breakfast spots, and upscale dining venues for 2025.{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.restaurantsquezoncity.com{% block canonical %}{% endblock %}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Restaurants in Quezon City - Find the Best Places to Eat{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Discover the best restaurants in Quezon City. Browse by cuisine, price range, and features.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}">
+    <meta property="og:url" content="https://www.restaurantsquezoncity.com{% block og_url %}{% endblock %}">
+    
+    <!-- Twitter Card / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BestEatsQC">
+    <meta name="twitter:creator" content="@BestEatsQC">
+    <meta name="twitter:title" content="{% block twitter_title %}Restaurants in Quezon City - Find the Best Places to Eat{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Discover the best restaurants in Quezon City. Browse by cuisine, price range, and features.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='hero-bg.jpg', _external=True) }}{% endblock %}">
+    
+    {% block extra_head %}{% endblock %}
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Restaurants Quezon City",
+        "description": "Discover the best restaurants in Quezon City with authentic Filipino flavors, dining experience, and diverse cuisines",
+        "url": "https://www.restaurantsquezoncity.com",
+        "about": [
+            "restaurants",
+            "dining experience",
+            "Filipino cuisine",
+            "comfort food",
+            "flavors",
+            "Quezon City",
+            "Philippines",
+            "dining venues",
+            "cuisines",
+            "service"
+        ],
+        "mentions": [
+            "Maginhawa",
+            "Tomas Morato",
+            "Filipino food",
+            "Spanish cuisine",
+            "fusion dishes",
+            "breakfast",
+            "dinner",
+            "heritage",
+            "vibes",
+            "2025"
+        ],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.restaurantsquezoncity.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', filename='css/custom.min.css') }}" as="style">
+    
+    <!-- Bootstrap CSS (Local) -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Leaflet CSS (Local) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <!-- Font Awesome (Local with font-display optimization) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <!-- Custom CSS (External, Minified) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    <style>/* Hero section background needs Jinja2 template */.hero-section{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("{{ url_for('static', filename='hero-bg.jpg') }}")}</style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container position-relative">
+            <button class="navbar-toggler d-block d-lg-none" type="button" id="mobileMenuBtn" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mx-auto" href="/">
+                <img src="{{ url_for('static', filename='logo.svg') }}" alt="Restaurants QC">
+            </a>
+            <div class="d-none d-lg-flex ms-auto align-items-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="cuisinesDropdown" role="button" data-bs-toggle="dropdown">
+                            Cuisines
+                        </a>
+                        <ul class="dropdown-menu cuisine-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="cuisineSearch" placeholder="Search cuisines...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="cuisine-list">
+                                {% if all_cuisines %}
+                                    {% for cuisine in all_cuisines %}
+                                    <li><a class="dropdown-item" href="/cuisine/{{ cuisine|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}">{{ cuisine }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areasDropdown" role="button" data-bs-toggle="dropdown">
+                            Areas
+                        </a>
+                        <ul class="dropdown-menu areas-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="areaSearch" placeholder="Search areas...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="area-list">
+                                {% if area_counts %}
+                                    {% for area, count in area_counts.items() %}
+                                    <li><a class="dropdown-item" href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/">{{ area }} ({{ count }})</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/all-restaurants">All Restaurants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">🔍 Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/best-of">🏆 Best Of</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/saved">❤️ Saved</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                            🎯 Quizzes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/quiz/perfect-spot">🔍 Find Perfect Restaurant</a></li>
+                            <li><a class="dropdown-item" href="/quiz/personality">🎭 What's Your Food Personality?</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/food-tour">🍜 Build Food Tour</a></li>
+                            <li><a class="dropdown-item" href="/contribute/menu">➕ Add Menu Data</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a href="/subscribe" class="btn btn-danger btn-sm w-100">
+                            <i class="fas fa-envelope me-1"></i> Subscribe
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Mobile menu overlay -->
+            <div id="mobileNavOverlay" class="mobile-nav-overlay d-lg-none">
+                <button class="close-mobile-nav" id="closeMobileNav" aria-label="Close menu">&times;</button>
+                <ul class="navbar-nav flex-column text-center mt-5">
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown mb-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="mobileCuisinesDropdown" role="button" data-bs-toggle="dropdown">
+                            Cuisines
+                        </a>
+                        <ul class="dropdown-menu cuisine-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="mobileCuisineSearch" placeholder="Search cuisines...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="cuisine-list">
+                                {% if all_cuisines %}
+                                    {% for cuisine in all_cuisines %}
+                                    <li><a class="dropdown-item" href="/cuisine/{{ cuisine|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}">{{ cuisine }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mb-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="mobileAreasDropdown" role="button" data-bs-toggle="dropdown">
+                            Areas
+                        </a>
+                        <ul class="dropdown-menu areas-dropdown">
+                            <li>
+                                <div class="dropdown-search">
+                                    <input type="text" class="form-control" id="mobileAreaSearch" placeholder="Search areas...">
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="area-list">
+                                {% if area_counts %}
+                                    {% for area, count in area_counts.items() %}
+                                    <li><a class="dropdown-item" href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/">{{ area }} ({{ count }})</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/all-restaurants">All Restaurants</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/search">🔍 Search</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="nav-link" href="/saved">❤️ My Saved</a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a href="/subscribe" class="btn btn-danger w-100">
+                            <i class="fas fa-envelope me-1"></i> Subscribe to Newsletter
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    {% block hero_section %}
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">{% block hero_title %}Top 12 Restaurants in Quezon City{% endblock %}</h1>
+            <p class="hero-subtitle">{% block hero_subtitle %}Discover the best places to eat near you{% endblock %}</p>
+        </div>
+    </section>
+    {% endblock %}
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Scripts (Deferred for faster page load) -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/leaflet.js') }}" defer></script>
+    
+    <script>
+        // Mobile filter toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.getElementById('filterToggle');
+            const filtersSidebar = document.querySelector('.filters-sidebar');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            const closeFilters = document.getElementById('closeFilters');
+            
+            if (filterToggle) {
+                filterToggle.addEventListener('click', function() {
+                    filtersSidebar.classList.add('active');
+                    mobileOverlay.classList.add('active');
+                });
+            }
+            
+            if (closeFilters) {
+                closeFilters.addEventListener('click', function() {
+                    filtersSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                });
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', function() {
+                    filtersSidebar.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                });
+            }
+        });
+
+        // Cuisine search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('cuisineSearch');
+            const cuisineItems = document.querySelectorAll('.cuisine-list .dropdown-item');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                cuisineItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Areas search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const areaSearchInput = document.getElementById('areaSearch');
+            const areaItems = document.querySelectorAll('.area-list .dropdown-item');
+
+            if (areaSearchInput && areaItems.length > 0) {
+                areaSearchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    areaItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        // Mobile areas search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileAreaSearchInput = document.getElementById('mobileAreaSearch');
+            const mobileAreaItems = document.querySelectorAll('.areas-dropdown .area-list .dropdown-item');
+
+            if (mobileAreaSearchInput && mobileAreaItems.length > 0) {
+                mobileAreaSearchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    mobileAreaItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        // Mobile nav toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            var mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            var closeMobileNav = document.getElementById('closeMobileNav');
+            if (mobileMenuBtn && mobileNavOverlay && closeMobileNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileNavOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    // Hide the hamburger button when menu is open
+                    mobileMenuBtn.style.opacity = '0';
+                    mobileMenuBtn.style.pointerEvents = 'none';
+                });
+                closeMobileNav.addEventListener('click', function() {
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    // Show the hamburger button when menu is closed
+                    mobileMenuBtn.style.opacity = '1';
+                    mobileMenuBtn.style.pointerEvents = 'auto';
+                });
+                
+                // Close menu when clicking on the overlay background
+                mobileNavOverlay.addEventListener('click', function(e) {
+                    if (e.target === mobileNavOverlay) {
+                        mobileNavOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                        // Show the hamburger button when menu is closed
+                        mobileMenuBtn.style.opacity = '1';
+                        mobileMenuBtn.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-5" style="background-color: #000;">
+        <div class="container">
+            <div class="row">
+                <!-- About Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">About Restaurants QC</h3>
+                    <p class="text-white-50">Your guide to the best restaurants in Quezon City. Find top-rated places to eat near you.</p>
+                    <p class="text-white-50">
+                        <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📊 Browse 400+ Restaurants</a>
+                    </p>
+                    <p class="text-white-50 mt-3">
+                        <strong class="text-white">Editor:</strong> <span class="text-white-50">Zachary Siecinski</span>
+                    </p>
+                    <p class="text-white-50">
+                        <strong class="text-white">Last updated:</strong> <span class="text-white-50">January 28, 2026</span>
+                    </p>
+                    <p class="text-white-50 mt-2">Follow us on social media:</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/BestEatsQC" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Popular Areas Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">Popular Areas</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📋 All Restaurants</a>
+                        </li>
+                        {% if area_counts %}
+                            {% for area, count in area_counts.items()|sort(attribute='1', reverse=true) %}
+                                {% if loop.index <= 6 %}
+                                <li class="mb-2">
+                                    <a href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/" class="text-white-50 text-decoration-none">
+                                        {{ area }} ({{ count }})
+                                    </a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Popular Cuisines Column -->
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-white mb-3">Popular Cuisines</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">🍽️ Complete Directory</a>
+                        </li>
+                        <li class="mb-2"><a href="/cuisine/fast-food" class="text-white-50 text-decoration-none">Fast food 🍔</a></li>
+                        <li class="mb-2"><a href="/cuisine/pizza" class="text-white-50 text-decoration-none">Pizza 🍕</a></li>
+                        <li class="mb-2"><a href="/cuisine/japanese" class="text-white-50 text-decoration-none">Japanese 🎌</a></li>
+                        <li class="mb-2"><a href="/cuisine/chinese" class="text-white-50 text-decoration-none">Chinese 🥢</a></li>
+                        <li class="mb-2"><a href="/cuisine/filipino" class="text-white-50 text-decoration-none">Filipino 🍚</a></li>
+                        <li class="mb-2"><a href="/cuisine/korean" class="text-white-50 text-decoration-none">Korean 🍜</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <hr class="border-secondary">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <p class="text-white-50 mb-0">© 2026 Restaurants QC. All rights reserved.</p>
+                        <div class="footer-links">
+                            <a href="/all-restaurants" class="text-white-50 text-decoration-none me-3">All Restaurants</a>
+                            <a href="/search" class="text-white-50 text-decoration-none me-3">🔍 Search</a>
+                            <a href="/best-of" class="text-white-50 text-decoration-none me-3">🏆 Best Of</a>
+                            <a href="/food-tour" class="text-white-50 text-decoration-none me-3">🍜 Food Tour</a>
+                            <a href="/about" class="text-white-50 text-decoration-none me-3">About</a>
+                            <a href="/how-we-rate" class="text-white-50 text-decoration-none me-3">How We Rate</a>
+                            <a href="/contact" class="text-white-50 text-decoration-none">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Save/Bookmark Functionality -->
+    <script>
+        // Save a restaurant
+        function saveRestaurant(id, name, area, cuisine) {
+            const saved = JSON.parse(localStorage.getItem('savedRestaurants') || '[]');
+            if (!saved.find(r => r.id === id)) {
+                saved.push({ 
+                    id: id, 
+                    name: name, 
+                    area: area, 
+                    cuisine: cuisine, 
+                    savedAt: new Date().toISOString() 
+                });
+                localStorage.setItem('savedRestaurants', JSON.stringify(saved));
+                updateSaveButtons();
+                showToast('Restaurant saved! ❤️');
+                return true;
+            }
+            return false;
+        }
+
+        // Remove a restaurant
+        function removeRestaurant(id) {
+            let saved = JSON.parse(localStorage.getItem('savedRestaurants') || '[]');
+            const wasSaved = saved.some(r => r.id === id);
+            saved = saved.filter(r => r.id !== id);
+            localStorage.setItem('savedRestaurants', JSON.stringify(saved));
+            updateSaveButtons();
+            if (wasSaved) {
+                showToast('Restaurant removed');
+            }
+            return true;
+        }
+
+        // Check if restaurant is saved
+        function isSaved(id) {
+            const saved = JSON.parse(localStorage.getItem('savedRestaurants') || '[]');
+            return saved.some(r => r.id === id);
+        }
+
+        // Update all save buttons on the page
+        function updateSaveButtons() {
+            document.querySelectorAll('.save-btn').forEach(btn => {
+                const id = btn.getAttribute('data-id');
+                if (isSaved(id)) {
+                    btn.innerHTML = '<i class="fas fa-heart text-danger"></i> Saved';
+                    btn.classList.add('saved');
+                    btn.classList.remove('btn-outline-danger');
+                    btn.classList.add('btn-danger');
+                } else {
+                    btn.innerHTML = '<i class="far fa-heart"></i> Save';
+                    btn.classList.remove('saved');
+                    btn.classList.remove('btn-danger');
+                    btn.classList.add('btn-outline-danger');
+                }
+            });
+        }
+
+        // Initialize save buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSaveButtons();
+            
+            // Add click handlers to save buttons
+            document.querySelectorAll('.save-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const area = this.getAttribute('data-area');
+                    const cuisine = this.getAttribute('data-cuisine');
+                    
+                    if (this.classList.contains('saved')) {
+                        removeRestaurant(id);
+                    } else {
+                        saveRestaurant(id, name, area, cuisine);
+                    }
+                });
+            });
+        });
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                <div class="toast show" role="alert">
+                    <div class="toast-header bg-danger text-white">
+                        <strong class="me-auto">Restaurants QC</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">${message}</div>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.querySelector('.toast').classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 
+
