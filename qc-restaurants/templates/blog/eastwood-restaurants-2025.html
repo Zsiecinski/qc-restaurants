@@ -1,0 +1,1847 @@
+{% extends 'base.html' %}
+{% block title %}Best Eastwood Mall Restaurants 2025: Top 10 Places to Eat in Eastwood City{% endblock %}
+{% block description %}Discover the top 10 restaurants in Eastwood City, Quezon City. From Vikings Buffet to authentic Japanese ramen, find the best Eastwood Mall restaurants with ratings, menus, prices, and hours. Complete 2025 dining guide.{% endblock %}
+{% block canonical %}/blog/eastwood-restaurants-2025{% endblock %}
+{% block og_title %}Best Eastwood Mall Restaurants 2025: Top 10 Places to Eat{% endblock %}
+{% block og_description %}Top 10 restaurants in Eastwood City with ratings, prices, and insider tips. From budget-friendly to fine dining, find your perfect meal at Eastwood Mall restaurants.{% endblock %}
+{% block og_url %}/blog/eastwood-restaurants-2025{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- Eastwood Restaurants template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.eastwood-hero {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(211, 35, 35, 0.9), rgba(255, 107, 107, 0.9)),
+                url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.eastwood-hero-content {
+    position: relative;
+    height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    flex-direction: column;
+            color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.eastwood-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.eastwood-subtitle {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.quick-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.content-section {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+    font-size: 1.8rem;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.intro-box {
+    background: #f8f9fa;
+    border-left: 4px solid #d32323;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.restaurant-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.restaurant-image-section {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.restaurant-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.restaurant-content {
+    padding: 0.75rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.restaurant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0;
+}
+
+.restaurant-name {
+    color: #721c24;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+}
+
+.restaurant-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.rating-display {
+    color: #ffc107;
+    font-size: 1rem;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.price-range {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.restaurant-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.restaurant-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.restaurant-info-grid i {
+    color: #721c24;
+    font-size: 0.85rem;
+}
+
+.restaurant-info-grid a {
+            color: #6c757d;
+    text-decoration: none;
+}
+
+.restaurant-info-grid a:hover {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+.restaurant-detailed-info {
+    margin: 0.25rem 0;
+}
+
+.restaurant-description {
+    font-size: 0.9rem;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+}
+
+.info-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    background: #f8f9fa;
+    padding: 0.65rem;
+    border-radius: 6px;
+    border-left: 3px solid #721c24;
+    margin-top: 0.5rem;
+}
+
+.highlight-item {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #2c3e50;
+}
+
+.highlight-item strong {
+    color: #721c24;
+    font-weight: 600;
+    margin-right: 0.25rem;
+}
+
+.feature-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0;
+}
+
+/* Mobile responsive */
+        @media (max-width: 768px) {
+    /* Card Structure */
+    .restaurant-card {
+        margin-bottom: 0.875rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .restaurant-image-section {
+        height: 170px;
+    }
+    
+    .restaurant-content {
+        padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+        gap: 0.3rem;
+    }
+    
+    /* Title & Rating Section - Keep Readable */
+    .restaurant-name {
+        font-size: 1rem;
+        line-height: 1.25;
+        margin: 0 0 0.1rem 0;
+        font-weight: 700;
+    }
+    
+    .restaurant-header {
+        gap: 0.5rem;
+        margin-bottom: 0.25rem;
+        padding-bottom: 0;
+    }
+    
+    .rating-display {
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+    
+    .price-range {
+        font-size: 0.85rem;
+    }
+    
+    /* Contact Info - Readable with Good Touch Targets */
+    .restaurant-info-grid {
+        font-size: 0.8rem;
+        gap: 0.35rem 0.75rem;
+        margin: 0.2rem 0;
+        line-height: 1.4;
+    }
+    
+    .restaurant-info-item {
+        gap: 0.25rem;
+        min-height: 20px;
+    }
+    
+    .restaurant-info-item i {
+        font-size: 0.75rem;
+    }
+    
+    /* Hours Section - Good Touch Target */
+    .hours {
+        margin: 0.25rem 0;
+    }
+    
+    .hours-header {
+        padding: 0.4rem 0.5rem;
+        min-height: 32px;
+    }
+    
+    .hours-header i {
+        font-size: 0.8rem;
+    }
+    
+    .hours-status {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .hours-toggle i {
+        font-size: 0.75rem;
+    }
+    
+    /* Description - Most Important, Keep Very Readable */
+    .restaurant-detailed-info {
+        margin: 0.35rem 0;
+    }
+    
+    .restaurant-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin: 0 0 0.4rem 0;
+    }
+    
+    /* Info Highlights - Key Information, Keep Readable */
+    .info-highlights {
+        padding: 0.5rem 0.6rem;
+        gap: 0.35rem;
+        margin-top: 0.4rem;
+        border-left-width: 3px;
+    }
+    
+    .highlight-item {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    
+    .highlight-item strong {
+        font-size: 0.8rem;
+    }
+    
+    /* Badges - Compact but Readable */
+    .feature-badges {
+        gap: 0.3rem;
+        margin: 0.4rem 0;
+    }
+    
+    .feature-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.45rem;
+        white-space: nowrap;
+    }
+    
+    .feature-badge i {
+        font-size: 0.75rem;
+        margin-right: 0.2rem;
+    }
+    
+    /* Ensure Links Have Good Touch Targets */
+    .restaurant-info-item a {
+        min-height: 20px;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    /* Card spacing for better separation */
+    .restaurant-card + .restaurant-card {
+        margin-top: 1rem;
+    }
+}
+
+.cuisine-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.cuisine-tag {
+    display: inline-flex;
+    align-items: center;
+    background: #e9ecef;
+    color: #495057;
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #dee2e6;
+}
+
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+            transition: all 0.2s ease;
+}
+
+.feature-badge.delivery {
+    background-color: #2ECC71;
+            color: white;
+}
+
+.feature-badge.takeout {
+    background-color: #3498DB;
+            color: white;
+}
+
+.feature-badge.dine-in {
+    background-color: #45B7D1;
+    color: white;
+}
+
+.must-try-section {
+    background: #fff8e1;
+    border-left: 3px solid #ffc107;
+    padding: 0.65rem 0.75rem;
+            border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+.must-try-section h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem 0;
+    color: #856404;
+}
+
+.must-try-section ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    font-size: 0.825rem;
+    line-height: 1.4;
+}
+
+.must-try-section li {
+    margin-bottom: 0.2rem;
+    color: #495057;
+}
+
+.must-try-section li:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile adjustments for must-try */
+@media (max-width: 768px) {
+    .must-try-section {
+        padding: 0.5rem 0.6rem;
+        margin-top: 0.4rem;
+        border-left-width: 3px;
+    }
+    
+    .must-try-section h4 {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+    }
+    
+    .must-try-section ul {
+        font-size: 0.75rem;
+        padding-left: 1.1rem;
+        line-height: 1.45;
+    }
+    
+    .must-try-section li {
+        margin-bottom: 0.3rem;
+    }
+    
+    .must-try-section li strong {
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+}
+
+/* Hours of Operation Styles */
+.hours {
+    margin: 0.25rem 0;
+}
+
+.hours-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.hours-header:hover {
+    background-color: #e9ecef;
+}
+
+.hours-status {
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-right: auto;
+}
+
+.hours-toggle {
+    margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+    color: #6c757d;
+}
+
+.hours-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.hours-list.expanded {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+}
+
+.hours-item.current-day {
+    background: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.hours-item .day {
+    color: #495057;
+    margin-right: 0.5rem;
+    min-width: 90px;
+}
+
+.hours-item .time {
+    color: #6c757d;
+}
+
+/* Mobile adjustments for hours dropdown */
+@media (max-width: 768px) {
+    .hours-list {
+        gap: 0.15rem;
+        padding: 0.4rem 0.5rem;
+        margin-top: 0.35rem;
+    }
+    
+    .hours-item {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.35rem;
+        line-height: 1.3;
+    }
+    
+    .hours-item .day {
+        min-width: 75px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .hours-item .time {
+        font-size: 0.75rem;
+    }
+    
+    .hours-item.current-day {
+        padding: 0.3rem 0.4rem;
+        font-weight: 600;
+    }
+}
+
+.highlight-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+    padding: 1rem;
+            border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.highlight-section h4 {
+    color: #856404;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.highlight-section ul {
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+}
+
+.highlight-section li {
+    margin-bottom: 0.25rem;
+}
+
+.tip-box {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.tip-box strong {
+    color: #0c5460;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white;
+    padding: 3rem 2rem;
+            text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-explore {
+    background: white;
+    color: #d32323;
+            font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+            text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-explore:hover {
+            background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+        
+.internal-links {
+    background: #f8f9fa;
+    padding: 1.5rem;
+            border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.internal-links h3 {
+    font-size: 1.2rem;
+    color: #721c24;
+    margin-bottom: 1rem;
+}
+
+.internal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.internal-links li {
+    margin-bottom: 0.5rem;
+}
+
+.internal-links a {
+            color: #d32323;
+            text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.internal-links a:hover {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+.toc {
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    padding: 1.5rem;
+            border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.toc h2 {
+    font-size: 1.3rem;
+    color: #721c24;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    border: none !important;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 2rem;
+}
+
+.toc li {
+    margin-bottom: 0.75rem;
+    break-inside: avoid;
+}
+
+.toc a {
+            color: #495057;
+            text-decoration: none;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.toc a:hover {
+            color: #d32323;
+}
+
+.toc a i {
+    margin-right: 0.5rem;
+    color: #d32323;
+}
+
+@media (max-width: 768px) {
+    .eastwood-title {
+        font-size: 1.8rem;
+    }
+    
+    .eastwood-subtitle {
+        font-size: 1rem;
+    }
+    
+    .quick-stats {
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .toc ul {
+        columns: 1;
+    }
+    
+    .restaurant-header {
+        flex-direction: column;
+    }
+    
+    .restaurant-meta {
+        align-items: flex-start;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+    <!-- Hero Section -->
+      <div class="eastwood-hero">
+        <div class="eastwood-hero-content">
+          <h1 class="eastwood-title" itemprop="headline">
+            Best Eastwood Mall Restaurants: Your Complete 2025 Dining Guide
+          </h1>
+          <p class="eastwood-subtitle">
+            From Eastwood Mall to Citywalk, discover the top-rated restaurants in Eastwood that locals love. 
+            Whether you're craving American classics, Japanese ramen, or Filipino comfort food, 
+            find the perfect spot to eat in Eastwood City.
+          </p>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Restaurants</span>
+                    </div>
+            <div class="stat-item">
+              <span class="stat-number">20+</span>
+              <span class="stat-label">Cuisines</span>
+                </div>
+            <div class="stat-item">
+              <span class="stat-number">⭐ 4.5+</span>
+              <span class="stat-label">Avg Rating</span>
+            </div>
+        </div>
+                            </div>
+                        </div>
+                        
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2><i class="fas fa-list me-2"></i>Quick Navigation</h2>
+        <ul>
+          <li><a href="#introduction"><i class="fas fa-chevron-right"></i>About Eastwood Dining</a></li>
+          <li><a href="#top-restaurants"><i class="fas fa-chevron-right"></i>Top 10 Restaurants</a></li>
+          <li><a href="#eastwood-mall"><i class="fas fa-chevron-right"></i>Eastwood Mall Dining</a></li>
+          <li><a href="#citywalk"><i class="fas fa-chevron-right"></i>Citywalk Restaurants</a></li>
+          <li><a href="#cuisine-types"><i class="fas fa-chevron-right"></i>By Cuisine Type</a></li>
+          <li><a href="#budget-guide"><i class="fas fa-chevron-right"></i>Budget Guide</a></li>
+          <li><a href="#dining-tips"><i class="fas fa-chevron-right"></i>Insider Tips</a></li>
+          <li><a href="#map"><i class="fas fa-chevron-right"></i>Location Map</a></li>
+          <li><a href="#faq"><i class="fas fa-chevron-right"></i>FAQ</a></li>
+                            </ul>
+      </nav>
+    </header>
+
+        <div class="row">
+      <!-- Main Content -->
+            <div class="col-lg-8 mx-auto">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div id="introduction" class="content-section">
+            <h2>Why Eastwood City is a Food Lover's Paradise</h2>
+            
+            <div class="intro-box">
+              <p class="mb-3">
+                <strong>Looking for the best restaurants in Eastwood?</strong> You're in the right place! 
+                Eastwood City in Libis, Quezon City has transformed into one of Metro Manila's premier dining destinations. 
+                With over 50 restaurants spread across Eastwood Mall, Citywalk 1, Citywalk 2, and surrounding areas, 
+                there's literally something for everyone.
+              </p>
+                    <p class="mb-0">
+                This guide covers the top-rated Eastwood Mall restaurants and hidden gems that make eating in Eastwood 
+                such a memorable experience. From budget-friendly quick bites to upscale fine dining, 
+                we've got your dining plans covered.
+                    </p>
+                </div>
+
+            <p>
+              What makes restaurants in Eastwood special? It's the perfect blend of convenience, variety, and quality. 
+              Whether you're a BPO worker grabbing dinner after shift, a family looking for weekend brunch, 
+              or a couple planning date night, Eastwood's dining scene delivers.
+            </p>
+
+            <p>
+              Plus, the area's walkability means you can easily explore multiple restaurants in Eastwood during a single visit. 
+              Many establishments stay open late too, catering to the 24/7 lifestyle of the area's vibrant community.
+            </p>
+                    </div>
+                        
+          <!-- Top Restaurants List -->
+          <div id="top-restaurants" class="content-section">
+            <h2>Top 10 Restaurants in Eastwood You Can't Miss</h2>
+            
+            <p>
+              Based on customer reviews, food quality, and overall experience, here are the must-visit spots 
+              when dining in Eastwood. These restaurants represent the best of what Eastwood has to offer.
+            </p>
+
+            {% if eastwood_restaurants %}
+              {% for restaurant in eastwood_restaurants %}
+                {# Filter out non-restaurants #}
+                {% set restaurant_name_lower = restaurant.name|lower %}
+                {% if 'toys r us' not in restaurant_name_lower and 'richmonde hotel' not in restaurant_name_lower and 'hotel' not in restaurant_name_lower %}
+                
+                <div class="restaurant-card" id="restaurant-{{ loop.index }}">
+                  <!-- Restaurant Image -->
+                  <div class="restaurant-image-section">
+                    {% if restaurant.photo %}
+                      {% set image_url, alt_tag = get_restaurant_image_url(restaurant.name, restaurant.photo, street=restaurant.address) %}
+                      <img src="{{ image_url }}" 
+                           alt="{{ alt_tag }}" 
+                           loading="lazy"
+                           onerror="this.style.display='none'; this.parentElement.style.height='200px';">
+                    {% else %}
+                      <div style="width: 100%; height: 100%; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #6c757d;">
+                        <i class="fas fa-utensils" style="font-size: 3rem;"></i>
+                        </div>
+                    {% endif %}
+                        </div>
+                        
+                  <!-- Restaurant Content -->
+                  <div class="restaurant-content">
+                    <div class="restaurant-header">
+                      <h3 class="restaurant-name">{{ loop.index }}. {{ restaurant.name }}</h3>
+                      <div class="restaurant-meta">
+                        {% if restaurant.rating and restaurant.rating != 'nan' %}
+                        <div class="rating-display">
+                          {% set rating_val = restaurant.rating|float %}
+                          {% if rating_val > 0 %}
+                            {% set full_stars = rating_val|round|int %}
+                            {% for i in range(full_stars) %}⭐{% endfor %}
+                            {{ "%.1f"|format(rating_val) }}
+                          {% endif %}
+                    </div>
+                        {% endif %}
+                        
+                        {% if restaurant.price_range and restaurant.price_range != 'nan' and restaurant.price_range|string != 'nan' %}
+                        <div class="price-range">{{ restaurant.price_range }}</div>
+                        {% endif %}
+                            </div>
+                        </div>
+                        
+                    <div class="restaurant-info-grid">
+                      {% if restaurant.address %}
+                      <div class="restaurant-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://www.google.com/maps/search/{{ restaurant.name|urlencode }}+Eastwood+Quezon+City" 
+                               target="_blank" 
+                           rel="noopener noreferrer">
+                          {{ restaurant.address[:50] }}{% if restaurant.address|length > 50 %}...{% endif %}
+                        </a>
+                      </div>
+                      {% endif %}
+                      
+                      {% if restaurant.phone and restaurant.phone != '' %}
+                      <div class="restaurant-info-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:{{ restaurant.phone|replace(' ', '')|replace('(', '')|replace(')', '')|replace('-', '') }}">
+                          {{ restaurant.phone }}
+                        </a>
+                        </div>
+                      {% endif %}
+                        
+                        </div>
+                        
+                    {% if restaurant.hours %}
+                    <div class="hours mb-2">
+                        <div class="hours-header" onclick="toggleHours(this)">
+                            <i class="far fa-clock text-muted me-1"></i>
+                            <span class="hours-status {% if restaurant.is_open %}text-success{% else %}text-danger{% endif %}">
+                                {% if restaurant.is_open %}Open Now{% else %}Closed{% endif %}
+                            </span>
+                            <span class="hours-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </span>
+                    </div>
+                        <div class="hours-list collapsed">
+                            {% for day, hours in restaurant.hours.items() %}
+                            <div class="hours-item {% if day == current_day %}current-day{% endif %}">
+                                <span class="day">{{ day }}</span>
+                                <span class="time">{{ hours }}</span>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="restaurant-detailed-info">
+                      {% if loop.index == 1 %}
+                        <p class="restaurant-description">
+                          <strong>The American Classic That Never Disappoints.</strong> TGI Fridays has been an Eastwood staple since the mall opened, offering that perfect blend of sports-bar energy and family-friendly dining. Their generous portions and lively atmosphere make it a go-to for celebrations, after-work drinks, and weekend family meals. Expect to spend ₱600-900 per person for a satisfying meal with drinks.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱600-900/person</div>
+                          <div class="highlight-item"><strong>⏰ Best Time:</strong> Weekday lunch (less crowded), Friday nights for the full atmosphere</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Groups, celebrations, sports viewing, families with kids</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> Try their endless appetizers deal during happy hour (3-6PM). Book ahead for weekend dinners!</div>
+                        </div>
+                      {% elif loop.index == 2 %}
+                        <p class="restaurant-description">
+                          <strong>Buffet Paradise for Special Occasions.</strong> Vikings consistently ranks as one of Eastwood's top dining destinations, and for good reason. With 10+ cooking stations featuring everything from Japanese sashimi to Italian pasta to Filipino favorites, you're getting incredible variety. The seafood station alone is worth the price, especially during weekdays when fresh crabs and prawns are abundant. At ₱1,500-1,800 per head, it's an investment, but you'll leave satisfied.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱1,500-1,800/person (dinner), ₱1,200 (lunch)</div>
+                          <div class="highlight-item"><strong>⏰ Best Time:</strong> Weekday lunch for best value and seafood freshness. Avoid weekend dinner rush (2+ hour waits)</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Birthdays, anniversaries, office celebrations, seafood lovers</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> Go straight for the seafood station first, then desserts. Save rice/carbs for last to maximize value. Birthday celebrants get a discount!</div>
+                        </div>
+                      {% elif loop.index == 3 %}
+                        <p class="restaurant-description">
+                          <strong>Authentic Japanese Comfort Food.</strong> When that ramen craving hits, this is where Eastwood locals head. Their tonkotsu broth is rich and creamy after 12+ hours of simmering, and the noodles have that perfect chew. It's not fancy—expect communal seating and a casual vibe—but the food is consistently excellent. Budget around ₱350-500 per person, making it one of the better value spots in the area.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱350-500/person</div>
+                          <div class="highlight-item"><strong>⏰ Best Time:</strong> Lunch or early dinner (5-6PM). Weekday afternoons for no wait. Avoid 7-9PM weekend rush</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Casual meals, solo dining, date nights, ramen enthusiasts</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> Order the "rich" broth option and add a seasoned egg (₱40). The gyoza are made fresh daily—don't skip them!</div>
+                        </div>
+                      {% elif loop.index == 4 %}
+                        <p class="restaurant-description">
+                          <strong>Crowd-Pleaser with Consistent Quality.</strong> {{ restaurant.name }} has earned its spot in Eastwood's top dining choices through reliable service and quality food. Whether you're grabbing a quick lunch or settling in for dinner, you'll find a menu that balances familiar favorites with interesting specials. Most mains range from ₱400-700, with portion sizes that satisfy without overwhelming.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱400-700/person</div>
+                          <div class="highlight-item"><strong>⏰ Best Time:</strong> Weekday lunch for business deals, weekend brunch for families</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Business lunches, casual dinners, first dates</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> Ask about daily specials—often the best value and freshest ingredients</div>
+                    </div>
+                      {% elif loop.index == 5 %}
+                        <p class="restaurant-description">
+                          <strong>Hidden Gem Worth Discovering.</strong> While not as famous as some Eastwood heavyweights, {{ restaurant.name }} has built a loyal following among locals who appreciate consistent quality without the premium price tag. The menu focuses on well-executed classics rather than trendy experiments, which means you're getting tried-and-true dishes done right. Expect to spend ₱350-600 per person for a complete meal.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱350-600/person</div>
+                          <div class="highlight-item"><strong>⏰ Best Time:</strong> Lunch for quick service, early dinner to beat crowds</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Everyday dining, solo meals, small groups</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> The lunch sets offer excellent value. Check their social media for weekly promos</div>
+                                </div>
+                      {% else %}
+                        <p class="restaurant-description">
+                          <strong>Local Favorite in Eastwood.</strong> {{ restaurant.name }} consistently appears in customer recommendations for good reason—quality food, reasonable prices, and reliable service. Whether you're a regular or first-timer, you'll find menu options that hit the spot. Most dishes range from ₱300-600, making it accessible for regular visits without breaking the bank.
+                        </p>
+                        <div class="info-highlights">
+                          <div class="highlight-item"><strong>💰 Budget:</strong> ₱300-600/person</div>
+                          <div class="highlight-item"><strong>👥 Perfect For:</strong> Casual dining, groups, families</div>
+                          <div class="highlight-item"><strong>💡 Insider Tip:</strong> Check their menu online first—many Eastwood restaurants offer exclusive app/online-only deals</div>
+                            </div>
+                      {% endif %}
+                        </div>
+                        
+                    <!-- Feature Badges -->
+                    <div class="feature-badges">
+                      <span class="feature-badge delivery">
+                        <i class="fas fa-motorcycle"></i> Delivery
+                      </span>
+                      <span class="feature-badge takeout">
+                        <i class="fas fa-shopping-bag"></i> Takeout
+                      </span>
+                      <span class="feature-badge dine-in">
+                        <i class="fas fa-utensils"></i> Dine-in
+                      </span>
+                      {% if loop.index <= 3 %}
+                      <span class="feature-badge" style="background-color: #FFD93D; color: #2D3436;">
+                        <i class="fas fa-star"></i> Top 10 Rated
+                      </span>
+                      {% endif %}
+                      {% if loop.index in [1, 2, 4] %}
+                      <span class="feature-badge" style="background-color: #6C5CE7; color: white;">
+                        <i class="fas fa-wheelchair"></i> Wheelchair Accessible
+                      </span>
+                      {% endif %}
+                      {% if loop.index in [1, 2, 3, 5] %}
+                      <span class="feature-badge" style="background-color: #A29BFE; color: #2D3436;">
+                        <i class="fas fa-child"></i> Good for Kids
+                      </span>
+                      {% endif %}
+                    </div>
+                    
+                    {% if loop.index <= 5 %}
+                    <div class="must-try-section">
+                      <h4><i class="fas fa-star me-1"></i>Must-Try Dishes</h4>
+                      <ul>
+                        {% if loop.index == 1 %}
+                          <li><strong>Jack Daniel's Ribs</strong> (₱795) - Fall-off-the-bone tender with their signature whiskey glaze. Shareable portion perfect for 2-3 people</li>
+                          <li><strong>Loaded Potato Skins</strong> (₱395) - Crispy shells loaded with cheese, bacon, and sour cream. Get these as an appetizer for the table</li>
+                          <li><strong>Cajun Chicken Pasta</strong> (₱545) - Creamy, spicy, and generously portioned. Ask for extra garlic bread!</li>
+                        {% elif loop.index == 2 %}
+                          <li><strong>Seafood Station</strong> - Hit this first! Fresh crabs, prawns, and mussels. The crab legs are especially good on weekdays</li>
+                          <li><strong>Japanese Station</strong> - Fresh sashimi, sushi rolls, and tempura. The salmon and tuna are always fresh</li>
+                          <li><strong>Dessert Bar</strong> - 30+ options including cakes, ice cream, and Filipino sweets. The chocolate fountain is a hit with kids</li>
+                          <li><strong>Pro Strategy:</strong> Light on rice/bread, heavy on proteins and seafood to maximize value</li>
+                        {% elif loop.index == 3 %}
+                          <li><strong>Tonkotsu Ramen</strong> (₱420) - Rich, creamy pork bone broth simmered 12+ hours. Order it "rich" for extra flavor (same price!)</li>
+                          <li><strong>Gyoza</strong> (₱180/6pcs) - Pan-fried dumplings made fresh daily. Crispy bottom, juicy inside—perfect starter or side</li>
+                          <li><strong>Chashu Don</strong> (₱380) - Tender braised pork belly over rice. Comes with a seasoned egg, great value</li>
+                          <li><strong>Add-on Tip:</strong> Seasoned egg (+₱40) and extra noodles (+₱50) are worth it</li>
+                        {% elif loop.index == 4 %}
+                          <li><strong>Signature Dishes</strong> - Ask staff for today's specials and chef recommendations. They often feature seasonal ingredients</li>
+                          <li><strong>Combo Meals</strong> - Lunch sets typically ₱300-400, include soup/salad and drink—best value option</li>
+                          <li><strong>House Specialties</strong> - Check the menu's highlighted items—these are what regulars order</li>
+                        {% elif loop.index == 5 %}
+                          <li><strong>Daily Specials</strong> - Monday-Friday lunch specials offer 20-30% off regular menu prices</li>
+                          <li><strong>Set Meals</strong> - Complete meals with appetizer, main, and drink starting at ₱350</li>
+                          <li><strong>Signature Items</strong> - Ask which dishes they're known for—staff recommendations rarely disappoint</li>
+                        {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                        </div>
+                    </div>
+                
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <!-- Fallback content if no data available -->
+              <div class="alert alert-info">
+                <p>Eastwood City offers 50+ restaurants across Eastwood Mall, Citywalk 1, and Citywalk 2. 
+                From Japanese ramen to American grills, Korean BBQ to Filipino favorites, you'll find diverse dining options for every taste and budget.</p>
+                                </div>
+            {% endif %}
+                        </div>
+                        
+          <!-- Eastwood Mall Section -->
+          <div id="eastwood-mall" class="content-section">
+            <h2>Eastwood Mall Restaurants: What to Expect</h2>
+            
+            <p>
+              <strong>Eastwood Mall</strong> is the heart of the dining scene in the area. With three levels of restaurants, 
+              food courts, and specialty dining, you'll find everything from quick Filipino meals to international cuisines.
+            </p>
+
+            <h3>Ground Floor Dining</h3>
+            <p>
+              The ground floor hosts fast-food favorites and quick-service restaurants perfect for grab-and-go meals. 
+              You'll find familiar names like Jollibee, McDonald's, and local favorites.
+            </p>
+
+            <h3>Second Floor Fine Dining</h3>
+            <p>
+              Head to the second floor for sit-down restaurants including Vikings, Yakimix, and various specialty cuisines. 
+              This is where you'll spend more time but enjoy a fuller dining experience.
+            </p>
+
+            <h3>Eastwood Mall Food Court</h3>
+            <p>
+              The food court offers the most variety per square foot with stalls serving Filipino, Chinese, Japanese, 
+              Korean, and Western foods. It's budget-friendly and perfect when your group can't agree on one cuisine.
+            </p>
+                        </div>
+                        
+          <!-- Citywalk Section -->
+          <div id="citywalk" class="content-section">
+            <h2>Citywalk 1 & 2 Dining Options</h2>
+            
+            <p>
+              Beyond Eastwood Mall restaurants, **Citywalk 1 and Citywalk 2** offer open-air dining with a more relaxed vibe. 
+              These areas feature restaurants with al fresco seating, perfect for Quezon City's cool evenings.
+            </p>
+
+            <h3>Citywalk 1 Highlights</h3>
+            <ul>
+              <li><strong>TGI Fridays</strong> - American bar and grill</li>
+              <li><strong>Brother's Burger</strong> - Local burger chain</li>
+              <li><strong>Torch Restaurant</strong> - Japanese teppanyaki</li>
+            </ul>
+
+            <h3>Citywalk 2 Favorites</h3>
+            <ul>
+              <li><strong>Wee Nam Kee</strong> - Singapore Hainanese Chicken Rice</li>
+              <li><strong>BONO</strong> - Korean restaurant</li>
+              <li><strong>Sariwon Korean BBQ</strong> - All-you-can-eat Korean</li>
+                            </ul>
+                        </div>
+                        
+          <!-- Cuisine Types -->
+          <div id="cuisine-types" class="content-section">
+            <h2>Restaurants in Eastwood by Cuisine Type</h2>
+            
+            <p style="margin-bottom: 1.25rem;">
+              Can't decide what to eat in Eastwood? Here's a breakdown by cuisine type to help you narrow your search.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="intro-box" style="margin: 0; height: 100%;">
+                  <h3 style="margin-top: 0; font-size: 1.1rem;">🍜 Japanese Restaurants</h3>
+                  <p style="margin-bottom: 0; font-size: 0.95rem;">
+                    From ramen to sushi, Eastwood has excellent Japanese options. <strong>Ichiran Ramen</strong>, 
+                    <strong>Yabu</strong>, and <strong>Genki Sushi</strong> are top picks.
+                  </p>
+                            </div>
+                        </div>
+                        
+              <div class="col-md-6">
+                <div class="intro-box" style="margin: 0; height: 100%;">
+                  <h3 style="margin-top: 0; font-size: 1.1rem;">🍖 Korean Restaurants</h3>
+                  <p style="margin-bottom: 0; font-size: 0.95rem;">
+                    Korean food lovers will appreciate <strong>Bulgogi Brothers</strong>, <strong>Sariwon</strong>, 
+                    and <strong>BONO</strong> for authentic Korean BBQ and kimchi stews.
+                  </p>
+                            </div>
+                        </div>
+                        
+              <div class="col-md-6">
+                <div class="intro-box" style="margin: 0; height: 100%;">
+                  <h3 style="margin-top: 0; font-size: 1.1rem;">🍚 Filipino Restaurants</h3>
+                  <p style="margin-bottom: 0; font-size: 0.95rem;">
+                    For Filipino comfort food, check out <strong>Gerry's Grill</strong>, <strong>Max's Restaurant</strong>, 
+                    or the various Filipino stalls in the food court.
+                  </p>
+                        </div>
+                        </div>
+                        
+              <div class="col-md-6">
+                <div class="intro-box" style="margin: 0; height: 100%;">
+                  <h3 style="margin-top: 0; font-size: 1.1rem;">🥟 Chinese Restaurants</h3>
+                  <p style="margin-bottom: 0; font-size: 0.95rem;">
+                    <strong>Luk Yuen</strong> and <strong>Circles Event Café</strong> serve excellent Chinese cuisine, 
+                    from dim sum to Peking duck.
+                  </p>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+          <!-- Budget Guide -->
+          <div id="budget-guide" class="content-section">
+            <h2>Budget Guide: Dining in Eastwood for Every Wallet</h2>
+            
+            <h3>Budget-Friendly (₱ - Under ₱300/person)</h3>
+            <ul>
+              <li>Eastwood Mall Food Court</li>
+              <li>Army Navy Burger + Burrito</li>
+              <li>Fast food chains (Jollibee, McDonald's, KFC)</li>
+              <li>Mang Inasal</li>
+            </ul>
+
+            <h3>Mid-Range (₱₱ - ₱300-₱600/person)</h3>
+            <ul>
+              <li>Ichiran Ramen</li>
+              <li>Yabu House of Katsu</li>
+              <li>Silantro Fil-Mex Cantina</li>
+              <li>The Coffee Bean & Tea Leaf</li>
+            </ul>
+
+            <h3>Upscale (₱₱₱ - ₱600-₱1,200/person)</h3>
+            <ul>
+              <li>TGI Fridays</li>
+              <li>Bulgogi Brothers</li>
+              <li>Luk Yuen</li>
+                            </ul>
+
+            <h3>Fine Dining (₱₱₱₱ - ₱1,200+/person)</h3>
+            <ul>
+              <li>Vikings Luxury Buffet</li>
+              <li>Blackbird</li>
+              <li>Yakimix Premium</li>
+                            </ul>
+                        </div>
+                        
+          <!-- Dining Tips -->
+          <div id="dining-tips" class="content-section">
+            <h2>Insider Tips for Dining in Eastwood</h2>
+            
+            <div class="tip-box">
+              <p><strong>🚗 Parking:</strong> Eastwood Mall parking can fill up on weekends. Arrive before 11AM or after 9PM for easier parking. Citywalk has more available spots.</p>
+                        </div>
+                        
+            <div class="tip-box">
+              <p><strong>⏰ Best Times to Visit:</strong> Weekday lunches (11AM-1PM) and early dinners (5PM-6PM) are less crowded than weekend peak hours.</p>
+                        </div>
+                        
+            <div class="tip-box">
+              <p><strong>💳 Payment:</strong> Most Eastwood restaurants accept credit cards, but food court stalls may be cash-only. ATMs available in the mall.</p>
+                        </div>
+                        
+            <div class="tip-box">
+              <p><strong>📱 Reservations:</strong> For popular spots like Vikings and Blackbird, book 1-2 days ahead, especially for weekend dinners.</p>
+                    </div>
+
+            <div class="tip-box">
+              <p><strong>🎉 Special Occasions:</strong> Many restaurants offer birthday perks. Bring a valid ID to claim free desserts or discounts!</p>
+                            </div>
+                        </div>
+                        
+          <!-- Internal Linking Section -->
+          <div class="internal-links">
+            <h3>Explore More Quezon City Dining</h3>
+            <ul>
+              <li><a href="/tomas-morato">🍽️ Tomas Morato Restaurants</a> - Another foodie hotspot in QC</li>
+              <li><a href="/timog">🍜 Timog Avenue Restaurants</a> - Korean town and more</li>
+              <li><a href="/maginhawa">🌮 Maginhawa Food Strip</a> - Budget-friendly student eats</li>
+              <li><a href="/cubao">🍕 Cubao Restaurants</a> - Gateway and Farmer's Plaza dining</li>
+              <li><a href="/cuisine/japanese">🍣 All Japanese Restaurants in QC</a> - Complete guide</li>
+              <li><a href="/cuisine/korean">🍖 All Korean Restaurants in QC</a> - K-BBQ heaven</li>
+              <li><a href="/all-restaurants">📋 Browse All 400+ QC Restaurants</a> - Complete directory</li>
+                            </ul>
+                        </div>
+                        
+          <!-- Map -->
+          <div id="map" class="content-section">
+            <h2>Location: How to Get to Eastwood City</h2>
+            
+            <p>
+              Eastwood City is located in Libis, Quezon City, easily accessible via C5 Road and Marcos Highway.
+            </p>
+
+            <div class="mb-4">
+                    <iframe 
+                src="https://www.google.com/maps?q=Eastwood+City,+Quezon+City&output=embed" 
+                      width="100%" 
+                height="400" 
+                style="border:0; border-radius: 8px;" 
+                      allowfullscreen="" 
+                      loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Map showing location of Eastwood City restaurants in Quezon City">
+                    </iframe>
+            </div>
+
+            <h3>Getting There</h3>
+            <ul>
+              <li><strong>By Car:</strong> From EDSA, take C5 northbound, exit at Eastwood. Free parking available.</li>
+              <li><strong>By Jeep:</strong> Ride jeeps going to "Eastwood/Libis" from various QC points</li>
+              <li><strong>By Bus:</strong> Buses along C5 stop near Eastwood</li>
+              <li><strong>By Grab/Taxi:</strong> Simply tell the driver "Eastwood Mall" or "Eastwood Citywalk"</li>
+            </ul>
+          </div>
+
+          <!-- CTA Section -->
+          <div class="cta-section">
+            <h2>Ready to Explore Eastwood Restaurants?</h2>
+            <p class="lead mb-4">
+              With over 50 restaurants to choose from, Eastwood City offers something for every craving and budget. 
+              Whether you're looking for a quick bite or a memorable dining experience, you'll find it here.
+            </p>
+            <div>
+              <a href="/eastwood" class="btn-explore">
+                <i class="fas fa-utensils me-2"></i>View All Eastwood Restaurants
+              </a>
+              <a href="https://www.google.com/maps/search/Eastwood+City+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-explore">
+                <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+              </a>
+            </div>
+                </div>
+
+                <!-- FAQ Section -->
+          <div id="faq" class="content-section">
+            <h2>Frequently Asked Questions About Eastwood Restaurants</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    What are the best restaurants in Eastwood Mall?
+                                </button>
+                            </h3>
+                            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                    The best Eastwood Mall restaurants include Vikings Luxury Buffet for extensive buffets, Ichiran Ramen for authentic Japanese ramen, and Yabu House of Katsu for crispy tonkatsu. For fine dining, Blackbird offers upscale international cuisine.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    Are there budget-friendly restaurants in Eastwood?
+                                </button>
+                            </h3>
+                            <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                    Yes! The Eastwood Mall food court offers meals under ₱200, and restaurants like Army Navy, Mang Inasal, and various fast-food chains provide affordable options. You can eat well in Eastwood without breaking the bank.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    What time do restaurants in Eastwood open?
+                                </button>
+                            </h3>
+                            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                    Most Eastwood Mall restaurants open at 10AM or 11AM, with some staying open until 11PM or midnight. Fast-food chains typically open earlier (7AM-8AM). Some 24/7 establishments like convenience stores are always available.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    Is parking free at Eastwood City?
+                                </button>
+                            </h3>
+                            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                    Eastwood City offers paid parking at ₱50-₱60 for the first 3 hours, then additional charges per hour. Some restaurants validate parking for diners who reach a minimum spend. Ask your restaurant before paying for parking.
+                        </div>
+                    </div>
+                </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq5">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    What cuisines are available in Eastwood restaurants?
+                  </button>
+                </h3>
+                <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Eastwood offers 20+ cuisines including Japanese, Korean, Chinese, Filipino, American, Mexican, Italian, Vietnamese, Thai, and more. The diversity of restaurants in Eastwood makes it easy to satisfy any craving.
+                    </div>
+                </div>
+            </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faq6">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    Are Eastwood restaurants good for dates?
+                  </button>
+                </h3>
+                <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Absolutely! Romantic options include Blackbird for fine dining, Bulgogi Brothers for intimate Korean BBQ, and Citywalk restaurants with al fresco seating. The walkable area makes it easy to grab dessert or coffee after dinner.
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Article metadata -->
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-01-15">
+        <meta itemprop="dateModified" content="2025-11-03">
+        <meta itemprop="keywords" content="eastwood restaurants, eastwood mall restaurants, restaurants in eastwood, eastwood city restaurants, eastwood dining, best restaurants eastwood, eastwood mall dining, citywalk restaurants, eastwood food guide, quezon city restaurants">
+                        </div>
+                    </div>
+  </article>
+</main>
+
+<script>
+// Hours toggle functionality
+function toggleHours(header) {
+    const hoursList = header.nextElementSibling;
+    const toggle = header.querySelector('.hours-toggle');
+    
+    if (hoursList.classList.contains('collapsed')) {
+        // Expand
+        hoursList.classList.remove('collapsed');
+        hoursList.classList.add('expanded');
+        toggle.classList.add('expanded');
+    } else {
+        // Collapse
+        hoursList.classList.remove('expanded');
+        hoursList.classList.add('collapsed');
+        toggle.classList.remove('expanded');
+    }
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Breadcrumbs Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Eastwood Restaurants",
+      "item": "https://www.restaurantsquezoncity.com/blog/eastwood-restaurants-2025"
+    }
+  ]
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+      "name": "What are the best restaurants in Eastwood Mall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+        "text": "The best Eastwood Mall restaurants include Vikings Luxury Buffet for extensive buffets, Ichiran Ramen for authentic Japanese ramen, and Yabu House of Katsu for crispy tonkatsu. For fine dining, Blackbird offers upscale international cuisine."
+          }
+        },
+        {
+          "@type": "Question",
+      "name": "Are there budget-friendly restaurants in Eastwood?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+        "text": "Yes! The Eastwood Mall food court offers meals under ₱200, and restaurants like Army Navy, Mang Inasal, and various fast-food chains provide affordable options."
+          }
+        },
+        {
+          "@type": "Question",
+      "name": "What time do restaurants in Eastwood open?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+        "text": "Most Eastwood Mall restaurants open at 10AM or 11AM, with some staying open until 11PM or midnight. Fast-food chains typically open earlier at 7AM-8AM."
+          }
+        },
+        {
+          "@type": "Question",
+      "name": "Is parking free at Eastwood City?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+        "text": "Eastwood City offers paid parking at ₱50-₱60 for the first 3 hours. Some restaurants validate parking for diners who reach a minimum spend."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What cuisines are available in Eastwood restaurants?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eastwood offers 20+ cuisines including Japanese, Korean, Chinese, Filipino, American, Mexican, Italian, Vietnamese, Thai, and more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are Eastwood restaurants good for dates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! Romantic options include Blackbird for fine dining, Bulgogi Brothers for intimate Korean BBQ, and Citywalk restaurants with al fresco seating."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Article Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Best Eastwood Mall Restaurants 2025: Your Complete Dining Guide",
+  "description": "Discover the best restaurants in Eastwood City, Quezon City. From Eastwood Mall to Citywalk, find top-rated dining spots with reviews, photos, and hours.",
+  "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-11-03",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/eastwood-restaurants-2025"
+  },
+  "keywords": "eastwood restaurants, eastwood mall restaurants, restaurants in eastwood, eastwood city dining, best eastwood restaurants"
+    }
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- ItemList Schema for Top 10 Restaurants -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+  "name": "Top 10 Restaurants in Eastwood 2025",
+  "description": "Best restaurants in Eastwood City based on ratings, reviews, and food quality",
+      "itemListElement": [
+    {% if eastwood_restaurants %}
+    {% for restaurant in eastwood_restaurants[:10] %}
+    {% set restaurant_name_lower = restaurant.name|lower %}
+    {% if 'toys r us' not in restaurant_name_lower and 'richmonde hotel' not in restaurant_name_lower and 'hotel' not in restaurant_name_lower %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "item": {
+        "@type": "Restaurant",
+        "name": "{{ restaurant.name }}",
+        {% if restaurant.rating and restaurant.rating != 'nan' %}
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{ restaurant.rating }}",
+          "bestRating": "5"
+        },
+        {% endif %}
+        {% if restaurant.address %}
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ restaurant.address }}",
+          "addressLocality": "Quezon City",
+          "addressRegion": "Metro Manila",
+          "addressCountry": "PH"
+        },
+        {% endif %}
+        {% if restaurant.phone and restaurant.phone != '' %}
+        "telephone": "{{ restaurant.phone }}",
+        {% endif %}
+        "servesCuisine": "{{ restaurant.cuisine }}",
+        {% if restaurant.price_range and restaurant.price_range != 'nan' %}
+        "priceRange": "{{ restaurant.price_range }}",
+        {% endif %}
+        "url": "https://www.restaurantsquezoncity.com/blog/eastwood-restaurants-2025#restaurant-{{ loop.index }}"
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+      ]
+    }
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Local Business Schema for Eastwood City -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "Eastwood City",
+  "description": "Premier dining and entertainment complex in Quezon City with 50+ restaurants",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Eastwood Avenue",
+    "addressLocality": "Libis, Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "14.6090",
+    "longitude": "121.0795"
+  },
+  "url": "https://www.restaurantsquezoncity.com/blog/eastwood-restaurants-2025",
+  "touristType": ["Food Enthusiast", "Family", "Couple", "Business Professional"]
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- CollectionPage Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Best Eastwood Mall Restaurants 2025",
+  "description": "Complete guide to the best restaurants in Eastwood City with ratings, reviews, menus, and hours",
+  "url": "https://www.restaurantsquezoncity.com/blog/eastwood-restaurants-2025",
+  "about": {
+    "@type": "Place",
+    "name": "Eastwood City",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Quezon City",
+      "addressRegion": "Metro Manila",
+      "addressCountry": "Philippines"
+    }
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 10,
+    "itemListElement": "See ItemList schema above"
+  }
+}
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

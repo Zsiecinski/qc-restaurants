@@ -1,0 +1,1991 @@
+{% extends 'base.html' %}
+{% block title %}SM Fairview Restaurants 2025: Best 64 Dining Spots in Quezon City | Complete Guide{% endblock %}
+{% block description %}Discover the best SM Fairview restaurants! From Belle-Ville pancakes to Khao Khai Thai food, Vikings buffet to Gerry's Grill - explore 64 top-rated dining options with reviews, prices, hours & insider tips.{% endblock %}
+{% block canonical %}/blog/sm-fairview-restaurants-2025{% endblock %}
+{% block og_title %}Best SM Fairview Restaurants 2025: Complete Dining Guide Quezon City{% endblock %}
+{% block og_description %}Top 64 SM Fairview restaurants featuring Belle-Ville Pancake Cafe, Khao Khai Thai, Vikings, Ramen Nagi & more. Reviews, prices, hours & must-try dishes for every budget.{% endblock %}
+{% block og_url %}/blog/sm-fairview-restaurants-2025{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- SM Fairview Restaurants template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.fairview-hero {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(211, 35, 35, 0.9), rgba(255, 107, 107, 0.9)),
+                url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.fairview-hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.fairview-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.fairview-subtitle {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.quick-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+    font-size: 1.8rem;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.content-section p {
+    margin-bottom: 1.2rem;
+}
+
+.content-section .lead {
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.content-section ul, .content-section ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.content-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+.intro-box {
+    background: #f8f9fa;
+    border-left: 4px solid #d32323;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.intro-box p {
+    margin-bottom: 1rem;
+}
+
+.intro-box p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #721c24, #8b2332);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.highlight-box h3 {
+    color: white !important;
+    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .highlight-box {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .highlight-box h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .highlight-box p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #721c24;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.feature-card h4 {
+    color: #721c24;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.feature-card h4 a {
+    transition: color 0.2s ease;
+}
+
+.feature-card h4 a:hover {
+    color: #d32323 !important;
+}
+
+.feature-card p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .feature-card {
+        padding: 1rem;
+        margin: 0.75rem 0;
+    }
+    
+    .feature-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+}
+
+.restaurant-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.25rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.restaurant-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Optimized image positioning for each restaurant */
+.restaurant-card img[alt*="Vikings"] {
+    object-position: center bottom; /* Show the buffet food spread */
+}
+
+.restaurant-card img[alt*="Gerry's Grill"] {
+    object-position: center top; /* Show the prominent signage */
+}
+
+.restaurant-card img[alt*="Belle-Ville"] {
+    object-position: 60% center; /* Focus on the pancake stack */
+}
+
+.restaurant-card img[alt*="Happy Dumplings"] {
+    object-position: center top; /* Show the storefront signage */
+}
+
+.restaurant-card img[alt*="Ramen Nagi"] {
+    object-position: 65% center; /* Focus on the ramen bowls */
+}
+
+.restaurant-card img[alt*="Lydia's Lechon"] {
+    object-position: center 40%; /* Center on the lechon */
+}
+
+@media (max-width: 768px) {
+    .restaurant-card {
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .restaurant-card img {
+        height: 180px;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-2px);
+    }
+}
+
+.restaurant-name {
+    color: #721c24;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+    .restaurant-name {
+        font-size: 1.1rem;
+        line-height: 1.25;
+    margin-bottom: 0.5rem;
+    }
+}
+
+.restaurant-rating {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.restaurant-rating .fas, .restaurant-rating .fa-star {
+    color: #ffc107;
+}
+
+.restaurant-cuisine {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.restaurant-hours {
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.restaurant-address {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.restaurant-phone {
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .restaurant-rating {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+    .restaurant-cuisine,
+    .restaurant-hours,
+    .restaurant-address,
+.restaurant-phone {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+}
+
+.price-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.top-pick-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #d32323;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stars {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.rating-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+    font-weight: 500;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+        margin-right: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-visit {
+    background: white;
+    color: #d32323;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.tip-box {
+    background: #d1ecf1;
+    border-left: 4px solid #0c5460;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.tip-box h4 {
+    color: #0c5460;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Show More functionality for mobile */
+@media (max-width: 768px) {
+    .restaurant-card.mobile-hidden {
+        display: none;
+    }
+    
+    .show-more-btn {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #d32323, #ff6b6b);
+        color: white;
+        border: none;
+    border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin: 1.5rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .show-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(211, 35, 35, 0.3);
+    }
+    
+    .show-more-btn i {
+        transition: transform 0.3s ease;
+        margin-left: 0.5rem;
+    }
+    
+    .show-more-btn.expanded i {
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 769px) {
+    .show-more-btn {
+        display: none;
+    }
+}
+
+.tip-box p, .tip-box ul {
+    margin-bottom: 0.75rem;
+}
+
+.tip-box ul {
+    padding-left: 1.5rem;
+}
+
+.tip-box ul:last-child {
+    margin-bottom: 0;
+}
+
+.internal-links {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.internal-links h3 {
+    font-size: 1.3rem;
+    color: #721c24;
+    margin-bottom: 1.5rem;
+}
+
+.internal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.internal-links li {
+    margin-bottom: 1rem;
+}
+
+.internal-links a {
+    color: #d32323;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.internal-links a:hover {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .tip-box {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .tip-box h4 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .tip-box p, .tip-box ul {
+        font-size: 0.9rem;
+    }
+    
+    .internal-links {
+        padding: 1.5rem;
+    }
+    
+    .internal-links h3 {
+        font-size: 1.1rem;
+    }
+    
+    .internal-links a {
+        font-size: 0.95rem;
+    }
+}
+
+.cuisine-badge {
+    display: inline-block;
+    background: #721c24;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 0.2rem;
+    text-decoration: none;
+}
+
+.cuisine-badge:hover {
+    background: #8b2332;
+    color: white;
+    text-decoration: none;
+}
+
+.toc {
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.toc h2 {
+    font-size: 1.3rem;
+    color: #721c24;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    border: none !important;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 2rem;
+}
+
+.toc li {
+    margin-bottom: 0.75rem;
+    break-inside: avoid;
+}
+
+.toc a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.toc a:hover {
+    color: #d32323;
+}
+
+.toc a i {
+    margin-right: 0.5rem;
+    color: #d32323;
+}
+
+/* Breadcrumbs */
+.breadcrumb-nav {
+    background: #f8f9fa;
+    padding: 0.75rem 0;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.breadcrumb-nav .container {
+    padding: 0 1rem;
+}
+
+.breadcrumb-nav ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.breadcrumb-nav li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-nav a {
+    color: #d32323;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-nav .separator {
+    color: #6c757d;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-nav .current {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+    }
+    
+    .breadcrumb-nav a,
+    .breadcrumb-nav .current {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb-nav .separator {
+        margin: 0 0.25rem;
+    }
+    
+    .toc ul {
+        columns: 1;
+    }
+    
+    .toc {
+        padding: 1rem;
+    }
+    
+    .toc h2 {
+        font-size: 1.1rem;
+    }
+    
+    .toc li {
+        margin-bottom: 0.6rem;
+    }
+    
+    .toc a {
+        font-size: 0.9rem;
+    }
+    
+    .fairview-hero {
+        height: 350px;
+    }
+    
+    .fairview-title {
+        font-size: 1.8rem;
+    }
+    
+    .fairview-subtitle {
+        font-size: 1rem;
+    }
+    
+    .quick-stats {
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    .quick-hours-dropdown .row {
+        flex-direction: column;
+    }
+    
+    .quick-hours-dropdown .col-md-4 {
+        margin-bottom: 1rem;
+    }
+    
+    .quick-hours-dropdown h6 {
+        font-size: 0.9rem;
+    }
+    
+    .quick-hours-dropdown .small {
+        font-size: 0.8rem;
+    }
+    
+    .content-section {
+        font-size: 1rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .intro-box {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .intro-box p {
+        font-size: 0.95rem;
+    }
+    
+    .quick-info-bar {
+        padding: 1rem !important;
+    }
+    
+    .quick-info-bar .col-6 {
+        padding: 0.5rem;
+    }
+    
+    .info-label {
+        font-size: 0.75rem;
+    }
+    
+    .info-value {
+        font-size: 0.85rem;
+    }
+    
+    .cta-section {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        <li><a href="/"><i class="fas fa-home me-1"></i>Home</a></li>
+        <li><span class="separator">/</span></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><span class="separator">/</span></li>
+        <li><span class="current">SM Fairview Restaurants</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+      <!-- Hero Section -->
+      <div class="fairview-hero">
+        <div class="fairview-hero-content">
+                <h1 class="fairview-title" itemprop="headline">
+            Best SM Fairview Restaurants: Your Complete 2025 Dining Guide
+                </h1>
+          <p class="fairview-subtitle">
+            From Belle-Ville's fluffy pancakes to Khao Khai's authentic Thai street food, Vikings buffet to 
+            Gerry's Grill Filipino favorites - discover the top 64 dining destinations in SM City Fairview, 
+            Quezon City's premier food hub.
+          </p>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">64+</span>
+              <span class="stat-label">Restaurants</span>
+              </div>
+            <div class="stat-item">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Cuisines</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">⭐ 4.5+</span>
+              <span class="stat-label">Avg Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Bar -->
+      <div class="quick-info-bar bg-white rounded shadow-sm p-3 mb-4">
+        <div class="row text-center g-0">
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-map-marker-alt text-danger mb-2"></i>
+            <div class="info-label">Location</div>
+            <div class="info-value">SM City Fairview, Quezon City</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-utensils text-danger mb-2"></i>
+            <div class="info-label">Restaurants</div>
+            <div class="info-value">64+ Options</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-star text-danger mb-2"></i>
+            <div class="info-label">Top Rated</div>
+            <div class="info-value">4.5+ Stars</div>
+          </div>
+          <div class="col-md-3 col-6">
+            <i class="fas fa-clock text-danger mb-2"></i>
+            <div class="info-label">Hours</div>
+            <div class="info-value hours-toggle-btn" onclick="toggleQuickHours()" style="cursor: pointer;">
+              <span class="hours-status-text">Most: 10AM-10PM</span>
+              <i class="fas fa-chevron-down ms-1" id="quickHoursChevron" style="font-size: 0.8rem;"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Expandable Hours Section -->
+        <div id="quickHoursDropdown" class="quick-hours-dropdown" style="display: none;">
+          <hr class="my-3">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-utensils me-2"></i>Restaurants</h6>
+              <p class="mb-1 small"><strong>Most restaurants:</strong> 10AM-10PM</p>
+              <p class="mb-1 small"><strong>Vikings:</strong> 11AM-2:30PM, 5:30PM-10PM</p>
+              <p class="mb-0 small"><strong>Gerry's Grill:</strong> Mon-Thu 10AM-9PM, Fri-Sat 10AM-10PM</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-coffee me-2"></i>Cafes</h6>
+              <p class="mb-1 small"><strong>Belle-Ville:</strong> Daily 10AM-10PM</p>
+              <p class="mb-1 small"><strong>Brewing Point:</strong> Daily 8AM-10PM</p>
+              <p class="mb-0 small"><strong>Starbucks:</strong> 24 hours</p>
+            </div>
+            <div class="col-md-4 mb-3">
+              <h6 class="text-danger mb-2"><i class="fas fa-shopping-bag me-2"></i>Mall Hours</h6>
+              <p class="mb-1 small"><strong>SM Fairview:</strong> Daily 10AM-10PM</p>
+              <p class="mb-1 small"><strong>Food Court:</strong> 10AM-9PM</p>
+              <p class="mb-0 small"><i class="fas fa-info-circle me-1"></i>Hours may vary by restaurant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2><i class="fas fa-list me-2"></i>Quick Navigation</h2>
+        <ul>
+          <li><a href="#top-restaurants"><i class="fas fa-chevron-right"></i>Top Rated Restaurants</a></li>
+          <li><a href="#cuisines"><i class="fas fa-chevron-right"></i>Browse by Cuisine</a></li>
+          <li><a href="#quick-bites"><i class="fas fa-chevron-right"></i>Quick Bites & Specialties</a></li>
+          <li><a href="#budget-guide"><i class="fas fa-chevron-right"></i>Budget Guide</a></li>
+          <li><a href="#dining-tips"><i class="fas fa-chevron-right"></i>Insider Tips</a></li>
+          <li><a href="#map"><i class="fas fa-chevron-right"></i>Location & Directions</a></li>
+          <li><a href="#faq"><i class="fas fa-chevron-right"></i>FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-lg-8 mx-auto">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div class="content-section mb-5">
+            <p class="lead">
+              Looking for the best <strong>SM Fairview restaurants</strong> in Quezon City? You've come to the right place! 
+              SM City Fairview has transformed into one of the premier dining destinations in northern Metro Manila, 
+              featuring over 64 restaurants ranging from international buffets to authentic Thai street food.
+            </p>
+            
+            <p>
+              Whether you're craving fluffy meringue pancakes at <strong>Belle-Ville Pancake Cafe</strong>, authentic 
+              Thai flavors at <strong>Khao Khai</strong>, the legendary <strong>Vikings buffet</strong>, or Filipino 
+              favorites like <strong>Gerry's Grill</strong> and <strong>Lydia's Lechon</strong>, SM Fairview's diverse 
+              dining scene offers something for everyone—from budget-friendly meals to upscale experiences.
+            </p>
+
+            <p>
+              This comprehensive guide showcases the must-try <strong>restaurants in SM Fairview</strong>, featuring 
+              detailed reviews, price ranges, operating hours, and insider tips. Whether you're a Fairview resident, 
+              mall-goer, or foodie explorer, discover why SM Fairview restaurants have become a culinary destination 
+              in Quezon City.
+            </p>
+          </div>
+
+          <!-- Top Restaurants Section -->
+          <div class="content-section mb-5">
+            <h2 id="top-restaurants"><i class="fas fa-star me-2"></i>Top Rated Restaurants in SM Fairview</h2>
+            
+            <p>
+              These are the highest-rated restaurants in SM Fairview based on customer reviews, food quality, 
+              and overall dining experience. For more detailed information about each restaurant, visit our 
+              <a href="/fairview/" class="text-danger">complete Fairview restaurant directory</a>.
+            </p>
+
+            <!-- Vikings -->
+            <div class="restaurant-card">
+              <img src="{{ url_for('static', filename='images/sm-fairview/vikings-fairview.webp') }}" alt="Vikings Fairview Terraces Buffet Restaurant" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Vikings The Alley Fairview Terraces</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.8/5</strong> (2,017 reviews)
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Buffet, International</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Mon-Sun: 11AM-2:30PM, 5:30PM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Upper G/F Ayala Malls Fairview, Quirino Highway, Maligaya St</div>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Dine-in</span>
+                <span class="badge bg-info me-1">Wheelchair Accessible</span>
+                <span class="badge bg-warning me-1">Good for Kids</span>
+              </div>
+            </div>
+
+            <!-- Gerry's Grill -->
+            <div class="restaurant-card">
+              <img src="{{ url_for('static', filename='images/sm-fairview/gerrys-grill.jpg') }}" alt="Gerry's Grill SM Fairview Filipino Restaurant" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Gerry's Grill</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.9/5</strong> (4,940 reviews)
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Filipino, Grill</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Mon-Thu: 10AM-9PM, Fri-Sat: 10AM-10PM, Sun: 10AM-9PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> 1118 Quirino Hwy</div>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Good for Kids</span>
+              </div>
+            </div>
+
+            <!-- Lydia's Lechon -->
+            <div class="restaurant-card">
+              <img src="{{ url_for('static', filename='images/sm-fairview/lydias.png') }}" alt="Lydia's Lechon Fairview Best Lechon Manila" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Lydia's Lechon The Best Lechon In Manila</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.8/5</strong> (786 reviews)
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Filipino, Lechon</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Mon-Sun: 10AM-8PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Fairview Subdivision, 77 Fairview Avenue</div>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Good for Kids</span>
+              </div>
+            </div>
+
+            <!-- 24 Chicken -->
+            <div class="restaurant-card">
+              <img src="{{ url_for('static', filename='images/sm-fairview/24-chicken.jpg') }}" alt="24 Chicken Fairview Korean Fried Chicken" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">24 Chicken Phoenix Dahlia</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.8/5</strong> (402 reviews)
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Korean, Chicken</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Mon-Sun: 10AM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Daisy Street, Corner Dahlia Ave</div>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Good for Kids</span>
+              </div>
+            </div>
+
+            <!-- Frankie's -->
+            <div class="restaurant-card">
+              <img src="{{ url_for('static', filename='images/sm-fairview/frankies-new-york-sm-fairview.jpeg') }}" alt="Frankie's New York Buffalo Wings SM Fairview" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Frankie's New York Buffalo Wings</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.8/5</strong> (206 reviews)
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> American, Wings</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Mon-Thu: 10AM-9PM, Fri-Sat: 10AM-10PM, Sun: 10AM-9PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Quirino Highway, corner Regalado Hwy</div>
+              <div class="mt-2">
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Good for Kids</span>
+              </div>
+            </div>
+
+            <!-- Show More Button for Mobile -->
+            <button id="showMoreBtn" class="show-more-btn" onclick="toggleRestaurants()">
+              <span id="btnText">Show 5 More Restaurants</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+
+            <!-- Belle-Ville Pancake Cafe -->
+            <div class="restaurant-card mobile-hidden">
+              <img src="{{ url_for('static', filename='images/sm-fairview/sm-fairview-belle-ville-pancake-cafe-ph.jpg') }}" alt="Belle-Ville Pancake Cafe SM Fairview Japanese Pancakes" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Belle-Ville Pancake Cafe</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.7/5</strong>
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Cafe, Japanese-inspired Desserts</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Daily: 10AM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Lower Ground Level, SM City Fairview</div>
+              <p class="mt-2 mb-2" style="font-size: 0.9rem; color: #495057;">
+                Famous for their fluffy meringue millefeuille pancakes in flavors like Caramel Apple, Chocolate Banana, 
+                and Matcha Red Bean. Also offers parfaits, French toast, pasta, and rice plates in a cozy cafe setting.
+              </p>
+              <div class="mt-2">
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-warning me-1">Instagram-Worthy</span>
+              </div>
+            </div>
+
+            <!-- Khao Khai -->
+            <div class="restaurant-card mobile-hidden">
+              <img src="{{ url_for('static', filename='images/sm-fairview/khao-khai.jpg') }}" alt="Khao Khai Thai Street Food SM Fairview" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Khao Khai - Authentic Thai Street Food</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.6/5</strong>
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Thai Street Food</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Daily: 10AM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Lower Ground Level, SM City Fairview</div>
+              <p class="mt-2 mb-2" style="font-size: 0.9rem; color: #495057;">
+                Brings authentic Thai street food flavors to SM Fairview with signature dishes like Shrimp Krapao, 
+                Tom Yum Fried Rice, and the classic Mango Sticky Rice. Perfect for spice lovers and Thai cuisine enthusiasts.
+              </p>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-danger me-1">Spicy Options</span>
+              </div>
+            </div>
+
+            <!-- Happy Dumplings -->
+            <div class="restaurant-card mobile-hidden">
+              <img src="{{ url_for('static', filename='images/sm-fairview/happy-dumplings.jpg') }}" alt="Happy Dumplings SM Fairview Dim Sum" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Happy Dumplings</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star-half-alt"></i>
+                <strong>4.5/5</strong>
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Chinese, Dim Sum</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Daily: 10AM-9PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> SM City Fairview</div>
+              <p class="mt-2 mb-2" style="font-size: 0.9rem; color: #495057;">
+                Specialty dumpling restaurant offering hakaw (shrimp dumplings) in eight unique flavors including Original, 
+                Garlic, Szechuan, and Satay. Also serves Shrimp Siomai and Beef & Wonton Noodle Soup.
+              </p>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Quick Service</span>
+              </div>
+            </div>
+
+            <!-- Brewing Point -->
+            <div class="restaurant-card mobile-hidden">
+              <img src="{{ url_for('static', filename='images/sm-fairview/brewing-point.jpg') }}" alt="Brewing Point Neighborhood Cafe SM Fairview" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Brewing Point Neighborhood Cafe</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star-half-alt"></i>
+                <strong>4.4/5</strong>
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Cafe, Comfort Food</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Daily: 8AM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> Upper Ground Level, Parkway, SM Fairview</div>
+              <p class="mt-2 mb-2" style="font-size: 0.9rem; color: #495057;">
+                Cozy neighborhood cafe serving comfort food favorites including the Breakfast Burger, Lechon Kawali Laing, 
+                and Smoked Pulled Pork Sandwich. Great spot for coffee and casual meals.
+              </p>
+              <div class="mt-2">
+                <span class="badge bg-success me-1">Delivery</span>
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-secondary me-1">Coffee</span>
+              </div>
+            </div>
+
+            <!-- Ramen Nagi -->
+            <div class="restaurant-card mobile-hidden">
+              <img src="{{ url_for('static', filename='images/sm-fairview/ramen-nagi.jpg') }}" alt="Ramen Nagi SM Fairview Japanese Restaurant" class="img-fluid rounded mb-3" loading="lazy">
+              <h3 class="restaurant-name">Ramen Nagi</h3>
+              <div class="restaurant-rating mb-2">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                <strong>4.6/5</strong>
+              </div>
+              <div class="restaurant-cuisine"><strong>Cuisine:</strong> Japanese, Ramen</div>
+              <div class="restaurant-hours"><strong>Hours:</strong> Daily: 11AM-10PM</div>
+              <div class="restaurant-address"><strong>Location:</strong> SM City Fairview</div>
+              <p class="mt-2 mb-2" style="font-size: 0.9rem; color: #495057;">
+                Popular ramen chain known for rich and flavorful ramen bowls including the Chicken Paitan King and 
+                limited-edition Korean King. Customize your ramen's richness, garlic, and spice levels.
+              </p>
+              <div class="mt-2">
+                <span class="badge bg-primary me-1">Takeout</span>
+                <span class="badge bg-info me-1">Dine-in</span>
+                <span class="badge bg-warning me-1">Ramen Specialist</span>
+              </div>
+            </div>
+            
+            <div class="text-center mt-4">
+              <a href="/fairview/" class="btn btn-danger btn-lg">
+                <i class="fas fa-utensils me-2"></i>View All Fairview Restaurants
+              </a>
+            </div>
+          </div>
+
+          <!-- Cuisine Categories -->
+          <div class="content-section mb-5">
+            <h2 id="cuisines"><i class="fas fa-utensils me-2"></i>Browse by Cuisine in Fairview</h2>
+            
+            <p>
+              SM Fairview offers a diverse range of cuisines to satisfy every palate. Here's what you can find. 
+              Explore our <a href="/cuisine/" class="text-danger">complete cuisine directory</a> for more options.
+            </p>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=fast-food" class="text-dark" style="text-decoration: none;">🍔 Fast Food (19 restaurants)</a></h4>
+                  <p>Quick bites and comfort food favorites including McDonald's, Jollibee, and local chains.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=cafe" class="text-dark" style="text-decoration: none;">☕ Cafe (11 restaurants)</a></h4>
+                  <p>Perfect spots for coffee, pastries, and light meals including Starbucks and local cafes.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=filipino" class="text-dark" style="text-decoration: none;">🍚 Filipino (7 restaurants)</a></h4>
+                  <p>Authentic Filipino cuisine including Gerry's Grill, Lydia's Lechon, and local favorites.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=pizza" class="text-dark" style="text-decoration: none;">🍕 Pizza (5 restaurants)</a></h4>
+                  <p>From classic to gourmet pizzas including Angel's Pizza and international chains.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=buffet" class="text-dark" style="text-decoration: none;">🍱 Buffet (3 restaurants)</a></h4>
+                  <p>All-you-can-eat options including Vikings and other buffet restaurants.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=korean" class="text-dark" style="text-decoration: none;">🍜 Korean (2 restaurants)</a></h4>
+                  <p>Korean cuisine including 24 Chicken and other Korean-inspired dishes.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <h3>Browse by Cuisine in Fairview</h3>
+              <div class="text-center">
+                <a href="/fairview/?cuisine=fast-food" class="cuisine-badge">Fast food</a>
+                <a href="/fairview/?cuisine=cafe" class="cuisine-badge">Cafe</a>
+                <a href="/fairview/?cuisine=filipino" class="cuisine-badge">Filipino</a>
+                <a href="/fairview/?cuisine=pizza" class="cuisine-badge">Pizza</a>
+                <a href="/fairview/?cuisine=buffet" class="cuisine-badge">Buffet</a>
+                <a href="/fairview/?cuisine=korean" class="cuisine-badge">Korean</a>
+                <a href="/fairview/?cuisine=chicken" class="cuisine-badge">Chicken</a>
+                <a href="/fairview/?cuisine=american" class="cuisine-badge">American</a>
+                <a href="/fairview/?cuisine=lechon" class="cuisine-badge">Lechon</a>
+                <a href="/fairview/?cuisine=ramen" class="cuisine-badge">Ramen</a>
+                <a href="/fairview/?cuisine=japanese" class="cuisine-badge">Japanese</a>
+                <a href="/fairview/?cuisine=asian" class="cuisine-badge">Asian</a>
+                <a href="/fairview/?cuisine=donut-shop" class="cuisine-badge">Donut shop</a>
+                <a href="/fairview/?cuisine=pancake" class="cuisine-badge">Pancake</a>
+                <a href="/fairview/?cuisine=chinese" class="cuisine-badge">Chinese</a>
+                <a href="/fairview/?cuisine=dessert" class="cuisine-badge">Dessert</a>
+                <a href="/fairview/?cuisine=cake-shop" class="cuisine-badge">Cake shop</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Bites & Specialties -->
+          <div class="content-section mb-5">
+            <h2 id="quick-bites"><i class="fas fa-hamburger me-2"></i>Quick Bites & Specialty Dining</h2>
+            
+            <p>
+              Beyond full-service restaurants, SM Fairview offers plenty of options for quick meals, coffee breaks, and special dining experiences.
+            </p>
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=fast-food" class="text-dark" style="text-decoration: none;">🍔 Fast Food (19 restaurants)</a></h4>
+                  <p class="mb-1">Quick meals from McDonald's, Jollibee, KFC, Burger King, Chowking, Greenwich, and more.</p>
+                  <a href="/fairview/?cuisine=fast-food" class="text-danger small">View all →</a>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=cafe" class="text-dark" style="text-decoration: none;">☕ Cafes (11 restaurants)</a></h4>
+                  <p class="mb-1">Coffee and light meals at Starbucks (24hrs), Cafe Mary Grace, Belle-Ville, Brewing Point, and more.</p>
+                  <a href="/fairview/?cuisine=cafe" class="text-danger small">View all →</a>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="feature-card">
+                  <h4><a href="/fairview/?cuisine=buffet" class="text-dark" style="text-decoration: none;">🍱 Buffets (3 restaurants)</a></h4>
+                  <p class="mb-1">All-you-can-eat at Vikings (4.8★, ₱1,500-1,800) and other buffet options for celebrations.</p>
+                  <a href="/fairview/?cuisine=buffet" class="text-danger small">View all →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <h2>Explore SM Fairview Restaurants Today</h2>
+            <p class="lead mb-4">
+              Whether you're looking for a quick bite, family dinner, or special celebration, 
+              SM Fairview's diverse restaurant scene has something for everyone. 
+              Discover your new favorite dining spot today!
+            </p>
+            <div>
+              <a href="/fairview/" class="btn-visit">
+                <i class="fas fa-utensils me-2"></i>View All Restaurants
+              </a>
+              <a href="https://www.google.com/maps/search/SM+City+Fairview+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+              </a>
+            </div>
+          </div>
+
+          <!-- Budget Guide -->
+          <div id="budget-guide" class="content-section mb-5">
+            <h2><i class="fas fa-wallet me-2"></i>Budget Guide: Dining in SM Fairview for Every Wallet</h2>
+            
+            <p>
+              Whether you're looking for budget eats or splurge-worthy meals, SM Fairview has options for every price point. 
+              Here's our breakdown to help you plan your dining budget:
+            </p>
+
+            <h3>💵 Budget-Friendly (Under ₱300/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Quick meals, students, everyday dining</p>
+              <ul>
+                <li><strong>SM Fairview Food Court</strong> - Various Filipino and Asian options (₱150-250)</li>
+                <li><strong>Fast Food Chains</strong> - Jollibee, McDonald's, KFC, Chowking (₱150-250)</li>
+                <li><strong>Happy Dumplings</strong> - Affordable dim sum options (₱200-300)</li>
+                <li><strong>Mang Inasal</strong> - Unlimited rice meals (₱150-250)</li>
+              </ul>
+            </div>
+
+            <h3>💰 Mid-Range (₱300-₱600/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Casual dining, dates, small celebrations</p>
+              <ul>
+                <li><strong>Belle-Ville Pancake Cafe</strong> - Japanese pancakes and cafe fare (₱300-500)</li>
+                <li><strong>Khao Khai</strong> - Authentic Thai street food (₱250-450)</li>
+                <li><strong>Ramen Nagi</strong> - Quality ramen bowls (₱400-600)</li>
+                <li><strong>Brewing Point Cafe</strong> - Comfort food and coffee (₱250-450)</li>
+                <li><strong>24 Chicken</strong> - Korean fried chicken (₱300-500)</li>
+              </ul>
+            </div>
+
+            <h3>💎 Upscale (₱600-₱1,200/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Business meals, special occasions, quality dining</p>
+              <ul>
+                <li><strong>Gerry's Grill</strong> - Filipino grill favorites (₱500-800)</li>
+                <li><strong>Frankie's</strong> - American bar and grill (₱600-900)</li>
+                <li><strong>Lydia's Lechon</strong> - Premium lechon and Filipino dishes (₱600-1,000)</li>
+              </ul>
+            </div>
+
+            <h3>👑 Fine Dining (₱1,200+/person)</h3>
+            <div class="intro-box">
+              <p><strong>Best for:</strong> Celebrations, birthdays, anniversaries</p>
+              <ul>
+                <li><strong>Vikings The Alley</strong> - Premium all-you-can-eat buffet (₱1,500-1,800)</li>
+                <li><strong>Note:</strong> Vikings offers birthday discounts and weekday lunch specials for better value</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Dining Tips -->
+          <div id="dining-tips" class="content-section mb-5">
+            <h2><i class="fas fa-lightbulb me-2"></i>Insider Tips for Dining in SM Fairview</h2>
+            
+            <p>Make the most of your SM Fairview dining experience with these local tips:</p>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-car me-2"></i>Parking Tips</h4>
+              <p><strong>Challenge:</strong> SM Fairview can get crowded on weekends.</p>
+              <p><strong>Solution:</strong> Arrive before 11AM or after 9PM for easier parking. The multi-level parking building has the most available spaces. Some restaurants offer parking validation with minimum spend—ask before paying!</p>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-clock me-2"></i>Best Times to Visit</h4>
+              <p><strong>Avoid the Rush:</strong></p>
+              <ul>
+                <li><strong>Weekday Lunch (11AM-1PM):</strong> Popular with office workers but quieter than weekends</li>
+                <li><strong>Early Dinner (5PM-6PM):</strong> Beat the dinner crowd and get better tables</li>
+                <li><strong>Weekend Mornings:</strong> Perfect for brunch at Belle-Ville or Brewing Point</li>
+                <li><strong>Late Night (9PM+):</strong> Many restaurants stay open, and crowds thin out</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-credit-card me-2"></i>Payment & Deals</h4>
+              <p><strong>What to Know:</strong></p>
+              <ul>
+                <li>Most sit-down restaurants accept credit cards and e-wallets</li>
+                <li>Food court stalls are mostly cash-only—bring small bills</li>
+                <li>ATMs available on every floor</li>
+                <li>Check restaurant social media pages for promos and discounts</li>
+                <li>Some restaurants offer birthday freebies—bring valid ID!</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-calendar-check me-2"></i>Reservations</h4>
+              <p><strong>When to Book Ahead:</strong></p>
+              <ul>
+                <li><strong>Vikings:</strong> Book 1-2 days ahead for weekend dinners (walk-ins often have 1-2 hour waits)</li>
+                <li><strong>Gerry's Grill:</strong> Reservations recommended for groups of 6+</li>
+                <li><strong>Most Other Restaurants:</strong> Walk-ins usually fine, but call ahead for large groups</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4><i class="fas fa-utensils me-2"></i>Food Court Strategy</h4>
+              <p><strong>Maximize Your Experience:</strong></p>
+              <ul>
+                <li>Visit during off-peak hours (2-4PM) for shorter lines</li>
+                <li>Tables fill up fast during lunch—send someone to grab seats first</li>
+                <li>Great for groups who can't agree on one cuisine</li>
+                <li>Most stalls offer combo meals for better value</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Internal Linking -->
+          <div class="intro-box">
+            <p><strong>Explore More Dining Areas:</strong> 
+              <a href="/eastwood" class="text-danger">Eastwood City</a> • 
+              <a href="/trinoma" class="text-danger">Trinoma Mall</a> • 
+              <a href="/all-restaurants" class="text-danger">All 400+ QC Restaurants</a>
+            </p>
+          </div>
+
+          <!-- Map Section -->
+          <div id="map" class="content-section mb-5">
+            <h2><i class="fas fa-map-marker-alt me-2"></i>Location: How to Get to SM Fairview</h2>
+            
+            <p>
+              SM City Fairview is located in Greater Lagro, Quezon City, along Quirino Highway. 
+              It's one of the largest malls in the Philippines and easily accessible from various parts of Metro Manila.
+            </p>
+
+            <div class="mb-4">
+              <iframe 
+                src="https://www.google.com/maps?q=SM+City+Fairview,+Quezon+City&output=embed" 
+                width="100%" 
+                height="400" 
+                style="border:0; border-radius: 8px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Map showing location of SM Fairview restaurants in Quezon City">
+              </iframe>
+            </div>
+
+            <h3>Getting There</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="intro-box">
+                  <h4><i class="fas fa-car me-2"></i>By Private Car</h4>
+                  <ul>
+                    <li><strong>From EDSA:</strong> Take EDSA northbound, turn right to Quirino Highway, proceed to SM Fairview</li>
+                    <li><strong>From Commonwealth:</strong> Take Commonwealth Ave to Quirino Highway</li>
+                    <li><strong>Parking:</strong> Multi-level parking building with 2,000+ spaces</li>
+                    <li><strong>Parking Fee:</strong> ₱40 for first 3 hours</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="intro-box">
+                  <h4><i class="fas fa-bus me-2"></i>By Public Transport</h4>
+                  <ul>
+                    <li><strong>Jeepney:</strong> Ride jeeps bound for "Fairview" from various QC points</li>
+                    <li><strong>Bus:</strong> Buses along Quirino Highway stop at SM Fairview</li>
+                    <li><strong>Grab/Taxi:</strong> Simply tell driver "SM City Fairview"</li>
+                    <li><strong>UV Express:</strong> Available from Cubao, Quezon Ave, and other QC areas</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="content-section mb-5">
+            <h2>Final Thoughts: Why SM Fairview Restaurants Are Worth the Visit</h2>
+            
+            <p>
+              <strong>SM Fairview restaurants</strong> have earned their reputation as one of Quezon City's premier 
+              dining destinations for good reason. With over 64 establishments spanning multiple cuisines, price points, 
+              and dining styles, SM City Fairview offers something for every palate and occasion.
+            </p>
+            
+            <p>
+              What sets the <strong>restaurants in SM Fairview</strong> apart is the combination of variety and quality. 
+              Whether you're seeking the luxury buffet experience at Vikings, craving authentic Thai street food at 
+              Khao Khai, or looking for Instagram-worthy pancakes at Belle-Ville Pancake Cafe, you'll find exceptional 
+              dining options without having to travel across Metro Manila.
+            </p>
+
+            <p>
+              From the highly-rated Gerry's Grill (4.9/5 stars with nearly 5,000 reviews) to hidden gems like 
+              Happy Dumplings and Brewing Point Neighborhood Cafe, <strong>SM Fairview dining</strong> caters to both 
+              casual diners and food enthusiasts. The mall's accessible location in northern Quezon City, ample parking, 
+              and extended operating hours make it an ideal choice for families, BPO workers, and weekend explorers alike.
+            </p>
+
+            <p>
+              Whether you're planning a special celebration at Vikings, a casual date at Ramen Nagi, or a quick lunch 
+              at one of the many fast-food options, the <strong>best SM Fairview restaurants</strong> deliver consistent 
+              quality and memorable experiences. The diversity of cuisines—from Filipino and Korean to Thai, Japanese, 
+              American, and beyond—means you can visit repeatedly without exhausting your options.
+            </p>
+
+            <p class="text-muted fst-italic">
+              Ready to explore? Visit <a href="/fairview/" class="text-danger">our complete Fairview restaurant directory</a> 
+              for detailed information, photos, menus, and contact details for all 64+ dining establishments. 
+              Bookmark this page and make SM Fairview your go-to destination for exceptional dining in Quezon City!
+            </p>
+          </div>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section mb-5">
+          <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  What are the most popular restaurants in SM Fairview?
+                </button>
+              </h3>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">The most popular restaurants include Vikings (4.8/5 stars), Gerry's Grill (4.8/5 stars), Lydia's Lechon (4.8/5 stars), and 24 Chicken (4.8/5 stars).</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  What cuisines are available in SM Fairview?
+                </button>
+              </h3>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">SM Fairview offers a wide variety of cuisines including Filipino, Korean, American, Chinese, Japanese, Italian, and many more international options.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Is there parking available at SM Fairview?
+                </button>
+              </h3>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes, SM Fairview has ample parking space for visitors. Parking is available in the mall's parking areas.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4">
+                  What are the operating hours of SM Fairview restaurants?
+                </button>
+              </h3>
+              <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Most restaurants in SM Fairview operate from 10AM to 10PM, though some may have extended hours. It's best to check individual restaurant hours.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5">
+                  Where can I find Belle-Ville Pancake Cafe in SM Fairview?
+                </button>
+              </h3>
+              <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Belle-Ville Pancake Cafe is located on the Lower Ground Level of SM City Fairview. They're famous for their fluffy meringue millefeuille pancakes in flavors like Caramel Apple, Chocolate Banana, and Matcha Red Bean. Expect to spend ₱300-500 per person.</div>
+          </div>
+      </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q6">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a6" aria-expanded="false" aria-controls="a6">
+                  Is there authentic Thai food in SM Fairview?
+                </button>
+              </h3>
+              <div id="a6" class="accordion-collapse collapse" aria-labelledby="q6" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Khao Khai on the Lower Ground Level serves authentic Thai street food including Shrimp Krapao, Tom Yum Fried Rice, and Mango Sticky Rice. It's perfect for those craving genuine Thai flavors with budget-friendly prices around ₱250-450 per person.</div>
+          </div>
+          </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q7">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a7" aria-expanded="false" aria-controls="a7">
+                  What's unique about Happy Dumplings at SM Fairview?
+                </button>
+              </h3>
+              <div id="a7" class="accordion-collapse collapse" aria-labelledby="q7" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Happy Dumplings offers hakaw (shrimp dumplings) in eight different flavors - Original, Garlic, Szechuan, Satay, and more. This variety lets you try different taste profiles all in one meal. They also serve excellent Shrimp Siomai and Beef & Wonton Noodle Soup.</div>
+          </div>
+          </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q8">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a8" aria-expanded="false" aria-controls="a8">
+                  Are there budget-friendly restaurant options in SM Fairview?
+                </button>
+              </h3>
+              <div id="a8" class="accordion-collapse collapse" aria-labelledby="q8" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Absolutely! Many options under ₱300/person including Happy Dumplings, various fast-food chains, and the food court. Mid-range options (₱300-600) include Brewing Point Cafe, Khao Khai, and Ramen Nagi. Vikings buffet is the premium option at ₱1,500-1,800.</div>
+            </div>
+          </div>
+          </div>
+        </section>
+
+        <!-- Article metadata -->
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-01-15">
+        <meta itemprop="dateModified" content="2025-11-11">
+        <meta itemprop="keywords" content="SM Fairview restaurants, best SM Fairview restaurants, restaurants in SM Fairview, Belle-Ville Pancake Cafe, Khao Khai Thai food, Vikings Fairview, Gerry's Grill Fairview, Ramen Nagi SM Fairview, Happy Dumplings, Brewing Point Cafe, Fairview Quezon City dining, SM City Fairview food, where to eat SM Fairview">
+      </div>
+    </div>
+  </article>
+</main>
+
+<script>
+// Toggle Quick Hours
+function toggleQuickHours() {
+    const dropdown = document.getElementById('quickHoursDropdown');
+    const chevron = document.getElementById('quickHoursChevron');
+    
+    if (dropdown.style.display === 'none') {
+        dropdown.style.display = 'block';
+        chevron.classList.add('rotated');
+    } else {
+        dropdown.style.display = 'none';
+        chevron.classList.remove('rotated');
+    }
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+});
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Top 64 Best Restaurants in SM Fairview, Quezon City",
+  "datePublished": "2025-01-15",
+  "image": "{{ url_for('static', filename='hero-bg.jpg', _external=True) }}",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "description": "Complete 2025 guide to the best SM Fairview restaurants. Featuring Belle-Ville Pancake Cafe, Khao Khai Thai, Vikings buffet, Gerry's Grill, Ramen Nagi, Happy Dumplings & 60+ more dining options with reviews, prices, and hours.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/sm-fairview-restaurants-2025"
+  },
+  "keywords": "SM Fairview restaurants, best SM Fairview restaurants, restaurants in SM Fairview, Belle-Ville Pancake Cafe, Khao Khai Thai food, Vikings Fairview, Gerry's Grill Fairview, Ramen Nagi SM Fairview, Happy Dumplings, Brewing Point Cafe, Fairview Quezon City dining, SM City Fairview food, where to eat SM Fairview, Fairview food guide"
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Breadcrumbs JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "SM Fairview Restaurants",
+      "item": "https://www.restaurantsquezoncity.com/blog/sm-fairview-restaurants-2025"
+    }
+  ]
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- FAQ JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the most popular restaurants in SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The most popular restaurants include Vikings (4.8/5 stars), Gerry's Grill (4.9/5 stars with 4,940 reviews), Lydia's Lechon (4.8/5 stars), Belle-Ville Pancake Cafe, Khao Khai Thai, and 24 Chicken (4.8/5 stars)."}
+    },
+    {
+      "@type": "Question",
+      "name": "What cuisines are available in SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "SM Fairview offers a wide variety of cuisines including Filipino, Korean, American, Chinese, Japanese, Thai, Italian, cafe dining, buffets, and many more international options. Notable mentions include authentic Thai at Khao Khai and Japanese pancakes at Belle-Ville."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there parking available at SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, SM Fairview has ample parking space for visitors. Parking is available in the mall's parking areas."}
+    },
+    {
+      "@type": "Question",
+      "name": "What are the operating hours of SM Fairview restaurants?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Most restaurants in SM Fairview operate from 10AM to 10PM, though some may have extended hours. It's best to check individual restaurant hours."}
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I find Belle-Ville Pancake Cafe in SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Belle-Ville Pancake Cafe is located on the Lower Ground Level of SM City Fairview. They're famous for their fluffy meringue millefeuille pancakes in flavors like Caramel Apple, Chocolate Banana, and Matcha Red Bean. Expect to spend ₱300-500 per person."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there authentic Thai food in SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Khao Khai on the Lower Ground Level serves authentic Thai street food including Shrimp Krapao, Tom Yum Fried Rice, and Mango Sticky Rice. It's perfect for those craving genuine Thai flavors with budget-friendly prices around ₱250-450 per person."}
+    },
+    {
+      "@type": "Question",
+      "name": "What's unique about Happy Dumplings at SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Happy Dumplings offers hakaw (shrimp dumplings) in eight different flavors - Original, Garlic, Szechuan, Satay, and more. This variety lets you try different taste profiles all in one meal. They also serve excellent Shrimp Siomai and Beef & Wonton Noodle Soup."}
+    },
+    {
+      "@type": "Question",
+      "name": "Are there budget-friendly restaurant options in SM Fairview?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Absolutely! Many options under ₱300/person including Happy Dumplings, various fast-food chains, and the food court. Mid-range options (₱300-600) include Brewing Point Cafe, Khao Khai, and Ramen Nagi. Vikings buffet is the premium option at ₱1,500-1,800."}
+    }
+  ]
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": "SM City Fairview",
+  "description": "Shopping mall in Quezon City with 64+ restaurants offering diverse dining options",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Quirino Highway",
+    "addressLocality": "Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "url": "https://www.restaurantsquezoncity.com/fairview/",
+  "servesCuisine": ["Filipino", "Korean", "American", "Chinese", "Japanese", "Thai", "Italian", "Fast Food", "Buffet", "Cafe", "Ramen", "Pancakes", "Street Food"],
+  "priceRange": "₱₱₱",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "10:00",
+      "closes": "22:00"
+    }
+  ]
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Toggle expandable hours dropdown
+function toggleQuickHours() {
+  const dropdown = document.getElementById('quickHoursDropdown');
+  const chevron = document.getElementById('quickHoursChevron');
+  
+  if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+    dropdown.style.display = 'block';
+    chevron.style.transform = 'rotate(180deg)';
+  } else {
+    dropdown.style.display = 'none';
+    chevron.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Toggle restaurant cards visibility on mobile
+function toggleRestaurants() {
+  const hiddenCards = document.querySelectorAll('.restaurant-card.mobile-hidden');
+  const btn = document.getElementById('showMoreBtn');
+  const btnText = document.getElementById('btnText');
+  
+  hiddenCards.forEach(card => {
+    if (card.style.display === 'none' || card.style.display === '') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  if (btn.classList.contains('expanded')) {
+    btn.classList.remove('expanded');
+    btnText.textContent = 'Show 5 More Restaurants';
+    // Scroll back to the button smoothly
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    btn.classList.add('expanded');
+    btnText.textContent = 'Show Less';
+  }
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

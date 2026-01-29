@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} | Restaurants in Quezon City{% endblock %}
+{% block description %}{{ post.excerpt }}{% endblock %}
+{% block content %}
+<main class="container my-5">
+  <article itemscope itemtype="https://schema.org/Article">
+    <header>
+      <img src="{{ post.featured_image }}" class="img-fluid rounded mb-4 w-100 blog-featured-img" alt="{{ post.title }}" itemprop="image">
+      <h1 itemprop="headline">{{ post.title }}</h1>
+      <p class="text-muted small" itemprop="datePublished">{{ post.date }}</p>
+    </header>
+    <section itemprop="articleBody" class="blog-article-content">
+      <div class="blog-restaurant-list">
+        {{ post.content | safe }}
+      </div>
+    </section>
+    <meta itemprop="author" content="Restaurants QC">
+    <meta itemprop="mainEntityOfPage" content="{{ request.url }}">
+    <meta itemprop="keywords" content="{{ post.keywords | join(', ') }}">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ post.title }}",
+      "datePublished": "{{ post.date }}",
+      "image": "{{ post.featured_image }}",
+      "author": {"@type": "Organization", "name": "Restaurants QC"},
+      "mainEntityOfPage": "{{ request.url }}",
+      "keywords": "{{ post.keywords | join(', ') }}",
+      "description": "{{ post.excerpt }}"
+    }
+    </script>
+  </article>
+  {% if related_posts %}
+  <aside class="mt-5">
+    <h2 class="h5">Related Posts</h2>
+    <ul>
+      {% for r in related_posts %}
+      <li><a href="/blog/{{ r.slug }}">{{ r.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+  {% endif %}
+</main>
+<style>
+.blog-featured-img {
+    max-height: 350px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.blog-article-content {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #333;
+}
+.blog-restaurant-list {
+    margin-top: 2rem;
+}
+.restaurant-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    margin-bottom: 2rem;
+}
+.restaurant-card:hover {
+    border: 2px solid #d32323;
+    box-shadow: 0 8px 24px rgba(211,35,35,0.15);
+    transform: translateY(-5px);
+}
+.restaurant-image-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+.restaurant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.price-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(108, 117, 125, 0.95);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 2;
+}
+.card-body {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.restaurant-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #2d2e2f;
+}
+.stars {
+    font-size: 0.9rem;
+    margin-right: 5px;
+    color: #ffd700;
+}
+.address {
+    margin-bottom: 0.15rem;
+    font-size: 0.9rem;
+}
+.features-badges .badge {
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+}
+.feature-badge.delivery {
+    background-color: #FF6B6B;
+    color: white;
+}
+.feature-badge.takeout {
+    background-color: #4ECDC4;
+    color: white;
+}
+.feature-badge.dine-in {
+    background-color: #45B7D1;
+    color: white;
+}
+</style>
+{% endblock %} 

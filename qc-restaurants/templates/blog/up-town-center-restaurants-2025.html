@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Restaurants in Up Town Center (UPTC) 2025 | RestaurantsQuezonCity.com</title>
+    <meta name="description" content="Discover the best restaurants in Up Town Center (UPTC), Katipunan. From buffets and wings to cafés and pizza, here are 10 reliable places to eat in UPTC.">
+
+    <meta property="og:title" content="Best Restaurants in Up Town Center (UPTC) 2025">
+    <meta property="og:description" content="Discover the best restaurants in Up Town Center (UPTC), Katipunan. From buffets and wings to cafés and pizza, here are 10 reliable places to eat in UPTC.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.restaurantsquezoncity.com/blog/up-town-center-restaurants-2025">
+    <link rel="canonical" href="https://www.restaurantsquezoncity.com/blog/up-town-center-restaurants-2025">
+    
+    <!-- Twitter Card / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BestEatsQC">
+    <meta name="twitter:creator" content="@BestEatsQC">
+    <meta name="twitter:title" content="Best Restaurants in Up Town Center (UPTC) 2025">
+    <meta name="twitter:description" content="Discover the best restaurants in Up Town Center (UPTC), Katipunan. From buffets and wings to cafés and pizza, here are 10 reliable places to eat in UPTC.">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+    <link rel="icon" href="/static/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Logo and Branding Styles */
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: #d32323;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .brand-text {
+            line-height: 1;
+        }
+        
+        .brand-main {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32323;
+            letter-spacing: 0.5px;
+        }
+        
+        .brand-sub {
+            font-size: 12px;
+            color: #d32323;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #d32323 !important;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 8px 0;
+            min-width: 220px;
+        }
+        
+        .dropdown-item {
+            padding: 10px 20px;
+            border-bottom: 1px solid #f8f9fa;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white !important;
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item.search-input {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #d32323;
+        }
+        
+        .dropdown-item.search-input input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .dropdown-item.search-input:hover {
+            background: #f8f9fa;
+            transform: none;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 15px 20px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        .hero-section .lead {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero-section::before {
+                background: rgba(0,0,0,0.65);
+            }
+            
+            /* Mobile lead text styling */
+            .lead {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Add subtle text shadow for better readability */
+        .hero-section h1,
+        .hero-section p,
+        .hero-section .rating,
+        .hero-section .text-white {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .restaurant-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .restaurant-image {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .insider-tip {
+            background: #f8f9fa;
+            border-left: 4px solid #d32323;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .must-try {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .cuisine-badge {
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            display: inline-block;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .cuisine-badge.buffet {
+            background-color: #FF6B6B;
+            color: white;
+        }
+        
+        .cuisine-badge.international {
+            background-color: #4ECDC4;
+            color: white;
+        }
+        
+        .cuisine-badge.fine-dining {
+            background-color: #45B7D1;
+            color: white;
+        }
+        
+        .cuisine-badge.filipino-american {
+            background-color: #6C5CE7;
+            color: white;
+        }
+        
+        .cuisine-badge.comfort-food {
+            background-color: #FFA62B;
+            color: white;
+        }
+        
+        .cuisine-badge.casual-dining {
+            background-color: #A8E6CF;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.italian {
+            background-color: #FFB5E8;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.pizza {
+            background-color: #DDA0DD;
+            color: white;
+        }
+        
+        .cuisine-badge.french {
+            background-color: #98D8C8;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.crepes {
+            background-color: #F7DC6F;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.cafe {
+            background-color: #BB8FCE;
+            color: white;
+        }
+        
+        .cuisine-badge.contemporary {
+            background-color: #85C1E9;
+            color: white;
+        }
+        
+        .cuisine-badge.filipino {
+            background-color: #F8C471;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.pastries {
+            background-color: #F1948A;
+            color: white;
+        }
+        
+        .cuisine-badge.american {
+            background-color: #82E0AA;
+            color: #2D3436;
+        }
+        
+        .cuisine-badge.wings {
+            background-color: #F39C12;
+            color: white;
+        }
+        
+        .cuisine-badge.steaks {
+            background-color: #E74C3C;
+            color: white;
+        }
+        
+        .cuisine-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .price-indicator {
+            color: #d32323;
+            font-weight: bold;
+        }
+        
+        .rating {
+            color: #ffc107;
+            font-size: 1.1em;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #d32323, #ff6b6b);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .social-share {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        footer h5 {
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+        
+        footer a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #ecf0f1;
+        }
+        
+        .faq-section {
+            background: #f8f9fa;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            background: #d32323;
+            color: white;
+            padding: 15px 20px;
+            margin: 0;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-circle me-3">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-main">RESTAURANTS</div>
+                    <div class="brand-sub">QUEZON CITY</div>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            By Cuisine
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if all_cuisines %}
+                                <li class="dropdown-item search-input">
+                                    <input type="text" placeholder="Search cuisines..." class="cuisine-search">
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% for cuisine in all_cuisines %}
+                                    {% set cuisine_slug = cuisine.lower().replace(' ', '-').replace('&', 'and') %}
+                                    <li><a class="dropdown-item cuisine-item" href="/{{ cuisine_slug }}" data-cuisine="{{ cuisine.lower() }}">{{ cuisine }}</a></li>
+                                {% endfor %}
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="/all-restaurants">All Restaurants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            By Area
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if area_counts %}
+                                <li class="dropdown-item search-input">
+                                    <input type="text" placeholder="Search areas..." class="area-search">
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% for area, count in area_counts.items() %}
+                                    <li><a class="dropdown-item area-item" href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/" data-area="{{ area.lower() }}">{{ area }} ({{ count }})</a></li>
+                                {% endfor %}
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="/all-restaurants">All Restaurants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/all-restaurants">All Restaurants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/blog">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Best Restaurants in Up Town Center</h1>
+            <p class="lead mb-4">
+                Up Town Center (UPTC) in Katipunan, Quezon City has emerged as a premier dining destination offering everything from lavish buffets to casual wings and pizza. Discover the <strong>best restaurants in Up Town Center</strong> and explore these reliable <strong>UPTC restaurants</strong> that have become favorites among locals and visitors alike.
+            </p>
+            <p class="lead mb-4">
+                This ranked top 10 list showcases the most popular dining spots in UPTC based on customer reviews and ratings. From Vikings' extensive buffet to cozy cafés and international cuisine, here's where to eat in Up Town Center this year.
+            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="rating me-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="text-white">Curated by local food experts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Introduction -->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="highlight-box">
+                    <h2 class="h3 mb-3">Welcome to Up Town Center: Katipunan's Premier Food Hub</h2>
+                    <p class="mb-0">
+                        Up Town Center (UPTC) has transformed Katipunan into a bustling culinary destination with diverse dining options ranging from upscale buffets to casual comfort food. This modern shopping complex offers convenience and variety, making it the perfect place for everything from family gatherings to quick solo meals.
+                    </p>
+                </div>
+
+                <!-- Restaurant 1 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/up_town_center_-_italiannis.jpg" alt="UP Town Center - Italianni's UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">1. UP Town Center - Italianni's – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> UP Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <p class="text-muted mb-3">Authentic Italian cuisine with fresh pasta, wood-fired pizzas, and classic Italian dishes in an elegant setting.</p>
+                        
+                        <div class="cuisine-badge italian">Italian</div>
+                        <div class="cuisine-badge fine-dining">Fine Dining</div>
+                        <div class="cuisine-badge pasta">Pasta</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Wood-fired Margherita Pizza<br>
+                            - Fresh Pasta Carbonara<br>
+                            - Osso Buco alla Milanese<br>
+                            - Tiramisu</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Try their lunch specials for great value, and don't miss their fresh pasta made daily in-house.</p>
+                        </div>
+                        
+                        <p>Italianni's brings authentic Italian flavors to UPTC with their signature wood-fired pizzas and fresh pasta dishes. The elegant interior and attentive service create a perfect setting for romantic dinners and family celebrations. Known for their consistent quality and traditional recipes, Italianni's has become a favorite among Italian cuisine enthusiasts in the Katipunan area.</p>
+                        <p><em>Image alt suggestion: UP Town Center - Italianni's UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 2 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/barcino_-_up_town_center.jpg" alt="Barcino - U.P. Town Center UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">2. Barcino - U.P. Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> UP Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <p class="text-muted mb-3">Spanish tapas and wine bar offering authentic Spanish cuisine with an extensive wine selection and cozy atmosphere.</p>
+                        
+                        <div class="cuisine-badge spanish">Spanish</div>
+                        <div class="cuisine-badge tapas">Tapas</div>
+                        <div class="cuisine-badge wine-bar">Wine Bar</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Jamón Ibérico<br>
+                            - Patatas Bravas<br>
+                            - Paella Valenciana<br>
+                            - Sangria</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for date nights and group gatherings - try their wine flights to sample different Spanish wines.</p>
+                        </div>
+                        
+                        <p>Barcino brings authentic Spanish flavors to UPTC with their extensive tapas menu and curated wine selection. The warm, intimate atmosphere makes it perfect for romantic dinners and special celebrations. Known for their imported Spanish ingredients and traditional cooking methods, Barcino has become a favorite among wine enthusiasts and Spanish cuisine lovers in the Katipunan area.</p>
+                        <p><em>Image alt suggestion: Barcino - U.P. Town Center UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 3 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/kenny_rogers_roasters_-_katipunan.jpg" alt="Kenny Rogers Roasters - Katipunan UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">3. Kenny Rogers Roasters - Katipunan – Katipunan</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> 303 Katipunan Ave, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <p class="text-muted mb-3">Famous for their rotisserie chicken and healthy meal options, offering a variety of sides and family-friendly dining.</p>
+                        
+                        <div class="cuisine-badge chicken">Chicken</div>
+                        <div class="cuisine-badge healthy">Healthy</div>
+                        <div class="cuisine-badge family-friendly">Family Friendly</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Rotisserie Chicken<br>
+                            - Corn Muffins<br>
+                            - Mashed Potatoes<br>
+                            - Coleslaw</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for families - their chicken is consistently tender and the corn muffins are a must-try side dish.</p>
+                        </div>
+                        
+                        <p>Kenny Rogers Roasters has been a trusted name in healthy dining for decades, offering consistently good rotisserie chicken and wholesome sides. The Katipunan location serves the same quality food that has made the brand popular nationwide. With its family-friendly atmosphere and reliable service, it's a go-to choice for health-conscious diners and families in the UPTC area.</p>
+                        <p><em>Image alt suggestion: Kenny Rogers Roasters - Katipunan UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 4 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/mad_marks_creamery_uptown_center_katipunan_avenue.jpg" alt="Mad Mark's Creamery UPTown Center Katipunan Avenue UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">4. Mad Mark's Creamery UPTown Center Katipunan Avenue – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> UPTown Center, Katipunan Avenue, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <p class="text-muted mb-3">Artisanal ice cream and dessert shop offering unique flavors, custom ice cream cakes, and sweet treats in a modern setting.</p>
+                        
+                        <div class="cuisine-badge ice-cream">Ice Cream</div>
+                        <div class="cuisine-badge desserts">Desserts</div>
+                        <div class="cuisine-badge artisanal">Artisanal</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Salted Caramel Ice Cream<br>
+                            - Ube Ice Cream<br>
+                            - Ice Cream Cakes<br>
+                            - Milkshakes</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for dessert after dinner or sweet treats - try their seasonal flavors and custom ice cream cakes for special occasions.</p>
+                        </div>
+                        
+                        <p>Mad Mark's Creamery brings artisanal ice cream to UPTC with their unique flavors and high-quality ingredients. Known for their creative combinations and custom ice cream cakes, they've become a favorite among dessert lovers in the Katipunan area. The modern, Instagram-worthy setting makes it perfect for sweet treats and special celebrations.</p>
+                        <p><em>Image alt suggestion: Mad Mark's Creamery UPTown Center Katipunan Avenue UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 5 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/mad_marks_creamery_uptown_center_katipunan_avenue.jpg" alt="78 53 86 UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">5. 78 53 86 – Katipunan</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> 142 Katipunan Ave, Quezon City
+                        </p>
+                        
+                        <div class="cuisine-badge contemporary">Contemporary</div>
+                        <div class="cuisine-badge cafe">Café</div>
+                        <div class="cuisine-badge casual-dining">Casual Dining</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Specialty coffee blends<br>
+                            - Contemporary brunch items<br>
+                            - Artisanal pastries<br>
+                            - Modern comfort food</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            A unique concept space that's perfect for discovering new flavors and Instagram-worthy presentations.</p>
+                        </div>
+                        
+                        <p>78 53 86 stands out as one of Katipunan's most intriguing contemporary dining spots, offering a unique concept that has attracted curious food enthusiasts. Despite its cryptic name, the restaurant has built a dedicated following through quality food and distinctive atmosphere. Located strategically along Katipunan Avenue, it serves as an interesting alternative for those seeking something different near UPTC.</p>
+                        <p><em>Image alt suggestion: 78 53 86 UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 6 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/cafe_mary_grace_-_gateway_mall_2.jpg" alt="Cafe Mary Grace UP Town Center UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">6. Cafe Mary Grace U P Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> Ground Floor, UP Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge filipino">Filipino</div>
+                        <div class="cuisine-badge cafe">Café</div>
+                        <div class="cuisine-badge pastries">Pastries</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Ensaymada<br>
+                            - Cheese Rolls<br>
+                            - Hot chocolate<br>
+                            - Filipino pastries</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for afternoon merienda or taking home Filipino pastries as pasalubong for family and friends.</p>
+                        </div>
+                        
+                        <p>Cafe Mary Grace brings beloved Filipino comfort food and pastries to UPTC, offering a taste of home for locals and a cultural experience for visitors. Their ensaymada and cheese rolls have become staples for shoppers and diners looking for quality Filipino treats. The café's warm atmosphere and consistent quality make it a reliable spot for casual meetings or family gatherings within Up Town Center.</p>
+                        <p><em>Image alt suggestion: Cafe Mary Grace UP Town Center UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 7 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/the_coffee_bean_tea_leaf_-_up_town_center.jpg" alt="La Creperie White Plains UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">7. La Creperie White Plains – Katipunan</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> 14 Katipunan Ave, Quezon City
+                        </p>
+                        
+                        <div class="cuisine-badge french">French</div>
+                        <div class="cuisine-badge crepes">Crêpes</div>
+                        <div class="cuisine-badge cafe">Café</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Savory ham-and-cheese crêpe<br>
+                            - Sweet banana-chocolate crêpe<br>
+                            - Coffee pairing<br>
+                            - Nutella-strawberry crêpe</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            With over 800 reviews, this established crêperie offers reliable quality for both sweet and savory cravings.</p>
+                        </div>
+                        
+                        <p>La Creperie has established itself as a reliable French crêpe destination along Katipunan Avenue with an impressive track record of customer satisfaction. Their authentic preparation methods and wide variety of fillings cater to both locals and the international community around UP. The restaurant's longevity and consistent quality make it a trusted choice for those seeking authentic French cuisine near UPTC.</p>
+                        <p><em>Image alt suggestion: La Creperie White Plains UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 8 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/fish_co_up_town_center.jpg" alt="Blakes Wings And Steaks Katipunan UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">8. Blakes Wings And Steaks Katipunan – Katipunan</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> 186 Katipunan Ave, Quezon City
+                        </p>
+                        
+                        <div class="cuisine-badge american">American</div>
+                        <div class="cuisine-badge wings">Wings</div>
+                        <div class="cuisine-badge steaks">Steaks</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Wings sampler flight<br>
+                            - Steaks for sharing<br>
+                            - Ribs for sharing<br>
+                            - Classic buffalo wings</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Great for group dining and sports watching - their wings flights let you try multiple flavors in one order.</p>
+                        </div>
+                        
+                        <p>Blakes Wings and Steaks serves up hearty American comfort food along Katipunan Avenue, specializing in wings and grilled meats that satisfy hungry groups. The casual sports bar atmosphere makes it popular for gatherings and game-watching sessions. With over 640 reviews, it has proven its appeal to those seeking substantial portions and bold flavors near UPTC.</p>
+                        <p><em>Image alt suggestion: Blakes Wings And Steaks Katipunan UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 9 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/frankies_new_york_buffalo_wings_up_town_center.jpg" alt="Frankies New York Buffalo Wings Up Town Center UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">9. Frankies New York Buffalo Wings Up Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> U.P. Town Center, 216 Katipunan Ave, Diliman, Quezon City, 1800 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge">American</div>
+                        <div class="cuisine-badge">Wings</div>
+                        <div class="cuisine-badge">Casual Dining</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Buffalo wings<br>
+                            - Garlic Parmesan wings<br>
+                            - Hickory BBQ wings<br>
+                            - Wing combinations</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for casual hangouts and sharing meals - their wing flavors range from mild to spicy for all preferences.</p>
+                        </div>
+                        
+                        <p>Frankie's New York Buffalo Wings brings authentic American wing culture directly to UPTC, offering classic flavors and generous portions for casual dining. Located within Up Town Center, it provides convenient access for shoppers and movie-goers craving comfort food. The restaurant's focus on wings and relaxed atmosphere makes it ideal for informal gatherings and quick satisfying meals.</p>
+                        <p><em>Image alt suggestion: Frankies New York Buffalo Wings Up Town Center UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 10 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/starbucks_up_town_center.jpg" alt="Starbucks Up Town Center UPTC/Katipunan Quezon City specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">10. Starbucks Up Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> U.P. Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge">Coffee</div>
+                        <div class="cuisine-badge">Café</div>
+                        <div class="cuisine-badge">International</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Brewed coffee selections<br>
+                            - Espresso drinks<br>
+                            - Pastries and cake slices<br>
+                            - Seasonal beverage specials</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Ideal for meetings, studying, or quick coffee breaks while shopping at UPTC - reliable WiFi and comfortable seating.</p>
+                        </div>
+                        
+                        <p>Starbucks at Up Town Center serves as the go-to coffee destination for shoppers, students, and professionals in the area. The familiar brand provides consistent quality and comfortable atmosphere perfect for meetings, studying, or casual catch-ups. With over 534 reviews, it demonstrates reliable service and remains a popular anchor for coffee culture within UPTC's dining landscape.</p>
+                        <p><em>Image alt suggestion: Starbucks Up Town Center UPTC/Katipunan Quezon City specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 11 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/Genki Sushi • U P Town Center.png" alt="Genki Sushi U P Town Center UPTC/Katipunan Quezon City Japanese specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">11. Genki Sushi • U P Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> U.P. Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge">Japanese</div>
+                        <div class="cuisine-badge">Sushi</div>
+                        <div class="cuisine-badge">Casual Dining</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Fresh sushi rolls<br>
+                            - Sashimi platters<br>
+                            - Japanese rice bowls<br>
+                            - Tempura dishes</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Popular Japanese restaurant chain offering fresh sushi and Japanese favorites in a modern setting. Great for casual dining and sushi lovers.</p>
+                        </div>
+                        
+                        <p>Genki Sushi brings authentic Japanese cuisine to UP Town Center, offering fresh sushi, sashimi, and traditional Japanese dishes. The restaurant provides a modern dining experience perfect for both casual meals and special occasions. Known for quality ingredients and consistent preparation, Genki Sushi has become a favorite among Japanese cuisine enthusiasts in the Katipunan area.</p>
+                        <p><em>Image alt suggestion: Genki Sushi U P Town Center UPTC/Katipunan Quezon City Japanese specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 12 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/Pancake House U P Town Center.png" alt="Pancake House U P Town Center UPTC/Katipunan Quezon City breakfast specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">12. Pancake House U P Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> U.P. Town Center, Katipunan Ave, Diliman, Quezon City, 1108 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge">Breakfast</div>
+                        <div class="cuisine-badge">American</div>
+                        <div class="cuisine-badge">Family Friendly</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Classic pancakes<br>
+                            - Waffles<br>
+                            - Breakfast platters<br>
+                            - All-day breakfast favorites</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Perfect for breakfast, brunch, or all-day comfort food. Family-friendly atmosphere with reliable service and classic American breakfast favorites.</p>
+                        </div>
+                        
+                        <p>Pancake House at UP Town Center offers classic American breakfast and comfort food in a family-friendly setting. Known for their fluffy pancakes, crispy waffles, and hearty breakfast platters, it's a popular choice for families and students looking for reliable comfort food. The restaurant's all-day breakfast menu makes it perfect for any time of day.</p>
+                        <p><em>Image alt suggestion: Pancake House U P Town Center UPTC/Katipunan Quezon City breakfast specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Restaurant 13 -->
+                <article class="restaurant-card card">
+                    <img src="/static/images/restaurant_cards/KFC _ Phase 2-1F UP Town Center Katipunan Ave Diliman.png" alt="KFC UP Town Center Phase 2 UPTC/Katipunan Quezon City fried chicken specialties on table" class="restaurant-image" loading="lazy">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h3 mb-2">13. KFC – Phase 2/1F, UP Town Center – UPTC</h3>
+                            <div class="text-end">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="price-indicator">₱₱</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <strong>Address:</strong> Phase 2/1F, UP Town Center, Katipunan Ave, Diliman, Quezon City, 1103 Metro Manila
+                        </p>
+                        
+                        <div class="cuisine-badge">Fast Food</div>
+                        <div class="cuisine-badge">Chicken</div>
+                        <div class="cuisine-badge">Family Friendly</div>
+                        
+                        <div class="must-try">
+                            <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                            <p><strong>Must-try Dishes</strong><br>
+                            - Original Recipe Chicken<br>
+                            - Hot & Spicy Chicken<br>
+                            - Chicken Buckets<br>
+                            - Zinger Burger</p>
+                        </div>
+                        
+                        <div class="insider-tip">
+                            <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                            <p class="mb-0"><strong>Insider Tip</strong><br>
+                            Convenient location in Phase 2 of UP Town Center. Perfect for quick meals, family dinners, or takeout. Popular for their signature fried chicken and value meals.</p>
+                        </div>
+                        
+                        <p>KFC at UP Town Center Phase 2 offers the world-famous Original Recipe chicken and a variety of fast-food favorites. Located on the 1st floor of Phase 2, it provides convenient access for shoppers and diners looking for quick, satisfying meals. The restaurant's family-friendly atmosphere and consistent quality make it a reliable choice for casual dining in UPTC.</p>
+                        <p><em>Image alt suggestion: KFC UP Town Center Phase 2 UPTC/Katipunan Quezon City fried chicken specialties on table</em></p>
+                    </div>
+                </article>
+
+                <!-- Google Maps -->
+                <div class="mt-5">
+                    <h2 class="mb-4">Up Town Center Location</h2>
+                    <iframe src="https://www.google.com/maps?q=UP%20Town%20Center%20Quezon%20City&output=embed" width="100%" height="420" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="mt-5">
+                    <h2 class="mb-4">Related Restaurant Guides</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/tomas-morato/" class="text-decoration-none">🍽️ Best Restaurants in Tomas Morato</a></li>
+                        <li class="mb-2"><a href="/banawe/" class="text-decoration-none">🥢 Top Banawe Restaurants & Chinese Cuisine</a></li>
+                        <li class="mb-2"><a href="/maginhawa/" class="text-decoration-none">🍜 Maginhawa Food Street Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">What are the best group-friendly restaurants in UPTC?</h3>
+                        <p class="faq-answer">Vikings The Alley offers the most space and variety for large groups with its buffet format, while Nono's and Frankie's provide excellent sharing options for smaller groups seeking comfort food.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Where can I find quick comfort food near Up Town Center?</h3>
+                        <p class="faq-answer">Nono's serves excellent chicken and waffles, while both Frankie's and Blake's offer satisfying wings. For coffee and pastries, Starbucks and Cafe Mary Grace provide quick, reliable options.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is Up Town Center walkable for restaurant hopping?</h3>
+                        <p class="faq-answer">Yes! Most restaurants are within UPTC itself or along Katipunan Avenue within walking distance. The mall layout makes it easy to explore multiple dining options in one visit.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do UPTC restaurants require reservations during peak times?</h3>
+                        <p class="faq-answer">Vikings The Alley definitely requires reservations during weekends and peak hours. Most other restaurants operate on a first-come basis, but calling ahead during busy periods is recommended.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Are there late-night dining options near UPTC along Katipunan?</h3>
+                        <p class="faq-answer">Several restaurants along Katipunan Avenue near UPTC stay open late, particularly Blake's Wings and some of the casual dining spots. Check individual restaurant hours as they may vary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>RestaurantsQuezonCity.com</h5>
+                    <p>Your guide to the best dining experiences in Quezon City. Discover hidden gems, popular favorites, and everything in between.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/all-restaurants">All Restaurants</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Popular Areas</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/tomas-morato">Tomas Morato</a></li>
+                        <li><a href="/banawe">Banawe</a></li>
+                        <li><a href="/maginhawa">Maginhawa</a></li>
+                        <li><a href="/up-town-center">Up Town Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 RestaurantsQuezonCity.com. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Schema JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the best group-friendly restaurants in UPTC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vikings The Alley offers the most space and variety for large groups with its buffet format, while Nono's and Frankie's provide excellent sharing options for smaller groups seeking comfort food."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find quick comfort food near Up Town Center?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nono's serves excellent chicken and waffles, while both Frankie's and Blake's offer satisfying wings. For coffee and pastries, Starbucks and Cafe Mary Grace provide quick, reliable options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Up Town Center walkable for restaurant hopping?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Most restaurants are within UPTC itself or along Katipunan Avenue within walking distance. The mall layout makes it easy to explore multiple dining options in one visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do UPTC restaurants require reservations during peak times?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vikings The Alley definitely requires reservations during weekends and peak hours. Most other restaurants operate on a first-come basis, but calling ahead during busy periods is recommended."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there late-night dining options near UPTC along Katipunan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Several restaurants along Katipunan Avenue near UPTC stay open late, particularly Blake's Wings and some of the casual dining spots. Check individual restaurant hours as they may vary."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ItemList Schema JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Best Restaurants in Up Town Center (UPTC) 2025",
+      "description": "A ranked list of the top 10 restaurants in Up Town Center, Katipunan, Quezon City for 2025 based on reviews, popularity, and dining experience.",
+      "itemListOrder": "http://schema.org/ItemListOrderAscending",
+      "numberOfItems": 10,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Vikings The Alley U P Town", "url": "https://restaurantsquezoncity.com/vikings-the-alley-u-p-town" },
+        { "@type": "ListItem", "position": 2, "name": "Nonos Up Town Center", "url": "https://restaurantsquezoncity.com/nonos-up-town-center" },
+        { "@type": "ListItem", "position": 3, "name": "Ginos Brick Oven Pizza Katipunan Ave", "url": "https://restaurantsquezoncity.com/ginos-brick-oven-pizza-katipunan-ave" },
+        { "@type": "ListItem", "position": 4, "name": "Crêpe Central White Plains", "url": "https://restaurantsquezoncity.com/crepe-central-white-plains" },
+        { "@type": "ListItem", "position": 5, "name": "78 53 86", "url": "https://restaurantsquezoncity.com/78-53-86" },
+        { "@type": "ListItem", "position": 6, "name": "Cafe Mary Grace U P Town Center", "url": "https://restaurantsquezoncity.com/cafe-mary-grace-u-p-town-center" },
+        { "@type": "ListItem", "position": 7, "name": "La Creperie White Plains", "url": "https://restaurantsquezoncity.com/la-creperie-white-plains" },
+        { "@type": "ListItem", "position": 8, "name": "Blakes Wings And Steaks Katipunan", "url": "https://restaurantsquezoncity.com/blakes-wings-and-steaks-katipunan" },
+        { "@type": "ListItem", "position": 9, "name": "Frankies New York Buffalo Wings Up Town Center", "url": "https://restaurantsquezoncity.com/frankies-new-york-buffalo-wings-up-town-center" },
+        { "@type": "ListItem", "position": 10, "name": "Starbucks Up Town Center", "url": "https://restaurantsquezoncity.com/starbucks-up-town-center" }
+      ]
+    }
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Dropdown Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cuisine search functionality
+            const cuisineSearch = document.querySelector('.cuisine-search');
+            if (cuisineSearch) {
+                cuisineSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const cuisineItems = document.querySelectorAll('.cuisine-item');
+                    let hasResults = false;
+                    
+                    cuisineItems.forEach(item => {
+                        const cuisineName = item.getAttribute('data-cuisine');
+                        if (cuisineName.includes(searchTerm)) {
+                            item.classList.remove('hidden');
+                            hasResults = true;
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    let noResults = document.querySelector('.cuisine-no-results');
+                    if (!hasResults && searchTerm.length > 0) {
+                        if (!noResults) {
+                            noResults = document.createElement('li');
+                            noResults.className = 'no-results cuisine-no-results';
+                            noResults.textContent = 'No cuisines found';
+                            document.querySelector('.dropdown-menu').appendChild(noResults);
+                        }
+                    } else if (noResults) {
+                        noResults.remove();
+                    }
+                });
+            }
+            
+            // Area search functionality
+            const areaSearch = document.querySelector('.area-search');
+            if (areaSearch) {
+                areaSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const areaItems = document.querySelectorAll('.area-item');
+                    let hasResults = false;
+                    
+                    areaItems.forEach(item => {
+                        const areaName = item.getAttribute('data-area');
+                        if (areaName.includes(searchTerm)) {
+                            item.classList.remove('hidden');
+                            hasResults = true;
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    let noResults = document.querySelector('.area-no-results');
+                    if (!hasResults && searchTerm.length > 0) {
+                        if (!noResults) {
+                            noResults = document.createElement('li');
+                            noResults.className = 'no-results area-no-results';
+                            noResults.textContent = 'No areas found';
+                            document.querySelector('.dropdown-menu').appendChild(noResults);
+                        }
+                    } else if (noResults) {
+                        noResults.remove();
+                    }
+                });
+            }
+            
+            // Clear search when dropdown closes
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const searchInputs = this.parentElement.querySelectorAll('input[type="text"]');
+                    searchInputs.forEach(input => {
+                        input.value = '';
+                        // Trigger search to show all items
+                        input.dispatchEvent(new Event('input'));
+                    });
+                });
+            });
+        });
+    </script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,956 @@
+{% extends 'base.html' %}
+{% block title %}Banapple Pies & Cheesecakes - Bakery Café & Comfort Food in Quezon City{% endblock %}
+{% block description %}Discover Banapple Pies & Cheesecakes - a beloved bakery café in Quezon City famous for banoffee pie, cheesecakes, comfort food, and cozy dining. Multiple locations across Metro Manila.{% endblock %}
+{% block canonical %}/blog/banapple-pies-cheesecakes{% endblock %}
+{% block og_title %}Banapple Pies & Cheesecakes - Bakery Café & Comfort Food in Quezon City{% endblock %}
+{% block og_description %}Banapple Pies & Cheesecakes - beloved bakery café in Quezon City famous for banoffee pie, cheesecakes, comfort food, and cozy dining. Multiple locations across Metro Manila.{% endblock %}
+{% block og_image %}{{ url_for('static', filename='images/Banapple/banapple-1.jpg', _external=True) }}{% endblock %}
+{% block twitter_image %}{{ url_for('static', filename='images/Banapple/banapple-1.jpg', _external=True) }}{% endblock %}
+{% block og_url %}/blog/banapple-pies-cheesecakes{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- Banapple template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.banapple-hero {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.banapple-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banapple-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 3rem 0 2rem;
+    color: white;
+}
+
+.banapple-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.banapple-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+}
+
+.content-section h3 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #721c24, #8b2332);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.highlight-box h3 {
+    color: white !important;
+    margin-top: 0;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #721c24;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.feature-card h4 {
+    color: #721c24;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.btn-visit {
+    background: white;
+    color: #d32323;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: #f8f9fa;
+    color: #721c24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.menu-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+}
+
+.menu-list li:before {
+    content: "🍰";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.sidebar-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-box h3 {
+    font-size: 1.2rem;
+    color: #721c24;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Gallery image hover effects */
+.gallery-image-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.gallery-image-link img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-image-link:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Lightbox Modal Styles */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+.lightbox-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    animation: zoomIn 0.3s;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10000;
+    line-height: 1;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+.lightbox-close:hover {
+    color: #d32323;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .banapple-title {
+        font-size: 1.8rem;
+    }
+    
+    .banapple-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <article itemscope itemtype="https://schema.org/Article">
+    <header class="mb-5">
+      <!-- Hero Section -->
+      <div class="banapple-hero position-relative mb-4">
+        <picture>
+          <source type="image/jpeg" srcset="/static/images/Banapple/banapple-1.jpg">
+          <img src="/static/images/Banapple/banapple-1.jpg" 
+               class="banapple-hero-img" 
+               alt="Banapple Pies & Cheesecakes Quezon City Bakery Café" 
+               itemprop="image">
+        </picture>
+        <div class="banapple-hero-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <h1 class="banapple-title" itemprop="headline">
+                  Welcome to Banapple – Bakery Café & Comfort Food in Quezon City
+                </h1>
+                <p class="banapple-subtitle">Freshly-baked pies, cheesecakes, and hearty comfort meals</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Bar -->
+      <div class="quick-info-bar bg-white rounded shadow-sm p-3 mb-4">
+        <div class="row text-center g-0">
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-map-marker-alt text-danger mb-2"></i>
+            <div class="info-label">Locations</div>
+            <div class="info-value">Multiple branches in QC</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-utensils text-danger mb-2"></i>
+            <div class="info-label">Specialty</div>
+            <div class="info-value">Pies & Cheesecakes</div>
+          </div>
+          <div class="col-md-3 col-6 mb-3 mb-md-0">
+            <i class="fas fa-coffee text-danger mb-2"></i>
+            <div class="info-label">Type</div>
+            <div class="info-value">Bakery Café</div>
+          </div>
+          <div class="col-md-3 col-6">
+            <i class="fas fa-heart text-danger mb-2"></i>
+            <div class="info-label">Vibe</div>
+            <div class="info-value">Cozy & Homey</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="content-section mb-4" aria-label="Table of contents">
+        <h2 id="toc" class="h4 mb-3"><i class="fas fa-list-ul me-2"></i>Jump to</h2>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3"><a href="#about" class="text-decoration-none">About</a></li>
+          <li class="list-inline-item me-3"><a href="#gallery" class="text-decoration-none">Gallery</a></li>
+          <li class="list-inline-item me-3"><a href="#menu" class="text-decoration-none">Menu Highlights</a></li>
+          <li class="list-inline-item me-3"><a href="#locations" class="text-decoration-none">Locations</a></li>
+          <li class="list-inline-item me-3"><a href="#pairings" class="text-decoration-none">Meal Pairings</a></li>
+          <li class="list-inline-item"><a href="#faq" class="text-decoration-none">FAQ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-lg-8 order-2 order-lg-1">
+        <section itemprop="articleBody" class="blog-article-content">
+          
+          <!-- Introduction -->
+          <div id="about" class="content-section mb-5">
+            <p class="lead">
+              <strong>Banapple Pies & Cheesecakes</strong> is a well-known bakery café and comfort food restaurant 
+              popular for its desserts and hearty meals, with multiple locations across Metro Manila and beyond. 
+              What started from a small home kitchen in Quezon City has grown into a beloved local food brand 
+              that's become a go-to destination for freshly-baked pies, cheesecakes, and comforting meals.
+            </p>
+            
+            <p>
+              The name <strong>Banapple</strong> comes from two of their early hit desserts—the <strong>banoffee pie</strong> 
+              and the <strong>apple caramel crumble pie</strong>. Founded by a couple who began baking for friends and 
+              restaurants, they later opened their first shop on Katipunan Avenue in Quezon City, and over time 
+              expanded into a small chain with several branches in malls and key neighborhoods throughout Metro Manila.
+            </p>
+
+            <p>
+              Banapple branches are casual sit-down places where you can enjoy breakfast, lunch, dinner, snacks, 
+              desserts, and coffee with family or friends. Known for a homey vibe and comfort-food atmosphere, 
+              Banapple has built a reputation for good food and cozy dining across multiple locations.
+            </p>
+          </div>
+
+          <!-- Photo Gallery -->
+          <div id="gallery" class="content-section mb-5">
+            <h2><i class="fas fa-images me-2"></i>Experience Banapple</h2>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <a href="/static/images/Banapple/banapple-2.jpg" class="gallery-image-link" data-lightbox="banapple-gallery">
+                  <img src="/static/images/Banapple/banapple-2.jpg" 
+                       alt="Banapple bakery café interior" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 250px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Cozy café atmosphere</div>
+              </div>
+              <div class="col-md-6">
+                <a href="/static/images/Banapple/banapple-3.jpg" class="gallery-image-link" data-lightbox="banapple-gallery">
+                  <img src="/static/images/Banapple/banapple-3.jpg" 
+                       alt="Banapple desserts and pies" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 250px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Freshly-baked desserts</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Banapple/banapple-4.jpg" class="gallery-image-link" data-lightbox="banapple-gallery">
+                  <img src="/static/images/Banapple/banapple-4.jpg" 
+                       alt="Banapple cheesecakes" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Signature cheesecakes</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Banapple/banapple-5.jpg" class="gallery-image-link" data-lightbox="banapple-gallery">
+                  <img src="/static/images/Banapple/banapple-5.jpg" 
+                       alt="Banapple comfort food" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Comfort food meals</div>
+              </div>
+              <div class="col-md-4">
+                <a href="/static/images/Banapple/banapple-6.jpg" class="gallery-image-link" data-lightbox="banapple-gallery">
+                  <img src="/static/images/Banapple/banapple-6.jpg" 
+                       alt="Banapple dining experience" 
+                       class="img-fluid rounded shadow-sm w-100"
+                       style="height: 200px; object-fit: cover;" 
+                       loading="lazy">
+                </a>
+                <div class="small text-muted mt-1 text-center">Cozy dining experience</div>
+              </div>
+            </div>
+            <p class="text-center text-muted fst-italic">
+              From freshly-baked pies to hearty comfort meals, Banapple offers a complete dining experience
+            </p>
+          </div>
+
+          <!-- Menu Highlights Section -->
+          <div id="menu" class="content-section mb-5">
+            <h2><i class="fas fa-utensils me-2"></i>Menu Highlights</h2>
+            
+            <p>
+              Banapple's menu features a delightful combination of freshly-baked desserts and hearty comfort food. 
+              Whether you're stopping by for a slice of pie, a full meal, or just coffee and dessert, there's 
+              something for every craving.
+            </p>
+
+            <div class="feature-card">
+              <h4>Signature & Must-Try Desserts</h4>
+              <ul class="menu-list">
+                <li><strong>Banoffee Pie:</strong> Classic banana-toffee pie with whipped cream and chocolate curls—the iconic dessert that started it all</li>
+                <li><strong>Blueberry Cheesecake:</strong> Creamy cheesecake with a rich blueberry topping</li>
+                <li><strong>Dark Chocolate Tiramisu Cheesecake:</strong> A richer, coffee-chocolate twist on cheesecake</li>
+                <li><strong>Apple Caramel Crumble Pie:</strong> Sweet apple pie with cinnamon and crumble topping</li>
+                <li><strong>Supercaramel Fudge Cake:</strong> Chocolate cake with caramel and fudge flavors</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Popular Savory & Main Dishes</h4>
+              <ul class="menu-list">
+                <li><strong>Chicken Parmigiano:</strong> Breaded chicken with tomato sauce and melted cheese</li>
+                <li><strong>Hickory Smoked Barbecue Country Ribs:</strong> Flavorful BBQ ribs, one of the staples of the savory menu</li>
+                <li><strong>Lasagna Roll-Ups:</strong> Creamy, cheesy pasta rolls in sauce</li>
+                <li><strong>Baked Creamy Cheesy Penne:</strong> Comforting pasta with a rich cheese sauce</li>
+                <li><strong>Baked Fish or Crunchy Fillet of Fish:</strong> Often served with mustard or honey thyme sauce</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Other Notable Items</h4>
+              <ul class="menu-list">
+                <li><strong>Baked Empanadas:</strong> Tuna, creamy chicken, or cheese & mushroom (great snack/finger food)</li>
+                <li><strong>All-Day Breakfast:</strong> Savory longganisa, boneless bangus belly and more</li>
+                <li><strong>Sandwiches & Salads:</strong> Crisp chicken sandwiches, house or Caesar salads</li>
+                <li><strong>Smoothies & Drinks:</strong> Banapple smoothie, mango, mocha, perfect with desserts or meals</li>
+              </ul>
+            </div>
+
+            <p>
+              Many visitors pair a savory rice or pasta dish with a slice of Banoffee Pie or Blueberry Cheesecake 
+              for a full meal experience. Portions are generally generous, and popular items can sell out during peak hours.
+            </p>
+          </div>
+
+          <!-- Locations Section -->
+          <div id="locations" class="content-section mb-5">
+            <h2><i class="fas fa-map-marker-alt me-2"></i>Popular Branches in Metro Manila</h2>
+            
+            <p>
+              Banapple has multiple locations across Metro Manila, making it accessible no matter where you are 
+              in the city. Here are some of the most popular branches:
+            </p>
+
+            <div class="row my-4">
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-star text-danger me-2"></i>Banapple Katipunan Too</h4>
+                  <p class="mb-0">Flagship location and one of the most highly-reviewed cafés in Quezon City</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-store text-danger me-2"></i>Banapple SM North EDSA Sky Garden</h4>
+                  <p class="mb-0">Busy branch in a major mall, perfect for shopping breaks</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-coffee text-danger me-2"></i>Banapple Matalino</h4>
+                  <p class="mb-0">Popular Quezon City café location</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-birthday-cake text-danger me-2"></i>Banapple Tomas Morato</h4>
+                  <p class="mb-0">Cake & café spot in Il Terrazzo</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-map-pin text-danger me-2"></i>Banapple Crossroad Tandang Sora</h4>
+                  <p class="mb-0">Well-reviewed location in Quezon City</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="feature-card">
+                  <h4><i class="fas fa-shopping-bag text-danger me-2"></i>Banapple - Shangri-La Plaza, Level 5</h4>
+                  <p class="mb-0">Ortigas mall branch</p>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Other locations include Banapple Feliz, Banapple Mezza Residences, and Banapple - Tarlac (a branch 
+              outside Metro Manila). All branches offer the same cozy atmosphere and menu favorites that have made 
+              Banapple a beloved local brand.
+            </p>
+          </div>
+
+          <!-- Meal Pairings Section -->
+          <div id="pairings" class="content-section mb-5">
+            <h2><i class="fas fa-utensils me-2"></i>Popular Meal & Dessert Pairings</h2>
+            
+            <p>
+              Many diners love combining savory dishes with Banapple's signature desserts. Here are some popular 
+              pairing ideas that create the perfect meal experience:
+            </p>
+
+            <div class="highlight-box">
+              <h3>Classic Lunch or Dinner + Dessert Combos</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li><strong>Hearty Entrée + Signature Pie:</strong> Try hickory smoked barbecued country ribs or chicken parmigiano, followed by a slice of Banoffee Pie</li>
+                    <li><strong>Pasta + Cheesecake:</strong> Baked creamy cheesy penne or lasagna roll-ups paired with Blueberry Cheesecake for a fruity contrast</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li><strong>Sandwich & Salad + Sweet Slice:</strong> Crunchy chicken Caesar fillet sandwich ending with Supercaramel Fudge Cake</li>
+                    <li><strong>Rice Meal + Pie:</strong> Savory rice meal paired with apple caramel crumble pie</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Most diners like to start with a savory entrée or pasta, then follow with a dessert slice (often 
+              Banoffee Pie or Cheesecake) as the perfect meal finish. This combination creates a satisfying 
+              dining experience that showcases both Banapple's comfort food and their famous desserts.
+            </p>
+          </div>
+
+          <!-- Why Visit Section -->
+          <div id="why-visit" class="content-section mb-5">
+            <h2><i class="fas fa-star me-2"></i>Why Banapple Stands Out</h2>
+            
+            <p>
+              In a city filled with dining options, Banapple distinguishes itself through:
+            </p>
+
+            <div class="row my-3">
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Freshly-Baked Desserts</h4>
+                  <p class="mb-0 small">Iconic pies and cheesecakes baked fresh daily—what Banapple is most famous for</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Comfort Food Meals</h4>
+                  <p class="mb-0 small">Hearty pastas, ribs, sandwiches, and entrees that satisfy any craving</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Homey Atmosphere</h4>
+                  <p class="mb-0 small">Cozy café vibe that started from a home kitchen—warm and welcoming</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Multiple Locations</h4>
+                  <p class="mb-0 small">Convenient branches across Metro Manila in malls and key neighborhoods</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">All-Day Dining</h4>
+                  <p class="mb-0 small">Perfect for breakfast, brunch, lunch, dinner, snacks, or just dessert and coffee</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="feature-card" style="padding: 1rem;">
+                  <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Catering Services</h4>
+                  <p class="mb-0 small">Offers catering services for events and special occasions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <h2>Visit Banapple Today</h2>
+            <p class="lead mb-4">
+              Whether you're craving a slice of their famous Banoffee Pie, a hearty comfort meal, or just 
+              a cozy place to enjoy coffee and dessert, Banapple welcomes you. Visit one of their many 
+              locations across Metro Manila and experience why they've become a beloved local food brand.
+            </p>
+            <div>
+              <a href="https://www.google.com/maps/search/Banapple+Quezon+City" target="_blank" rel="noopener noreferrer" class="btn-visit">
+                <i class="fas fa-map-marker-alt me-2"></i>Find a Location
+              </a>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="content-section mb-5">
+            <p>
+              <strong>Banapple Pies & Cheesecakes</strong> represents more than just a bakery café—it's a 
+              testament to how a small home kitchen can grow into a beloved local brand. With their combination 
+              of freshly-baked desserts, hearty comfort food, cozy atmosphere, and multiple convenient locations, 
+              they've created a dining experience that feels like home.
+            </p>
+            
+            <p>
+              Whether you're planning a full meal, stopping by for dessert, or looking for catering for a 
+              special event, Banapple is ready to welcome you with their signature pies, cheesecakes, and 
+              comforting meals that have made them a go-to destination across Metro Manila.
+            </p>
+          </div>
+
+        </section>
+
+        <meta itemprop="author" content="Restaurants QC">
+        <meta itemprop="datePublished" content="2025-01-20">
+        <meta itemprop="keywords" content="Banapple, Banapple Pies & Cheesecakes, Quezon City bakery, banoffee pie Quezon City, cheesecake Quezon City, Katipunan bakery, SM North EDSA bakery, comfort food Quezon City, bakery café QC">
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section mb-5">
+          <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  What is Banapple famous for?
+                </button>
+              </h3>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Banapple is most famous for its Banoffee Pie (banana-toffee pie) and Blueberry Cheesecake. The name comes from their banoffee pie and apple caramel crumble pie—two of their early hit desserts.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  Where are Banapple locations in Quezon City?
+                </button>
+              </h3>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Popular Quezon City locations include Banapple Katipunan Too (flagship), Banapple SM North EDSA Sky Garden, Banapple Matalino, Banapple Tomas Morato, and Banapple Crossroad Tandang Sora.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Do they serve full meals or just desserts?
+                </button>
+              </h3>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Banapple serves both! They offer hearty comfort food meals like pastas, chicken parmigiano, ribs, sandwiches, and all-day breakfast, in addition to their famous pies and cheesecakes.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4">
+                  Do they offer catering services?
+                </button>
+              </h3>
+              <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! Banapple offers catering services for events and special occasions. Contact your nearest branch for more information.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="q5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5">
+                  What are the most popular menu items?
+                </button>
+              </h3>
+              <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">The most popular items are Banoffee Pie, Blueberry Cheesecake, Hickory Smoked Barbecue Country Ribs, Chicken Parmigiano, and Baked Creamy Cheesy Penne. Many diners pair a savory dish with a dessert slice for the full experience.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4 order-1 order-lg-2 mb-4">
+        <div class="sidebar-box sticky-top" style="top: 20px;">
+          <h3><i class="fas fa-info-circle me-2"></i>Quick Info</h3>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i>Locations</strong>
+            <p class="mb-1">Multiple branches across</p>
+            <p class="mb-0">Metro Manila & Quezon City</p>
+            <a href="https://www.google.com/maps/search/Banapple+Quezon+City" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-sm btn-outline-danger mt-2">
+              <i class="fas fa-directions me-1"></i> Find Locations
+            </a>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-utensils text-danger me-2"></i>Specialties</strong>
+            <ul class="mb-0 ps-3 small">
+              <li>Banoffee Pie</li>
+              <li>Cheesecakes</li>
+              <li>Comfort Food</li>
+              <li>Freshly-Baked Pies</li>
+              <li>Coffee & Drinks</li>
+            </ul>
+          </div>
+          <div class="mb-3">
+            <strong class="d-block mb-2"><i class="fas fa-tags text-danger me-2"></i>Keywords</strong>
+            <div>
+              <span class="badge bg-danger me-1 mb-1">Banapple</span>
+              <span class="badge bg-danger me-1 mb-1">Bakery Café</span>
+              <span class="badge bg-danger me-1 mb-1">Banoffee Pie</span>
+              <span class="badge bg-danger me-1 mb-1">Cheesecake</span>
+              <span class="badge bg-danger me-1 mb-1">Quezon City</span>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-2 small text-muted">Last updated: {{ current_date if current_date else 'January 2025' }}</div>
+          <h3><i class="fas fa-book me-2"></i>Related Articles</h3>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <a href="/blog/maginhawa-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Maginhawa Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/blog/tomas-morato-restaurants-2025" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>Tomas Morato Restaurants
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="/all-restaurants" class="text-decoration-none">
+                <i class="fas fa-chevron-right text-danger me-2"></i>All QC Restaurants
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Banapple Pies & Cheesecakes - Bakery Café & Comfort Food in Quezon City",
+  "datePublished": "2025-01-20",
+  "image": "/static/images/Banapple/banapple-1.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "Restaurants QC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Restaurants Quezon City",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+    }
+  },
+  "description": "Discover Banapple Pies & Cheesecakes - a beloved bakery café in Quezon City famous for banoffee pie, cheesecakes, comfort food, and cozy dining. Multiple locations across Metro Manila.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.restaurantsquezoncity.com/blog/banapple-pies-cheesecakes"
+  },
+  "keywords": "Banapple, Banapple Pies & Cheesecakes, Quezon City bakery, banoffee pie Quezon City, cheesecake Quezon City, Katipunan bakery, SM North EDSA bakery, comfort food Quezon City, bakery café QC"
+}
+</script>
+
+<!-- Breadcrumbs JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.restaurantsquezoncity.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.restaurantsquezoncity.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Banapple Pies & Cheesecakes",
+      "item": "https://www.restaurantsquezoncity.com/blog/banapple-pies-cheesecakes"
+    }
+  ]
+}
+</script>
+
+<!-- Restaurant JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Banapple Pies & Cheesecakes",
+  "description": "Well-known bakery café and comfort food restaurant popular for its desserts and hearty meals, with multiple locations across Metro Manila",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Quezon City",
+    "addressRegion": "Metro Manila",
+    "addressCountry": "PH"
+  },
+  "servesCuisine": ["Bakery", "Café", "Comfort Food", "Desserts", "American", "Filipino"],
+  "priceRange": "₱₱",
+  "image": [
+    "/static/images/Banapple/banapple-1.jpg",
+    "/static/images/Banapple/banapple-2.jpg",
+    "/static/images/Banapple/banapple-3.jpg"
+  ]
+}
+</script>
+
+<!-- FAQ JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Banapple famous for?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Banapple is most famous for its Banoffee Pie (banana-toffee pie) and Blueberry Cheesecake. The name comes from their banoffee pie and apple caramel crumble pie—two of their early hit desserts."}
+    },
+    {
+      "@type": "Question",
+      "name": "Where are Banapple locations in Quezon City?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Popular Quezon City locations include Banapple Katipunan Too (flagship), Banapple SM North EDSA Sky Garden, Banapple Matalino, Banapple Tomas Morato, and Banapple Crossroad Tandang Sora."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do they serve full meals or just desserts?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Banapple serves both! They offer hearty comfort food meals like pastas, chicken parmigiano, ribs, sandwiches, and all-day breakfast, in addition to their famous pies and cheesecakes."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do they offer catering services?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Banapple offers catering services for events and special occasions. Contact your nearest branch for more information."}
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most popular menu items?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The most popular items are Banoffee Pie, Blueberry Cheesecake, Hickory Smoked Barbecue Country Ribs, Chicken Parmigiano, and Baked Creamy Cheesy Penne. Many diners pair a savory dish with a dessert slice for the full experience."}
+    }
+  ]
+}
+</script>
+
+<!-- Lightbox Modal -->
+<div id="lightboxModal" class="lightbox-modal">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImage" src="" alt="">
+  </div>
+</div>
+
+<script>
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryLinks = document.querySelectorAll('.gallery-image-link[data-lightbox]');
+    const modal = document.getElementById('lightboxModal');
+    const modalImg = document.getElementById('lightboxImage');
+    
+    galleryLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imgSrc = this.getAttribute('href');
+            const imgAlt = this.querySelector('img').getAttribute('alt');
+            modalImg.src = imgSrc;
+            modalImg.alt = imgAlt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+    
+    // Close on background click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeLightbox();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+});
+
+function closeLightbox() {
+    const modal = document.getElementById('lightboxModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+</script>
+{% endblock %}

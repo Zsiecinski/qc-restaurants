@@ -1,0 +1,89 @@
+<!-- 
+FOOTER BACKUP TEMPLATE
+This is a backup of the working footer structure that matches the main site.
+Use this as a reference when updating other templates or if you need to restore the footer.
+-->
+
+<!-- Footer -->
+<footer class="footer mt-5 py-5" style="background-color: #000;">
+    <div class="container">
+        <div class="row">
+            <!-- About Column -->
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">About Restaurants QC</h3>
+                <p class="text-white-50">Your guide to the best restaurants in Quezon City. Find top-rated places to eat near you.</p>
+                <p class="text-white-50">
+                    <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📊 Browse 400+ Restaurants</a>
+                </p>
+                <p class="text-white-50">Follow us on social media:</p>
+                <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Popular Areas Column -->
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">Popular Areas</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📋 All Restaurants</a>
+                    </li>
+                    {% if area_counts %}
+                        {% for area, count in area_counts.items()|sort(attribute='1', reverse=true) %}
+                            {% if loop.index <= 6 %}
+                            <li class="mb-2">
+                                <a href="/{{ area|lower|replace(' ', '-')|replace('/', '-')|replace('.', '')|replace('(', '')|replace(')', '') }}/" class="text-white-50 text-decoration-none">
+                                    {{ area }} ({{ count }})
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- Popular Cuisines Column -->
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">Popular Cuisines</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">🍽️ Complete Directory</a>
+                    </li>
+                    <li class="mb-2"><a href="/cuisine/fast-food" class="text-white-50 text-decoration-none">Fast food 🍔</a></li>
+                    <li class="mb-2"><a href="/cuisine/pizza" class="text-white-50 text-decoration-none">Pizza 🍕</a></li>
+                    <li class="mb-2"><a href="/cuisine/japanese" class="text-white-50 text-decoration-none">Japanese 🎌</a></li>
+                    <li class="mb-2"><a href="/cuisine/chinese" class="text-white-50 text-decoration-none">Chinese 🥢</a></li>
+                    <li class="mb-2"><a href="/cuisine/filipino" class="text-white-50 text-decoration-none">Filipino 🍚</a></li>
+                    <li class="mb-2"><a href="/cuisine/korean" class="text-white-50 text-decoration-none">Korean 🍜</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <hr class="border-secondary">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <p class="text-white-50 mb-0">© 2024 Restaurants QC. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="/all-restaurants" class="text-white-50 text-decoration-none me-3">All Restaurants</a>
+                        <a href="/about" class="text-white-50 text-decoration-none">About</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 
+NOTES:
+- This footer uses Bootstrap classes: footer, mt-5, py-5, col-md-4, mb-4, etc.
+- Text colors: text-white for headings, text-white-50 for body text and links
+- Icons: Font Awesome (fab fa-facebook-f, fab fa-instagram, fab fa-tiktok)
+- Emojis: 📊, 📋, 🍽️, 🍔, 🍕, 🎌, 🥢, 🍚, 🍜
+- Dynamic content: Uses Jinja2 templates for area_counts and all_cuisines
+- Responsive: col-md-4 creates 3 columns on medium+ screens, stacks on mobile
+- Styling: background-color: #000, border-secondary for the divider line
+-->

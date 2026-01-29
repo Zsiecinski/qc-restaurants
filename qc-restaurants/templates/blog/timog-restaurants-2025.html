@@ -1,0 +1,712 @@
+{% extends 'base.html' %}
+{% block title %}Timog Restaurants 2025: Complete Guide to Best Places to Eat in Timog Quezon City{% endblock %}
+{% block description %}Discover the best Timog restaurants! From Korean BBQ to Filipino comfort food, find 30+ top-rated dining spots with reviews, prices, menus & insider tips. Updated January 2025.{% endblock %}
+{% block canonical %}/blog/timog-restaurants-2025{% endblock %}
+{% block og_title %}Best Timog Restaurants 2025: Complete Dining Guide Quezon City{% endblock %}
+{% block og_description %}Top 30+ Timog restaurants featuring Korean BBQ, Filipino cuisine & more. Reviews, prices, hours & must-try dishes for every budget.{% endblock %}
+{% block og_url %}/blog/timog-restaurants-2025{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80{% endblock %}
+
+{% block hero_title %}{% endblock %}
+{% block hero_subtitle %}{% endblock %}
+
+<!-- Override the hero section to be completely empty -->
+{% block hero_section %}
+<!-- Timog Restaurants template overrides base hero section -->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hide the base template's hero section completely */
+.hero-section {
+    display: none !important;
+}
+
+/* Article Styles */
+.timog-hero {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(211, 35, 35, 0.9), rgba(255, 107, 107, 0.9)),
+                url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.timog-hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.timog-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.timog-subtitle {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.quick-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.quick-info-bar {
+    border: 1px solid #e9ecef;
+}
+
+.quick-info-bar i {
+    font-size: 1.5rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.content-section {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #721c24;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #d32323;
+}
+
+.content-section h3 {
+    color: #d32323;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-section p {
+    margin-bottom: 1rem;
+}
+
+.content-section ul, .content-section ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.content-section li {
+    margin-bottom: 0.5rem;
+}
+
+.restaurant-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 30px;
+    background: white;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant-image {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.insider-tip {
+    background: #f8f9fa;
+    border-left: 4px solid #d32323;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.must-try {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.cuisine-badge {
+    background: #e9ecef;
+    color: #495057;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-right: 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.price-indicator {
+    color: #d32323;
+    font-weight: bold;
+}
+
+.rating {
+    color: #ffc107;
+    font-size: 1.1em;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d32323, #ff6b6b);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.social-share {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.social-share h5 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.social-share a {
+    color: #d32323;
+    margin: 0 10px;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.social-share a:hover {
+    color: #ff6b6b;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .timog-title {
+        font-size: 1.8rem;
+    }
+    
+    .timog-subtitle {
+        font-size: 1rem;
+    }
+    
+    .quick-stats {
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+/* Clickable phone styling */
+.phone a {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+}
+.phone a:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745 !important;
+    text-decoration: none;
+}
+.phone a:active {
+    background-color: rgba(40, 167, 69, 0.2);
+    transform: scale(0.98);
+}
+.phone .fa-phone-volume {
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+.phone a:hover .fa-phone-volume {
+    opacity: 1;
+}
+
+/* Clickable address styling */
+.text-muted a:hover {
+    color: #d32323 !important;
+    text-decoration: none;
+}
+</style>
+{% endblock %}
+
+<!-- Hero Section -->
+<section class="timog-hero">
+    <div class="timog-hero-content">
+        <h1 class="timog-title">Timog Restaurants: Complete Guide to Best Places to Eat in 2025</h1>
+        <p class="timog-subtitle">
+            Timog Avenue is one of Quezon City's most vibrant dining districts, home to Korean BBQ, Filipino comfort food, international cuisines, and lively bars. Discover the best restaurants in Timog for 2025.
+        </p>
+        <div class="quick-stats">
+            <div class="stat-item">
+                <span class="stat-number">30+</span>
+                <span class="stat-label">Restaurants</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Cuisines</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">₱150-₱2000</span>
+                <span class="stat-label">Price Range</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Info Bar -->
+<div class="container mb-4">
+    <div class="row quick-info-bar rounded py-3">
+        <div class="col-md-3 col-6 text-center mb-3 mb-md-0">
+            <div class="info-label">Top Area</div>
+            <div class="info-value">Timog Avenue</div>
+        </div>
+        <div class="col-md-3 col-6 text-center mb-3 mb-md-0">
+            <div class="info-label">Best For</div>
+            <div class="info-value">Korean, Filipino</div>
+        </div>
+        <div class="col-md-3 col-6 text-center">
+            <div class="info-label">Price Range</div>
+            <div class="info-value">Budget to Mid-range</div>
+        </div>
+        <div class="col-md-3 col-6 text-center">
+            <div class="info-label">Vibe</div>
+            <div class="info-value">Casual & Lively</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="container my-5 content-section">
+    <!-- Introduction -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="highlight-box">
+                <h2 class="h3 mb-3">Welcome to Timog: Quezon City's Foodie Hub</h2>
+                <p class="mb-0">
+                    Timog Avenue, also known as Scout Area, is a food lover's paradise in Quezon City. Known for its concentrations of Korean restaurants, Filipino eateries, and lively nightlife spots, Timog offers diverse dining options for every budget and craving. Whether you're craving authentic Korean BBQ, traditional Filipino comfort food, or international flavors, Timog has it all.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {% if timog_restaurants %}
+    <!-- Restaurant Listings -->
+    {% for restaurant in timog_restaurants %}
+    <article class="restaurant-card card">
+        {% if restaurant.photo_url and restaurant.photo_url != 'nan' %}
+        <img src="{{ restaurant.photo_url }}" alt="{{ restaurant.name }}" class="restaurant-image" loading="lazy">
+        {% else %}
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="{{ restaurant.name }}" class="restaurant-image" loading="lazy">
+        {% endif %}
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <h2 class="h3 mb-2">{{ loop.index }}. {{ restaurant.name }}</h2>
+                <div class="text-end">
+                    {% if restaurant.rating and restaurant.rating != 'nan' and restaurant.rating > 0 %}
+                    <div class="rating">
+                        {% for i in range(5) %}
+                        <i class="fas fa-star{% if i < restaurant.rating|int %}-fill{% endif %}"></i>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <span class="price-indicator">{{ restaurant.price_range if restaurant.price_range and restaurant.price_range != 'nan' else '₱₱' }}</span>
+                </div>
+            </div>
+            
+            {% if restaurant.address %}
+            <p class="text-muted mb-3">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                <a href="https://maps.google.com/?q={{ restaurant.name }} Timog Quezon City" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="text-decoration-none text-muted"
+                   title="Open in Google Maps">
+                    {{ restaurant.address }}
+                    <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size: 0.8em;"></i>
+                </a>
+            </p>
+            {% endif %}
+            
+            {% if restaurant.phone %}
+            <p class="text-muted mb-3 phone">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:{{ restaurant.phone }}" class="text-muted">{{ restaurant.phone }}</a>
+            </p>
+            {% endif %}
+            
+            {% if restaurant.cuisine %}
+            <div class="cuisine-badge">{{ restaurant.cuisine }}</div>
+            {% endif %}
+            
+            {% if restaurant.subtypes %}
+            <div class="mt-2">
+                {% for subtype in restaurant.subtypes.split(',') %}
+                <span class="cuisine-badge" style="background: #d32323; color: white;">{{ subtype.strip() }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="insider-tip mt-3">
+                <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i>Insider Tip</h5>
+                <p class="mb-0">Visit during lunch hours for special promos and smaller crowds.</p>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+    {% else %}
+    <!-- Fallback content when no restaurants loaded -->
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="h3 mb-4">Popular Timog Restaurants</h2>
+            
+            <article class="restaurant-card card">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Korean BBQ Restaurant" class="restaurant-image" loading="lazy">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h2 class="h3 mb-2">1. Samgyeopsal House</h2>
+                        <div class="text-end">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="price-indicator">₱₱</span>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-3">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <a href="https://maps.google.com/?q=Samgyeopsal+House+Timog+Quezon+City" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-muted">Timog Avenue, Quezon City <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size: 0.8em;"></i></a>
+                    </p>
+                    <div class="cuisine-badge">Korean BBQ</div>
+                    <div class="cuisine-badge">Grill</div>
+                    <div class="must-try mt-3">
+                        <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Samgyeopsal</strong> - Premium pork belly BBQ</li>
+                            <li><strong>Galbi</strong> - Marinated beef short ribs</li>
+                            <li><strong>Kimchi Stew</strong> - Traditional Korean comfort food</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="restaurant-card card">
+                <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Filipino Restaurant" class="restaurant-image" loading="lazy">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h2 class="h3 mb-2">2. Kamayan ni Pards</h2>
+                        <div class="text-end">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="price-indicator">₱</span>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-3">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <a href="https://maps.google.com/?q=Kamayan+ni+Pards+Timog+Quezon+City" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-muted">Timog Avenue, Quezon City <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size: 0.8em;"></i></a>
+                    </p>
+                    <div class="cuisine-badge">Filipino</div>
+                    <div class="cuisine-badge">Comfort Food</div>
+                    <div class="must-try mt-3">
+                        <h4 class="h5 mb-2"><i class="fas fa-utensils me-2"></i>Must-try Dishes</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Sisig</strong> - Chopped pork with calamansi</li>
+                            <li><strong>Kare-Kare</strong> - Oxtail peanut stew</li>
+                            <li><strong>Bangus</strong> - Milkfish escabeche</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="mt-5">
+                <h2 class="h3 mb-4">Frequently Asked Questions About Timog Restaurants</h2>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                What are the best Korean restaurants in Timog?
+                            </button>
+                        </h3>
+                        <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Timog is famous for Korean BBQ. Top spots include Samgyeopsal House, Bulgogi Brothers, and Mapo Korean Restaurant. Most offer authentic Korean dishes with quality meats and traditional side dishes.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                What is Timog best known for?
+                            </button>
+                        </h3>
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Timog is best known for its Korean restaurants, lively nightlife bars, and affordable Filipino eateries. It's a popular destination for late-night food and drinks.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                Are there affordable restaurants in Timog?
+                            </button>
+                        </h3>
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! Timog has plenty of budget-friendly options. Filipino karinderyas, food courts, and Korean casual dining spots offer meals from ₱150-300.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                What time is best to visit Timog restaurants?
+                            </button>
+                        </h3>
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Lunch hours (11AM-1PM) are less crowded. For dinner, arrive before 6:30PM to avoid crowds. Late-night spots stay open until 2-3AM for nightlife dining.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section rounded">
+                <h3 class="mb-3">Share Your Timog Experience</h3>
+                <p class="mb-4">
+                    Have a favorite restaurant we missed? Share your own Timog dining experiences and recommendations in the comments below!
+                </p>
+                <div class="social-share">
+                    <h5 class="mb-3">Share this guide with fellow foodies:</h5>
+                    <a href="#" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Share on Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Share on Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer mt-5 py-5" style="background-color: #000;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">About Restaurants QC</h3>
+                <p class="text-white-50">Your guide to the best restaurants in Quezon City. Find top-rated places to eat near you.</p>
+                <p class="text-white-50">
+                    <a href="/all-restaurants" class="text-white-50 text-decoration-none fw-bold">📊 Browse 400+ Restaurants</a>
+                </p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">Popular Areas</h3>
+                <ul class="list-unstyled">
+                    <li><a href="/up-town-center/" class="text-white-50 text-decoration-none">UP Town Center</a></li>
+                    <li><a href="/eastwood/" class="text-white-50 text-decoration-none">Eastwood City</a></li>
+                    <li><a href="/sm-fairview/" class="text-white-50 text-decoration-none">SM Fairview</a></li>
+                    <li><a href="/tomas-morato/" class="text-white-50 text-decoration-none">Tomas Morato</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h3 class="text-white mb-3">Popular Cuisines</h3>
+                <ul class="list-unstyled">
+                    <li><a href="/cuisine/korean" class="text-white-50 text-decoration-none">Korean</a></li>
+                    <li><a href="/cuisine/japanese" class="text-white-50 text-decoration-none">Japanese</a></li>
+                    <li><a href="/cuisine/filipino" class="text-white-50 text-decoration-none">Filipino</a></li>
+                    <li><a href="/cuisine/chinese" class="text-white-50 text-decoration-none">Chinese</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-4 pt-4 border-top border-secondary">
+            <div class="col text-center">
+                <p class="text-white-50 mb-0">&copy; 2025 RestaurantsQuezonCity.com. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block extra_js %}
+<script>
+// Add any page-specific JavaScript here
+</script>
+
+<!-- FAQ Schema Markup -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What are the best Korean restaurants in Timog?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Timog is famous for Korean BBQ. Top spots include Samgyeopsal House, Bulgogi Brothers, and Mapo Korean Restaurant. Most offer authentic Korean dishes with quality meats and traditional side dishes."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is Timog best known for?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Timog is best known for its Korean restaurants, lively nightlife bars, and affordable Filipino eateries. It's a popular destination for late-night food and drinks."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are there affordable restaurants in Timog?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Timog has plenty of budget-friendly options. Filipino karinderyas, food courts, and Korean casual dining spots offer meals from ₱150-300."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What time is best to visit Timog restaurants?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lunch hours (11AM-1PM) are less crowded. For dinner, arrive before 6:30PM to avoid crowds. Late-night spots stay open until 2-3AM for nightlife dining."
+            }
+        }
+    ]
+}
+</script>
+
+<!-- Article Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Timog Restaurants: Complete Guide to Best Places to Eat in 2025",
+    "description": "Discover the best Timog restaurants in Quezon City. From Korean BBQ to Filipino comfort food, find top-rated dining spots with reviews, prices, and hours.",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "author": {
+        "@type": "Organization",
+        "name": "Restaurants QC"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Restaurants Quezon City",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.restaurantsquezoncity.com/static/logo.svg"
+        }
+    },
+    "datePublished": "2025-01-28",
+    "dateModified": "2025-01-28",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.restaurantsquezoncity.com/blog/timog-restaurants-2025"
+    },
+    "keywords": "timog restaurants, restaurants in timog, timog quezon city dining, korean restaurants timog, best timog restaurants"
+}
+</script>
+
+    <!-- Author Byline -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px; height: 80px; background: #d32323; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; color: white; font-size: 32px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1">Written by</p>
+                                <h4 class="h5 mb-1">Zachary Siecinski</h4>
+                                <p class="text-muted mb-0">Editor, RestaurantsQuezonCity.com</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0">
+                            Zachary is a Quezon City resident passionate about helping seniors and families find the best dining spots. For more guides, <a href="/about">learn more about us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
