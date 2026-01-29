@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ What's Your Dining Personality? - Take the Quiz</title>
+    <meta name="description" content="Discover your dining personality type! Are you a Foodie Explorer, Comfort Seeker, or Social Butterfly? Take the fun quiz!">
+    <link rel="canonical" href="/quiz/personality">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .quiz-hero {
+            background: transparent;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .progress-dot.active {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+        .progress-dot.completed {
+            background: #28a745;
+        }
+        .question {
+            display: none;
+            text-align: center;
+        }
+        .question.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .option-card {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .option-card:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateY(-3px);
+        }
+        .option-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .option-card.selected .text-muted {
+            color: rgba(255,255,255,0.8) !important;
+        }
+        .option-emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .personality-type {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .personality-emoji {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+        .personality-name {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .personality-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .trait-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        .restaurant-picks {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+        .social-btn.fb { background: #1877f2; }
+        .social-btn.tw { background: #1da1f2; }
+        .social-btn.li { background: #0077b5; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="quiz-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">🎭 What's Your Dining Personality?</h1>
+            <p class="lead">Answer 5 fun questions to discover your foodie type!</p>
+        </div>
+    </section>
+
+    <!-- Quiz Container -->
+    <main class="container pb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="quiz-card">
+                    <!-- Progress Dots -->
+                    <div class="progress-dots">
+                        <div class="progress-dot active" id="dot1"></div>
+                        <div class="progress-dot" id="dot2"></div>
+                        <div class="progress-dot" id="dot3"></div>
+                        <div class="progress-dot" id="dot4"></div>
+                        <div class="progress-dot" id="dot5"></div>
+                    </div>
+
+                    <!-- Question 1 -->
+                    <div class="question active" id="q1">
+                        <h3>When you go out to eat, what's most important?</h3>
+                        <div class="option-grid">
+                            <div class="option-card" onclick="selectOption(1, 'explorer', this)">
+                                <div class="option-emoji">🗺️</div>
+                                <strong>New Experiences</strong>
+                                <p class="text-muted small mb-0">I love trying new cuisines!</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(1, 'comfort', this)">
+                                <div class="option-emoji">🛋️</div>
+                                <strong>Comfort & familiarity</strong>
+                                <p class="text-muted small mb-0">I like my favorite dishes</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(1, 'social', this)">
+                                <div class="option-emoji">👥</div>
+                                <strong>The company</strong>
+                                <p class="text-muted small mb-0">Who I'm with matters most</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(1, 'adventure', this)">
+                                <div class="option-emoji">🎢</div>
+                                <strong>The experience</strong>
+                                <p class="text-muted small mb-0">Ambience & vibes are key</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question" id="q2">
+                        <h3>Pick your ideal Friday night:</h3>
+                        <div class="option-grid">
+                            <div class="option-card" onclick="selectOption(2, 'foodie', this)">
+                                <div class="option-emoji">🔍</div>
+                                <strong>Hunting for a hidden gem</strong>
+                                <p class="text-muted small mb-0">Researched every option</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(2, 'homebody', this)">
+                                <div class="option-emoji">🏠</div>
+                                <strong>Cozy neighborhood spot</strong>
+                                <p class="text-muted small mb-0">My usual go-to place</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(2, 'party', this)">
+                                <div class="option-emoji">🎊</div>
+                                <strong>Trending new opening</strong>
+                                <p class="text-muted small mb-0">Where all the buzz is</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(2, 'date', this)">
+                                <div class="option-emoji">💫</div>
+                                <strong>Special occasion spot</strong>
+                                <p class="text-muted small mb-0">Romantic & memorable</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question" id="q3">
+                        <h3>What do you do when the menu arrives?</h3>
+                        <div class="option-grid">
+                            <div class="option-card" onclick="selectOption(3, 'researcher', this)">
+                                <div class="option-emoji">📖</div>
+                                <strong>Read EVERYTHING</strong>
+                                <p class="text-muted small mb-0">Ingredients, origins, reviews...</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(3, 'repeat', this)">
+                                <div class="option-emoji">👆</div>
+                                <strong>Point to my favorite</strong>
+                                <p class="text-muted small mb-0">I know what I like</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(3, 'ask', this)">
+                                <div class="option-emoji">💬</div>
+                                <strong>Ask the server</strong>
+                                <p class="text-muted small mb-0">They know best!</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(3, 'spontaneous', this)">
+                                <div class="option-emoji">🎲</div>
+                                <strong>Try something random</strong>
+                                <p class="text-muted small mb-0">Live dangerously!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question" id="q4">
+                        <h3>Your friends describe you as...</h3>
+                        <div class="option-grid">
+                            <div class="option-card" onclick="selectOption(4, 'guide', this)">
+                                <div class="option-emoji">🗺️</div>
+                                <strong>The Food GPS</strong>
+                                <p class="text-muted small mb-0">Always have recommendations</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(4, 'loyal', this)">
+                                <div class="option-emoji">💝</div>
+                                <strong>The Loyal One</strong>
+                                <p class="text-muted small mb-0">Same order every time</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(4, 'organizer', this)">
+                                <div class="option-emoji">📋</div>
+                                <strong>The Planner</strong>
+                                <p class="text-muted small mb-0">Made the reservation</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(4, 'photographer', this)">
+                                <div class="option-emoji">📸</div>
+                                <strong>The Photographer</strong>
+                                <p class="text-muted small mb-0">Food must be 'grammed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question" id="q5">
+                        <h3>If food was a movie genre, you'd pick:</h3>
+                        <div class="option-grid">
+                            <div class="option-card" onclick="selectOption(5, 'documentary', this)">
+                                <div class="option-emoji">🎬</div>
+                                <strong>Documentary</strong>
+                                <p class="text-muted small mb-0">I want to learn something</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(5, 'comedy', this)">
+                                <div class="option-emoji">😂</div>
+                                <strong>Comedy</strong>
+                                <p class="text-muted small mb-0">Fun & easygoing</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(5, 'romance', this)">
+                                <div class="option-emoji">💕</div>
+                                <strong>Romantic Comedy</strong>
+                                <p class="text-muted small mb-0">Heartwarming & sweet</p>
+                            </div>
+                            <div class="option-card" onclick="selectOption(5, 'action', this)">
+                                <div class="option-emoji">🔥</div>
+                                <strong>Action Blockbuster</strong>
+                                <p class="text-muted small mb-0">Big flavors, big experience!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div id="results" style="display: none;">
+                        <div class="personality-type">
+                            <div class="personality-emoji" id="resultEmoji">🍳</div>
+                            <div class="personality-name" id="resultName">The Foodie Explorer</div>
+                            <div class="personality-tagline" id="resultTagline">Always hunting for the next great meal</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <h5 class="mb-2">Your Traits</h5>
+                                <div id="resultTraits"></div>
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="mb-2">Perfect For You</h5>
+                                <p class="text-muted" id="resultDescription"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="restaurant-picks">
+                            <h5 class="mb-3">🎯 Restaurants That Match Your Personality</h5>
+                            <div id="resultRestaurants"></div>
+                        </div>
+                        
+                        <div class="social-share">
+                            <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn tw"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn li"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="/quiz/perfect-spot" class="btn btn-danger btn-lg me-2">🔍 Find My Perfect Restaurant</a>
+                            <a href="/all-restaurants" class="btn btn-outline-dark btn-lg">Browse All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentQuestion = 1;
+        const answers = {};
+        
+        const personalities = {
+            'explorer': {
+                emoji: '🗺️',
+                name: 'The Culinary Explorer',
+                tagline: 'Always seeking the next great discovery',
+                traits: ['Curious', 'Adventurous', 'Research-driven'],
+                description: 'You\'re the type who reads reviews before bed and has a running list of "must-try" restaurants. New openings? You\'re first in line. Your perfect spots are hidden gems, up-and-coming areas, and anywhere with an interesting story.',
+                restaurants: ['Some Thai (Tomas Morato)', 'Eastwood City discoveries', 'Maginhawa hidden spots']
+            },
+            'comfort': {
+                emoji: '🛋️',
+                name: 'The Comfort Seeker',
+                tagline: 'Your favorite spots are like old friends',
+                traits: ['Loyal', 'Reliable', 'Traditional'],
+                description: 'You know what you like and you\'re not ashamed. Your go-to restaurant knows your usual order. You appreciate consistency and quality over trends. Your perfect spots are neighborhood institutions with decades of faithful customers.',
+                restaurants: ['LOLA Cafe', 'Classic Filipino spots', 'Family-run establishments']
+            },
+            'social': {
+                emoji: '👥',
+                name: 'The Social Butterfly',
+                tagline: 'Food is better shared',
+                traits: ['Generous', 'Outgoing', 'Connection-focused'],
+                description: 'You book the table, pick the spot, and make sure everyone\'s glasses are full. For you, dining is about the people, not just the food. Your perfect spots have great atmosphere, private rooms, and can handle big groups.',
+                restaurants: ['Eastwood City hotspots', 'Timog group-friendly', 'Large Filipino restaurants']
+            },
+            'adventure': {
+                emoji: '🎢',
+                name: 'The Experience Hunter',
+                tagline: 'Dining is entertainment',
+                traits: ['Bold', 'Trend-conscious', 'Experience-driven'],
+                description: 'You choose restaurants the way others choose concerts - by the 'vibe' and 'energy.' Instagram-worthy interiors, new concepts, and places that create memories matter to you. Your perfect spots are the ones that make people say "wow."',
+                restaurants: ['Trinoma & UPTC new concepts', 'Rooftop dining', 'Instagrammable cafes']
+            },
+            'foodie': {
+                emoji: '🔍',
+                name: 'The Dedicated Foodie',
+                tagline: 'Every meal is an investigation',
+                traits: ['Analytical', 'Passionate', 'Knowledgeable'],
+                description: 'You know the chef\'s name, the restaurant\'s history, and exactly which dishes are worth ordering. You\'ve eaten everywhere and have strong opinions. Your perfect spots are renowned establishments and critically acclaimed kitchens.',
+                restaurants: ['Tomas Morato fine dining', 'Award-winning spots', 'Chef\'s table experiences']
+            },
+            'homebody': {
+                emoji: '🏠',
+                name: 'The Neighborhood Gem Lover',
+                tagline: 'The best restaurant is five minutes away',
+                traits: ['Practical', 'Community-minded', 'Appreciative'],
+                description: 'You\'ve mastered the art of the "nearby" find. Why drive across town when there\'s an amazing spot around the corner? You know every server by name and every parking spot by number. Your perfect spots are walkable neighborhood favorites.',
+                restaurants: ['Local QC favorites', 'Walkable area gems', 'Community staples']
+            },
+            'party': {
+                emoji: '🎊',
+                name: 'The Trendsetter',
+                tagline: 'Always on the cutting edge',
+                traits: ['Influential', 'Connected', 'Energetic'],
+                description: 'You were at the opening night and your friends ask YOU where to go. Your social calendar is full and you\'re always hosting. Your perfect spots are the hottest tables in town where reservations are hard to get.',
+                restaurants: ['Newest QC openings', 'Celebrity chef spots', 'Exclusive venues']
+            },
+            'date': {
+                emoji: '💫',
+                name: 'The Romantic',
+                tagline: 'Every meal is a date',
+                traits: ['Romantic', 'Atmospheric', 'Attentive'],
+                description: 'You care about the ambiance as much as the appetizer. Lighting, service, and the overall experience matter. You\'ve mastered the art of the perfect evening. Your perfect spots have candlelit tables, exceptional service, and memories in the making.',
+                restaurants: ['Tomas Morato romantic spots', 'Fine dining venues', 'Special occasion restaurants']
+            },
+            'researcher': {
+                emoji: '📖',
+                name: 'The Informed Diner',
+                tagline: 'Knowledge is delicious',
+                traits: ['Curious', 'Thorough', 'Educated'],
+                description: 'You\'ve read every review, checked every rating, and know exactly what you\'re getting into. You appreciate restaurants that care about their craft. Your perfect spots are places with interesting menus, detailed preparations, and passionate chefs.',
+                restaurants: ['Detail-oriented kitchens', 'Farm-to-table spots', 'Artisan restaurants']
+            },
+            'repeat': {
+                emoji: '👆',
+                name: 'The Loyal Regular',
+                tagline: 'If it ain\'t broke, don\'t fix it',
+                traits: ['Faithful', 'Decisive', 'Satisfied'],
+                description: 'You have your order ready before you sit down. You\'ve tried everything on the menu - multiple times. The staff knows your name and your drink. Loyalty is your love language. Your perfect spots are places that have earned your trust.',
+                restaurants: ['Your trusted favorites', 'Reliable chains', 'Proven performers']
+            },
+            'ask': {
+                emoji: '💬',
+                name: 'The Server\'s Best Friend',
+                tagline: 'The experts know best',
+                traits: ['Trusting', 'Open-minded', 'Social'],
+                description: 'You look to the staff for guidance and often discover your new favorite dish through their recommendation. You appreciate restaurants with knowledgeable teams who care about your experience. Your perfect spots have passionate, engaged service.',
+                restaurants: ['Service-focused fine dining', 'Family-style spots', 'Hospitality-first restaurants']
+            },
+            'spontaneous': {
+                emoji: '🎲',
+                name: 'The Adventurous Soul',
+                tagline: 'Life\'s too short for the safe choice',
+                traits: ['Bold', 'Fearless', 'Spontaneous'],
+                description: 'You\'re the one who says "let\'s try something new" and actually means it. Surprise dishes, off-menu requests, and culinary experiments are your thing. Your perfect spots are places that encourage culinary curiosity.',
+                restaurants: ['Chef\'s choice omakase', 'Experimental kitchens', 'Brave new concepts']
+            },
+            'guide': {
+                emoji: '🗺️',
+                name: 'The Local Guide',
+                tagline: 'Everyone comes to you for recommendations',
+                traits: ['Generous', 'Knowledgeable', 'Connected'],
+                description: 'You\'re the unofficial restaurant ambassador of your friend group. You\'ve organized countless group dinners and everyone trusts your taste. Your perfect spots are versatile enough to please any crowd.',
+                restaurants: ['Group-friendly venues', 'Diverse menus', 'Central locations']
+            },
+            'loyal': {
+                emoji: '💝',
+                name: 'The Heart of the Table',
+                tagline: 'Love through food',
+                traits: ['Sentimental', 'Devoted', 'Nurturing'],
+                description: 'Food is your love language and you express care through feeding people. You remember everyone\'s allergies and preferences. Your perfect spots are places that feel like home and treat guests like family.',
+                restaurants: ['Family-owned gems', 'Filipino comfort food', 'Home-style cooking']
+            },
+            'organizer': {
+                emoji: '📋',
+                name: 'The Chief Experience Officer',
+                tagline: 'Every detail matters',
+                traits: ['Detail-oriented', 'Responsible', 'Prepared'],
+                description: 'You\'ve made the reservation, checked the parking, and confirmed the menu. You\'ve thought of everything so everyone can just enjoy. Your perfect spots are smooth operations with excellent coordination.',
+                restaurants: ['Professional service venues', 'Corporate-friendly', 'Reliable establishments']
+            },
+            'photographer': {
+                emoji: '📸',
+                name: 'The Visual Connoisseur',
+                tagline: 'First with camera, first in line',
+                traits: ['Aesthetic', 'Trend-aware', 'Creative'],
+                description: 'You can\'t eat until you\'ve photographed it. You know the best lighting, the perfect angle, and which dishes are most 'grammable. Your perfect spots are visual feasts with stunning presentations.',
+                restaurants: ['Aesthetic cafes', 'Styled interiors', 'Beautiful plating']
+            },
+            'documentary': {
+                emoji: '🎬',
+                name: 'The Cultural Explorer',
+                tagline: 'Food tells stories',
+                traits: ['Intellectual', 'Cultural', 'Deep'],
+                description: 'You want to understand the origins, the techniques, and the traditions behind what you\'re eating. Each meal is a lesson in culture and history. Your perfect spots have meaningful narratives and authentic heritage.',
+                restaurants: ['Traditional Filipino', 'Heritage restaurants', 'Cultural dining']
+            },
+            'comedy': {
+                emoji: '😂',
+                name: 'The Joyful Diner',
+                tagline: 'Good food, good vibes',
+                traits: ['Lighthearted', 'Fun-loving', 'Easy-going'],
+                description: 'You\'re here for a good time, not a long time. Laughter flows as freely as the drinks. Your perfect spots are lively, unpretentious, and always have a great playlist.',
+                restaurants: ['Casual hangouts', 'Sports bars', 'Fun pubs']
+            },
+            'romance': {
+                emoji: '💕',
+                name: 'The Romantic Soul',
+                tagline: 'Dreams over dinner',
+                traits: ['Idealistic', 'Sentimental', 'Dreamy'],
+                description: 'You believe dining out should feel magical. Every meal is an opportunity for romance, even if it\'s just with yourself. Your perfect spots have that intangible "special feeling" that makes everything taste better.',
+                restaurants: ['Intimate settings', 'Candlelit dining', 'Dreamy atmospheres']
+            },
+            'action': {
+                emoji: '🔥',
+                name: 'The Flavor Adventurer',
+                tagline: 'Big flavors, big energy',
+                traits: ['Bold', 'Dynamic', 'Adrenaline-driven'],
+                description: 'You want the most exciting option on the menu. Big flavors, dramatic presentations, and memorable experiences. You\'re not here to play it safe - you\'re here for the thrill of great food.',
+                restaurants: ['Bold Asian flavors', 'Dynamic fusion', 'Exciting new concepts']
+            }
+        };
+        
+        function selectOption(questionNum, value, element) {
+            answers[questionNum] = value;
+            
+            element.parentElement.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            setTimeout(() => {
+                if (currentQuestion < 5) {
+                    document.getElementById('q' + currentQuestion).classList.remove('active');
+                    currentQuestion++;
+                    document.getElementById('q' + currentQuestion).classList.add('active');
+                    updateDots();
+                } else {
+                    showResults();
+                }
+            }, 400);
+        }
+        
+        function updateDots() {
+            for (let i = 1; i <= 5; i++) {
+                const dot = document.getElementById('dot' + i);
+                dot.classList.remove('active', 'completed');
+                if (i < currentQuestion) {
+                    dot.classList.add('completed');
+                } else if (i === currentQuestion) {
+                    dot.classList.add('active');
+                }
+            }
+        }
+        
+        function showResults() {
+            // Calculate personality based on answers
+            const counts = {};
+            Object.values(answers).forEach(v => {
+                counts[v] = (counts[v] || 0) + 1;
+            });
+            
+            // Find most common answer pattern
+            const dominant = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+            
+            const personality = personalities[dominant] || personalities['explorer'];
+            
+            // Update UI
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.getElementById('results').style.display = 'block';
+            
+            document.getElementById('resultEmoji').textContent = personality.emoji;
+            document.getElementById('resultName').textContent = personality.name;
+            document.getElementById('resultTagline').textContent = personality.tagline;
+            document.getElementById('resultDescription').textContent = personality.description;
+            
+            // Traits
+            let traitsHtml = '';
+            personality.traits.forEach(t => {
+                traitsHtml += `<span class="trait-badge">${t}</span>`;
+            });
+            document.getElementById('resultTraits').innerHTML = traitsHtml;
+            
+            // Restaurant picks
+            let restHtml = '';
+            personality.restaurants.forEach((r, i) => {
+                restHtml += `<p class="mb-1"><i class="fas fa-utensils text-danger me-2"></i>${r}</p>`;
+            });
+            document.getElementById('resultRestaurants').innerHTML = restHtml;
+            
+            // Update all dots
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('dot' + i).classList.remove('active');
+                document.getElementById('dot' + i).classList.add('completed');
+            }
+        }
+    </script>
+</body>
+</html>

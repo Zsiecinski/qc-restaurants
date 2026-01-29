@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Menu Contributions</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            background: #1a1a2e;
+            color: white;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .admin-sidebar .nav-link {
+            color: rgba(255,255,255,0.7);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 4px 10px;
+        }
+        .admin-sidebar .nav-link:hover,
+        .admin-sidebar .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .stat-card .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d32323;
+        }
+        .stat-card .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .contribution-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e9ecef;
+        }
+        .contribution-card.pending {
+            border-left-color: #ffc107;
+        }
+        .contribution-card.approved {
+            border-left-color: #28a745;
+        }
+        .contribution-card.rejected {
+            border-left-color: #dc3545;
+        }
+        .menu-item-preview {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        .action-btns .btn {
+            margin-right: 5px;
+            padding: 6px 12px;
+        }
+        .badge-pending { background: #ffc107; color: #000; }
+        .badge-approved { background: #28a745; color: #fff; }
+        .badge-rejected { background: #dc3545; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 admin-sidebar">
+                <h4 class="px-3 mb-4">🍽️ Admin Panel</h4>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="/admin">
+                        <i class="fas fa-home me-2"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="/admin/contributions">
+                        <i class="fas fa-utensils me-2"></i> Menu Contributions
+                        {% if pending_count > 0 %}
+                        <span class="badge bg-danger float-end">{{ pending_count }}</span>
+                        {% endif %}
+                    </a>
+                    <a class="nav-link" href="/admin/restaurants">
+                        <i class="fas fa-list me-2"></i> Restaurants
+                    </a>
+                    <a class="nav-link" href="/admin/menus">
+                        <i class="fas fa-book me-2"></i> Menu Database
+                    </a>
+                    <a class="nav-link" href="/admin/analytics">
+                        <i class="fas fa-chart-bar me-2"></i> Analytics
+                    </a>
+                    <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 10px;">
+                    <a class="nav-link" href="/" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i> View Site
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 p-4">
+                <h2 class="mb-4">📊 Dashboard Overview</h2>
+                
+                <!-- Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.total_restaurants }}</div>
+                            <div class="stat-label">Total Restaurants</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.menus_with_data }}</div>
+                            <div class="stat-label">With Menu Data</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.pending_contributions }}</div>
+                            <div class="stat-label">Pending Contributions</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.total_menu_items }}</div>
+                            <div class="stat-label">Total Menu Items</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Contributions -->
+                <h4 class="mb-3">Recent Contributions</h4>
+                {% if contributions %}
+                {% for contrib in contributions[:5] %}
+                <div class="contribution-card {% if contrib.status == 'pending' %}pending{% elif contrib.status == 'approved' %}approved{% else %}rejected{% endif %}">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="mb-1">{{ contrib.restaurant }}</h5>
+                            <p class="text-muted small mb-2">
+                                Submitted by {{ contrib.contributor.name or 'Anonymous' }}
+                                <span class="mx-2">•</span>
+                                {{ contrib.submitted_at[:10] }}
+                            </p>
+                            <span class="badge badge-{{ contrib.status }}">{{ contrib.status }}</span>
+                        </div>
+                        <div class="action-btns">
+                            {% if contrib.status == 'pending' %}
+                            <button class="btn btn-success btn-sm" onclick="approveContribution('{{ loop.index0 }}')">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectContribution('{{ loop.index0 }}')">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                            {% endif %}
+                            <button class="btn btn-outline-secondary btn-sm" onclick="viewContribution('{{ loop.index0 }}')">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {% if show_details == loop.index0 %}
+                    <div class="menu-item-preview">
+                        <h6 class="mb-2">Items Submitted:</h6>
+                        {% for item in contrib.items %}
+                        <div class="d-flex justify-content-between">
+                            <span>{{ item.name }}</span>
+                            <span class="text-danger">{{ item.price }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                {% if stats.pending_contributions > 5 %}
+                <a href="/admin/contributions" class="btn btn-outline-danger">
+                    View All {{ stats.pending_contributions }} Contributions
+                </a>
+                {% endif %}
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No contributions yet. Share the contribute page to get started!
+                </div>
+                {% endif %}
+                
+                <!-- Quick Actions -->
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h5 class="mb-3">⚡ Quick Actions</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="/admin/scrape" class="btn btn-outline-danger">
+                                    <i class="fas fa-download me-1"></i> Run Menu Scraper
+                                </a>
+                                <a href="/admin/export" class="btn btn-outline-secondary">
+                                    <i class="fas fa-file-export me-1"></i> Export Data
+                                </a>
+                                <button class="btn btn-outline-primary" onclick="clearOldContributions()">
+                                    <i class="fas fa-trash me-1"></i> Clear Old
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h5 class="mb-3">📈 Content Health</h5>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Menu Coverage</span>
+                                    <span>{{ stats.menu_coverage }}%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-danger" style="width: {{ stats.menu_coverage }}%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Data Quality</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function approveContribution(index) {
+            if (confirm('Approve this contribution? Menu items will be added to the database.')) {
+                fetch('/admin/contributions/' + index + '/approve', { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) location.reload();
+                    });
+            }
+        }
+        
+        function rejectContribution(index) {
+            if (confirm('Reject this contribution?')) {
+                fetch('/admin/contributions/' + index + '/reject', { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) location.reload();
+                    });
+            }
+        }
+        
+        function viewContribution(index) {
+            // Toggle details visibility
+            alert('View contribution details for index: ' + index);
+        }
+    </script>
+</body>
+</html>

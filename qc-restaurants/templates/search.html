@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Search Restaurants - Quezon City</title>
+    <meta name="description" content="Search for restaurants in Quezon City by name, cuisine, area, or price.">
+    <link rel="canonical" href="/search">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        .search-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px 0;
+        }
+        .search-box-large {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-top: -40px;
+        }
+        .search-input {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+        }
+        .search-input:focus {
+            border-color: #d32323;
+            box-shadow: 0 0 0 0.2rem rgba(211, 35, 35, 0.25);
+        }
+        .quick-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .filter-chip {
+            padding: 8px 20px;
+            background: #f8f9fa;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .filter-chip:hover {
+            background: #fff3f3;
+            border-color: #d32323;
+        }
+        .filter-chip.active {
+            background: #d32323;
+            color: white;
+        }
+        .search-results {
+            margin-top: 40px;
+        }
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 20px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .result-card:hover {
+            border-color: #d32323;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .result-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .result-content {
+            flex: 1;
+        }
+        .highlight-match {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        .search-stats {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .suggestion-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .suggestion-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .suggestion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .suggestion-tag {
+            padding: 6px 16px;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e9ecef;
+        }
+        .suggestion-tag:hover {
+            background: #d32323;
+            color: white;
+            border-color: #d32323;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="search-hero">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold mb-3">🔍 Find Your Perfect Restaurant</h1>
+            <p class="lead text-white-50">Search by name, cuisine, area, or anything else!</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <main class="container pb-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="search-box-large">
+                    <form action="/search" method="GET" id="searchForm">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" 
+                                   class="form-control border-start-0 search-input" 
+                                   name="q" 
+                                   id="searchInput"
+                                   placeholder="Search restaurants, cuisines, areas..." 
+                                   value="{{ query }}"
+                                   autofocus>
+                            <button type="submit" class="btn btn-danger px-4">
+                                Search
+                            </button>
+                        </div>
+                        
+                        <!-- Quick Filters -->
+                        <div class="quick-filters">
+                            <span class="filter-chip {% if cuisine_filter == 'filipino' %}active{% endif %}" 
+                                  onclick="filterCuisine('filipino')">🇵🇭 Filipino</span>
+                            <span class="filter-chip {% if cuisine_filter == 'asian' %}active{% endif %}" 
+                                  onclick="filterCuisine('asian')">🍜 Asian</span>
+                            <span class="filter-chip {% if cuisine_filter == 'western' %}active{% endif %}" 
+                                  onclick="filterCuisine('western')">🍔 Western</span>
+                            <span class="filter-chip {% if cuisine_filter == 'coffee' %}active{% endif %}" 
+                                  onclick="filterCuisine('coffee')">☕ Coffee</span>
+                            <span class="filter-divider"></span>
+                            <span class="filter-chip {% if area_filter == 'timog' %}active{% endif %}" 
+                                  onclick="filterArea('timog')">📍 Timog</span>
+                            <span class="filter-chip {% if area_filter == 'north' %}active{% endif %}" 
+                                  onclick="filterArea('north')">📍 North QC</span>
+                            <span class="filter-chip {% if area_filter == 'east' %}active{% endif %}" 
+                                  onclick="filterArea('east')">📍 Eastwood</span>
+                        </div>
+                        
+                        <!-- Hidden fields for filters -->
+                        <input type="hidden" name="cuisine" id="cuisineFilter" value="{{ cuisine_filter }}">
+                        <input type="hidden" name="area" id="areaFilter" value="{{ area_filter }}">
+                    </form>
+                </div>
+
+                <!-- Search Results -->
+                {% if query %}
+                <div class="search-results">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="search-stats mb-0">
+                            {% if results %}
+                            Found <strong>{{ results|length }}</strong> result{% if results|length != 1 %}s{% endif %} for 
+                            "<strong>{{ query }}</strong>"
+                            {% else %}
+                            No results found for "<strong>{{ query }}</strong>"
+                            {% endif %}
+                        </p>
+                    </div>
+                    
+                    {% if results %}
+                    {% for restaurant in results %}
+                    <article class="result-card">
+                        <img src="{{ restaurant.photo or 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200' }}" 
+                             alt="{{ restaurant.name }}" class="result-image">
+                        <div class="result-content">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h3 class="h5 mb-1">
+                                        <a href="/restaurant/{{ restaurant.slug }}" class="text-decoration-none text-dark">
+                                            {{ restaurant.name }}
+                                        </a>
+                                    </h3>
+                                    <p class="text-muted small mb-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i> {{ restaurant.area }}
+                                        <span class="mx-2">•</span>
+                                        <i class="fas fa-utensils me-1"></i> {{ restaurant.cuisine }}
+                                    </p>
+                                </div>
+                                <div class="text-end">
+                                    {% if restaurant.rating %}
+                                    <span class="badge bg-warning text-dark">
+                                        ⭐ {{ restaurant.rating }}
+                                    </span>
+                                    {% endif %}
+                                    <span class="d-block mt-1 text-muted small">{{ restaurant.price_range }}</span>
+                                </div>
+                            </div>
+                            
+                            {% if restaurant.highlight %}
+                            <p class="mb-2 small">
+                                <span class="highlight-match">{{ restaurant.highlight }}</span>
+                            </p>
+                            {% endif %}
+                            
+                            <div class="mt-2">
+                                <a href="/restaurant/{{ restaurant.slug }}" class="btn btn-danger btn-sm">
+-outline                                    View Details
+                                </a>
+                                <button class="btn btn-outline-secondary btn-sm save-search-result" 
+                                        data-id="{{ restaurant.id }}"
+                                        data-name="{{ restaurant.name }}"
+                                        data-area="{{ restaurant.area }}"
+                                        data-cuisine="{{ restaurant.cuisine }}">
+                                    <i class="far fa-heart"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                    
+                    {% else %}
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3 class="h5 mb-3">No restaurants found</h3>
+                        <p class="mb-4">Try different keywords or browse our suggestions below</p>
+                        <a href="/all-restaurants" class="btn btn-danger">Browse All Restaurants</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Suggestions (shown when no search or no results) -->
+                {% if not query or not results %}
+                <div class="suggestion-box">
+                    <div class="suggestion-title">🔥 Popular Searches</div>
+                    <div class="suggestion-tags">
+                        <a href="/search?q=Filipino&cuisine=filipino" class="suggestion-tag">Filipino Food</a>
+                        <a href="/search?q=Thai&cuisine=asian" class="suggestion-tag">Thai Restaurant</a>
+                        <a href="/search?q=Coffee&cuisine=coffee" class="suggestion-tag">Coffee Shops</a>
+                        <a href="/search?q=Tomas+Morato&area=tomas+morato" class="suggestion-tag">Tomas Morato</a>
+                        <a href="/search?q=SM+North&area=north" class="suggestion-tag">SM North Area</a>
+                        <a href="/search?q=Budget&budget=budget" class="suggestion-tag">Budget Friendly</a>
+                        <a href="/search?q=Date+Night" class="suggestion-tag">Date Night Spots</a>
+                        <a href="/search?q=Family+Friendly" class="suggestion-tag">Family Restaurants</a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Browse by Category -->
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="suggestion-box h-100">
+                            <div class="suggestion-title">🍽️ Browse by Cuisine</div>
+                            <div class="suggestion-tags">
+                                <a href="/all-restaurants?cuisine=Filipino" class="suggestion-tag">Filipino</a>
+                                <a href="/all-restaurants?cuisine=Japanese" class="suggestion-tag">Japanese</a>
+                                <a href="/all-restaurants?cuisine=Thai" class="suggestion-tag">Thai</a>
+                                <a href="/all-restaurants?cuisine=Korean" class="suggestion-tag">Korean</a>
+                                <a href="/all-restaurants?cuisine=Chinese" class="suggestion-tag">Chinese</a>
+                                <a href="/all-restaurants?cuisine=Italian" class="suggestion-tag">Italian</a>
+                                <a href="/all-restaurants?cuisine=American" class="suggestion-tag">American</a>
+                                <a href="/all-restaurants?cuisine=Cafe" class="suggestion-tag">Cafe</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="suggestion-box h-100">
+                            <div class="suggestion-title">📍 Browse by Area</div>
+                            <div class="suggestion-tags">
+                                <a href="/all-restaurants?area=Timog" class="suggestion-tag">Timog</a>
+                                <a href="/all-restaurants?area=Tomas+Morato" class="suggestion-tag">Tomas Morato</a>
+                                <a href="/all-restaurants?area=Maginhawa" class="suggestion-tag">Maginhawa</a>
+                                <a href="/all-restaurants?area=SM+North" class="suggestion-tag">SM North</a>
+                                <a href="/all-restaurants?area=Trinoma" class="suggestion-tag">Trinoma</a>
+                                <a href="/all-restaurants?area=Eastwood" class="suggestion-tag">Eastwood</a>
+                                <a href="/all-restaurants?area=Cubao" class="suggestion-tag">Cubao</a>
+                                <a href="/all-restaurants?area=Kamuning" class="suggestion-tag">Kamuning</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function filterCuisine(cuisine) {
+            document.getElementById('cuisineFilter').value = cuisine;
+            document.getElementById('searchForm').submit();
+        }
+        
+        function filterArea(area) {
+            document.getElementById('areaFilter').value = area;
+            document.getElementById('searchForm').submit();
+        }
+        
+        // Auto-submit on filter click
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

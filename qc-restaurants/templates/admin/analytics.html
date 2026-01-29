@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            background: #1a1a2e;
+            color: white;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .admin-sidebar .nav-link {
+            color: rgba(255,255,255,0.7);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 4px 10px;
+        }
+        .admin-sidebar .nav-link:hover,
+        .admin-sidebar .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d32323;
+        }
+        .stat-card .label {
+            color: #6c757d;
+        }
+        .chart-placeholder {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 admin-sidebar">
+                <h4 class="px-3 mb-4">🍽️ Admin</h4>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/admin">
+                        <i class="fas fa-home me-2"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="/admin/contributions">
+                        <i class="fas fa-utensils me-2"></i> Contributions
+                    </a>
+                    <a class="nav-link" href="/admin/menus">
+                        <i class="fas fa-book me-2"></i> Menu Database
+                    </a>
+                    <a class="nav-link active" href="/admin/analytics">
+                        <i class="fas fa-chart-bar me-2"></i> Analytics
+                    </a>
+                    <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 10px;">
+                    <a class="nav-link" href="/" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i> View Site
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="col-md-10 p-4">
+                <h2 class="mb-4">📈 Analytics</h2>
+                
+                <!-- Key Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="value">{{ stats.total_restaurants }}</div>
+                            <div class="label">Total Restaurants</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="value">{{ stats.with_photos }}</div>
+                            <div class="label">With Photos</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="value">{{ stats.with_ratings }}</div>
+                            <div class="label">With Ratings</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="value">{{ stats.avg_rating }}</div>
+                            <div class="label">Avg Rating</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cuisine Distribution -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="chart-placeholder">
+                            <div class="w-100">
+                                <h5 class="mb-3">🍽️ Cuisine Distribution</h5>
+                                {% for cuisine, count in stats.cuisine_counts.items() %}
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>{{ cuisine }}</span>
+                                    <span class="badge bg-danger">{{ count }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-placeholder">
+                            <div class="w-100">
+                                <h5 class="mb-3">📍 Area Distribution</h5>
+                                {% for area, count in stats.area_counts.items() %}
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>{{ area }}</span>
+                                    <span class="badge bg-primary">{{ count }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coming Soon -->
+                <div class="alert alert-secondary">
+                    <i class="fas fa-clock me-2"></i>
+                    <strong>Coming Soon:</strong> Traffic analytics, user engagement metrics, conversion tracking.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
